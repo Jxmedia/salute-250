@@ -6,5 +6,5 @@ module.exports = {
     title: `salute250`,
     siteUrl: `https://www.yourdomain.tld`,
   },
-  plugins: [],
-}
+  plugins: ["gatsby-plugin-postcss"],
+};
