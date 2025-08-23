@@ -13,6 +13,81 @@ const navigation = [
   { name: "Spectators", href: "#" },
 ];
 
+const people = [
+  {
+    name: "Jane Cooper",
+    title: "Paradigm Representative",
+    role: "Admin",
+    email: "janecooper@example.com",
+    telephone: "+1-202-555-0170",
+    imageUrl:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+  },
+  {
+    name: "Cody Fisher",
+    title: "Lead Security Associate",
+    role: "Admin",
+    email: "codyfisher@example.com",
+    telephone: "+1-202-555-0114",
+    imageUrl:
+      "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+  },
+  {
+    name: "Esther Howard",
+    title: "Assurance Administrator",
+    email: "estherhoward@example.com",
+    telephone: "+1-202-555-0143",
+    role: "Admin",
+    imageUrl:
+      "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+  },
+  {
+    name: "Jenny Wilson",
+    title: "Chief Accountability Analyst",
+    role: "Admin",
+    email: "jennywilson@example.com",
+    telephone: "+1-202-555-0184",
+    imageUrl:
+      "https://images.unsplash.com/photo-1498551172505-8ee7ad69f235?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+  },
+  {
+    name: "Kristin Watson",
+    title: "Investor Data Orchestrator",
+    role: "Admin",
+    email: "kristinwatson@example.com",
+    telephone: "+1-202-555-0191",
+    imageUrl:
+      "https://images.unsplash.com/photo-1532417344469-368f9ae6d187?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+  },
+  {
+    name: "Cameron Williamson",
+    title: "Product Infrastructure Executive",
+    role: "Admin",
+    email: "cameronwilliamson@example.com",
+    telephone: "+1-202-555-0108",
+    imageUrl:
+      "https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+  },
+  {
+    name: "Courtney Henry",
+    title: "Investor Factors Associate",
+    role: "Admin",
+    email: "courtneyhenry@example.com",
+    telephone: "+1-202-555-0104",
+    imageUrl:
+      "https://images.unsplash.com/photo-1534751516642-a1af1ef26a56?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+  },
+  {
+    name: "Theresa Webb",
+    title: "Global Division Officer",
+    role: "Admin",
+    email: "theresawebb@example.com",
+    telephone: "+1-202-555-0138",
+    imageUrl:
+      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+  },
+];
+
 export default function HomePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -232,119 +307,72 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-      <div className="bg-gradient-to-r from-saluteRed to-red-700 h-4" />
-      <div className="border-t-[10px] border-white" />
-      <div className="bg-gradient-to-r from-blue-600 to-blue-900 h-4" />
-      <div className="bg-gray-50 py-24 sm:py-32">
+      <div className="divider">
+        <div className="bg-gradient-to-r from-saluteRed to-red-700 h-3" />
+        <div className="bg-white h-2" />
+        <div className="bg-gradient-to-r from-blue-600 to-blue-900 h-3" />
+      </div>
+
+      <div className="bg-gray-50 py-24">
         <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
-          <h2 className="text-center text-base/7 font-semibold text-indigo-600">
-            Deploy faster
-          </h2>
-          <p className="mx-auto mt-2 max-w-lg text-balance text-center text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">
-            Everything you need to deploy your app
+          <p className="text-center text-blue-800 text-xl font-primary font-extrabold uppercase">
+            SAA{" "}
+            <span className="font-script text-[1.2em] text-saluteRed">250</span>
+            Tour
           </p>
-          <div className="mt-10 grid gap-4 sm:mt-16 lg:grid-cols-3 lg:grid-rows-2">
-            <div className="relative lg:row-span-2">
-              <div className="absolute inset-px rounded-lg bg-white lg:rounded-l-[2rem]" />
-              <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
-                <div className="px-8 pb-3 pt-8 sm:px-10 sm:pb-0 sm:pt-10">
-                  <p className="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">
-                    Mobile friendly
-                  </p>
-                  <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
-                    Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
-                    qui lorem cupidatat commodo.
-                  </p>
-                </div>
-                <div className="relative min-h-[30rem] w-full grow [container-type:inline-size] max-lg:mx-auto max-lg:max-w-sm">
-                  <div className="absolute inset-x-10 bottom-0 top-10 overflow-hidden rounded-t-[12cqw] border-x-[3cqw] border-t-[3cqw] border-gray-700 bg-gray-900 shadow-2xl">
+          <p className="mx-auto mt-2 text-balance text-center text-4xl font-primary font-semibold tracking-tight text-gray-800 sm:text-7xl">
+            Upcoming Events
+          </p>
+          <ul
+            role="list"
+            className="py-20 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
+          >
+            {people.map((person) => (
+              <li
+                key={person.email}
+                className="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white ring-1 ring-blue-700/10"
+              >
+                <a href="" className="hover:opacity-80">
+                  <div className="flex flex-1 flex-col p-6">
                     <img
                       alt=""
-                      src="https://tailwindcss.com/plus-assets/img/component-images/bento-03-mobile-friendly.png"
-                      className="size-full object-cover object-top"
+                      src={person.imageUrl}
+                      className="shrink-0 rounded-lg"
                     />
+                    <h3 className="mt-6 text-sm font-medium text-gray-900">
+                      {person.name}
+                    </h3>
+                    <dl className="mt-1 flex grow flex-col justify-between">
+                      <dt className="sr-only">Title</dt>
+                      <dd className="text-sm text-gray-500">{person.title}</dd>
+                      <dt className="sr-only">Role</dt>
+                      <dd className="mt-3">
+                        <span className="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                          {person.role}
+                        </span>
+                      </dd>
+                    </dl>
                   </div>
-                </div>
-              </div>
-              <div className="pointer-events-none absolute inset-px rounded-lg shadow outline outline-1 outline-black/5 lg:rounded-l-[2rem]" />
-            </div>
-            <div className="relative max-lg:row-start-1">
-              <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-t-[2rem]" />
-              <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)]">
-                <div className="px-8 pt-8 sm:px-10 sm:pt-10">
-                  <p className="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">
-                    Performance
-                  </p>
-                  <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit
-                    maiores impedit.
-                  </p>
-                </div>
-                <div className="flex flex-1 items-center justify-center px-8 max-lg:pb-12 max-lg:pt-10 sm:px-10 lg:pb-2">
-                  <img
-                    alt=""
-                    src="https://tailwindcss.com/plus-assets/img/component-images/bento-03-performance.png"
-                    className="w-full max-lg:max-w-xs"
-                  />
-                </div>
-              </div>
-              <div className="pointer-events-none absolute inset-px rounded-lg shadow outline outline-1 outline-black/5 max-lg:rounded-t-[2rem]" />
-            </div>
-            <div className="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2">
-              <div className="absolute inset-px rounded-lg bg-white" />
-              <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)]">
-                <div className="px-8 pt-8 sm:px-10 sm:pt-10">
-                  <p className="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">
-                    Security
-                  </p>
-                  <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
-                    Morbi viverra dui mi arcu sed. Tellus semper adipiscing
-                    suspendisse semper morbi.
-                  </p>
-                </div>
-                <div className="flex flex-1 items-center [container-type:inline-size] max-lg:py-6 lg:pb-2">
-                  <img
-                    alt=""
-                    src="https://tailwindcss.com/plus-assets/img/component-images/bento-03-security.png"
-                    className="h-[min(152px,40cqw)] object-cover"
-                  />
-                </div>
-              </div>
-              <div className="pointer-events-none absolute inset-px rounded-lg shadow outline outline-1 outline-black/5" />
-            </div>
-            <div className="relative lg:row-span-2">
-              <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]" />
-              <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-r-[calc(2rem+1px)]">
-                <div className="px-8 pb-3 pt-8 sm:px-10 sm:pb-0 sm:pt-10">
-                  <p className="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">
-                    Powerful APIs
-                  </p>
-                  <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
-                    Sit quis amet rutrum tellus ullamcorper ultricies libero
-                    dolor eget sem sodales gravida.
-                  </p>
-                </div>
-                <div className="relative min-h-[30rem] w-full grow">
-                  <div className="absolute bottom-0 left-10 right-0 top-10 overflow-hidden rounded-tl-xl bg-gray-900 shadow-2xl outline outline-1 outline-white/10">
-                    <div className="flex bg-gray-900 outline outline-1 outline-white/5">
-                      <div className="-mb-px flex text-sm/6 font-medium text-gray-400">
-                        <div className="border-b border-r border-b-white/20 border-r-white/10 bg-white/5 px-4 py-2 text-white">
-                          NotificationSetting.jsx
-                        </div>
-                        <div className="border-r border-gray-600/10 px-4 py-2">
-                          App.jsx
-                        </div>
+                  <div>
+                    <div className="font-body -mt-px flex divide-x divide-gray-200">
+                      <div className="border-t border-gray-200 flex w-0 flex-1">
+                        <a
+                          href={`tel:${person.telephone}`}
+                          className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
+                        >
+                          <IoTicketSharp
+                            aria-hidden="true"
+                            className="size-5 text-gray-400"
+                          />
+                          Get Tickets / Information
+                        </a>
                       </div>
                     </div>
-                    <div className="px-6 pb-14 pt-6">
-                      {/* Your code example */}
-                    </div>
                   </div>
-                </div>
-              </div>
-              <div className="pointer-events-none absolute inset-px rounded-lg shadow outline outline-1 outline-black/5 max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]" />
-            </div>
-          </div>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </>
