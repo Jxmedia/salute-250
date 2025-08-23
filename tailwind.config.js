@@ -5,7 +5,18 @@ module.exports = {
     "./src/components/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    fontFamily: {
+      primary: ["Bitter"],
+      body: ["Poppins"],
+      script: ["Pinyon Script"],
+    },
+    extend: {
+      colors: {
+        saluteTan: "#eddaba",
+        saluteNavy: "#2a3e47",
+        saluteRed: "#ba2b23",
+      },
+    },
   },
   plugins: [],
 };
