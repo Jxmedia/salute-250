@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { LiaFlagUsaSolid } from "react-icons/lia";
 import { MdOutlineEvent } from "react-icons/md";
 import { IoTicketSharp } from "react-icons/io5";
+import { MdLocationPin } from "react-icons/md";
+import { FaClock } from "react-icons/fa";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import HeaderLogo from "../images/SAA-Badge-Dates.png";
@@ -15,9 +17,9 @@ const navigation = [
 
 const people = [
   {
-    name: "Jane Cooper",
-    title: "Paradigm Representative",
-    role: "Admin",
+    name: "Tampa Bay Aviation Show",
+    location: "Raymond James Stadium",
+    eventType: "Air Show",
     email: "janecooper@example.com",
     telephone: "+1-202-555-0170",
     imageUrl:
@@ -25,8 +27,8 @@ const people = [
   },
   {
     name: "Cody Fisher",
-    title: "Lead Security Associate",
-    role: "Admin",
+    location: "Lead Security Associate",
+    eventType: "Sporting Event",
     email: "codyfisher@example.com",
     telephone: "+1-202-555-0114",
     imageUrl:
@@ -34,57 +36,12 @@ const people = [
   },
   {
     name: "Esther Howard",
-    title: "Assurance Administrator",
+    location: "Assurance Administrator",
     email: "estherhoward@example.com",
     telephone: "+1-202-555-0143",
-    role: "Admin",
+    eventType: "Car Show",
     imageUrl:
       "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  {
-    name: "Jenny Wilson",
-    title: "Chief Accountability Analyst",
-    role: "Admin",
-    email: "jennywilson@example.com",
-    telephone: "+1-202-555-0184",
-    imageUrl:
-      "https://images.unsplash.com/photo-1498551172505-8ee7ad69f235?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  {
-    name: "Kristin Watson",
-    title: "Investor Data Orchestrator",
-    role: "Admin",
-    email: "kristinwatson@example.com",
-    telephone: "+1-202-555-0191",
-    imageUrl:
-      "https://images.unsplash.com/photo-1532417344469-368f9ae6d187?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  {
-    name: "Cameron Williamson",
-    title: "Product Infrastructure Executive",
-    role: "Admin",
-    email: "cameronwilliamson@example.com",
-    telephone: "+1-202-555-0108",
-    imageUrl:
-      "https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  {
-    name: "Courtney Henry",
-    title: "Investor Factors Associate",
-    role: "Admin",
-    email: "courtneyhenry@example.com",
-    telephone: "+1-202-555-0104",
-    imageUrl:
-      "https://images.unsplash.com/photo-1534751516642-a1af1ef26a56?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  {
-    name: "Theresa Webb",
-    title: "Global Division Officer",
-    role: "Admin",
-    email: "theresawebb@example.com",
-    telephone: "+1-202-555-0138",
-    imageUrl:
-      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
   },
 ];
 
@@ -332,39 +289,77 @@ export default function HomePage() {
                 key={person.email}
                 className="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white ring-1 ring-blue-700/10"
               >
-                <a href="" className="hover:opacity-80">
+                <a
+                  href=""
+                  className="duration-300 ease-in-out hover:bg-saluteTan hover:bg-opacity-30 rounded-lg group"
+                >
                   <div className="flex flex-1 flex-col p-6">
                     <img
                       alt=""
                       src={person.imageUrl}
                       className="shrink-0 rounded-lg"
                     />
-                    <h3 className="mt-6 text-sm font-medium text-gray-900">
+                    <dd className="mt-4">
+                      <dt className="sr-only">eventType</dt>
+                      <span className="inline-flex items-center rounded-md bg-green-50 px-3 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                        {person.eventType}
+                      </span>
+                    </dd>
+                    <h3 className="mt-2 text-lg font-body font-medium text-gray-900">
                       {person.name}
                     </h3>
-                    <dl className="mt-1 flex grow flex-col justify-between">
+                    <dl className="border-t pt-2 mt-2 mt-1 flex grow flex-col font-body justify-between">
                       <dt className="sr-only">Title</dt>
-                      <dd className="text-sm text-gray-500">{person.title}</dd>
-                      <dt className="sr-only">Role</dt>
-                      <dd className="mt-3">
-                        <span className="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                          {person.role}
-                        </span>
+                      <dd className="text-sm text-gray-500 flex items-start gap-2">
+                        <IoTicketSharp
+                          aria-hidden="true"
+                          className="size-5 text-blue-700"
+                        />{" "}
+                        Free
+                      </dd>
+
+                      <dt className="sr-only">eventType</dt>
+                    </dl>
+                    <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
+                      <dt className="sr-only">Title</dt>
+                      <dd className="text-sm text-gray-500 flex items-start gap-2">
+                        <MdLocationPin
+                          aria-hidden="true"
+                          className="size-5 text-blue-700"
+                        />{" "}
+                        {person.location}
+                      </dd>
+
+                      <dd className="pl-7 text-sm text-gray-500 flex items-start gap-2">
+                        Street Address
+                      </dd>
+                      <dd className="pl-7 text-sm text-gray-500 flex items-start gap-2">
+                        City, Florida 3333
+                      </dd>
+                    </dl>
+                    <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
+                      <dt className="sr-only">Title</dt>
+                      <dd className="text-sm text-gray-500 flex items-center gap-2">
+                        <FaClock
+                          aria-hidden="true"
+                          className="size-4 text-blue-700"
+                        />{" "}
+                        Jan 20, 2026, 11:30AM - 7:00PM ET
                       </dd>
                     </dl>
                   </div>
                   <div>
-                    <div className="font-body -mt-px flex divide-x divide-gray-200">
+                    <div className="duration-300 ease-in-out font-body -mt-px flex divide-x divide-gray-200 bg-blue-700 group-hover:opacity-80 rounded-b-lg">
                       <div className="border-t border-gray-200 flex w-0 flex-1">
                         <a
                           href={`tel:${person.telephone}`}
-                          className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
+                          className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-white group-hover:underline"
                         >
                           <IoTicketSharp
                             aria-hidden="true"
-                            className="size-5 text-gray-400"
+                            className="size-5 text-saluteTan"
                           />
-                          Get Tickets / Information
+                          Event Details
                         </a>
                       </div>
                     </div>
