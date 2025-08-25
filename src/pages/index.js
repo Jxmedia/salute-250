@@ -6,6 +6,7 @@ import { MdLocationPin } from "react-icons/md";
 import { FaClock } from "react-icons/fa";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { MdOutlineEventAvailable } from "react-icons/md";
 import HeaderLogo from "../images/SAA-Badge-Dates.png";
 
 const navigation = [
@@ -206,7 +207,7 @@ export default function HomePage() {
           <div className="relative max-w-7xl px-6 lg:px-8">
             <div className="max-w-3xl py-32 sm:py-40">
               <div className="hidden sm:mb-8 sm:flex sm:justify-start">
-                <div className="font-primary relative px-3 py-1 text-white hover:ring-gray-900/20">
+                <div className="font-primary relative px-3 py-1 text-gray-300 hover:ring-gray-900/20">
                   {timeLeft.expired ? (
                     <p className="text-3xl">Happy 250 Anniversary!</p>
                   ) : (
@@ -220,7 +221,7 @@ export default function HomePage() {
                         {" "}
                         <TimeBlock label="Mins" value={timeLeft.minutes} />
                       </span>
-                      <span className="hidden pl-6">
+                      <span className="pl-6 text-left">
                         <TimeBlock label="Secs" value={timeLeft.seconds} />
                       </span>
                     </div>
@@ -246,16 +247,16 @@ export default function HomePage() {
                 <div className="mt-10 flex items-center justify-start gap-x-6">
                   <a
                     href="#"
-                    className="border-t-2 border-blue-500 flex items-center gap-2 duration-700 ease-in-out bg-blue-800 rounded-b-xl px-6 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-gradient-to-r hover:from-saluteTan hover:to-saluteTan hover:text-blue-800"
+                    className="border-t-2 border-blue-500 flex items-center gap-2 duration-700 ease-in-out bg-blue-800 rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-gradient-to-r hover:from-saluteTan hover:to-saluteTan hover:text-blue-800"
                   >
                     View All Events{" "}
                     <MdOutlineEvent aria-hidden="true" className="size-7" />
                   </a>
                   <a
                     href="#"
-                    className="border-t-2 border-teal-800 flex items-center gap-2 duration-700 ease-in-out bg-saluteNavy rounded-b-xl px-6 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-gradient-to-r hover:from-saluteTan hover:to-saluteTan hover:text-saluteNavy"
+                    className="border-t-2 border-teal-800 flex items-center gap-2 duration-700 ease-in-out bg-saluteNavy rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-gradient-to-r hover:from-saluteTan hover:to-saluteTan hover:text-saluteNavy"
                   >
-                    Spectator Tickets{" "}
+                    Spectators{" "}
                     <IoTicketSharp aria-hidden="true" className="size-7" />
                   </a>
                 </div>
@@ -278,8 +279,24 @@ export default function HomePage() {
             Tour
           </p>
           <p className="mx-auto mt-2 text-balance text-center text-4xl font-primary font-semibold tracking-tight text-gray-800 sm:text-7xl">
-            Upcoming Events
+            Upcoming Signature Events
           </p>
+          <div className="mt-8 flex items-center justify-center gap-x-6">
+            <a
+              href="#"
+              className="border-t-2 border-blue-500 flex items-center gap-2 duration-700 ease-in-out bg-blue-800 rounded-b-xl px-10 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-gradient-to-r hover:from-saluteTan hover:to-saluteTan hover:text-blue-800"
+            >
+              View All Events{" "}
+              <MdOutlineEvent aria-hidden="true" className="size-7" />
+            </a>
+            <a
+              href="#"
+              className="border-t-2 border-red-500 flex items-center gap-2 duration-700 ease-in-out bg-saluteRed rounded-b-xl px-10 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-gradient-to-r hover:from-saluteTan hover:to-saluteTan hover:text-saluteNavy"
+            >
+              Register Your Event{" "}
+              <MdOutlineEventAvailable aria-hidden="true" className="size-7" />
+            </a>
+          </div>
           <ul
             role="list"
             className="py-20 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
@@ -297,7 +314,7 @@ export default function HomePage() {
                     <img
                       alt=""
                       src={person.imageUrl}
-                      className="shrink-0 rounded-lg"
+                      className="shrink-0 rounded-lg h-48"
                     />
                     <dd className="mt-4">
                       <dt className="sr-only">eventType</dt>
@@ -368,6 +385,143 @@ export default function HomePage() {
               </li>
             ))}
           </ul>
+        </div>
+      </div>
+      <div className="bg-saluteBlue py-24">
+        <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
+          <p className="mx-auto mt-2 text-balance text-center text-4xl font-primary font-semibold tracking-tight text-white sm:text-7xl">
+            About SAA{" "}
+            <span className="font-script text-[1.2em] text-saluteRed">250</span>
+          </p>
+
+          <div className="font-body mt-10 grid max-w-xl grid-cols-1 gap-8 text-lg/7 text-white lg:max-w-none lg:grid-cols-2">
+            <div>
+              <p>
+                Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget
+                risus enim. Mattis mauris semper sed amet vitae sed turpis id.
+                Id dolor praesent donec est. Odio penatibus risus viverra tellus
+                varius sit neque erat velit. Faucibus commodo massa rhoncus,
+                volutpat. Dignissim sed eget risus enim. Mattis mauris semper
+                sed amet vitae sed turpis id.
+              </p>
+              <p className="mt-8">
+                Et vitae blandit facilisi magna lacus commodo. Vitae sapien duis
+                odio id et. Id blandit molestie auctor fermentum dignissim.
+                Lacus diam tincidunt ac cursus in vel. Mauris varius vulputate
+                et ultrices hac adipiscing egestas.
+              </p>
+            </div>
+            <div>
+              <p>
+                Erat pellentesque dictumst ligula porttitor risus eget et eget.
+                Ultricies tellus felis id dignissim eget. Est augue maecenas
+                risus nulla ultrices congue nunc tortor.
+              </p>
+              <p className="mt-8">
+                Et vitae blandit facilisi magna lacus commodo. Vitae sapien duis
+                odio id et. Id blandit molestie auctor fermentum dignissim.
+                Lacus diam tincidunt ac cursus in vel. Mauris varius vulputate
+                et ultrices hac adipiscing egestas. Iaculis convallis ac tempor
+                et ut. Ac lorem vel integer orci.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="py-10">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <p className="mx-auto mt-2 text-balance text-center text-4xl font-primary font-semibold tracking-tight text-white sm:text-5xl">
+              Current Sponsors
+            </p>
+
+            <div className="mt-10 -mx-6 grid grid-cols-2 gap-0.5 overflow-hidden sm:mx-0 sm:rounded-xl md:grid-cols-3">
+              <div className="bg-saluteTan p-8 sm:p-10">
+                <img
+                  alt="Transistor"
+                  src="https://tailwindcss.com/plus-assets/img/logos/158x48/transistor-logo-gray-900.svg"
+                  width={158}
+                  height={48}
+                  className="max-h-12 w-full object-contain"
+                />
+              </div>
+              <div className="bg-saluteTan p-6 sm:p-10">
+                <img
+                  alt="Reform"
+                  src="https://tailwindcss.com/plus-assets/img/logos/158x48/reform-logo-gray-900.svg"
+                  width={158}
+                  height={48}
+                  className="max-h-12 w-full object-contain"
+                />
+              </div>
+              <div className="bg-saluteTan p-6 sm:p-10">
+                <img
+                  alt="Tuple"
+                  src="https://tailwindcss.com/plus-assets/img/logos/158x48/tuple-logo-gray-900.svg"
+                  width={158}
+                  height={48}
+                  className="max-h-12 w-full object-contain"
+                />
+              </div>
+              <div className="bg-saluteTan p-6 sm:p-10">
+                <img
+                  alt="Laravel"
+                  src="https://tailwindcss.com/plus-assets/img/logos/158x48/laravel-logo-gray-900.svg"
+                  width={158}
+                  height={48}
+                  className="max-h-12 w-full object-contain"
+                />
+              </div>
+              <div className="bg-saluteTan p-6 sm:p-10">
+                <img
+                  alt="SavvyCal"
+                  src="https://tailwindcss.com/plus-assets/img/logos/158x48/savvycal-logo-gray-900.svg"
+                  width={158}
+                  height={48}
+                  className="max-h-12 w-full object-contain"
+                />
+              </div>
+              <div className="bg-saluteTan p-6 sm:p-10">
+                <img
+                  alt="Statamic"
+                  src="https://tailwindcss.com/plus-assets/img/logos/158x48/statamic-logo-gray-900.svg"
+                  width={158}
+                  height={48}
+                  className="max-h-12 w-full object-contain"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative bg-white">
+        <div className="relative h-80 overflow-hidden bg-indigo-600 md:absolute md:left-0 md:h-full md:w-1/3 lg:w-1/2">
+          <img
+            alt=""
+            src="https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1920&q=60&blend=6366F1&sat=-100&blend-mode=multiply"
+            className="size-full object-cover"
+          />
+        </div>
+        <div className="relative mx-auto max-w-7xl py-24 sm:py-32 lg:px-8 lg:py-40">
+          <div className="pl-6 pr-6 md:ml-auto md:w-2/3 md:pl-16 lg:w-1/2  lg:pr-0">
+            <p className="font-primary mt-2 text-4xl font-semibold tracking-tight text-gray-800 sm:text-6xl">
+              Questions?
+            </p>
+            <p className="mt-6 font-body text-lg/7 text-gray-600">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et,
+              egestas tempus tellus etiam sed. Quam a scelerisque amet
+              ullamcorper eu enim et fermentum, augue. Aliquet amet volutpat
+              quisque ut interdum tincidunt duis.
+            </p>
+            <div className="mt-8 flex">
+              <a
+                href="#"
+                className="font-body uppercase font-semibold border-t-2 border-red-500 flex items-center gap-2 duration-700 ease-in-out bg-gradient-to-r from-saluteRed to-red-700 rounded-b-xl px-14 py-2.5 text-lg/6 text-white hover:underline hover:bg-gradient-to-r hover:from-saluteTan hover:to-saluteTan hover:text-saluteRed"
+              >
+                Contact Us{" "}
+                <LiaFlagUsaSolid aria-hidden="true" className="size-7" />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </>

@@ -15,6 +15,7 @@ module.exports = {
         saluteTan: "#eddaba",
         saluteNavy: "#2a3e47",
         saluteRed: "#ba2b23",
+        saluteBlue: "#082c5c",
       },
     },
   },
