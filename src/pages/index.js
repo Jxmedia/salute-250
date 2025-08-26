@@ -137,7 +137,7 @@ export default function HomePage() {
             <div className="hidden lg:flex lg:flex-1 lg:justify-end">
               <a
                 href="#"
-                className="border-t-2 border-red-500 flex items-center gap-2 duration-700 ease-in-out bg-gradient-to-r from-saluteRed to-red-700 rounded-b-xl px-6 py-2.5 text-lg/6 text-white hover:underline hover:bg-gradient-to-r hover:from-saluteTan hover:to-saluteTan hover:text-saluteRed"
+                className="border-t-2 border-red-500 flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl px-6 py-2.5 text-lg/6 text-white hover:underline hover:bg-saluteTan hover:text-saluteRed"
               >
                 Contact Us{" "}
                 <LiaFlagUsaSolid aria-hidden="true" className="size-7" />
@@ -251,14 +251,14 @@ export default function HomePage() {
                 <div className="mt-10 flex items-center justify-start gap-x-6">
                   <a
                     href="#"
-                    className="border-t-2 border-blue-500 flex items-center gap-2 duration-700 ease-in-out bg-blue-800 rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-gradient-to-r hover:from-saluteTan hover:to-saluteTan hover:text-blue-800"
+                    className="border-t-2 border-blue-500 flex items-center gap-2 duration-300 ease-in-out bg-blue-800 rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-blue-800"
                   >
                     View All Events{" "}
                     <MdOutlineEvent aria-hidden="true" className="size-7" />
                   </a>
                   <a
                     href="#"
-                    className="border-t-2 border-teal-800 flex items-center gap-2 duration-700 ease-in-out bg-saluteNavy rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-gradient-to-r hover:from-saluteTan hover:to-saluteTan hover:text-saluteNavy"
+                    className="border-t-2 border-teal-800 flex items-center gap-2 duration-300 ease-in-out bg-saluteNavy rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteNavy"
                   >
                     Spectators{" "}
                     <IoTicketSharp aria-hidden="true" className="size-7" />
@@ -288,14 +288,14 @@ export default function HomePage() {
           <div className="mt-8 flex items-center justify-center gap-x-6">
             <a
               href="#"
-              className="border-t-2 border-blue-500 flex items-center gap-2 duration-700 ease-in-out bg-blue-800 rounded-b-xl px-10 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-gradient-to-r hover:from-saluteTan hover:to-saluteTan hover:text-blue-800"
+              className="border-t-2 border-blue-500 flex items-center gap-2 duration-300 ease-in-out bg-blue-800 rounded-b-xl px-10 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-blue-800"
             >
               View All Events{" "}
               <MdOutlineEvent aria-hidden="true" className="size-7" />
             </a>
             <a
               href="#"
-              className="border-t-2 border-red-500 flex items-center gap-2 duration-700 ease-in-out bg-saluteRed rounded-b-xl px-10 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-gradient-to-r hover:from-saluteTan hover:to-saluteTan hover:text-saluteNavy"
+              className="border-t-2 border-red-500 flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl px-10 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteNavy"
             >
               Register Your Event{" "}
               <MdOutlineEventAvailable aria-hidden="true" className="size-7" />
@@ -552,7 +552,7 @@ export default function HomePage() {
                 <div className="mt-10 flex items-center justify-center gap-x-6">
                   <a
                     href="#"
-                    className="font-body uppercase font-semibold border-t-2 border-yellow-100 flex items-center gap-2 duration-700 ease-in-out bg-saluteTan rounded-b-xl px-14 py-2.5 text-lg/6 text-saluteBlue hover:underline hover:bg-saluteBlue  hover:text-white"
+                    className="font-body uppercase font-semibold border-t-2 border-yellow-100 flex items-center gap-2 duration-300 ease-in-out bg-saluteTan rounded-b-xl px-14 py-2.5 text-lg/6 text-saluteBlue hover:underline hover:bg-saluteBlue  hover:text-white"
                   >
                     Spectators{" "}
                     <IoMdNotifications aria-hidden="true" className="size-7" />
@@ -586,7 +586,7 @@ export default function HomePage() {
             <div className="mt-8 flex">
               <a
                 href="#"
-                className="font-body uppercase font-semibold border-t-2 border-red-500 flex items-center gap-2 duration-700 ease-in-out bg-gradient-to-r from-saluteRed to-red-700 rounded-b-xl px-14 py-2.5 text-lg/6 text-white hover:underline hover:bg-gradient-to-r hover:from-saluteTan hover:to-saluteTan hover:text-saluteRed"
+                className="font-body uppercase font-semibold border-t-2 border-red-500 flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl px-14 py-2.5 text-lg/6 text-white hover:underline hover:bg-saluteTan hover:text-saluteRed"
               >
                 Contact Us{" "}
                 <LiaFlagUsaSolid aria-hidden="true" className="size-7" />
