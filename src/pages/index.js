@@ -8,6 +8,13 @@ import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { MdOutlineEventAvailable } from "react-icons/md";
 import HeaderLogo from "../images/SAA-Badge-Dates.png";
+import AirShowCover from "../images/event-covers/airshow.png";
+import SportsCover from "../images/event-covers/sports-event.png";
+import CarCover from "../images/event-covers/carshow.png";
+import { MdAirplaneTicket } from "react-icons/md";
+import { IoMdNotifications } from "react-icons/io";
+import { GiAmericanFootballHelmet } from "react-icons/gi";
+import { IoCarSportSharp } from "react-icons/io5";
 
 const navigation = [
   { name: "Home", href: "#" },
@@ -16,15 +23,14 @@ const navigation = [
   { name: "Spectators", href: "#" },
 ];
 
-const people = [
+const event = [
   {
     name: "Tampa Bay Aviation Show",
     location: "Raymond James Stadium",
     eventType: "Air Show",
     email: "janecooper@example.com",
     telephone: "+1-202-555-0170",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+    imageUrl: AirShowCover,
   },
   {
     name: "Cody Fisher",
@@ -32,8 +38,7 @@ const people = [
     eventType: "Sporting Event",
     email: "codyfisher@example.com",
     telephone: "+1-202-555-0114",
-    imageUrl:
-      "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+    imageUrl: SportsCover,
   },
   {
     name: "Esther Howard",
@@ -41,8 +46,7 @@ const people = [
     email: "estherhoward@example.com",
     telephone: "+1-202-555-0143",
     eventType: "Car Show",
-    imageUrl:
-      "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+    imageUrl: CarCover,
   },
 ];
 
@@ -240,7 +244,7 @@ export default function HomePage() {
                   Get ready for a once-in-a-generation celebration—America's
                   250th anniversary is almost here! Over 365 days, we’ll unite
                   for thousands of events honoring our shared history, diverse
-                  stories, and bold future. Join millions of people in
+                  stories, and bold future. Join millions of event in
                   commemorating the spirit of a nation{" "}
                   <span className="font-script">250</span> years in the making.
                 </p>
@@ -301,9 +305,9 @@ export default function HomePage() {
             role="list"
             className="py-20 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
           >
-            {people.map((person) => (
+            {event.map((event) => (
               <li
-                key={person.email}
+                key={event.email}
                 className="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white ring-1 ring-blue-700/10"
               >
                 <a
@@ -311,19 +315,49 @@ export default function HomePage() {
                   className="duration-300 ease-in-out hover:bg-saluteTan hover:bg-opacity-30 rounded-lg group"
                 >
                   <div className="flex flex-1 flex-col p-6">
-                    <img
-                      alt=""
-                      src={person.imageUrl}
-                      className="shrink-0 rounded-lg h-48"
-                    />
+                    <div className="relative isolate overflow-hidden rounded-lg py-12">
+                      <img
+                        alt=""
+                        src={event.imageUrl}
+                        className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
+                      />
+
+                      <div className="absolute inset-0 bg-yellow-900 opacity-70 mix-blend-multiply duration-300 ease-in-out group-hover:saturate-0" />
+                      <div className="relative flex justify-center duration-300 opacity-90 group-hover:blur-[2px] ease-in-out group-hover:opacity-60">
+                        {event.eventType === "Air Show" ? (
+                          <MdAirplaneTicket
+                            aria-hidden="true"
+                            className="size-24 text-white "
+                          />
+                        ) : (
+                          <></>
+                        )}
+                        {event.eventType === "Sporting Event" ? (
+                          <GiAmericanFootballHelmet
+                            aria-hidden="true"
+                            className="size-24 text-white "
+                          />
+                        ) : (
+                          <></>
+                        )}
+                        {event.eventType === "Car Show" ? (
+                          <IoCarSportSharp
+                            aria-hidden="true"
+                            className="size-24 text-white "
+                          />
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                    </div>
                     <dd className="mt-4">
                       <dt className="sr-only">eventType</dt>
-                      <span className="inline-flex items-center rounded-md bg-green-50 px-3 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                        {person.eventType}
+                      <span className="inline-flex items-center rounded-md bg-teal-50 px-5 py-1.5 text-xs font-medium text-teal-700 ring-1 ring-inset ring-teal-600/20">
+                        {event.eventType}
                       </span>
                     </dd>
                     <h3 className="mt-2 text-lg font-body font-medium text-gray-900">
-                      {person.name}
+                      {event.name}
                     </h3>
                     <dl className="border-t pt-2 mt-2 mt-1 flex grow flex-col font-body justify-between">
                       <dt className="sr-only">Title</dt>
@@ -344,7 +378,7 @@ export default function HomePage() {
                           aria-hidden="true"
                           className="size-5 text-blue-700"
                         />{" "}
-                        {person.location}
+                        {event.location}
                       </dd>
 
                       <dd className="pl-7 text-sm text-gray-500 flex items-start gap-2">
@@ -369,7 +403,7 @@ export default function HomePage() {
                     <div className="duration-300 ease-in-out font-body -mt-px flex divide-x divide-gray-200 bg-blue-700 group-hover:opacity-80 rounded-b-lg">
                       <div className="border-t border-gray-200 flex w-0 flex-1">
                         <a
-                          href={`tel:${person.telephone}`}
+                          href={`tel:${event.telephone}`}
                           className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-white group-hover:underline"
                         >
                           <IoTicketSharp
@@ -487,6 +521,43 @@ export default function HomePage() {
                   height={48}
                   className="max-h-12 w-full object-contain"
                 />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="bg-gray-900">
+        <div className="relative isolate overflow-hidden">
+          <img
+            alt=""
+            src="https://www.shutterstock.com/shutterstock/photos/54087580/display_1500/stock-photo-a-sky-diver-carries-an-american-flag-as-he-descends-down-through-the-clouds-54087580.jpg"
+            className="absolute inset-0 -z-10 size-full object-cover"
+          />
+          <div className="absolute inset-0 bg-saluteNavy mix-blend-multiply" />
+          <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="mx-auto max-w-4xl py-32">
+              <div className="text-center">
+                <h1 className="font-primary text-balance text-5xl font-semibold tracking-tight text-saluteTan sm:text-7xl">
+                  Subscribe Today
+                </h1>
+                <h3 className="mt-2 font-body text-balance text-3xl font-semibold tracking-tight text-saluteTan">
+                  Be Part of America’s <span className="font-script">250</span>
+                  th Find Events Near You
+                </h3>
+                <p className="font-body mt-4 text-pretty text-lg font-medium text-white sm:text-xl/8">
+                  From air shows to parades, concerts to commemorations —
+                  patriotic events are happening across the nation for America’s
+                  250th birthday in 2026.
+                </p>
+                <div className="mt-10 flex items-center justify-center gap-x-6">
+                  <a
+                    href="#"
+                    className="font-body uppercase font-semibold border-t-2 border-yellow-100 flex items-center gap-2 duration-700 ease-in-out bg-saluteTan rounded-b-xl px-14 py-2.5 text-lg/6 text-saluteBlue hover:underline hover:bg-saluteBlue  hover:text-white"
+                  >
+                    Spectators{" "}
+                    <IoMdNotifications aria-hidden="true" className="size-7" />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
