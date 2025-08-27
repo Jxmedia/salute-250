@@ -33,7 +33,7 @@ const event = [
     imageUrl: AirShowCover,
   },
   {
-    name: "Cody Fisher",
+    name: "Lightning vs. Avalanche",
     location: "Lead Security Associate",
     eventType: "Sporting Event",
     email: "codyfisher@example.com",
@@ -41,7 +41,7 @@ const event = [
     imageUrl: SportsCover,
   },
   {
-    name: "Esther Howard",
+    name: "SEMA Pre Show",
     location: "Assurance Administrator",
     email: "estherhoward@example.com",
     telephone: "+1-202-555-0143",
@@ -102,15 +102,19 @@ export default function HomePage() {
   return (
     <>
       <div className="bg-white">
-        <header className="absolute inset-x-0 top-0 z-50">
+        <header className="absolute inset-x-0 top-0 z-50 bg-gradient-to-b from-saluteTan/30 to-transparent backdrop-blur-sm">
           <nav
             aria-label="Global"
-            className="flex items-center font-body font-semibold uppercase justify-between p-6 lg:px-8"
+            className="flex items-center font-body font-semibold uppercase justify-between p-8 lg:px-8"
           >
             <div className="flex lg:flex-1">
-              <a href="#" className="-m-1.5 p-1.5">
+              <a href="/" className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
-                <img alt="" src={HeaderLogo} className="h-16 w-auto" />
+                <img
+                  alt=""
+                  src={HeaderLogo}
+                  className="h-16 w-auto hover:saturate-0"
+                />
               </a>
             </div>
             <div className="flex lg:hidden">
@@ -128,7 +132,7 @@ export default function HomePage() {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-lg/6 uppercase duration-300 ease-in-out text-white hover:underline hover:text-saluteTan"
+                  className="text-lg/6 uppercase duration-300 ease-in-out text-white hover:underline hover:text-saluteBlue hover:bg-saluteTan/80 p-3 rounded-md"
                 >
                   {item.name}
                 </a>
@@ -202,16 +206,17 @@ export default function HomePage() {
             // src="https://www.shutterstock.com/shutterstock/photos/1067889479/display_1500/stock-photo-american-flag-background-1067889479.jpg"
             // src="https://www.shutterstock.com/shutterstock/photos/760198318/display_1500/stock-photo-american-flag-background-760198318.jpg"
             // src="https://www.shutterstock.com/shutterstock/photos/785215165/display_1500/stock-photo-american-flag-background-785215165.jpg"
-            src="https://www.shutterstock.com/shutterstock/photos/321307532/display_1500/stock-photo-american-flag-on-dark-background-321307532.jpg"
+            // src="https://www.shutterstock.com/shutterstock/photos/321307532/display_1500/stock-photo-american-flag-on-dark-background-321307532.jpg"
+            src="https://www.shutterstock.com/shutterstock/photos/1010693263/display_1500/stock-photo-closeup-ruffled-american-flag-isolated-on-white-background-1010693263.jpg"
             className="absolute inset-0 -z-10 size-full object-cover scale-x-[-1]"
           />
 
-          {/* <div className="absolute inset-0 bg-gradient-to-r from-[#0f1437] to-[#223172] opacity-80 mix-blend-multiply" /> */}
+          <div className="absolute inset-0 bg-saluteTan opacity-80 mix-blend-multiply" />
 
           <div className="relative max-w-7xl px-6 lg:px-8">
             <div className="max-w-3xl py-32 sm:py-40">
               <div className="hidden sm:mb-8 sm:flex sm:justify-start">
-                <div className="font-primary relative px-3 py-1 text-gray-300 hover:ring-gray-900/20">
+                <div className="font-primary relative px-3 py-1 text-gray-700 hover:ring-gray-900/20">
                   {timeLeft.expired ? (
                     <p className="text-3xl">Happy 250 Anniversary!</p>
                   ) : (
@@ -233,14 +238,14 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="">
-                <h1 className="text-balance text-saluteTan text-5xl font-primary font-extrabold uppercase sm:text-8xl">
+                <h1 className="text-balance text-saluteBlue text-5xl font-primary font-extrabold uppercase sm:text-8xl">
                   Salute Across America{" "}
                   <span className="font-script  text-[1.2em] text-saluteRed">
                     250
                   </span>
                 </h1>
 
-                <p className="mt-3 text-pretty text-lg font-body text-white sm:text-xl/8">
+                <p className="mt-3 text-pretty text-lg font-body text-gray-700 sm:text-xl/8">
                   Get ready for a once-in-a-generation celebration—America's
                   250th anniversary is almost here! Over 365 days, we’ll unite
                   for thousands of events honoring our shared history, diverse
@@ -303,7 +308,7 @@ export default function HomePage() {
           </div>
           <ul
             role="list"
-            className="py-20 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
+            className="py-20 tracking-wide grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
           >
             {event.map((event) => (
               <li
@@ -327,7 +332,7 @@ export default function HomePage() {
                         {event.eventType === "Air Show" ? (
                           <MdAirplaneTicket
                             aria-hidden="true"
-                            className="size-24 text-white "
+                            className="size-24 text-white"
                           />
                         ) : (
                           <></>
@@ -335,7 +340,7 @@ export default function HomePage() {
                         {event.eventType === "Sporting Event" ? (
                           <GiAmericanFootballHelmet
                             aria-hidden="true"
-                            className="size-24 text-white "
+                            className="size-24 text-white"
                           />
                         ) : (
                           <></>
@@ -343,7 +348,7 @@ export default function HomePage() {
                         {event.eventType === "Car Show" ? (
                           <IoCarSportSharp
                             aria-hidden="true"
-                            className="size-24 text-white "
+                            className="size-24 text-white"
                           />
                         ) : (
                           <></>
@@ -356,10 +361,10 @@ export default function HomePage() {
                         {event.eventType}
                       </span>
                     </dd>
-                    <h3 className="mt-2 text-lg font-body font-medium text-gray-900">
+                    <h3 className="py-3 text-2xl font-primary font-medium text-gray-900">
                       {event.name}
                     </h3>
-                    <dl className="border-t pt-2 mt-2 mt-1 flex grow flex-col font-body justify-between">
+                    <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
                       <dt className="sr-only">Title</dt>
                       <dd className="text-sm text-gray-500 flex items-start gap-2">
                         <IoTicketSharp
@@ -533,7 +538,7 @@ export default function HomePage() {
             src="https://www.shutterstock.com/shutterstock/photos/54087580/display_1500/stock-photo-a-sky-diver-carries-an-american-flag-as-he-descends-down-through-the-clouds-54087580.jpg"
             className="absolute inset-0 -z-10 size-full object-cover"
           />
-          <div className="absolute inset-0 bg-saluteNavy mix-blend-multiply" />
+          <div className="absolute inset-0 bg-gray-600 mix-blend-multiply" />
           <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-4xl py-32">
               <div className="text-center">
@@ -568,7 +573,7 @@ export default function HomePage() {
         <div className="relative h-80 overflow-hidden bg-indigo-600 md:absolute md:left-0 md:h-full md:w-1/3 lg:w-1/2">
           <img
             alt=""
-            src="https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1920&q=60&blend=6366F1&sat=-100&blend-mode=multiply"
+            src="https://www.shutterstock.com/shutterstock/photos/2452273295/display_1500/stock-photo-woman-patriot-with-american-flag-on-the-beach-at-sunset-usa-celebrate-th-of-july-independence-2452273295.jpg"
             className="size-full object-cover"
           />
         </div>
