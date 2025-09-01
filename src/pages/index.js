@@ -235,13 +235,12 @@ export default function HomePage() {
                 >
                   Buy Tickets
                 </button>
-                <button
-                  type="button"
-                  onClick={() => setOpen(false)}
+                <a
+                  href="/events"
                   className="w-full justify-center border-t-2 border-blue-300 flex items-center gap-2 duration-300 ease-in-out bg-blue-600 rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteBlue"
                 >
-                  Back to Events
-                </button>
+                  View all Events
+                </a>
               </div>
             </DialogPanel>
           </div>
