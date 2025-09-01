@@ -200,44 +200,95 @@ export default function EventsHome() {
         <Dialog open={open} onClose={setOpen} className="relative z-10">
           <DialogBackdrop
             transition
-            className="fixed inset-0 bg-gray-700/90 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
+            className="fixed inset-0 bg-gray-800/90 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
           />
 
           <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
             <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
               <DialogPanel
                 transition
-                className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-sm sm:p-6 data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
+                className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-xl sm:p-6 data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
               >
                 <div>
-                  <div className="mx-auto flex size-12 items-center justify-center rounded-full bg-green-100">
-                    <MdOutlineEventAvailable
+                  <div className="mx-auto flex size-12 items-center justify-center rounded-full bg-blue-200">
+                    <MdAirplaneTicket
                       aria-hidden="true"
-                      className="size-6 text-green-600"
+                      className="size-6 text-blue-600"
                     />
                   </div>
-                  <div className="mt-3 text-center sm:mt-5">
-                    <DialogTitle
-                      as="h3"
-                      className="text-base font-semibold text-gray-900"
-                    >
-                      Payment successful
-                    </DialogTitle>
-                    <div className="mt-2">
-                      <p className="text-sm text-gray-500">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Consequatur amet labore.
-                      </p>
+                  <div className="mt-2 text-center">
+                    <h3 className="text-2xl font-primary font-medium text-gray-900">
+                      {event[0].name}
+                    </h3>
+                    <h4 className="text-sm font-body text-gray-400">
+                      Sunday, Jan 13, 2026 | 3PM - 7PM
+                    </h4>{" "}
+                  </div>
+                  <div className="mt-3 relative isolate overflow-hidden rounded-lg">
+                    <img
+                      alt=""
+                      src="https://www.ilpost.it/wp-content/uploads/2016/07/google.jpg"
+                      className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
+                    />
+
+                    <div className="py-20 relative flex justify-center" />
+                  </div>
+
+                  <div className="flex items-center justify-center gap-x-4 font-body">
+                    <div className="flex items-center justify-center gap-x-2">
+                      <MdLocationPin
+                        aria-hidden="true"
+                        className="size-5 text-blue-700"
+                      />
+                      <dd className="text-sm text-gray-500 py-3 text-center gap-2">
+                        Street Address, City, Florida 33333
+                      </dd>
+                    </div>
+                    <p className="text-sm text-gray-500 flex items-start gap-x-2">
+                      <IoTicketSharp
+                        aria-hidden="true"
+                        className="size-5 text-blue-700"
+                      />{" "}
+                      Free
+                    </p>
+                  </div>
+
+                  <div className="">
+                    <div className="border border-gray-100 bg-gray-50 rounded-2xl p-3 font-body justify-center">
+                      <div className="py-2">
+                        <p className="text-sm text-gray-700 gap-2">
+                          Lorem ipsum dolor sit amet, consectetur adipiscing
+                          elit. Sed orci libero, mattis sed orci ut, sagittis
+                          ultrices neque. Pellentesque habitant morbi tristique
+                          senectus et netus et malesuada fames ac turpis
+                          egestas. Donec at varius lacus. Pellentesque eget
+                          varius sapien. Cras vel gravida diam.
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div className="mt-5 sm:mt-6">
+                <div className="flex justify-center mt-5 sm:mt-6 gap-x-2 text-center">
                   <button
                     type="button"
                     onClick={() => setOpen(false)}
-                    className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    className="pointer-events-none w-full justify-center opacity-30 border-t-2 border-blue-800 flex items-center gap-2 duration-300 ease-in-out bg-saluteNavy rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteNavy"
                   >
-                    Go back to dashboard
+                    Buy Tickets
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setOpen(false)}
+                    className="hidden w-full justify-center border-t-2 border-blue-800 flex items-center gap-2 duration-300 ease-in-out bg-saluteNavy rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteNavy"
+                  >
+                    Buy Tickets
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setOpen(false)}
+                    className="w-full justify-center border-t-2 border-blue-300 flex items-center gap-2 duration-300 ease-in-out bg-blue-600 rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteBlue"
+                  >
+                    Back to Events
                   </button>
                 </div>
               </DialogPanel>
@@ -496,16 +547,15 @@ export default function EventsHome() {
                       </h3>
                       <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
                         <dt className="sr-only">Title</dt>
-                        <dd className="text-sm text-gray-500 flex items-start gap-2">
-                          <IoTicketSharp
+                        <dd className="text-sm text-gray-500 flex items-center gap-2">
+                          <FaClock
                             aria-hidden="true"
-                            className="size-5 text-blue-700"
+                            className="size-4 text-blue-700"
                           />{" "}
-                          Free
+                          Jan 20, 2026, 11:30AM - 7:00PM ET
                         </dd>
-
-                        <dt className="sr-only">eventType</dt>
                       </dl>
+
                       <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
                         <dt className="sr-only">Title</dt>
                         <dd className="text-sm text-gray-500 flex items-start gap-2">
@@ -525,12 +575,12 @@ export default function EventsHome() {
                       </dl>
                       <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
                         <dt className="sr-only">Title</dt>
-                        <dd className="text-sm text-gray-500 flex items-center gap-2">
-                          <FaClock
+                        <dd className="text-sm text-gray-500 flex items-start gap-2">
+                          <IoTicketSharp
                             aria-hidden="true"
-                            className="size-4 text-blue-700"
+                            className="size-5 text-blue-700"
                           />{" "}
-                          Jan 20, 2026, 11:30AM - 7:00PM ET
+                          Free
                         </dd>
                       </dl>
                     </div>

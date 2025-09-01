@@ -314,12 +314,13 @@ export default function HomePage() {
                 </h1>
 
                 <p className="mt-3 text-pretty text-lg font-body text-gray-700 sm:text-xl/8">
-                  Get ready for a once-in-a-generation celebration—America's
-                  250th anniversary is almost here! Over 365 days, we’ll unite
-                  for thousands of events honoring our shared history, diverse
-                  stories, and bold future. Join millions of event in
-                  commemorating the spirit of a nation{" "}
-                  <span className="font-script">250</span> years in the making.
+                  Get ready for a once-in-a-generation celebration—America's{" "}
+                  <span className="font-script">250</span>th anniversary is
+                  almost here! Over 365 days, we’ll unite for thousands of
+                  events honoring our shared history, diverse stories, and bold
+                  future. Join millions of event in commemorating the spirit of
+                  a nation <span className="font-script">250</span> years in the
+                  making.
                 </p>
                 <div className="mt-10 flex items-center justify-start gap-x-6">
                   <a
