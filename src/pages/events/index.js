@@ -13,10 +13,12 @@ import {
   ListboxOption,
   ListboxOptions,
 } from "@headlessui/react";
-import { FaFacebookSquare } from "react-icons/fa";
+import { FaCircle, FaFacebookSquare } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaLinkedinIn } from "react-icons/fa6";
+import { MdStarBorder } from "react-icons/md";
+import { MdOutlineStar } from "react-icons/md";
 
 import { LiaFlagUsaSolid } from "react-icons/lia";
 import { MdOutlineEvent } from "react-icons/md";
@@ -75,6 +77,7 @@ const event = [
     email: "janecooper@example.com",
     telephone: "+1-202-555-0170",
     imageUrl: AirShowCover,
+    tier: "Signature",
   },
   {
     name: "Lightning vs. Avalanche",
@@ -83,6 +86,7 @@ const event = [
     email: "codyfisher@example.com",
     telephone: "+1-202-555-0114",
     imageUrl: SportsCover,
+    tier: "Affiliate",
   },
   {
     name: "SEMA Pre Show",
@@ -91,6 +95,7 @@ const event = [
     telephone: "+1-202-555-0143",
     eventType: "Car Show",
     imageUrl: CarCover,
+    tier: "Partner",
   },
 ];
 const people = [
@@ -176,7 +181,10 @@ export default function EventsHome() {
                     />
                   </div>
                   <div className="mt-2 text-center">
-                    <h3 className="text-2xl font-primary font-medium text-gray-900">
+                    <p className="text-2xl font-script font-medium text-saluteRed">
+                      Signature Event
+                    </p>
+                    <h3 className="text-3xl font-primary font-medium text-gray-900">
                       {event[0].name}
                     </h3>
                     <h4 className="text-sm font-body text-gray-400">
@@ -393,7 +401,9 @@ export default function EventsHome() {
             Tour
           </p>
           <p className="mx-auto mt-2 text-balance text-center text-4xl font-primary font-semibold tracking-tight text-saluteTan sm:text-7xl">
-            Signature Events
+            All{" "}
+            <span className="font-script text-[1.2em] text-white">2026</span>{" "}
+            Events
           </p>
           <div className="mt-8 flex items-center justify-center gap-x-6">
             <a
@@ -510,11 +520,44 @@ export default function EventsHome() {
                           )}
                         </div>
                       </div>
-                      <dd className="mt-4">
+                      <dd className="mt-4 font-body">
                         <dt className="sr-only">eventType</dt>
-                        <span className="inline-flex items-center rounded-md bg-teal-50 px-5 py-1.5 text-xs font-medium text-teal-700 ring-1 ring-inset ring-teal-600/20">
-                          {event.eventType}
-                        </span>
+                        <div className="flex gap-x-2">
+                          {event.tier === "Signature" ? (
+                            <span className="inline-flex gap-x-1 items-center rounded-md bg-red-50 px-4 py-1.5 text-xs font-semibold text-red-700 ring-1 ring-inset ring-red-600/20">
+                              <MdOutlineStar
+                                aria-hidden="true"
+                                className="size-4"
+                              />
+
+                              {event.tier}
+                            </span>
+                          ) : (
+                            <></>
+                          )}
+                          {event.tier === "Partner" ? (
+                            <span className="inline-flex gap-x-1 items-center rounded-md bg-orange-50 px-4 py-1.5 text-xs font-semibold text-orange-700 ring-1 ring-inset ring-orange-600/20">
+                              <MdStarBorder
+                                aria-hidden="true"
+                                className="size-4"
+                              />
+                              {event.tier}
+                            </span>
+                          ) : (
+                            <></>
+                          )}
+                          {event.tier === "Affiliate" ? (
+                            <span className="inline-flex gap-x-1 items-center rounded-md bg-indigo-50 px-4 py-1.5 text-xs font-semibold text-indigo-700 ring-1 ring-inset ring-indigo-600/20">
+                              <FaCircle aria-hidden="true" className="size-2" />
+                              {event.tier}
+                            </span>
+                          ) : (
+                            <></>
+                          )}
+                          <span className="inline-flex items-center rounded-md bg-teal-50 px-5 py-1.5 text-xs font-medium text-teal-700 ring-1 ring-inset ring-teal-600/20">
+                            {event.eventType}
+                          </span>
+                        </div>
                       </dd>
                       <h3 className="py-3 text-2xl font-primary font-medium text-gray-900">
                         {event.name}

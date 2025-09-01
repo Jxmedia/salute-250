@@ -11,6 +11,7 @@ import { FaFacebookSquare } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaLinkedinIn } from "react-icons/fa6";
+import { MdOutlineStar } from "react-icons/md";
 
 import HeaderLogo from "../images/SAA-Badge-Dates.png";
 import AirShowCover from "../images/event-covers/airshow.png";
@@ -154,7 +155,10 @@ export default function HomePage() {
                   />
                 </div>
                 <div className="mt-2 text-center">
-                  <h3 className="text-2xl font-primary font-medium text-gray-900">
+                  <p className="text-2xl font-script font-medium text-saluteRed">
+                    Signature Event
+                  </p>
+                  <h3 className="text-3xl font-primary font-medium text-gray-900">
                     {event[0].name}
                   </h3>
                   <h4 className="text-sm font-body text-gray-400">
@@ -434,7 +438,11 @@ export default function HomePage() {
             Tour
           </p>
           <p className="mx-auto mt-2 text-balance text-center text-4xl font-primary font-semibold tracking-tight text-gray-800 sm:text-7xl">
-            Upcoming Signature Events
+            Upcoming{" "}
+            <span className="font-scriptText tracking-[0.5px] text-[1.2em] text-saluteRed">
+              Signature
+            </span>{" "}
+            Events
           </p>
           <div className="mt-8 flex items-center justify-center gap-x-6">
             <a
@@ -501,11 +509,20 @@ export default function HomePage() {
                         )}
                       </div>
                     </div>
-                    <dd className="mt-4">
+                    <dd className="mt-4 font-body">
                       <dt className="sr-only">eventType</dt>
-                      <span className="inline-flex items-center rounded-md bg-teal-50 px-5 py-1.5 text-xs font-medium text-teal-700 ring-1 ring-inset ring-teal-600/20">
-                        {event.eventType}
-                      </span>
+                      <div className="flex gap-x-2">
+                        <span className="inline-flex gap-x-1 items-center rounded-md bg-red-50 px-4 py-1.5 text-xs font-semibold text-red-700 ring-1 ring-inset ring-red-600/20">
+                          <MdOutlineStar
+                            aria-hidden="true"
+                            className="size-4"
+                          />
+                          Signature
+                        </span>
+                        <span className="inline-flex items-center rounded-md bg-teal-50 px-5 py-1.5 text-xs font-medium text-teal-700 ring-1 ring-inset ring-teal-600/20">
+                          {event.eventType}
+                        </span>
+                      </div>
                     </dd>
                     <h3 className="py-3 text-2xl font-primary font-medium text-gray-900">
                       {event.name}

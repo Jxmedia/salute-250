@@ -9,6 +9,7 @@ module.exports = {
       primary: ["Bitter"],
       body: ["Poppins"],
       script: ["Pinyon Script"],
+      scriptText: ["Mea Culpa"],
     },
     extend: {
       colors: {
