@@ -187,7 +187,7 @@ export default function EventsHome() {
                     <h3 className="text-3xl font-primary font-medium text-gray-900">
                       {event[0].name}
                     </h3>
-                    <h4 className="text-sm pt-1 font-body text-gray-500">
+                    <h4 className="text-sm pt-1 font-body text-gray-600">
                       Sunday, Jan 13, 2026 |{" "}
                       <span className="text-saluteBlue/90 font-medium">
                         3PM - 7PM
@@ -210,11 +210,11 @@ export default function EventsHome() {
                         aria-hidden="true"
                         className="size-5 text-blue-700"
                       />
-                      <dd className="text-sm text-gray-500 py-3 text-center gap-2">
+                      <dd className="text-sm text-gray-600 py-3 text-center gap-2">
                         Street Address, City, Florida 33333
                       </dd>
                     </div>
-                    <p className="text-sm text-gray-500 flex items-start gap-x-2">
+                    <p className="text-sm text-gray-600 flex items-start gap-x-2">
                       <IoTicketSharp
                         aria-hidden="true"
                         className="size-5 text-blue-700"
@@ -301,7 +301,7 @@ export default function EventsHome() {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(true)}
-                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-500"
+                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-600"
               >
                 <span className="sr-only">Open main menu</span>
                 <Bars3Icon aria-hidden="true" className="size-6" />
@@ -460,7 +460,7 @@ export default function EventsHome() {
                     </ListboxOption>
                     <ListboxOption
                       value="Event Tier"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-500 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-600 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
                     >
                       <span className="block truncate font-normal group-data-[selected]:font-semibold underline">
                         Clear
@@ -527,7 +527,7 @@ export default function EventsHome() {
                     </ListboxOption>
                     <ListboxOption
                       value="Event Tier"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-500 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-600 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
                     >
                       <span className="block truncate font-normal group-data-[selected]:font-semibold underline">
                         Clear
@@ -567,7 +567,7 @@ export default function EventsHome() {
                     </ListboxOption>
                     <ListboxOption
                       value="Event Tier"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-500 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-600 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
                     >
                       <span className="block truncate font-normal group-data-[selected]:font-semibold underline">
                         Clear
@@ -613,7 +613,7 @@ export default function EventsHome() {
                     </ListboxOption>
                     <ListboxOption
                       value="Event Tier"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-500 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-600 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
                     >
                       <span className="block truncate font-normal group-data-[selected]:font-semibold underline">
                         Clear
@@ -716,7 +716,7 @@ export default function EventsHome() {
                       </h3>
                       <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
                         <dt className="sr-only">Title</dt>
-                        <dd className="text-sm text-gray-500 flex items-center gap-2">
+                        <dd className="text-sm text-gray-600 flex items-center gap-2">
                           <FaClock
                             aria-hidden="true"
                             className="size-4 text-blue-700"
@@ -727,7 +727,7 @@ export default function EventsHome() {
 
                       <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
                         <dt className="sr-only">Title</dt>
-                        <dd className="text-sm text-gray-500 flex items-start gap-2">
+                        <dd className="text-sm text-gray-600 flex items-start gap-2">
                           <MdLocationPin
                             aria-hidden="true"
                             className="size-5 text-blue-700"
@@ -735,16 +735,16 @@ export default function EventsHome() {
                           {event.location}
                         </dd>
 
-                        <dd className="pl-7 text-sm text-gray-500 flex items-start gap-2">
+                        <dd className="pl-7 text-sm text-gray-600 flex items-start gap-2">
                           Street Address
                         </dd>
-                        <dd className="pl-7 text-sm text-gray-500 flex items-start gap-2">
+                        <dd className="pl-7 text-sm text-gray-600 flex items-start gap-2">
                           City, Florida 3333
                         </dd>
                       </dl>
                       <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
                         <dt className="sr-only">Title</dt>
-                        <dd className="text-sm text-gray-500 flex items-start gap-2">
+                        <dd className="text-sm text-gray-600 flex items-start gap-2">
                           <IoTicketSharp
                             aria-hidden="true"
                             className="size-5 text-blue-700"
