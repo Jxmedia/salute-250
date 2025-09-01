@@ -181,7 +181,7 @@ export default function EventsHome() {
                     />
                   </div>
                   <div className="mt-2 text-center">
-                    <p className="text-2xl font-script font-medium text-saluteRed">
+                    <p className="text-2xl font-scriptText tracking-[0.5px] text-saluteRed">
                       Signature Event
                     </p>
                     <h3 className="text-3xl font-primary font-medium text-gray-900">
