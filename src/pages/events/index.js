@@ -181,14 +181,17 @@ export default function EventsHome() {
                     />
                   </div>
                   <div className="mt-2 text-center">
-                    <p className="text-2xl font-scriptText tracking-[0.5px] text-saluteRed">
+                    <p className="text-3xl font-scriptText tracking-[0.5px] text-saluteRed">
                       Signature Event
                     </p>
                     <h3 className="text-3xl font-primary font-medium text-gray-900">
                       {event[0].name}
                     </h3>
-                    <h4 className="text-sm font-body text-gray-400">
-                      Sunday, Jan 13, 2026 | 3PM - 7PM
+                    <h4 className="text-sm pt-1 font-body text-gray-500">
+                      Sunday, Jan 13, 2026 |{" "}
+                      <span className="text-saluteBlue/90 font-medium">
+                        3PM - 7PM
+                      </span>
                     </h4>{" "}
                   </div>
                   <div className="mt-3 relative isolate overflow-hidden rounded-2xl">
@@ -387,10 +390,6 @@ export default function EventsHome() {
         <img
           alt=""
           src="https://www.shutterstock.com/shutterstock/photos/1067889479/display_1500/stock-photo-american-flag-background-1067889479.jpg"
-          // src="https://www.shutterstock.com/shutterstock/photos/760198318/display_1500/stock-photo-american-flag-background-760198318.jpg"
-          // src="https://www.shutterstock.com/shutterstock/photos/785215165/display_1500/stock-photo-american-flag-background-785215165.jpg"
-          // src="https://www.shutterstock.com/shutterstock/photos/321307532/display_1500/stock-photo-american-flag-on-dark-background-321307532.jpg"
-          //   src="https://www.shutterstock.com/shutterstock/photos/1010693263/display_1500/stock-photo-closeup-ruffled-american-flag-isolated-on-white-background-1010693263.jpg"
           className="absolute inset-0 -z-10 opacity-60 size-full object-cover scale-x-[-1]"
         />
 
@@ -421,8 +420,56 @@ export default function EventsHome() {
               <IoMdNotifications aria-hidden="true" className="size-7" />
             </a>
           </div>
-          <div className="py-6 border-t border-gray-600 mt-10">
+          <div className="pt-6 pb-8 border-t border-b border-gray-600 mt-10">
             <div className="pb-8 flex gap-x-4">
+              <Listbox value={selected} onChange={setSelected}>
+                <div className="relative mt-2">
+                  <ListboxButton className="flex items-center gap-x-1 font-body bg-white px-10 py-4 text-md text-saluteRed font-medium rounded-full hover:bg-saluteRed hover:text-white focus-visible:outline-saluteBlue">
+                    <span className="">
+                      {selected ? selected : "Event Tier"}
+                    </span>
+                  </ListboxButton>
+
+                  <ListboxOptions
+                    transition
+                    className="absolute z-10 mt-1 w-full overflow-auto rounded-3xl bg-white py-4 text-base shadow-lg outline outline-1 outline-black/5 data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in sm:text-sm"
+                  >
+                    <ListboxOption
+                      value="Signature Event"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-900 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                    >
+                      <span className="block truncate font-normal group-data-[selected]:font-semibold">
+                        Signature
+                      </span>
+                    </ListboxOption>
+                    <ListboxOption
+                      value="Partner Event"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-900 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                    >
+                      <span className="block truncate font-normal group-data-[selected]:font-semibold">
+                        Partner
+                      </span>
+                    </ListboxOption>
+                    <ListboxOption
+                      value="Affiliate Event"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-900 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                    >
+                      <span className="block truncate font-normal group-data-[selected]:font-semibold">
+                        Affiliate
+                      </span>
+                    </ListboxOption>
+                    <ListboxOption
+                      value="Event Tier"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-500 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                    >
+                      <span className="block truncate font-normal group-data-[selected]:font-semibold underline">
+                        Clear
+                      </span>
+                    </ListboxOption>
+                  </ListboxOptions>
+                </div>
+              </Listbox>
+
               <Listbox value={selected} onChange={setSelected}>
                 <div className="relative mt-2">
                   <ListboxButton className="flex items-center gap-x-1 font-body bg-white px-10 py-4 text-md text-saluteRed font-medium rounded-full hover:bg-saluteRed hover:text-white focus-visible:outline-saluteBlue">
@@ -449,27 +496,132 @@ export default function EventsHome() {
                   </ListboxOptions>
                 </div>
               </Listbox>
-              <button
-                type="button"
-                onClick={() => setOpen(true)}
-                className="flex items-center gap-x-1 font-body bg-white px-6 py-2 text-md text-saluteRed font-medium rounded-full hover:bg-saluteRed hover:text-white focus-visible:outline-saluteBlue"
-              >
-                Event Type Mobile{" "}
-              </button>
-              <button
-                type="button"
-                onClick={() => setOpen(true)}
-                className="flex items-center gap-x-1 font-body bg-white px-6 py-2 text-md text-saluteRed font-medium rounded-full hover:bg-saluteRed hover:text-white focus-visible:outline-saluteBlue"
-              >
-                Start Date(DESC)
-              </button>
-              <button
-                type="button"
-                onClick={() => setOpen(true)}
-                className="flex items-center gap-x-1 font-body bg-white px-6 py-2 text-md text-saluteRed font-medium rounded-full hover:bg-saluteRed hover:text-white focus-visible:outline-saluteBlue"
-              >
-                Price
-              </button>
+
+              <Listbox value={selected} onChange={setSelected}>
+                <div className="relative mt-2">
+                  <ListboxButton className="flex items-center gap-x-1 font-body bg-white px-10 py-4 text-md text-saluteRed font-medium rounded-full hover:bg-saluteRed hover:text-white focus-visible:outline-saluteBlue">
+                    <span className="">
+                      {selected ? selected : "Event Name"}
+                    </span>
+                  </ListboxButton>
+
+                  <ListboxOptions
+                    transition
+                    className="absolute z-10 mt-1 w-full overflow-auto rounded-3xl bg-white py-4 text-base shadow-lg outline outline-1 outline-black/5 data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in sm:text-sm"
+                  >
+                    <ListboxOption
+                      value="ASC"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-900 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                    >
+                      <span className="block truncate font-normal group-data-[selected]:font-semibold">
+                        Ascending
+                      </span>
+                    </ListboxOption>
+                    <ListboxOption
+                      value="DESC"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-900 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                    >
+                      <span className="block truncate font-normal group-data-[selected]:font-semibold">
+                        Descending
+                      </span>
+                    </ListboxOption>
+                    <ListboxOption
+                      value="Event Tier"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-500 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                    >
+                      <span className="block truncate font-normal group-data-[selected]:font-semibold underline">
+                        Clear
+                      </span>
+                    </ListboxOption>
+                  </ListboxOptions>
+                </div>
+              </Listbox>
+
+              <Listbox value={selected} onChange={setSelected}>
+                <div className="relative mt-2">
+                  <ListboxButton className="flex items-center gap-x-1 font-body bg-white px-10 py-4 text-md text-saluteRed font-medium rounded-full hover:bg-saluteRed hover:text-white focus-visible:outline-saluteBlue">
+                    <span className="">
+                      {selected ? selected : "Start Date"}
+                    </span>
+                  </ListboxButton>
+
+                  <ListboxOptions
+                    transition
+                    className="absolute z-10 mt-1 w-full overflow-auto rounded-3xl bg-white py-4 text-base shadow-lg outline outline-1 outline-black/5 data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in sm:text-sm"
+                  >
+                    <ListboxOption
+                      value="ASC"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-900 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                    >
+                      <span className="block truncate font-normal group-data-[selected]:font-semibold">
+                        Ascending
+                      </span>
+                    </ListboxOption>
+                    <ListboxOption
+                      value="DESC"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-900 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                    >
+                      <span className="block truncate font-normal group-data-[selected]:font-semibold">
+                        Descending
+                      </span>
+                    </ListboxOption>
+                    <ListboxOption
+                      value="Event Tier"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-500 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                    >
+                      <span className="block truncate font-normal group-data-[selected]:font-semibold underline">
+                        Clear
+                      </span>
+                    </ListboxOption>
+                  </ListboxOptions>
+                </div>
+              </Listbox>
+
+              <Listbox value={selected} onChange={setSelected}>
+                <div className="relative mt-2">
+                  <ListboxButton className="flex items-center gap-x-1 font-body bg-white px-10 py-4 text-md text-saluteRed font-medium rounded-full hover:bg-saluteRed hover:text-white focus-visible:outline-saluteBlue">
+                    <span className="">{selected ? selected : "Price"}</span>
+                  </ListboxButton>
+
+                  <ListboxOptions
+                    transition
+                    className="absolute z-10 mt-1 w-full overflow-auto rounded-3xl bg-white py-4 text-base shadow-lg outline outline-1 outline-black/5 data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in sm:text-sm"
+                  >
+                    <ListboxOption
+                      value="ASC"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-900 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                    >
+                      <span className="block truncate font-normal group-data-[selected]:font-semibold">
+                        Ascending
+                      </span>
+                    </ListboxOption>
+                    <ListboxOption
+                      value="DESC"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-900 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                    >
+                      <span className="block truncate font-normal group-data-[selected]:font-semibold">
+                        Descending
+                      </span>
+                    </ListboxOption>
+                    <ListboxOption
+                      value="Free"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-900 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                    >
+                      <span className="block truncate font-normal group-data-[selected]:font-semibold">
+                        Free
+                      </span>
+                    </ListboxOption>
+                    <ListboxOption
+                      value="Event Tier"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-500 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                    >
+                      <span className="block truncate font-normal group-data-[selected]:font-semibold underline">
+                        Clear
+                      </span>
+                    </ListboxOption>
+                  </ListboxOptions>
+                </div>
+              </Listbox>
             </div>
             <ul
               role="list"

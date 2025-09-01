@@ -125,7 +125,7 @@ export default function HomePage() {
   function TimeBlock({ label, value }) {
     return (
       <div>
-        <div className="text-4xl font-bold">
+        <div className="text-4xl font-bold font-primary">
           {String(value).padStart(2, "0")}
         </div>
         <div className="mt-2 text-sm">{label}</div>
@@ -155,14 +155,17 @@ export default function HomePage() {
                   />
                 </div>
                 <div className="mt-2 text-center">
-                  <p className="text-2xl font-scriptText tracking-[0.5px] text-saluteRed">
+                  <p className="text-3xl font-scriptText tracking-[0.5px] text-saluteRed">
                     Signature Event
                   </p>
                   <h3 className="text-3xl font-primary font-medium text-gray-900">
                     {event[0].name}
                   </h3>
-                  <h4 className="text-sm font-body text-gray-400">
-                    Sunday, Jan 13, 2026 | 3PM - 7PM
+                  <h4 className="text-sm pt-1 font-body text-gray-500">
+                    Sunday, Jan 13, 2026 |{" "}
+                    <span className="text-saluteBlue/90 font-medium">
+                      3PM - 7PM
+                    </span>
                   </h4>{" "}
                 </div>
                 <div className="mt-3 relative isolate overflow-hidden rounded-2xl">
