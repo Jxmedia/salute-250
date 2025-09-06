@@ -158,7 +158,7 @@ export default function HomePage() {
                   <p className="text-3xl font-scriptText tracking-[0.5px] text-saluteRed">
                     Signature Event
                   </p>
-                  <h3 className="text-3xl font-primary font-medium text-gray-900">
+                  <h3 className="text-3xl font-primary font-medium text-gray-700">
                     {event[0].name}
                   </h3>
                   <h4 className="text-sm pt-1 font-body text-gray-600">
@@ -332,7 +332,7 @@ export default function HomePage() {
                       <a
                         key={item.name}
                         href={item.href}
-                        className="-mx-3 block rounded-2xl px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                        className="-mx-3 block rounded-2xl px-3 py-2 text-base/7 font-semibold text-gray-700 hover:bg-gray-50"
                       >
                         {item.name}
                       </a>
@@ -341,7 +341,7 @@ export default function HomePage() {
                   <div className="py-6">
                     <a
                       href="#"
-                      className="-mx-3 block rounded-2xl px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                      className="-mx-3 block rounded-2xl px-3 py-2.5 text-base/7 font-semibold text-gray-700 hover:bg-gray-50"
                     >
                       Log in
                     </a>
@@ -527,7 +527,7 @@ export default function HomePage() {
                         </span>
                       </div>
                     </dd>
-                    <h3 className="py-3 text-2xl font-primary font-medium text-gray-900">
+                    <h3 className="py-3 text-2xl font-primary font-medium text-gray-700">
                       {event.name}
                     </h3>
                     <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
@@ -844,7 +844,7 @@ export default function HomePage() {
           cookieOpen === false ? "hidden" : ""
         } font-body mx-10 fixed inset-x-0 bottom-5 flex flex-col justify-between rounded-3xl gap-x-8 gap-y-4 border-t border-gray-900/10 bg-white p-10 shadow-lg md:flex-row md:items-center lg:px-8`}
       >
-        <p className="max-w-4xl text-sm/6 text-gray-900">
+        <p className="max-w-4xl text-sm/6 text-gray-700">
           This website uses cookies to supplement a balanced diet and provide a
           much deserved reward to the senses after consuming bland but
           nutritious meals. Accepting our cookies is optional but recommended,
@@ -865,7 +865,7 @@ export default function HomePage() {
           <button
             type="button"
             onClick={() => setcookieOpen(false)}
-            className="text-sm/6 font-semibold text-gray-900 hover:text-gray-700 hover:underline"
+            className="text-sm/6 font-semibold text-gray-700 hover:text-gray-700 hover:underline"
           >
             Reject all
           </button>

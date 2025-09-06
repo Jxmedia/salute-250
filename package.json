@@ -17,8 +17,11 @@
   "dependencies": {
     "@headlessui/react": "^2.2.7",
     "@heroicons/react": "^2.2.0",
+    "@heroui/react": "^2.8.3",
     "gatsby": "^5.14.6",
     "gatsby-plugin-google-fonts": "^1.0.1",
+    "i": "^0.3.7",
+    "npm": "^11.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.5.0"

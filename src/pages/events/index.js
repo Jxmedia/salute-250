@@ -184,7 +184,7 @@ export default function EventsHome() {
                     <p className="text-3xl font-scriptText tracking-[0.5px] text-saluteRed">
                       Signature Event
                     </p>
-                    <h3 className="text-3xl font-primary font-medium text-gray-900">
+                    <h3 className="text-3xl font-primary font-medium text-gray-700">
                       {event[0].name}
                     </h3>
                     <h4 className="text-sm pt-1 font-body text-gray-600">
@@ -360,7 +360,7 @@ export default function EventsHome() {
                       <a
                         key={item.name}
                         href={item.href}
-                        className="-mx-3 block rounded-2xl px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                        className="-mx-3 block rounded-2xl px-3 py-2 text-base/7 font-semibold text-gray-700 hover:bg-gray-50"
                       >
                         {item.name}
                       </a>
@@ -369,7 +369,7 @@ export default function EventsHome() {
                   <div className="py-6">
                     <a
                       href="#"
-                      className="-mx-3 block rounded-2xl px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                      className="-mx-3 block rounded-2xl px-3 py-2.5 text-base/7 font-semibold text-gray-700 hover:bg-gray-50"
                     >
                       Log in
                     </a>
@@ -436,7 +436,7 @@ export default function EventsHome() {
                   >
                     <ListboxOption
                       value="Signature Event"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-900 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-700 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
                     >
                       <span className="block truncate font-normal group-data-[selected]:font-semibold">
                         Signature
@@ -444,7 +444,7 @@ export default function EventsHome() {
                     </ListboxOption>
                     <ListboxOption
                       value="Partner Event"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-900 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-700 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
                     >
                       <span className="block truncate font-normal group-data-[selected]:font-semibold">
                         Partner
@@ -452,7 +452,7 @@ export default function EventsHome() {
                     </ListboxOption>
                     <ListboxOption
                       value="Affiliate Event"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-900 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-700 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
                     >
                       <span className="block truncate font-normal group-data-[selected]:font-semibold">
                         Affiliate
@@ -486,13 +486,21 @@ export default function EventsHome() {
                       <ListboxOption
                         key={person}
                         value={person}
-                        className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-900 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                        className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-700 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
                       >
                         <span className="block truncate font-normal group-data-[selected]:font-semibold">
                           {person}
                         </span>
                       </ListboxOption>
                     ))}
+                    <ListboxOption
+                      value="Event Tier"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-600 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                    >
+                      <span className="block truncate font-normal group-data-[selected]:font-semibold underline">
+                        Clear
+                      </span>
+                    </ListboxOption>
                   </ListboxOptions>
                 </div>
               </Listbox>
@@ -511,7 +519,7 @@ export default function EventsHome() {
                   >
                     <ListboxOption
                       value="ASC"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-900 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-700 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
                     >
                       <span className="block truncate font-normal group-data-[selected]:font-semibold">
                         Ascending
@@ -519,7 +527,7 @@ export default function EventsHome() {
                     </ListboxOption>
                     <ListboxOption
                       value="DESC"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-900 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-700 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
                     >
                       <span className="block truncate font-normal group-data-[selected]:font-semibold">
                         Descending
@@ -551,7 +559,7 @@ export default function EventsHome() {
                   >
                     <ListboxOption
                       value="ASC"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-900 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-700 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
                     >
                       <span className="block truncate font-normal group-data-[selected]:font-semibold">
                         Ascending
@@ -559,7 +567,7 @@ export default function EventsHome() {
                     </ListboxOption>
                     <ListboxOption
                       value="DESC"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-900 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-700 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
                     >
                       <span className="block truncate font-normal group-data-[selected]:font-semibold">
                         Descending
@@ -589,7 +597,7 @@ export default function EventsHome() {
                   >
                     <ListboxOption
                       value="ASC"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-900 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-700 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
                     >
                       <span className="block truncate font-normal group-data-[selected]:font-semibold">
                         Ascending
@@ -597,7 +605,7 @@ export default function EventsHome() {
                     </ListboxOption>
                     <ListboxOption
                       value="DESC"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-900 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-700 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
                     >
                       <span className="block truncate font-normal group-data-[selected]:font-semibold">
                         Descending
@@ -605,7 +613,7 @@ export default function EventsHome() {
                     </ListboxOption>
                     <ListboxOption
                       value="Free"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-900 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
+                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-700 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
                     >
                       <span className="block truncate font-normal group-data-[selected]:font-semibold">
                         Free
@@ -711,7 +719,7 @@ export default function EventsHome() {
                           </span>
                         </div>
                       </dd>
-                      <h3 className="py-3 text-2xl font-primary font-medium text-gray-900">
+                      <h3 className="py-3 text-2xl font-primary font-medium text-gray-700">
                         {event.name}
                       </h3>
                       <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
