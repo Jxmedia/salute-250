@@ -1,19 +1,6 @@
-import React, { useState, useEffect } from "react";
-
-import {
-  Dialog,
-  DialogBackdrop,
-  DialogPanel,
-  DialogTitle,
-} from "@headlessui/react";
-import {
-  Label,
-  Listbox,
-  ListboxButton,
-  ListboxOption,
-  ListboxOptions,
-} from "@headlessui/react";
-import { FaCircle, FaFacebookSquare } from "react-icons/fa";
+import React, { useState } from "react";
+import Layout from "../../components/Layout";
+import { FaFacebookSquare } from "react-icons/fa";
 import { FaRegArrowAltCircleDown } from "react-icons/fa";
 import { IoMusicalNotesSharp } from "react-icons/io5";
 import { FaInstagram } from "react-icons/fa";
@@ -21,28 +8,11 @@ import { FaPersonMilitaryRifle, FaXTwitter } from "react-icons/fa6";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { MdOutlineFestival, MdStarBorder } from "react-icons/md";
 import { MdOutlineStar } from "react-icons/md";
-
 import { LiaFlagUsaSolid } from "react-icons/lia";
-import { MdOutlineEvent } from "react-icons/md";
-import { IoTicketSharp } from "react-icons/io5";
-import { MdLocationPin } from "react-icons/md";
-import { FaClock } from "react-icons/fa";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { MdOutlineEventAvailable } from "react-icons/md";
-import HeaderLogo from "../../images/SAA-Badge-Dates.png";
-import AirShowCover from "../../images/event-covers/airshow.png";
-import SportsCover from "../../images/event-covers/sports-event.png";
-import CarCover from "../../images/event-covers/carshow.png";
 import { MdAirplaneTicket } from "react-icons/md";
-import { IoMdNotifications } from "react-icons/io";
 import { GiAmericanFootballHelmet } from "react-icons/gi";
 import { IoCarSportSharp } from "react-icons/io5";
-import { FaPhoneSquareAlt } from "react-icons/fa";
-import { IoIosMailOpen } from "react-icons/io";
-import { HiMiniDevicePhoneMobile } from "react-icons/hi2";
-import { EnvelopeIcon, PhoneIcon } from "@heroicons/react/20/solid";
 import { DateInput, TimeInput } from "@heroui/react";
-import { useDateFormatter } from "@react-aria/i18n";
 import {
   parseDate,
   parseAbsoluteToLocal,
@@ -54,7 +24,7 @@ import { CheckIcon } from "@heroicons/react/20/solid";
 import { RiMailSendFill, RiSchoolFill } from "react-icons/ri";
 import { BsPatchQuestionFill } from "react-icons/bs";
 
-const tiers = [
+const eventTiers = [
   {
     name: "Affiliate",
     id: "tier-freelancer",
@@ -101,67 +71,7 @@ const tiers = [
   },
 ];
 
-const navigation = [
-  { name: "Home", href: "#" },
-  { name: "About", href: "#" },
-  { name: "Events", href: "#" },
-  { name: "Spectators", href: "#" },
-];
-
-const footerNavigation = [
-  {
-    name: "Facebook",
-    href: "#",
-    icon: FaFacebookSquare,
-  },
-  {
-    name: "Instagram",
-    href: "#",
-    icon: FaInstagram,
-  },
-  {
-    name: "X",
-    href: "#",
-    icon: FaXTwitter,
-  },
-  {
-    name: "Linkedin",
-    href: "#",
-    icon: FaLinkedinIn,
-  },
-];
-
-const event = [
-  {
-    name: "Tampa Bay Aviation Show",
-    location: "Raymond James Stadium",
-    eventType: "Air Show",
-    email: "janecooper@example.com",
-    telephone: "+1-202-555-0170",
-    imageUrl: AirShowCover,
-    tier: "Signature",
-  },
-  {
-    name: "Lightning vs. Avalanche",
-    location: "Lead Security Associate",
-    eventType: "Sporting Event",
-    email: "codyfisher@example.com",
-    telephone: "+1-202-555-0114",
-    imageUrl: SportsCover,
-    tier: "Affiliate",
-  },
-  {
-    name: "SEMA Pre Show",
-    location: "Assurance Administrator",
-    email: "estherhoward@example.com",
-    telephone: "+1-202-555-0143",
-    eventType: "Car Show",
-    imageUrl: CarCover,
-    tier: "Partner",
-  },
-];
-
-const features = [
+const eventTypes = [
   {
     name: "Air Show or Aviation Event",
     description:
@@ -218,7 +128,7 @@ const features = [
   },
 ];
 
-export default function EventsHome() {
+export default function RegisterEvent() {
   //
   //
   //
@@ -246,231 +156,10 @@ export default function EventsHome() {
   //
 
   //
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [open, setOpen] = useState(false);
 
   return (
-    <>
-      <div>
-        <Dialog open={open} onClose={setOpen} className="relative z-10">
-          <DialogBackdrop
-            transition
-            className="fixed inset-0 bg-gray-800/90 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
-          />
-
-          <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-            <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-              <DialogPanel
-                transition
-                className="relative transform overflow-hidden rounded-2xl bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-xl sm:p-6 data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
-              >
-                <div>
-                  <div className="mx-auto flex size-12 items-center justify-center rounded-full bg-blue-200">
-                    <MdAirplaneTicket
-                      aria-hidden="true"
-                      className="size-6 text-blue-600"
-                    />
-                  </div>
-                  <div className="mt-2 text-center">
-                    <p className="text-3xl font-scriptText tracking-[0.5px] text-saluteRed">
-                      Signature Event
-                    </p>
-                    <h3 className="text-3xl font-primary font-medium text-gray-700">
-                      {event[0].name}
-                    </h3>
-                    <h4 className="text-sm pt-1 font-body text-gray-600">
-                      Sunday, Jan 13, 2026 |{" "}
-                      <span className="text-saluteBlue/90 font-medium">
-                        3PM - 7PM
-                      </span>
-                    </h4>{" "}
-                  </div>
-                  <div className="mt-3 relative isolate overflow-hidden rounded-2xl">
-                    <img
-                      alt=""
-                      src="https://www.ilpost.it/wp-content/uploads/2016/07/google.jpg"
-                      className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
-                    />
-
-                    <div className="py-20 relative flex justify-center" />
-                  </div>
-
-                  <div className="flex items-center justify-center gap-x-4 font-body">
-                    <div className="flex items-center justify-center gap-x-2">
-                      <MdLocationPin
-                        aria-hidden="true"
-                        className="size-5 text-blue-700"
-                      />
-                      <dd className="text-sm text-gray-600 py-3 text-center gap-2">
-                        Street Address, City, Florida 33333
-                      </dd>
-                    </div>
-                    <p className="text-sm text-gray-600 flex items-start gap-x-2">
-                      <IoTicketSharp
-                        aria-hidden="true"
-                        className="size-5 text-blue-700"
-                      />{" "}
-                      Free
-                    </p>
-                  </div>
-
-                  <div className="">
-                    <div className="border border-gray-100 bg-gray-50 rounded-2xl p-3 font-body justify-center">
-                      <div className="py-2">
-                        <p className="text-sm text-gray-700 gap-2">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Sed orci libero, mattis sed orci ut, sagittis
-                          ultrices neque. Pellentesque habitant morbi tristique
-                          senectus et netus et malesuada fames ac turpis
-                          egestas. Donec at varius lacus. Pellentesque eget
-                          varius sapien. Cras vel gravida diam.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex justify-center gap-x-4 mt-5">
-                  {footerNavigation.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className="text-saluteTan hover:text-white"
-                    >
-                      <span className="sr-only">{item.name}</span>
-                      <item.icon
-                        aria-hidden="true"
-                        className="text-saluteRed hover:opacity-80 size-7"
-                      />
-                    </a>
-                  ))}
-                </div>
-                <div className="flex justify-center mt-5 sm:mt-6 gap-x-2 text-center">
-                  <button
-                    type="button"
-                    onClick={() => setOpen(false)}
-                    className="pointer-events-none w-full justify-center opacity-30 border-t-2 border-blue-800 flex items-center gap-2 duration-300 ease-in-out bg-saluteNavy rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteNavy"
-                  >
-                    Buy Tickets
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setOpen(false)}
-                    className="hidden w-full justify-center border-t-2 border-blue-800 flex items-center gap-2 duration-300 ease-in-out bg-saluteNavy rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteNavy"
-                  >
-                    Buy Tickets
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setOpen(false)}
-                    className="w-full justify-center border-t-2 border-blue-300 flex items-center gap-2 duration-300 ease-in-out bg-blue-600 rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteBlue"
-                  >
-                    Back to Events
-                  </button>
-                </div>
-              </DialogPanel>
-            </div>
-          </div>
-        </Dialog>
-      </div>
-      <div className="bg-white">
-        <header className="absolute inset-x-0 top-0 z-50 ">
-          <nav
-            aria-label="Global"
-            className="flex items-center font-body font-semibold uppercase justify-between p-8 lg:px-8"
-          >
-            <div className="flex lg:flex-1">
-              <a href="/" className="-m-1.5 p-1.5">
-                <span className="sr-only">Your Company</span>
-                <img
-                  alt=""
-                  src={HeaderLogo}
-                  className="h-16 w-auto hover:saturate-0"
-                />
-              </a>
-            </div>
-            <div className="flex lg:hidden">
-              <button
-                type="button"
-                onClick={() => setMobileMenuOpen(true)}
-                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-600"
-              >
-                <span className="sr-only">Open main menu</span>
-                <Bars3Icon aria-hidden="true" className="size-6" />
-              </button>
-            </div>
-            <div className="hidden lg:flex lg:gap-x-12">
-              {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-lg/6 uppercase duration-300 ease-in-out text-white hover:underline hover:text-saluteTan p-3 rounded-md"
-                >
-                  {item.name}
-                </a>
-              ))}
-            </div>
-            <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-              <a
-                href="#"
-                className="border-t-2 border-red-500 flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl px-6 py-2.5 text-lg/6 text-white hover:underline hover:bg-saluteTan hover:text-saluteRed"
-              >
-                Contact Us{" "}
-                <LiaFlagUsaSolid aria-hidden="true" className="size-7" />
-              </a>
-            </div>
-          </nav>
-          <Dialog
-            open={mobileMenuOpen}
-            onClose={setMobileMenuOpen}
-            className="lg:hidden"
-          >
-            <div className="fixed inset-0 z-50" />
-            <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-              <div className="flex items-center justify-between">
-                <a href="#" className="-m-1.5 p-1.5">
-                  <span className="sr-only">Your Company</span>
-                  <img
-                    alt=""
-                    src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=saluteBluede=600"
-                    className="h-8 w-auto"
-                  />
-                </a>
-                <button
-                  type="button"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="-m-2.5 rounded-md p-2.5 text-gray-700"
-                >
-                  <span className="sr-only">Close menu</span>
-                  <XMarkIcon aria-hidden="true" className="size-6" />
-                </button>
-              </div>
-              <div className="mt-6 flow-root">
-                <div className="-my-6 divide-y divide-gray-500/10">
-                  <div className="space-y-2 py-6">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className="-mx-3 block rounded-2xl px-3 py-2 text-base/7 font-semibold text-gray-700 hover:bg-gray-50"
-                      >
-                        {item.name}
-                      </a>
-                    ))}
-                  </div>
-                  <div className="py-6">
-                    <a
-                      href="#"
-                      className="-mx-3 block rounded-2xl px-3 py-2.5 text-base/7 font-semibold text-gray-700 hover:bg-gray-50"
-                    >
-                      Log in
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </DialogPanel>
-          </Dialog>
-        </header>
-      </div>
+    <Layout>
+      <div className="bg-white"></div>
       <div className="divider">
         <div className="bg-gradient-to-r from-saluteRed to-red-700 h-2.5" />
         <div className="bg-white h-1.5" />
@@ -485,7 +174,7 @@ export default function EventsHome() {
 
         {/* <div className="absolute inset-0 bg-saluteBlue mix-blend-multiply" /> */}
         <div className="relative mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
-          <p className="text-center text-saluteTan text-xl font-primary font-extrabold uppercase">
+          <p className="text-center text-saluteRed text-xl font-primary font-extrabold uppercase">
             SAA{" "}
             <span className="font-script text-[1.2em] text-saluteBlue">
               250
@@ -522,7 +211,7 @@ export default function EventsHome() {
             <div className="">
               <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <p className="text-center font-primary mt-2 text-4xl font-semibold tracking-tight text-saluteRed sm:text-6xl">
-                  Event Tiers
+                  Event eventTiers
                 </p>
                 <div className="pt-10 isolate mx-auto grid max-w-md grid-cols-1 gap-y-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
                   <div className="lg:mt-12 -mr-px lg:rounded-r-none flex flex-col justify-between rounded-3xl bg-white p-8 ring-1 ring-inset ring-saluteBlue xl:p-10">
@@ -540,7 +229,7 @@ export default function EventsHome() {
                         role="list"
                         className="mt-4 space-y-3 text-sm/6 text-gray-600"
                       >
-                        {tiers[0].features.map((feature) => (
+                        {eventTiers[0].features.map((feature) => (
                           <li key={feature} className="flex gap-x-3">
                             <CheckIcon
                               aria-hidden="true"
@@ -562,7 +251,7 @@ export default function EventsHome() {
                         role="list"
                         className="mt-4 space-y-3 text-sm/6 text-gray-600"
                       >
-                        {tiers[0].features.map((feature) => (
+                        {eventTiers[0].features.map((feature) => (
                           <li key={feature} className="flex gap-x-3">
                             <CheckIcon
                               aria-hidden="true"
@@ -590,7 +279,7 @@ export default function EventsHome() {
                         role="list"
                         className="mt-4 space-y-3 text-sm/6 text-gray-600"
                       >
-                        {tiers[0].features.map((feature) => (
+                        {eventTiers[0].features.map((feature) => (
                           <li key={feature} className="flex gap-x-3">
                             <CheckIcon
                               aria-hidden="true"
@@ -612,7 +301,7 @@ export default function EventsHome() {
                         role="list"
                         className="mt-4 space-y-3 text-sm/6 text-gray-600"
                       >
-                        {tiers[0].features.map((feature) => (
+                        {eventTiers[0].features.map((feature) => (
                           <li key={feature} className="flex gap-x-3">
                             <CheckIcon
                               aria-hidden="true"
@@ -643,7 +332,7 @@ export default function EventsHome() {
                         role="list"
                         className="mt-4 space-y-3 text-sm/6 text-saluteTan"
                       >
-                        {tiers[0].features.map((feature) => (
+                        {eventTiers[0].features.map((feature) => (
                           <li key={feature} className="flex gap-x-3">
                             <CheckIcon
                               aria-hidden="true"
@@ -665,7 +354,7 @@ export default function EventsHome() {
                         role="list"
                         className="mt-4 space-y-3 text-sm/6 text-saluteTan"
                       >
-                        {tiers[0].features.map((feature) => (
+                        {eventTiers[0].features.map((feature) => (
                           <li key={feature} className="flex gap-x-3">
                             <CheckIcon
                               aria-hidden="true"
@@ -685,18 +374,18 @@ export default function EventsHome() {
                 Event Types
               </p>
               <dl className="py-16 font-body grid grid-cols-1 gap-16 lg:grid-cols-3">
-                {features.map((feature) => (
-                  <div key={feature.name}>
+                {eventTypes.map((type) => (
+                  <div key={type.name}>
                     <dt>
                       <div className="flex size-14 items-center justify-center rounded-lg bg-saluteBlue text-white">
-                        <feature.icon aria-hidden="true" className="size-8" />
+                        <type.icon aria-hidden="true" className="size-8" />
                       </div>
                       <p className="mt-6 text-xl/8 font-semibold tracking-tight text-blue-800">
-                        {feature.name}
+                        {type.name}
                       </p>
                     </dt>
                     <dd className="mt-2 text-base/7 text-gray-600">
-                      {feature.description}
+                      {type.description}
                     </dd>
                   </div>
                 ))}
@@ -705,7 +394,6 @@ export default function EventsHome() {
           </div>
         </div>
       </div>
-
       <div className="bg-saluteTan/50 py-20">
         <div className="max-w-6xl mx-auto">
           <h3 className=" text-center font-primary text-4xl font-semibold tracking-tight text-saluteBlue sm:text-6xl">
@@ -1145,80 +833,6 @@ export default function EventsHome() {
           </div>
         </div>
       </div>
-      <footer className="bg-gray-900">
-        <div className="mx-auto max-w-7xl px-6 pb-10 pt-2 md:flex md:items-center md:justify-between lg:px-8">
-          <div className="flex justify-center gap-x-6 md:order-2">
-            <div className="">
-              {" "}
-              <dl className="font-body mt-10 space-y-4 text-sm/7 tracking-wide text-saluteTan">
-                <div className="flex justify-end gap-x-2">
-                  <dt className="flex-none">
-                    <span className="sr-only">Telephone</span>
-                    <HiMiniDevicePhoneMobile
-                      aria-hidden="true"
-                      className="h-7 w-6 text-saluteRed"
-                    />
-                  </dt>
-                  <dd>
-                    <a
-                      href="tel:+1 (555) 234-5678"
-                      className="hover:text-white"
-                    >
-                      +1 (555) 234-5678
-                    </a>
-                  </dd>
-                </div>
-                <div className="flex justify-end gap-x-2">
-                  <dt className="flex-none">
-                    <span className="sr-only">Email</span>
-                    <IoIosMailOpen
-                      aria-hidden="true"
-                      className="h-7 w-6 text-saluteRed"
-                    />
-                  </dt>
-                  <dd>
-                    <a
-                      href="mailto:info@saluteacrossamerica250.com"
-                      className="hover:text-white"
-                    >
-                      info@saluteacrossamerica250.com
-                    </a>
-                  </dd>
-                </div>
-              </dl>
-              <div className="flex justify-end gap-x-4 mt-5">
-                {footerNavigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="text-saluteTan hover:text-white"
-                  >
-                    <span className="sr-only">{item.name}</span>
-                    <item.icon
-                      aria-hidden="true"
-                      className="text-white hover:opacity-80 size-6"
-                    />
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="">
-            <a href="/" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
-              <img
-                alt=""
-                src={HeaderLogo}
-                className="h-20 mx-auto w-auto hover:saturate-0"
-              />
-            </a>
-            <p className="mt-8 text-center text-sm/6 text-saluteTan md:order-1 md:mt-0">
-              &copy; {new Date().getFullYear()} SAA 250, Inc. All rights
-              reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
-    </>
+    </Layout>
   );
 }
