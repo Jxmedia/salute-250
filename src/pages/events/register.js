@@ -5,7 +5,6 @@ import { FaRegArrowAltCircleDown } from "react-icons/fa";
 import { IoMusicalNotesSharp } from "react-icons/io5";
 import { FaInstagram } from "react-icons/fa";
 import { FaPersonMilitaryRifle, FaXTwitter } from "react-icons/fa6";
-import { FaLinkedinIn } from "react-icons/fa6";
 import { MdOutlineFestival, MdStarBorder } from "react-icons/md";
 import { MdOutlineStar } from "react-icons/md";
 import { LiaFlagUsaSolid } from "react-icons/lia";
@@ -22,51 +21,59 @@ import {
 import { CheckIcon } from "@heroicons/react/20/solid";
 import { RiMailSendFill, RiSchoolFill } from "react-icons/ri";
 import { BsPatchQuestionFill } from "react-icons/bs";
+import AnchorLink from "react-anchor-link-smooth-scroll";
+import Favicon from "../../images/favicon.png";
+import OGFB from "../../images/og-image.jpg";
+import { Helmet } from "react-helmet";
 
 const eventTiers = [
   {
     name: "Affiliate",
-    id: "tier-freelancer",
-    href: "#",
-    priceMonthly: "$19",
-    description: "The essentials to provide your best work for clients.",
-    features: [
-      "5 products",
-      "Up to 1,000 subscribers",
-      "Basic analytics",
-      "48-hour support response time",
+
+    qualifications: [
+      "250+ in-person attendance",
+      "Event is open to the public",
+      "Inclues patriotic moment (Anthem, flag salute, etc)",
     ],
-    mostPopular: false,
+    integration: [
+      "Logo + link on event website",
+      "At least one social media post or share",
+      "Optional email or program mention if applicable",
+    ],
   },
   {
     name: "Partner",
-    id: "tier-startup",
-    href: "#",
-    priceMonthly: "$49",
-    description: "A plan that scales with your rapidly growing business.",
-    features: [
-      "25 products",
-      "Up to 10,000 subscribers",
-      "Advanced analytics",
-      "24-hour support response time",
-      "Marketing automations",
+
+    qualifications: [
+      "2,500+ in-person attendance",
+      "Brings together community or showcases civic spirit",
+      "Open to incorporating patriotic elements",
     ],
-    mostPopular: true,
+    integration: [
+      " Logo + link on event website",
+      "Inclusion in email marketing",
+      "Social media cross-promotion (tags, hashtags)",
+      "Optional stage or program recognition",
+      "SAA250 mention in press releases where applicable",
+    ],
   },
   {
     name: "Signature",
-    id: "tier-enterprise",
-    href: "#",
-    priceMonthly: "$99",
-    description: "Dedicated support and infrastructure for your company.",
-    features: [
-      "Unlimited products",
-      "Unlimited subscribers",
-      "Advanced analytics",
-      "1-hour, dedicated support response time",
-      "Marketing automations",
+
+    qualifications: [
+      "25,000+ in-person attendance",
+      "Strong national or regional brand recognition",
+      "Content with clear patriotic alignment",
+      "High public visibility or cultural significance",
     ],
-    mostPopular: false,
+    integration: [
+      "Logo + link on event website",
+      "Inclusion in all promotional emails",
+      "On-site branding (banners, stage mention)",
+      "SAA250 mentioned in press/media",
+      "Option to co-brand merchandise",
+      "Participation in national campaign moments",
+    ],
   },
 ];
 
@@ -158,6 +165,58 @@ export default function RegisterEvent() {
 
   return (
     <Layout>
+      <Helmet>
+        {/* Primary Meta Tags */}
+        <title>Register Event || Salute Across America 250</title>
+        <meta name="title" content="Salute Across America 250" />
+        <meta
+          name="description"
+          content="Get ready for a once-in-a-generation celebration—America's 250th anniversary is almost here! Over 365 days, we’ll unite for thousands of events honoring our shared history, diverse stories, and bold future. Join millions of event in commemorating the spirit of a nation 250 years in the making."
+        />
+        <meta name="keywords" content="America, 250, America 250th" />
+        <meta name="author" content="Salute Across America 250" />
+        <meta name="robots" content="index, follow" />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="language" content="en" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://saluteacrossamerica250.com/" />
+        <meta property="og:title" content="Salute Across America 250" />
+        <meta
+          property="og:description"
+          content="Get ready for a once-in-a-generation celebration—America's 250th anniversary is almost here! Over 365 days, we’ll unite for thousands of events honoring our shared history, diverse stories, and bold future. Join millions of event in commemorating the spirit of a nation 250 years in the making."
+        />
+        <meta property="og:image" content={OGFB} />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:url"
+          content="https://saluteacrossamerica250.com/"
+        />
+        <meta name="twitter:title" content="Salute Across America 250" />
+        <meta
+          name="twitter:description"
+          content="Get ready for a once-in-a-generation celebration—America's 250th anniversary is almost here! Over 365 days, we’ll unite for thousands of events honoring our shared history, diverse stories, and bold future. Join millions of event in commemorating the spirit of a nation 250 years in the making."
+        />
+        <meta name="twitter:image" content={Favicon} />
+
+        {/* Favicons */}
+        <link rel="icon" href={Favicon} />
+        <link rel="apple-touch-icon" sizes="180x180" href={Favicon} />
+        <link rel="manifest" href="/site.webmanifest" />
+
+        {/* Canonical Link */}
+        <link rel="canonical" href="https://saluteacrossamerica250.com/" />
+
+        {/* Theme and Mobile */}
+        <meta name="theme-color" content="#ffffff" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=5"
+        />
+      </Helmet>
       <div className="bg-white"></div>
       <div className="divider">
         <div className="bg-gradient-to-r from-saluteRed to-red-700 h-2.5" />
@@ -190,27 +249,27 @@ export default function RegisterEvent() {
             </span>{" "}
             Event
           </p>
-          <div className="font-body py-2 text-center">
+          <div className="max-w-lg mx-auto font-body py-2 text-center">
             <p className="text-lg text-gray-700 gap-2">
               Join a growing list of events nationwide proudly commemorating
               America’s 250th anniversary in 2026.
             </p>
           </div>
           <div className="mt-8 flex items-center justify-center gap-x-6">
-            <a
-              href="#"
+            <AnchorLink
+              href="#form"
               className="border-t-2 border-blue-800 flex items-center gap-2 duration-300 ease-in-out bg-saluteTan rounded-b-xl px-10 py-2.5 text-lg/6 text-saluteBlue font-body font-semibold uppercase hover:underline hover:bg-saluteBlue hover:text-white"
             >
               Skip Information and Register{" "}
               <FaRegArrowAltCircleDown aria-hidden="true" className="size-7" />
-            </a>
+            </AnchorLink>
           </div>
 
           <div className="pt-6 pb-8 border-t border-gray-600 mt-10 py-20 sm:pt-14">
             <div className="">
               <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <p className="text-center font-primary mt-2 text-4xl font-semibold tracking-tight text-saluteRed sm:text-6xl">
-                  Event eventTiers
+                  Event Tiers
                 </p>
                 <div className="pt-10 isolate mx-auto grid max-w-md grid-cols-1 gap-y-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
                   <div className="lg:mt-12 -mr-px lg:rounded-r-none flex flex-col justify-between rounded-3xl bg-white p-8 ring-1 ring-inset ring-saluteBlue xl:p-10">
@@ -228,7 +287,7 @@ export default function RegisterEvent() {
                         role="list"
                         className="mt-4 space-y-3 text-sm/6 text-gray-600"
                       >
-                        {eventTiers[0].features.map((feature) => (
+                        {eventTiers[0].qualifications.map((feature) => (
                           <li key={feature} className="flex gap-x-3">
                             <CheckIcon
                               aria-hidden="true"
@@ -250,7 +309,7 @@ export default function RegisterEvent() {
                         role="list"
                         className="mt-4 space-y-3 text-sm/6 text-gray-600"
                       >
-                        {eventTiers[0].features.map((feature) => (
+                        {eventTiers[0].integration.map((feature) => (
                           <li key={feature} className="flex gap-x-3">
                             <CheckIcon
                               aria-hidden="true"
@@ -278,7 +337,7 @@ export default function RegisterEvent() {
                         role="list"
                         className="mt-4 space-y-3 text-sm/6 text-gray-600"
                       >
-                        {eventTiers[0].features.map((feature) => (
+                        {eventTiers[1].qualifications.map((feature) => (
                           <li key={feature} className="flex gap-x-3">
                             <CheckIcon
                               aria-hidden="true"
@@ -300,7 +359,7 @@ export default function RegisterEvent() {
                         role="list"
                         className="mt-4 space-y-3 text-sm/6 text-gray-600"
                       >
-                        {eventTiers[0].features.map((feature) => (
+                        {eventTiers[1].integration.map((feature) => (
                           <li key={feature} className="flex gap-x-3">
                             <CheckIcon
                               aria-hidden="true"
@@ -331,7 +390,7 @@ export default function RegisterEvent() {
                         role="list"
                         className="mt-4 space-y-3 text-sm/6 text-saluteTan"
                       >
-                        {eventTiers[0].features.map((feature) => (
+                        {eventTiers[2].qualifications.map((feature) => (
                           <li key={feature} className="flex gap-x-3">
                             <CheckIcon
                               aria-hidden="true"
@@ -353,7 +412,7 @@ export default function RegisterEvent() {
                         role="list"
                         className="mt-4 space-y-3 text-sm/6 text-saluteTan"
                       >
-                        {eventTiers[0].features.map((feature) => (
+                        {eventTiers[2].integration.map((feature) => (
                           <li key={feature} className="flex gap-x-3">
                             <CheckIcon
                               aria-hidden="true"
@@ -393,492 +452,545 @@ export default function RegisterEvent() {
           </div>
         </div>
       </div>
-      <div className="bg-saluteTan/50 py-20">
-        <div className="max-w-6xl mx-auto">
-          <h3 className=" text-center font-primary text-4xl font-semibold tracking-tight text-saluteBlue sm:text-6xl">
-            Register Your Event
-          </h3>
-          <p className="py-8 font-body text-lg text-gray-700 gap-2 text-center max-w-3xl mx-auto">
-            Complete the form below to share your event with us. All submissions
-            are reviewed to ensure they align with the patriotic spirit of
-            Salute Across America 250. Once approved, you’ll receive
-            confirmation and next steps by email.
-          </p>
-          <form className="border-t border-saluteBlue pt-8 font-body">
-            <div className="space-y-12 sm:space-y-16">
-              <div>
-                <h2 className="text-base/7 font-semibold text-gray-900">
-                  Event Details
-                </h2>
-                <p className="mt-1 max-w-2xl text-sm/6 text-gray-600">
-                  Lets gather some information about your event for
-                  consideration.
-                </p>
+      <section id="form">
+        <div className="bg-saluteTan/50 py-20">
+          <div className="max-w-6xl mx-auto">
+            <h3 className=" text-center font-primary text-4xl font-semibold tracking-tight text-saluteBlue sm:text-6xl">
+              Register Your Event
+            </h3>
+            <p className="py-8 font-body text-lg text-gray-700 gap-2 text-center max-w-3xl mx-auto">
+              Complete the form below to share your event with us. All
+              submissions are reviewed to ensure they align with the patriotic
+              spirit of Salute Across America 250. Once approved, you’ll receive
+              confirmation and next steps by email.
+            </p>
+            <form className="border-t border-saluteBlue pt-8 font-body">
+              <div className="space-y-12 sm:space-y-16">
+                <div>
+                  <h2 className="text-base/7 font-semibold text-gray-900">
+                    Event Details
+                  </h2>
+                  <p className="mt-1 max-w-2xl text-sm/6 text-gray-600">
+                    Lets gather some information about your event for
+                    consideration.
+                  </p>
 
-                <div className="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:border-t-gray-900/10 sm:pb-0">
-                  <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label
-                      htmlFor="username"
-                      className="block text-sm/6 font-medium sm:pt-1.5 text-red-600"
-                    >
-                      Event Name*
-                    </label>
-                    <div className="mt-2 sm:col-span-2 sm:mt-0">
-                      <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
+                  <div className="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:border-t-gray-900/10 sm:pb-0">
+                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                      <label
+                        htmlFor="username"
+                        className="block text-sm/6 font-medium sm:pt-1.5 text-red-600"
+                      >
+                        Event Name*
+                      </label>
+                      <div className="mt-2 sm:col-span-2 sm:mt-0">
+                        <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
+                          <input
+                            id="username"
+                            name="username"
+                            type="text"
+                            placeholder="SAA 250 BBQ"
+                            className="block min-w-0 grow bg-white py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                      <label
+                        htmlFor="first-name"
+                        className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
+                      >
+                        Start Date and Time
+                      </label>
+                      <div className="mt-2 flex gap-x-4 sm:mt-0">
+                        <div className="font-body block w-1/2 rounded-md bg-white py-1.5 text-base text-gray-900 tracking-[1px] outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-xs sm:text-sm/6">
+                          <DateInput
+                            aria-label="Start Date"
+                            onChange={setStartDateValue}
+                            placeholderValue={new CalendarDate(1995, 11, 6)}
+                          />
+                        </div>
+                        <div className="font-body block w-1/2 rounded-md bg-white py-1.5 text-base text-gray-900 tracking-[1px] outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-xs sm:text-sm/6">
+                          <TimeInput
+                            aria-label="Start Time"
+                            onChange={setStartTime}
+                            defaultValue={new Time(12, 0)}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                      <label
+                        htmlFor="first-name"
+                        className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
+                      >
+                        End Date and Time
+                      </label>
+                      <div className="mt-2 flex gap-x-4 sm:mt-0">
+                        <div className="font-body block w-1/2 rounded-md bg-white py-1.5 text-base text-gray-900 tracking-[1px] outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-xs sm:text-sm/6">
+                          <DateInput
+                            aria-label="Start Date"
+                            onChange={setStartDateValue}
+                            placeholderValue={new CalendarDate(1995, 11, 6)}
+                          />
+                        </div>
+                        <div className="font-body block w-1/2 rounded-md bg-white py-1.5 text-base text-gray-900 tracking-[1px] outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-xs sm:text-sm/6">
+                          <TimeInput
+                            aria-label="Start Time"
+                            onChange={setStartTime}
+                            defaultValue={new Time(12, 0)}
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                      <label
+                        htmlFor="country"
+                        className="block text-sm/6 font-medium text-red-600 sm:pt-1.5"
+                      >
+                        Requested Event Tier*
+                      </label>
+                      <div className="mt-2 sm:col-span-2 sm:mt-0">
+                        <div className="grid grid-cols-1 sm:max-w-xs">
+                          <select
+                            id="country"
+                            name="country"
+                            autoComplete="country-name"
+                            className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:text-sm/6"
+                          >
+                            <option>Affiliate</option>
+                            <option>Partner</option>
+                            <option>Signature</option>
+                          </select>
+                          <FaRegArrowAltCircleDown
+                            aria-hidden="true"
+                            className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                      <label
+                        htmlFor="country"
+                        className="block text-sm/6 font-medium text-red-600 sm:pt-1.5"
+                      >
+                        Event Type*
+                      </label>
+                      <div className="mt-2 sm:col-span-2 sm:mt-0">
+                        <div className="grid grid-cols-1 sm:max-w-xs">
+                          <select
+                            id="country"
+                            name="country"
+                            autoComplete="country-name"
+                            className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:text-sm/6"
+                          >
+                            <option>Air Show</option>
+                            <option>Music Festival</option>
+                            <option>Sporting Event</option>
+                          </select>
+                          <FaRegArrowAltCircleDown
+                            aria-hidden="true"
+                            className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                      <label
+                        htmlFor="country"
+                        className="block text-sm/6 font-medium text-red-600 sm:pt-1.5"
+                      >
+                        Event/Venue Address*
+                      </label>
+                      <div className="mt-2 sm:col-span-2 sm:mt-0">
+                        <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
+                          <input
+                            id="username"
+                            name="username"
+                            type="text"
+                            className="block min-w-0 grow bg-white py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                      <label
+                        htmlFor="first-name"
+                        className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
+                      >
+                        Venue name
+                      </label>
+                      <div className="mt-2 sm:col-span-2 sm:mt-0">
                         <input
-                          id="username"
-                          name="username"
+                          id="first-name"
+                          name="first-name"
                           type="text"
-                          placeholder="SAA 250 BBQ"
-                          className="block min-w-0 grow bg-white py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
+                          autoComplete="given-name"
+                          className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-xs sm:text-sm/6"
                         />
                       </div>
                     </div>
-                  </div>
 
-                  <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label
-                      htmlFor="first-name"
-                      className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
-                    >
-                      Start Date and Time
-                    </label>
-                    <div className="mt-2 flex gap-x-4 sm:mt-0">
-                      <div className="font-body block w-1/2 rounded-md bg-white py-1.5 text-base text-gray-900 tracking-[1px] outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-xs sm:text-sm/6">
-                        <DateInput
-                          aria-label="Start Date"
-                          onChange={setStartDateValue}
-                          placeholderValue={new CalendarDate(1995, 11, 6)}
+                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                      <label
+                        htmlFor="about"
+                        className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
+                      >
+                        Event Description
+                      </label>
+                      <div className="mt-2 sm:col-span-2 sm:mt-0">
+                        <textarea
+                          id="about"
+                          name="about"
+                          rows={3}
+                          className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-2xl sm:text-sm/6"
+                          defaultValue={""}
                         />
-                      </div>
-                      <div className="font-body block w-1/2 rounded-md bg-white py-1.5 text-base text-gray-900 tracking-[1px] outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-xs sm:text-sm/6">
-                        <TimeInput
-                          aria-label="Start Time"
-                          onChange={setStartTime}
-                          defaultValue={new Time(12, 0)}
-                        />
+                        <p className="mt-3 text-sm/6 text-gray-600">
+                          Write a few sentences about your event.
+                        </p>
                       </div>
                     </div>
-                  </div>
-                  <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label
-                      htmlFor="first-name"
-                      className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
-                    >
-                      End Date and Time
-                    </label>
-                    <div className="mt-2 flex gap-x-4 sm:mt-0">
-                      <div className="font-body block w-1/2 rounded-md bg-white py-1.5 text-base text-gray-900 tracking-[1px] outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-xs sm:text-sm/6">
-                        <DateInput
-                          aria-label="Start Date"
-                          onChange={setStartDateValue}
-                          placeholderValue={new CalendarDate(1995, 11, 6)}
-                        />
-                      </div>
-                      <div className="font-body block w-1/2 rounded-md bg-white py-1.5 text-base text-gray-900 tracking-[1px] outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-xs sm:text-sm/6">
-                        <TimeInput
-                          aria-label="Start Time"
-                          onChange={setStartTime}
-                          defaultValue={new Time(12, 0)}
-                        />
-                      </div>
-                    </div>
-                  </div>
 
-                  <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label
-                      htmlFor="country"
-                      className="block text-sm/6 font-medium text-red-600 sm:pt-1.5"
-                    >
-                      Requested Event Tier*
-                    </label>
-                    <div className="mt-2 sm:col-span-2 sm:mt-0">
-                      <div className="grid grid-cols-1 sm:max-w-xs">
-                        <select
-                          id="country"
-                          name="country"
-                          autoComplete="country-name"
-                          className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:text-sm/6"
-                        >
-                          <option>Affiliate</option>
-                          <option>Partner</option>
-                          <option>Signature</option>
-                        </select>
-                        <FaRegArrowAltCircleDown
+                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                      <label
+                        htmlFor="about"
+                        className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
+                      >
+                        Other Qualifiers for Event Tier
+                      </label>
+                      <div className="mt-2 sm:col-span-2 sm:mt-0">
+                        <textarea
+                          id="about"
+                          name="about"
+                          rows={3}
+                          className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-2xl sm:text-sm/6"
+                          defaultValue={""}
+                        />
+                        <p className="mt-3 text-sm/6 text-gray-600 max-w-xl">
+                          Please share anything additional about your event that
+                          may support its tier selection — including its
+                          patriotic theme, community impact, media coverage, or
+                          other unique aspects.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                      <label
+                        htmlFor="about"
+                        className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
+                      >
+                        Additional Brand Integrations
+                      </label>
+                      <div className="mt-2 sm:col-span-2 sm:mt-0">
+                        <textarea
+                          id="about"
+                          name="about"
+                          rows={3}
+                          className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-2xl sm:text-sm/6"
+                          defaultValue={""}
+                        />
+                        <p className="mt-3 text-sm/6 text-gray-600 max-w-xl">
+                          Do you have any creative or unique ways you’d like to
+                          incorporate the Salute Across America 250 branding
+                          into your event? From stage design to merchandise or
+                          media campaigns, we welcome your ideas for using the
+                          brand to amplify patriotism and commemorate America’s
+                          250th anniversary.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                      <label
+                        htmlFor="first-name"
+                        className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
+                      >
+                        Event Website
+                      </label>
+                      <div className="mt-2 sm:col-span-2 sm:mt-0">
+                        <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
+                          <div className="shrink-0 select-none text-base text-gray-500 sm:text-sm/6">
+                            www.
+                          </div>
+                          <input
+                            id="username"
+                            name="username"
+                            type="text"
+                            placeholder="event.com"
+                            className="block min-w-0 grow bg-white py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                      <label
+                        htmlFor="first-name"
+                        className="flex items-center block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
+                      >
+                        <FaFacebookSquare
                           aria-hidden="true"
-                          className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
-                        />
+                          className="pr-2 text-saluteRed hover:opacity-80 size-8"
+                        />{" "}
+                        Facebook
+                      </label>
+                      <div className="mt-2 sm:col-span-2 sm:mt-0">
+                        <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
+                          <div className="shrink-0 select-none text-base text-gray-500 sm:text-sm/6">
+                            www.facebook.com/
+                          </div>
+                          <input
+                            id="username"
+                            name="username"
+                            type="text"
+                            placeholder="eventUserName"
+                            className="block min-w-0 grow bg-white py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label
-                      htmlFor="country"
-                      className="block text-sm/6 font-medium text-red-600 sm:pt-1.5"
-                    >
-                      Event Type*
-                    </label>
-                    <div className="mt-2 sm:col-span-2 sm:mt-0">
-                      <div className="grid grid-cols-1 sm:max-w-xs">
-                        <select
-                          id="country"
-                          name="country"
-                          autoComplete="country-name"
-                          className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:text-sm/6"
-                        >
-                          <option>Air Show</option>
-                          <option>Music Festival</option>
-                          <option>Sporting Event</option>
-                        </select>
-                        <FaRegArrowAltCircleDown
+                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                      <label
+                        htmlFor="first-name"
+                        className="flex items-center block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
+                      >
+                        <FaInstagram
                           aria-hidden="true"
-                          className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label
-                      htmlFor="country"
-                      className="block text-sm/6 font-medium text-red-600 sm:pt-1.5"
-                    >
-                      Event/Venue Address*
-                    </label>
-                    <div className="mt-2 sm:col-span-2 sm:mt-0">
-                      <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
-                        <input
-                          id="username"
-                          name="username"
-                          type="text"
-                          className="block min-w-0 grow bg-white py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label
-                      htmlFor="first-name"
-                      className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
-                    >
-                      Venue name
-                    </label>
-                    <div className="mt-2 sm:col-span-2 sm:mt-0">
-                      <input
-                        id="first-name"
-                        name="first-name"
-                        type="text"
-                        autoComplete="given-name"
-                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-xs sm:text-sm/6"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label
-                      htmlFor="about"
-                      className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
-                    >
-                      Event Description
-                    </label>
-                    <div className="mt-2 sm:col-span-2 sm:mt-0">
-                      <textarea
-                        id="about"
-                        name="about"
-                        rows={3}
-                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-2xl sm:text-sm/6"
-                        defaultValue={""}
-                      />
-                      <p className="mt-3 text-sm/6 text-gray-600">
-                        Write a few sentences about your event.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label
-                      htmlFor="about"
-                      className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
-                    >
-                      Other Qualifiers for Event Tier
-                    </label>
-                    <div className="mt-2 sm:col-span-2 sm:mt-0">
-                      <textarea
-                        id="about"
-                        name="about"
-                        rows={3}
-                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-2xl sm:text-sm/6"
-                        defaultValue={""}
-                      />
-                      <p className="mt-3 text-sm/6 text-gray-600 max-w-xl">
-                        Please share anything additional about your event that
-                        may support its tier selection — including its patriotic
-                        theme, community impact, media coverage, or other unique
-                        aspects.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label
-                      htmlFor="about"
-                      className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
-                    >
-                      Additional Brand Integrations
-                    </label>
-                    <div className="mt-2 sm:col-span-2 sm:mt-0">
-                      <textarea
-                        id="about"
-                        name="about"
-                        rows={3}
-                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-2xl sm:text-sm/6"
-                        defaultValue={""}
-                      />
-                      <p className="mt-3 text-sm/6 text-gray-600 max-w-xl">
-                        Do you have any creative or unique ways you’d like to
-                        incorporate the Salute Across America 250 branding into
-                        your event? From stage design to merchandise or media
-                        campaigns, we welcome your ideas for using the brand to
-                        amplify patriotism and commemorate America’s 250th
-                        anniversary.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label
-                      htmlFor="first-name"
-                      className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
-                    >
-                      Event Website
-                    </label>
-                    <div className="mt-2 sm:col-span-2 sm:mt-0">
-                      <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
-                        <div className="shrink-0 select-none text-base text-gray-500 sm:text-sm/6">
-                          www.
+                          className="pr-2 text-saluteRed hover:opacity-80 size-8"
+                        />{" "}
+                        Instagram
+                      </label>
+                      <div className="mt-2 sm:col-span-2 sm:mt-0">
+                        <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
+                          <div className="shrink-0 select-none text-base text-gray-500 sm:text-sm/6">
+                            www.instagram.com/
+                          </div>
+                          <input
+                            id="username"
+                            name="username"
+                            type="text"
+                            placeholder="eventUserName"
+                            className="block min-w-0 grow bg-white py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
+                          />
                         </div>
-                        <input
-                          id="username"
-                          name="username"
-                          type="text"
-                          placeholder="event.com"
-                          className="block min-w-0 grow bg-white py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
-                        />
                       </div>
                     </div>
-                  </div>
-                  <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label
-                      htmlFor="first-name"
-                      className="flex items-center block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
-                    >
-                      <FaFacebookSquare
-                        aria-hidden="true"
-                        className="pr-2 text-saluteRed hover:opacity-80 size-8"
-                      />{" "}
-                      Facebook
-                    </label>
-                    <div className="mt-2 sm:col-span-2 sm:mt-0">
-                      <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
-                        <div className="shrink-0 select-none text-base text-gray-500 sm:text-sm/6">
-                          www.facebook.com/
-                        </div>
-                        <input
-                          id="username"
-                          name="username"
-                          type="text"
-                          placeholder="eventUserName"
-                          className="block min-w-0 grow bg-white py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label
-                      htmlFor="first-name"
-                      className="flex items-center block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
-                    >
-                      <FaInstagram
-                        aria-hidden="true"
-                        className="pr-2 text-saluteRed hover:opacity-80 size-8"
-                      />{" "}
-                      Instagram
-                    </label>
-                    <div className="mt-2 sm:col-span-2 sm:mt-0">
-                      <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
-                        <div className="shrink-0 select-none text-base text-gray-500 sm:text-sm/6">
-                          www.instagram.com/
-                        </div>
-                        <input
-                          id="username"
-                          name="username"
-                          type="text"
-                          placeholder="eventUserName"
-                          className="block min-w-0 grow bg-white py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label
-                      htmlFor="first-name"
-                      className="flex items-center block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
-                    >
-                      <FaXTwitter
-                        aria-hidden="true"
-                        className="pr-2 text-saluteRed hover:opacity-80 size-8"
-                      />{" "}
-                      Twitter/X
-                    </label>
-                    <div className="mt-2 sm:col-span-2 sm:mt-0">
-                      <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
-                        <div className="shrink-0 select-none text-base text-gray-500 sm:text-sm/6">
-                          www.x.com/
-                        </div>
-                        <input
-                          id="username"
-                          name="username"
-                          type="text"
-                          placeholder="eventUserName"
-                          className="block min-w-0 grow bg-white py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label
-                      htmlFor="country"
-                      className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
-                    >
-                      Projected Attendance
-                    </label>
-                    <div className="mt-2 sm:col-span-2 sm:mt-0">
-                      <div className="grid grid-cols-1 sm:max-w-xs">
-                        <select
-                          id="country"
-                          name="country"
-                          autoComplete="country-name"
-                          className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:text-sm/6"
-                        >
-                          <option>0 - 250</option>
-                          <option>251 - 1000</option>
-                          <option>1001 - 2500</option>
-                          <option>2501 - 5000</option>
-                          <option>5001 - 10000</option>
-                          <option>10001 - 25000</option>
-                          <option>25001 - 50000</option>
-                          <option>50001+</option>
-                        </select>
-                        <FaRegArrowAltCircleDown
+                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                      <label
+                        htmlFor="first-name"
+                        className="flex items-center block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
+                      >
+                        <FaXTwitter
                           aria-hidden="true"
-                          className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
-                        />
+                          className="pr-2 text-saluteRed hover:opacity-80 size-8"
+                        />{" "}
+                        Twitter/X
+                      </label>
+                      <div className="mt-2 sm:col-span-2 sm:mt-0">
+                        <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
+                          <div className="shrink-0 select-none text-base text-gray-500 sm:text-sm/6">
+                            www.x.com/
+                          </div>
+                          <input
+                            id="username"
+                            name="username"
+                            type="text"
+                            placeholder="eventUserName"
+                            className="block min-w-0 grow bg-white py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                      <label
+                        htmlFor="country"
+                        className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
+                      >
+                        Projected Attendance
+                      </label>
+                      <div className="mt-2 sm:col-span-2 sm:mt-0">
+                        <div className="grid grid-cols-1 sm:max-w-xs">
+                          <select
+                            id="country"
+                            name="country"
+                            autoComplete="country-name"
+                            className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:text-sm/6"
+                          >
+                            <option>0 - 250</option>
+                            <option>251 - 1000</option>
+                            <option>1001 - 2500</option>
+                            <option>2501 - 5000</option>
+                            <option>5001 - 10000</option>
+                            <option>10001 - 25000</option>
+                            <option>25001 - 50000</option>
+                            <option>50001+</option>
+                          </select>
+                          <FaRegArrowAltCircleDown
+                            aria-hidden="true"
+                            className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div>
-                <h2 className="text-base/7 font-semibold text-gray-900">
-                  Terms/Conditions
-                </h2>
-                <p className="mt-1 text-xs/6 text-gray-600">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  blandit dapibus orci, eget porttitor purus accumsan a. Donec
-                  placerat rutrum augue nec gravida. Aliquam lobortis bibendum
-                  mollis. Donec sapien enim, mattis gravida tincidunt ac, porta
-                  sit amet elit. Quisque et dictum nibh, vel luctus sapien.
-                  Vivamus vestibulum diam nisi, vulputate bibendum diam congue
-                  sed. Aenean aliquam, dui et faucibus malesuada, erat felis
-                  consequat nibh, vitae facilisis elit quam sed turpis. Ut odio
-                  nulla, hendrerit vitae vulputate eget, mattis at leo.
-                </p>
-                <p className="mt-4 text-xs/6 text-gray-600">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  blandit dapibus orci, eget porttitor purus accumsan a. Donec
-                  placerat rutrum augue nec gravida. Aliquam lobortis bibendum
-                  mollis. Donec sapien enim, mattis gravida tincidunt ac, porta
-                  sit amet elit. Quisque et dictum nibh, vel luctus sapien.
-                  Vivamus vestibulum diam nisi, vulputate bibendum diam congue
-                  sed. Aenean aliquam, dui et faucibus malesuada, erat felis
-                  consequat nibh, vitae facilisis elit quam sed turpis. Ut odio
-                  nulla, hendrerit vitae vulputate eget, mattis at leo.
-                </p>
-                <p className="mt-4 text-xs/6 text-gray-600">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  blandit dapibus orci, eget porttitor purus accumsan a. Donec
-                  placerat rutrum augue nec gravida. Aliquam lobortis bibendum
-                  mollis. Donec sapien enim, mattis gravida tincidunt ac, porta
-                  sit amet elit. Quisque et dictum nibh, vel luctus sapien.
-                  Vivamus vestibulum diam nisi, vulputate bibendum diam congue
-                  sed. Aenean aliquam, dui et faucibus malesuada, erat felis
-                  consequat nibh, vitae facilisis elit quam sed turpis. Ut odio
-                  nulla, hendrerit vitae vulputate eget, mattis at leo.
-                </p>
+                <div>
+                  <h2 className="text-base/7 font-semibold text-gray-900">
+                    Terms/Conditions
+                  </h2>
+                  <p className="mt-1 text-xs/6 text-gray-600">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                    blandit dapibus orci, eget porttitor purus accumsan a. Donec
+                    placerat rutrum augue nec gravida. Aliquam lobortis bibendum
+                    mollis. Donec sapien enim, mattis gravida tincidunt ac,
+                    porta sit amet elit. Quisque et dictum nibh, vel luctus
+                    sapien. Vivamus vestibulum diam nisi, vulputate bibendum
+                    diam congue sed. Aenean aliquam, dui et faucibus malesuada,
+                    erat felis consequat nibh, vitae facilisis elit quam sed
+                    turpis. Ut odio nulla, hendrerit vitae vulputate eget,
+                    mattis at leo.
+                  </p>
+                  <p className="mt-4 text-xs/6 text-gray-600">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                    blandit dapibus orci, eget porttitor purus accumsan a. Donec
+                    placerat rutrum augue nec gravida. Aliquam lobortis bibendum
+                    mollis. Donec sapien enim, mattis gravida tincidunt ac,
+                    porta sit amet elit. Quisque et dictum nibh, vel luctus
+                    sapien. Vivamus vestibulum diam nisi, vulputate bibendum
+                    diam congue sed. Aenean aliquam, dui et faucibus malesuada,
+                    erat felis consequat nibh, vitae facilisis elit quam sed
+                    turpis. Ut odio nulla, hendrerit vitae vulputate eget,
+                    mattis at leo.
+                  </p>
+                  <p className="mt-4 text-xs/6 text-gray-600">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                    blandit dapibus orci, eget porttitor purus accumsan a. Donec
+                    placerat rutrum augue nec gravida. Aliquam lobortis bibendum
+                    mollis. Donec sapien enim, mattis gravida tincidunt ac,
+                    porta sit amet elit. Quisque et dictum nibh, vel luctus
+                    sapien. Vivamus vestibulum diam nisi, vulputate bibendum
+                    diam congue sed. Aenean aliquam, dui et faucibus malesuada,
+                    erat felis consequat nibh, vitae facilisis elit quam sed
+                    turpis. Ut odio nulla, hendrerit vitae vulputate eget,
+                    mattis at leo.
+                  </p>
 
-                <div className="space-y-10 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10  sm:pb-0">
-                  <fieldset>
-                    <legend className="sr-only">By email</legend>
-                    <div className=" sm:gap-4 sm:py-6">
-                      <div className="mt-4 sm:col-span-2 sm:mt-0">
-                        <div className="max-w-lg space-y-6">
-                          <div className="flex gap-3">
-                            <div className="flex h-6 shrink-0 items-center">
-                              <div className="group grid size-5 grid-cols-1">
-                                <input
-                                  defaultChecked
-                                  id="comments"
-                                  name="comments"
-                                  type="checkbox"
-                                  aria-describedby="comments-description"
-                                  className="col-start-1 row-start-1 appearance-none rounded border border-gray-300 bg-white checked:border-saluteBlue checked:bg-saluteBlue indeterminate:border-saluteBlue indeterminate:bg-saluteBlue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-saluteBlue disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
-                                />
-                                <svg
-                                  fill="none"
-                                  viewBox="0 0 14 14"
-                                  className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-[:disabled]:stroke-gray-950/25"
+                  <div className="space-y-10 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10  sm:pb-0">
+                    <fieldset>
+                      <legend className="sr-only">By email</legend>
+                      <div className=" sm:gap-4 sm:py-6">
+                        <div className="mt-4 sm:col-span-2 sm:mt-0">
+                          <div className="max-w-lg space-y-6">
+                            <div className="flex gap-3">
+                              <div className="flex h-6 shrink-0 items-center">
+                                <div className="group grid size-5 grid-cols-1">
+                                  <input
+                                    defaultChecked
+                                    id="comments"
+                                    name="comments"
+                                    type="checkbox"
+                                    aria-describedby="comments-description"
+                                    className="col-start-1 row-start-1 appearance-none rounded border border-gray-300 bg-white checked:border-saluteBlue checked:bg-saluteBlue indeterminate:border-saluteBlue indeterminate:bg-saluteBlue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-saluteBlue disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
+                                  />
+                                  <svg
+                                    fill="none"
+                                    viewBox="0 0 14 14"
+                                    className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-[:disabled]:stroke-gray-950/25"
+                                  >
+                                    <path
+                                      d="M3 8L6 11L11 3.5"
+                                      strokeWidth={2}
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      className="opacity-0 group-has-[:checked]:opacity-100"
+                                    />
+                                    <path
+                                      d="M3 7H11"
+                                      strokeWidth={2}
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      className="opacity-0 group-has-[:indeterminate]:opacity-100"
+                                    />
+                                  </svg>
+                                </div>
+                              </div>
+                              <div className="text-base/6 font-medium">
+                                <p
+                                  id="comments-description"
+                                  className="text-gray-800"
                                 >
-                                  <path
-                                    d="M3 8L6 11L11 3.5"
-                                    strokeWidth={2}
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    className="opacity-0 group-has-[:checked]:opacity-100"
-                                  />
-                                  <path
-                                    d="M3 7H11"
-                                    strokeWidth={2}
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    className="opacity-0 group-has-[:indeterminate]:opacity-100"
-                                  />
-                                </svg>
+                                  By Checking I Agree to the above Terms
+                                </p>
                               </div>
                             </div>
-                            <div className="text-base/6 font-medium">
-                              <p
-                                id="comments-description"
-                                className="text-gray-800"
-                              >
-                                By Checking I Agree to the above Terms
-                              </p>
+                            <div className="flex gap-3">
+                              <div className="flex h-6 shrink-0 items-center">
+                                <div className="group grid size-5 grid-cols-1">
+                                  <input
+                                    defaultChecked
+                                    id="comments"
+                                    name="comments"
+                                    type="checkbox"
+                                    aria-describedby="comments-description"
+                                    className="col-start-1 row-start-1 appearance-none rounded border border-gray-300 bg-white checked:border-saluteBlue checked:bg-saluteBlue indeterminate:border-saluteBlue indeterminate:bg-saluteBlue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-saluteBlue disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
+                                  />
+                                  <svg
+                                    fill="none"
+                                    viewBox="0 0 14 14"
+                                    className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-[:disabled]:stroke-gray-950/25"
+                                  >
+                                    <path
+                                      d="M3 8L6 11L11 3.5"
+                                      strokeWidth={2}
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      className="opacity-0 group-has-[:checked]:opacity-100"
+                                    />
+                                    <path
+                                      d="M3 7H11"
+                                      strokeWidth={2}
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      className="opacity-0 group-has-[:indeterminate]:opacity-100"
+                                    />
+                                  </svg>
+                                </div>
+                              </div>
+                              <div className="text-base/6 font-medium">
+                                <p
+                                  id="comments-description"
+                                  className="text-gray-800"
+                                >
+                                  By Checking this, you agree to our{" "}
+                                  <a
+                                    href="#"
+                                    className="underline text-blue-700 hover:opacity-70"
+                                  >
+                                    privacy policy.
+                                  </a>
+                                </p>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </fieldset>
+                    </fieldset>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="mt-8 items-center gap-x-6">
-              <button className="w-full flex justify-center border-t-2 border-saluteBlue flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteBlue hover:text-white">
-                Submit Event for Review
-                <RiMailSendFill aria-hidden="true" className="size-7" />
-              </button>
-            </div>
-          </form>
+              <div className="mt-8 items-center gap-x-6">
+                <button className="w-full flex justify-center border-t-2 border-saluteBlue flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteBlue hover:text-white">
+                  Submit Event for Review
+                  <RiMailSendFill aria-hidden="true" className="size-7" />
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
+      </section>
       <div className="hidden relative bg-white">
         <div className="relative h-80 overflow-hidden bg-saluteBlue md:absolute md:left-0 md:h-full md:w-1/3 lg:w-1/2">
           <img

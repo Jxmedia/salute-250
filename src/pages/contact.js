@@ -1,27 +1,8 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
-import { FaFacebookSquare } from "react-icons/fa";
-import { FaRegArrowAltCircleDown } from "react-icons/fa";
-import { IoMusicalNotesSharp } from "react-icons/io5";
-import { FaInstagram } from "react-icons/fa";
-import { FaPersonMilitaryRifle, FaXTwitter } from "react-icons/fa6";
-import { FaLinkedinIn } from "react-icons/fa6";
-import { MdOutlineFestival, MdStarBorder } from "react-icons/md";
-import { MdOutlineStar } from "react-icons/md";
-import { LiaFlagUsaSolid } from "react-icons/lia";
-import { MdAirplaneTicket } from "react-icons/md";
-import { GiAmericanFootballHelmet } from "react-icons/gi";
-import { IoCarSportSharp } from "react-icons/io5";
-import { DateInput, TimeInput } from "@heroui/react";
-import {
-  parseDate,
-  parseAbsoluteToLocal,
-  CalendarDate,
-  Time,
-} from "@internationalized/date";
-import { CheckIcon } from "@heroicons/react/20/solid";
-import { RiMailSendFill, RiSchoolFill } from "react-icons/ri";
-import { BsPatchQuestionFill } from "react-icons/bs";
+import CTA from "../images/girl-cta.jpg";
+import { parseDate, parseAbsoluteToLocal } from "@internationalized/date";
+import { RiMailSendFill } from "react-icons/ri";
 import {
   Disclosure,
   DisclosureButton,
@@ -99,14 +80,14 @@ export default function RegisterEvent() {
         <div className="bg-white h-1.5" />
         <div className="bg-gradient-to-r from-blue-600 to-blue-900 h-2.5" />
       </div>
-      <div className="bg-saluteBlue relative pt-32">
+      <div className="relative pt-32">
         <img
           alt=""
           src="https://www.shutterstock.com/shutterstock/photos/1067889479/display_1500/stock-photo-american-flag-background-1067889479.jpg"
-          className="hidden absolute inset-0 -z-10 opacity-10 size-full object-cover scale-x-[-1]"
+          className="absolute inset-0 -z-10 opacity-60 size-full object-cover scale-x-[-1]"
         />
 
-        {/* <div className="absolute inset-0 bg-saluteBlue mix-blend-multiply" /> */}
+        <div className="absolute inset-0 bg-saluteBlue mix-blend-multiply" />
         <div className="relative mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
           <p className="text-center text-saluteRed text-xl font-primary font-extrabold uppercase">
             SAA <span className="font-script text-[1.2em] text-white">250</span>
@@ -124,7 +105,7 @@ export default function RegisterEvent() {
             </p>
           </div>
         </div>
-        <div className="bg-saluteBlue py-8">
+        <div className="relative py-8">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-2xl divide-y divide-gray-100 lg:mx-0 lg:max-w-none">
               <div className="grid grid-cols-1 gap-10 py-16 lg:grid-cols-2">
@@ -172,7 +153,7 @@ export default function RegisterEvent() {
           </div>
         </div>
 
-        <div className="mx-auto max-w-7xl px-6 lg:pb-24 lg:px-8">
+        <div className="relative mx-auto max-w-7xl px-6 lg:pb-24 lg:px-8">
           <div className="mx-auto max-w-4xl">
             <p className="text-center font-primary mt-2 text-4xl font-semibold tracking-tight text-saluteTan sm:text-6xl">
               Frequently Asked Questions
@@ -213,15 +194,11 @@ export default function RegisterEvent() {
 
       <div className="relative bg-white">
         <div className="relative h-80 overflow-hidden bg-saluteBlue md:absolute md:left-0 md:h-full md:w-1/3 lg:w-1/2">
-          <img
-            alt=""
-            src="https://www.shutterstock.com/shutterstock/photos/2452273295/display_1500/stock-photo-woman-patriot-with-american-flag-on-the-beach-at-sunset-usa-celebrate-th-of-july-independence-2452273295.jpg"
-            className="size-full object-cover"
-          />
+          <img alt="" src={CTA} className="size-full object-cover" />
         </div>
         <div className="relative mx-auto max-w-7xl py-24 sm:py-32 lg:px-8 lg:py-40">
           <div className="pl-6 pr-6 md:ml-auto md:w-2/3 md:pl-16 lg:w-1/2  lg:pr-0">
-            <p className="font-primary mt-2 text-4xl font-semibold tracking-tight text-gray-800 sm:text-6xl">
+            <p className="font-primary mt-2 text-4xl font-semibold tracking-tight text-saluteRed sm:text-6xl">
               More Questions?
             </p>
             <p className="mt-6 font-body text-lg/7 text-gray-600">
@@ -337,32 +314,50 @@ export default function RegisterEvent() {
                       />
                     </div>
                   </div>
-                  <div className="flex gap-x-4 sm:col-span-2">
-                    <div className="flex h-6 items-center">
-                      <div className="group relative inline-flex w-8 shrink-0 rounded-full bg-gray-200 p-px outline-offset-2 outline-indigo-600 ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out has-[:checked]:bg-indigo-600 has-[:focus-visible]:outline has-[:focus-visible]:outline-2">
-                        <span className="size-4 rounded-full bg-white shadow-sm ring-1 ring-gray-900/5 transition-transform duration-200 ease-in-out group-has-[:checked]:translate-x-3.5" />
+                  <div className="flex gap-3 sm:col-span-2">
+                    <div className="flex h-6 shrink-0 items-center">
+                      <div className="group grid size-5 grid-cols-1">
                         <input
-                          id="agree-to-policies"
-                          name="agree-to-policies"
+                          defaultChecked
+                          id="comments"
+                          name="comments"
                           type="checkbox"
-                          aria-label="Agree to policies"
-                          className="absolute inset-0 appearance-none focus:outline-none"
+                          aria-describedby="comments-description"
+                          className="col-start-1 row-start-1 appearance-none rounded border border-gray-300 bg-white checked:border-saluteBlue checked:bg-saluteBlue indeterminate:border-saluteBlue indeterminate:bg-saluteBlue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-saluteBlue disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
                         />
+                        <svg
+                          fill="none"
+                          viewBox="0 0 14 14"
+                          className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-[:disabled]:stroke-gray-950/25"
+                        >
+                          <path
+                            d="M3 8L6 11L11 3.5"
+                            strokeWidth={2}
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="opacity-0 group-has-[:checked]:opacity-100"
+                          />
+                          <path
+                            d="M3 7H11"
+                            strokeWidth={2}
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="opacity-0 group-has-[:indeterminate]:opacity-100"
+                          />
+                        </svg>
                       </div>
                     </div>
-                    <label
-                      htmlFor="agree-to-policies"
-                      className="text-sm/6 text-gray-600"
-                    >
-                      By selecting this, you agree to our{" "}
-                      <a
-                        href="#"
-                        className="whitespace-nowrap font-semibold text-indigo-600"
-                      >
-                        privacy policy
-                      </a>
-                      .
-                    </label>
+                    <div className="text-base/6 font-medium">
+                      <p id="comments-description" className="text-gray-800">
+                        By Checking this, you agree to our{" "}
+                        <a
+                          href="#"
+                          className="underline text-blue-700 hover:opacity-70"
+                        >
+                          privacy policy.
+                        </a>
+                      </p>
+                    </div>
                   </div>
                 </div>
                 <div className="mt-10">

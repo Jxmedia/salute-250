@@ -21,11 +21,6 @@ const footerNavigation = [
     href: "#",
     icon: FaXTwitter,
   },
-  {
-    name: "Linkedin",
-    href: "#",
-    icon: FaLinkedinIn,
-  },
 ];
 
 const Footer = () => {

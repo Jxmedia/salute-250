@@ -18,7 +18,8 @@ const Header = (props) => {
     <header
       className={` ${
         props.currentPath === "/events/register/" ||
-        props.currentPath === "/events/"
+        props.currentPath === "/events/" ||
+        props.currentPath === "/spectators/"
           ? "backdrop-blur-none from-transparent"
           : ""
       } absolute inset-x-0 top-0 z-50 bg-gradient-to-b from-saluteBlue/50 backdrop-blur-sm to-transparent`}
@@ -53,7 +54,8 @@ const Header = (props) => {
               key={item.name}
               href={item.href}
               className={`text-lg/6 uppercase duration-300 ease-in-out ${
-                props.currentPath === "/events/register/"
+                props.currentPath === "/events/register/" ||
+                props.currentPath === "/spectators/"
                   ? "text-saluteBlue"
                   : "text-white"
               } hover:underline hover:text-saluteTan p-3 rounded-md`}

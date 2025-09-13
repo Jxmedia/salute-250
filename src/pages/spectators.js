@@ -28,6 +28,9 @@ import {
   DisclosurePanel,
 } from "@headlessui/react";
 import { LuCirclePlus, LuCircleMinus } from "react-icons/lu";
+import Favicon from "../images/favicon.png";
+import OGFB from "../images/og-image.jpg";
+import { Helmet } from "react-helmet";
 
 const faqs = [
   {
@@ -93,13 +96,65 @@ export default function RegisterEvent() {
 
   return (
     <Layout>
+      <Helmet>
+        {/* Primary Meta Tags */}
+        <title>Spectators || Salute Across America 250</title>
+        <meta name="title" content="Salute Across America 250" />
+        <meta
+          name="description"
+          content="Get ready for a once-in-a-generation celebration—America's 250th anniversary is almost here! Over 365 days, we’ll unite for thousands of events honoring our shared history, diverse stories, and bold future. Join millions of event in commemorating the spirit of a nation 250 years in the making."
+        />
+        <meta name="keywords" content="America, 250, America 250th" />
+        <meta name="author" content="Salute Across America 250" />
+        <meta name="robots" content="index, follow" />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="language" content="en" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://saluteacrossamerica250.com/" />
+        <meta property="og:title" content="Salute Across America 250" />
+        <meta
+          property="og:description"
+          content="Get ready for a once-in-a-generation celebration—America's 250th anniversary is almost here! Over 365 days, we’ll unite for thousands of events honoring our shared history, diverse stories, and bold future. Join millions of event in commemorating the spirit of a nation 250 years in the making."
+        />
+        <meta property="og:image" content={OGFB} />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:url"
+          content="https://saluteacrossamerica250.com/"
+        />
+        <meta name="twitter:title" content="Salute Across America 250" />
+        <meta
+          name="twitter:description"
+          content="Get ready for a once-in-a-generation celebration—America's 250th anniversary is almost here! Over 365 days, we’ll unite for thousands of events honoring our shared history, diverse stories, and bold future. Join millions of event in commemorating the spirit of a nation 250 years in the making."
+        />
+        <meta name="twitter:image" content={Favicon} />
+
+        {/* Favicons */}
+        <link rel="icon" href={Favicon} />
+        <link rel="apple-touch-icon" sizes="180x180" href={Favicon} />
+        <link rel="manifest" href="/site.webmanifest" />
+
+        {/* Canonical Link */}
+        <link rel="canonical" href="https://saluteacrossamerica250.com/" />
+
+        {/* Theme and Mobile */}
+        <meta name="theme-color" content="#ffffff" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=5"
+        />
+      </Helmet>
       <div className="bg-white"></div>
       <div className="divider">
         <div className="bg-gradient-to-r from-saluteRed to-red-700 h-2.5" />
         <div className="bg-white h-1.5" />
         <div className="bg-gradient-to-r from-blue-600 to-blue-900 h-2.5" />
       </div>
-      <div className="bg-gray-50 relative pt-32">
+      <div className=" relative pt-32">
         <img
           alt=""
           src="https://www.shutterstock.com/shutterstock/photos/1067889479/display_1500/stock-photo-american-flag-background-1067889479.jpg"
@@ -127,7 +182,7 @@ export default function RegisterEvent() {
             </p>
           </div>
         </div>
-        <div className="mt-10 relative isolate bg-white">
+        <div className="border-t-2 border-saluteTan mt-16 relative isolate bg-white">
           <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
             <div className="relative px-6 pb-20 pt-24 sm:pt-32 lg:static lg:px-8">
               <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
