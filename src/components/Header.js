@@ -5,10 +5,10 @@ import { LiaFlagUsaSolid } from "react-icons/lia";
 import { Dialog, DialogPanel, DialogBackdrop } from "@headlessui/react";
 
 const navigation = [
-  { name: "Home", href: "#" },
-  { name: "About", href: "#" },
-  { name: "Events", href: "#" },
-  { name: "Spectators", href: "#" },
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about/" },
+  { name: "Events", href: "/events/" },
+  { name: "Spectators", href: "/spectators/" },
 ];
 
 const Header = (props) => {
@@ -19,7 +19,8 @@ const Header = (props) => {
       className={` ${
         props.currentPath === "/events/register/" ||
         props.currentPath === "/events/" ||
-        props.currentPath === "/spectators/"
+        props.currentPath === "/spectators/" ||
+        props.currentPath === "/about/"
           ? "backdrop-blur-none from-transparent"
           : ""
       } absolute inset-x-0 top-0 z-50 bg-gradient-to-b from-saluteBlue/50 backdrop-blur-sm to-transparent`}
@@ -55,7 +56,8 @@ const Header = (props) => {
               href={item.href}
               className={`text-lg/6 uppercase duration-300 ease-in-out ${
                 props.currentPath === "/events/register/" ||
-                props.currentPath === "/spectators/"
+                props.currentPath === "/spectators/" ||
+                props.currentPath === "/about/"
                   ? "text-saluteBlue"
                   : "text-white"
               } hover:underline hover:text-saluteTan p-3 rounded-md`}
@@ -66,7 +68,7 @@ const Header = (props) => {
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <a
-            href="#"
+            href="/contact/"
             className="border-t-2 border-red-500 flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl px-6 py-2.5 text-lg/6 text-white hover:underline hover:bg-saluteTan hover:text-saluteRed"
           >
             Contact Us <LiaFlagUsaSolid aria-hidden="true" className="size-7" />

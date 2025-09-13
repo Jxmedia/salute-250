@@ -164,21 +164,21 @@ export default function EventsHome() {
             SAA <span className="font-script text-[1.2em] text-white">250</span>
             Tour
           </p>
-          <p className="mx-auto mt-2 text-balance text-center text-4xl font-primary font-semibold tracking-tight text-saluteTan sm:text-7xl">
+          <h1 className="mx-auto mt-2 text-balance text-center text-4xl font-primary font-semibold tracking-tight text-saluteTan sm:text-7xl">
             All{" "}
             <span className="font-script text-[1.2em] text-white">2026</span>{" "}
             Events
-          </p>
+          </h1>
           <div className="mt-8 flex items-center justify-center gap-x-6">
             <a
-              href="#"
+              href="register"
               className="border-t-2 border-red-500 flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl px-10 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteNavy"
             >
               Register Your Event{" "}
               <MdOutlineEventAvailable aria-hidden="true" className="size-7" />
             </a>
             <a
-              href="#"
+              href="/spectators/"
               className="font-body uppercase font-semibold border-t-2 border-yellow-100 flex items-center gap-2 duration-300 ease-in-out bg-saluteTan rounded-b-xl px-14 py-2.5 text-lg/6 text-saluteBlue hover:underline hover:bg-saluteBlue  hover:text-white"
             >
               Spectators{" "}
@@ -556,9 +556,9 @@ export default function EventsHome() {
         </div>
         <div className="relative mx-auto max-w-7xl py-24 sm:py-32 lg:px-8 lg:py-40">
           <div className="pl-6 pr-6 md:ml-auto md:w-2/3 md:pl-16 lg:w-1/2  lg:pr-0">
-            <p className="font-primary mt-2 text-4xl font-semibold tracking-tight text-gray-800 sm:text-6xl">
+            <h3 className="font-primary mt-2 text-4xl font-semibold tracking-tight text-gray-800 sm:text-6xl">
               Questions?
-            </p>
+            </h3>
             <p className="mt-6 font-body text-lg/7 text-gray-600">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et,
               egestas tempus tellus etiam sed. Quam a scelerisque amet
@@ -567,7 +567,7 @@ export default function EventsHome() {
             </p>
             <div className="mt-8 flex">
               <a
-                href="#"
+                href="/contact/"
                 className="font-body uppercase font-semibold border-t-2 border-red-500 flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl px-14 py-2.5 text-lg/6 text-white hover:underline hover:bg-saluteTan hover:text-saluteRed"
               >
                 Contact Us{" "}

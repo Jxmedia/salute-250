@@ -239,16 +239,17 @@ export default function RegisterEvent() {
             </span>
             Tour
           </p>
-          <p className="mx-auto mt-2 text-balance text-center text-4xl font-primary font-semibold tracking-tight text-saluteBlue sm:text-7xl">
-            Register Your <span className="text-saluteBlue">Salute Across</span>
-          </p>
-          <p className="mx-auto mt-2 text-balance text-center text-4xl font-primary font-semibold tracking-tight text-saluteBlue sm:text-7xl">
-            <span className="text-saluteBlue">America</span>
-            <span className="font-script text-[1.2em] text-saluteRed">
-              250
-            </span>{" "}
-            Event
-          </p>
+          <h1 className="mx-auto mt-2 text-balance text-center text-4xl font-primary font-semibold tracking-tight text-saluteBlue sm:text-7xl">
+            Register Your <span className="text-saluteBlue">Salute Across</span>{" "}
+            <span className="mx-auto mt-2 text-balance text-center text-4xl font-primary font-semibold tracking-tight text-saluteBlue sm:text-7xl">
+              <span className="text-saluteBlue">America </span>
+              <span className="font-script text-[1.2em] text-saluteRed">
+                250
+              </span>{" "}
+              Event
+            </span>
+          </h1>
+
           <div className="max-w-lg mx-auto font-body py-2 text-center">
             <p className="text-lg text-gray-700 gap-2">
               Join a growing list of events nationwide proudly commemorating
@@ -455,9 +456,9 @@ export default function RegisterEvent() {
       <section id="form">
         <div className="bg-saluteTan/50 py-20">
           <div className="max-w-6xl mx-auto">
-            <h3 className=" text-center font-primary text-4xl font-semibold tracking-tight text-saluteBlue sm:text-6xl">
+            <h2 className=" text-center font-primary text-4xl font-semibold tracking-tight text-saluteBlue sm:text-6xl">
               Register Your Event
-            </h3>
+            </h2>
             <p className="py-8 font-body text-lg text-gray-700 gap-2 text-center max-w-3xl mx-auto">
               Complete the form below to share your event with us. All
               submissions are reviewed to ensure they align with the patriotic
@@ -1001,9 +1002,9 @@ export default function RegisterEvent() {
         </div>
         <div className="relative mx-auto max-w-7xl py-24 sm:py-32 lg:px-8 lg:py-40">
           <div className="pl-6 pr-6 md:ml-auto md:w-2/3 md:pl-16 lg:w-1/2  lg:pr-0">
-            <p className="font-primary mt-2 text-4xl font-semibold tracking-tight text-gray-800 sm:text-6xl">
+            <h3 className="font-primary mt-2 text-4xl font-semibold tracking-tight text-gray-800 sm:text-6xl">
               Questions?
-            </p>
+            </h3>
             <p className="mt-6 font-body text-lg/7 text-gray-600">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et,
               egestas tempus tellus etiam sed. Quam a scelerisque amet

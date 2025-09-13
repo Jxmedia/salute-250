@@ -168,7 +168,13 @@ export default function HomePage() {
               <div className="hidden sm:mb-8 sm:flex sm:justify-start">
                 <div className="font-primary relative px-3 py-1 text-gray-700 hover:ring-gray-900/20">
                   {timeLeft.expired ? (
-                    <p className="text-3xl">Happy 250 Anniversary!</p>
+                    <p className="text-3xl font-primary font-bold uppercase text-left">
+                      Happy{" "}
+                      <span className="font-script  text-[1.2em] text-saluteRed">
+                        250
+                      </span>
+                      th Anniversary!
+                    </p>
                   ) : (
                     <div className="mt-5 flex justify-center gap-6 text-center divide-x divide-gray-500 font-body">
                       <TimeBlock label="Days" value={timeLeft.days} />
@@ -238,13 +244,13 @@ export default function HomePage() {
             <span className="font-script text-[1.2em] text-saluteRed">250</span>
             Tour
           </p>
-          <p className="mx-auto mt-2 text-balance text-center text-4xl font-primary font-semibold tracking-tight text-gray-800 sm:text-7xl">
+          <h2 className="mx-auto mt-2 text-balance text-center text-4xl font-primary font-semibold tracking-tight text-gray-800 sm:text-7xl">
             Upcoming{" "}
             <span className="font-scriptText tracking-[0.5px] text-[1.2em] text-saluteRed">
               Signature
             </span>{" "}
             Events
-          </p>
+          </h2>
           <div className="mt-8 flex items-center justify-center gap-x-6">
             <a
               href="#"
@@ -431,9 +437,9 @@ export default function HomePage() {
         </div>
         <div className="py-10">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <p className="mx-auto mt-2 text-balance text-center text-4xl font-primary font-semibold tracking-tight text-white sm:text-5xl">
+            <h3 className="mx-auto mt-2 text-balance text-center text-4xl font-primary font-semibold tracking-tight text-white sm:text-5xl">
               Current Sponsors
-            </p>
+            </h3>
 
             <div className="mt-10 -mx-6 grid grid-cols-2 gap-0.5 overflow-hidden sm:mx-0 sm:rounded-xl md:grid-cols-3">
               <div className="bg-saluteTan p-8 sm:p-10">
@@ -505,9 +511,9 @@ export default function HomePage() {
           <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-4xl py-32">
               <div className="text-center">
-                <h1 className="font-primary text-balance text-5xl font-semibold tracking-tight text-saluteTan sm:text-7xl">
+                <h3 className="font-primary text-balance text-5xl font-semibold tracking-tight text-saluteTan sm:text-7xl">
                   Subscribe Today
-                </h1>
+                </h3>
                 <h3 className="mt-2 font-body text-balance text-3xl font-semibold tracking-tight text-saluteTan">
                   Be Part of America’s <span className="font-script">250</span>
                   th Find Events Near You
@@ -519,7 +525,7 @@ export default function HomePage() {
                 </p>
                 <div className="mt-10 flex items-center justify-center gap-x-6">
                   <a
-                    href="#"
+                    href="/spectators/"
                     className="font-body uppercase font-semibold border-t-2 border-yellow-100 flex items-center gap-2 duration-300 ease-in-out bg-saluteTan rounded-b-xl px-14 py-2.5 text-lg/6 text-saluteBlue hover:underline hover:bg-saluteBlue  hover:text-white"
                   >
                     Spectators{" "}
@@ -538,9 +544,9 @@ export default function HomePage() {
         </div>
         <div className="relative mx-auto max-w-7xl py-24 sm:py-32 lg:px-8 lg:py-40">
           <div className="pl-6 pr-6 md:ml-auto md:w-2/3 md:pl-16 lg:w-1/2  lg:pr-0">
-            <p className="font-primary mt-2 text-4xl font-semibold tracking-tight text-gray-800 sm:text-6xl">
+            <h3 className="font-primary mt-2 text-4xl font-semibold tracking-tight text-gray-800 sm:text-6xl">
               Questions?
-            </p>
+            </h3>
             <p className="mt-6 font-body text-lg/7 text-gray-600">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et,
               egestas tempus tellus etiam sed. Quam a scelerisque amet

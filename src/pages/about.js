@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
-import { FaRegArrowAltCircleDown } from "react-icons/fa";
+import CTA from "../images/girl-cta.jpg";
+
 import { LiaFlagUsaSolid } from "react-icons/lia";
-import { RiMailSendFill } from "react-icons/ri";
+
 import {
   Disclosure,
   DisclosureButton,
@@ -49,7 +50,6 @@ const faqs = [
 export default function RegisterEvent() {
   //
   //
-  //
 
   //
   //
@@ -60,7 +60,7 @@ export default function RegisterEvent() {
     <Layout>
       <Helmet>
         {/* Primary Meta Tags */}
-        <title>Spectators || Salute Across America 250</title>
+        <title>About Us || Salute Across America 250</title>
         <meta name="title" content="Salute Across America 250" />
         <meta
           name="description"
@@ -133,7 +133,7 @@ export default function RegisterEvent() {
             Tour
           </p>
           <h1 className="mx-auto mt-2 text-balance text-center text-4xl font-primary font-semibold tracking-tight text-saluteBlue sm:text-7xl">
-            Spectators/Visitors{" "}
+            About Salute Across America
           </h1>
 
           <div className="font-body py-2 text-center">
@@ -144,169 +144,157 @@ export default function RegisterEvent() {
             </p>
           </div>
         </div>
-        <div className="border-t-2 border-saluteTan mt-16 relative isolate bg-white">
-          <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
-            <div className="relative px-6 pb-20 pt-24 sm:pt-32 lg:static lg:px-8">
-              <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
-                <div className="absolute inset-y-0 left-0 -z-10 w-full overflow-hidden bg-saluteTan ring-1 ring-gray-900/10 lg:w-1/2"></div>
-                <h2 className="font-primary mt-2 text-4xl font-semibold tracking-tight text-saluteRed sm:text-6xl">
-                  Subscribe to Notifications
-                </h2>
-                <p className="pt-2 font-body font-medium max-w-xl text-2xl text-saluteBlue gap-2">
-                  Be Part of America’s <span className="font-script">250</span>
-                  th and Find <span className="block">Events Near You</span>
+        <div className="mt-14 bg-saluteTan py-24">
+          <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
+            <div className="font-body mt-10 grid max-w-xl grid-cols-1 gap-8 text-lg/7 text-saluteBlue lg:max-w-none lg:grid-cols-2">
+              <div>
+                <p>
+                  Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget
+                  risus enim. Mattis mauris semper sed amet vitae sed turpis id.
+                  Id dolor praesent donec est. Odio penatibus risus viverra
+                  tellus varius sit neque erat velit. Faucibus commodo massa
+                  rhoncus, volutpat. Dignissim sed eget risus enim. Mattis
+                  mauris semper sed amet vitae sed turpis id.
                 </p>
-                <p className="pt-4 font-body max-w-3xl mx-auto text-lg text-gray-700 gap-2">
-                  From air shows to parades, concerts to commemorations —
-                  patriotic events are happening across the nation for America’s
-                  <span className="font-script">250</span>th birthday in 2026.
+                <p className="mt-8">
+                  Et vitae blandit facilisi magna lacus commodo. Vitae sapien
+                  duis odio id et. Id blandit molestie auctor fermentum
+                  dignissim. Lacus diam tincidunt ac cursus in vel. Mauris
+                  varius vulputate et ultrices hac adipiscing egestas.
                 </p>
-                <p className="pt-5 font-body max-w-3xl mx-auto text-lg text-gray-700 gap-2">
-                  Sign up to get updates about Salute Across America{" "}
-                  <span className="font-script">250</span> events near you.
-                  You’ll be the first to know about major celebrations in your
-                  area.
+              </div>
+              <div>
+                <p>
+                  Erat pellentesque dictumst ligula porttitor risus eget et
+                  eget. Ultricies tellus felis id dignissim eget. Est augue
+                  maecenas risus nulla ultrices congue nunc tortor.
                 </p>
-                <p className="pt-5 font-body max-w-3xl mx-auto text-lg text-gray-700 gap-2">
-                  Hosting an event? Thousands of Americans are searching here
-                  for ways to celebrate. Make sure they find you — register your
-                  event today.
+                <p className="mt-8">
+                  Et vitae blandit facilisi magna lacus commodo. Vitae sapien
+                  duis odio id et. Id blandit molestie auctor fermentum
+                  dignissim. Lacus diam tincidunt ac cursus in vel. Mauris
+                  varius vulputate et ultrices hac adipiscing egestas. Iaculis
+                  convallis ac tempor et ut. Ac lorem vel integer orci.
                 </p>
               </div>
             </div>
-            <form
-              action="#"
-              method="POST"
-              className="font-body px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48"
-            >
-              <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
-                <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-                  <div>
-                    <label
-                      htmlFor="first-name"
-                      className="block text-sm/6 font-semibold text-red-600"
-                    >
-                      First name*
-                    </label>
-                    <div className="mt-2.5">
-                      <input
-                        id="first-name"
-                        name="first-name"
-                        type="text"
-                        autoComplete="given-name"
-                        className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="last-name"
-                      className="block text-sm/6 font-semibold text-red-600"
-                    >
-                      Last name*
-                    </label>
-                    <div className="mt-2.5">
-                      <input
-                        id="last-name"
-                        name="last-name"
-                        type="text"
-                        autoComplete="family-name"
-                        className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
-                      />
-                    </div>
-                  </div>
-                  <div className="sm:col-span-1">
-                    <label
-                      htmlFor="email"
-                      className="block text-sm/6 font-semibold text-red-600"
-                    >
-                      Email*
-                    </label>
-                    <div className="mt-2.5">
-                      <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        autoComplete="email"
-                        className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
-                      />
-                    </div>
-                  </div>
-                  <div className="sm:col-span-1">
-                    <label
-                      htmlFor="phone-number"
-                      className="block text-sm/6 font-semibold text-red-600"
-                    >
-                      Zip Code*
-                    </label>
-                    <div className="mt-2.5">
-                      <input
-                        id="phone-number"
-                        name="phone-number"
-                        type="tel"
-                        autoComplete="tel"
-                        className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
-                      />
-                    </div>
-                  </div>
-                  <div className="sm:col-span-2">
-                    <label
-                      htmlFor="phone-number"
-                      className="block text-sm/6 font-semibold text-red-600"
-                    >
-                      Max Miles From Home You’ll Travel to an Event?*
-                    </label>
-                    <div className="mt-2.5">
-                      <div className="grid grid-cols-1">
-                        <select
-                          id="country"
-                          name="country"
-                          autoComplete="country-name"
-                          className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:text-sm/6"
-                        >
-                          <option>1 - 10</option>
-                          <option>11 - 50</option>
-                          <option>51 - 100</option>
-                          <option>101 - 500</option>
-                          <option>500 - 1000</option>
-                          <option>1001 - 5000</option>
-                          <option>5001 - 10000</option>
-                          <option>I'll travel anywhere in the Country</option>
-                        </select>
-                        <FaRegArrowAltCircleDown
-                          aria-hidden="true"
-                          className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
-                        />
-                      </div>
-                    </div>
-                  </div>
+          </div>
+          <div className="py-10">
+            <div className="mx-auto max-w-7xl px-6 lg:px-8">
+              <h3 className="mx-auto mt-2 text-balance text-center text-4xl font-primary font-semibold tracking-tight text- sm:text-5xl">
+                Current Sponsors
+              </h3>
 
-                  <div className="sm:col-span-2">
-                    <label
-                      htmlFor="phone-number"
-                      className="block text-sm/6 font-semibold text-gray-900"
-                    >
-                      Phone Number
-                    </label>
-                    <div className="mt-2.5">
-                      <input
-                        id="phone-number"
-                        name="phone-number"
-                        type="tel"
-                        autoComplete="tel"
-                        className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
-                      />
-                    </div>
-                  </div>
+              <div className="mt-10 -mx-6 grid grid-cols-2 gap-0.5 overflow-hidden sm:mx-0 sm:rounded-xl md:grid-cols-3">
+                <div className="bg-saluteTan p-8 sm:p-10">
+                  <img
+                    alt="Transistor"
+                    src="https://tailwindcss.com/plus-assets/img/logos/158x48/transistor-logo-gray-900.svg"
+                    width={158}
+                    height={48}
+                    className="max-h-12 w-full object-contain"
+                  />
                 </div>
-                <div className="mt-8 flex justify-end">
-                  <button className="w-full flex justify-center border-t-2 border-saluteBlue flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteBlue hover:text-white">
-                    Submit
-                    <RiMailSendFill aria-hidden="true" className="size-7" />
-                  </button>
+                <div className="bg-saluteTan p-6 sm:p-10">
+                  <img
+                    alt="Reform"
+                    src="https://tailwindcss.com/plus-assets/img/logos/158x48/reform-logo-gray-900.svg"
+                    width={158}
+                    height={48}
+                    className="max-h-12 w-full object-contain"
+                  />
+                </div>
+                <div className="bg-saluteTan p-6 sm:p-10">
+                  <img
+                    alt="Tuple"
+                    src="https://tailwindcss.com/plus-assets/img/logos/158x48/tuple-logo-gray-900.svg"
+                    width={158}
+                    height={48}
+                    className="max-h-12 w-full object-contain"
+                  />
+                </div>
+                <div className="bg-saluteTan p-6 sm:p-10">
+                  <img
+                    alt="Laravel"
+                    src="https://tailwindcss.com/plus-assets/img/logos/158x48/laravel-logo-gray-900.svg"
+                    width={158}
+                    height={48}
+                    className="max-h-12 w-full object-contain"
+                  />
+                </div>
+                <div className="bg-saluteTan p-6 sm:p-10">
+                  <img
+                    alt="SavvyCal"
+                    src="https://tailwindcss.com/plus-assets/img/logos/158x48/savvycal-logo-gray-900.svg"
+                    width={158}
+                    height={48}
+                    className="max-h-12 w-full object-contain"
+                  />
+                </div>
+                <div className="bg-saluteTan p-6 sm:p-10">
+                  <img
+                    alt="Statamic"
+                    src="https://tailwindcss.com/plus-assets/img/logos/158x48/statamic-logo-gray-900.svg"
+                    width={158}
+                    height={48}
+                    className="max-h-12 w-full object-contain"
+                  />
                 </div>
               </div>
-            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="bg-white py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto grid max-w-2xl grid-cols-1 items-start gap-x-8 gap-y-16 sm:gap-y-24 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+            <div className="lg:pr-4">
+              <div className="relative rounded-2xl px-6 pb-9 sm:px-12 lg:max-w-2xl lg:px-8 lg:pb-8 xl:px-10 xl:pb-10">
+                <img alt="" src={CTA} className=" rounded-2xl object-cover" />
+              </div>
+              <div className="relative rounded-2xl px-6 pb-9 sm:px-12 lg:max-w-2xl lg:px-8 lg:pb-8 xl:px-10 xl:pb-10">
+                <img
+                  alt=""
+                  src={CTA}
+                  className=" rounded-2xl object-cover saturate-0"
+                />
+              </div>
+            </div>
+            <div>
+              <div className="text-base/7 text-gray-700 lg:max-w-lg">
+                <h2 className="text-balance text-saluteBlue text-5xl font-primary font-extrabold uppercase sm:text-5xl">
+                  Salute Across America{" "}
+                  <span className="font-script  text-[1.2em] text-saluteRed">
+                    250
+                  </span>
+                </h2>
+
+                <div className="font-body saluteBlue max-w-xl">
+                  <p className="mt-6">
+                    Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget
+                    risus enim. Mattis mauris semper sed amet vitae sed turpis
+                    id. Id dolor praesent donec est. Odio penatibus risus
+                    viverra tellus varius sit neque erat velit. Faucibus commodo
+                    massa rhoncus, volutpat. Dignissim sed eget risus enim.
+                    Mattis mauris semper sed amet vitae sed turpis id.
+                  </p>
+                  <p className="mt-8">
+                    Et vitae blandit facilisi magna lacus commodo. Vitae sapien
+                    duis odio id et. Id blandit molestie auctor fermentum
+                    dignissim. Lacus diam tincidunt ac cursus in vel. Mauris
+                    varius vulputate et ultrices hac adipiscing egestas. Iaculis
+                    convallis ac tempor et ut. Ac lorem vel integer orci.
+                  </p>
+                  <p className="mt-8">
+                    Et vitae blandit facilisi magna lacus commodo. Vitae sapien
+                    duis odio id et. Id blandit molestie auctor fermentum
+                    dignissim. Lacus diam tincidunt ac cursus in vel. Mauris
+                    varius vulputate et ultrices hac adipiscing egestas. Iaculis
+                    convallis ac tempor et ut. Ac lorem vel integer orci.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -350,19 +338,15 @@ export default function RegisterEvent() {
         </div>
       </div>
 
-      <div className="hidden relative bg-white">
-        <div className="relative h-80 overflow-hidden bg-saluteBlue md:absolute md:left-0 md:h-full md:w-1/3 lg:w-1/2">
-          <img
-            alt=""
-            src="https://www.shutterstock.com/shutterstock/photos/2452273295/display_1500/stock-photo-woman-patriot-with-american-flag-on-the-beach-at-sunset-usa-celebrate-th-of-july-independence-2452273295.jpg"
-            className="size-full object-cover"
-          />
+      <div className="relative bg-white">
+        <div className="relative h-80 overflow-hidden bg-indigo-600 md:absolute md:left-0 md:h-full md:w-1/3 lg:w-1/2">
+          <img alt="" src={CTA} className="size-full object-cover" />
         </div>
         <div className="relative mx-auto max-w-7xl py-24 sm:py-32 lg:px-8 lg:py-40">
           <div className="pl-6 pr-6 md:ml-auto md:w-2/3 md:pl-16 lg:w-1/2  lg:pr-0">
-            <p className="font-primary mt-2 text-4xl font-semibold tracking-tight text-gray-800 sm:text-6xl">
-              Questions?
-            </p>
+            <h3 className="font-primary mt-2 text-4xl font-semibold tracking-tight text-gray-800 sm:text-6xl">
+              More Questions?
+            </h3>
             <p className="mt-6 font-body text-lg/7 text-gray-600">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et,
               egestas tempus tellus etiam sed. Quam a scelerisque amet

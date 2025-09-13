@@ -9,6 +9,9 @@ import {
   DisclosurePanel,
 } from "@headlessui/react";
 import { LuCirclePlus, LuCircleMinus } from "react-icons/lu";
+import Favicon from "../images/favicon.png";
+import OGFB from "../images/og-image.jpg";
+import { Helmet } from "react-helmet";
 
 const faqs = [
   {
@@ -47,25 +50,6 @@ export default function RegisterEvent() {
   //
   //
   //
-  const today = new Date();
-
-  const yyyy = today.getFullYear();
-  const dd = String(today.getDate()).padStart(2, "0");
-  const mm = String(today.getMonth() + 1).padStart(2, "0"); // Months are zero-based
-
-  const formattedDate = `${yyyy}-${mm}-${dd}`;
-  //
-  //
-  const [startDateValue, setStartDateValue] = useState(
-    parseDate(formattedDate)
-  );
-
-  const [startTime, setStartTime] = useState(
-    parseAbsoluteToLocal("2024-04-08T18:45:22Z")
-  );
-
-  console.log(startDateValue);
-  console.log(startTime);
 
   //
   //
@@ -74,6 +58,58 @@ export default function RegisterEvent() {
 
   return (
     <Layout>
+      <Helmet>
+        {/* Primary Meta Tags */}
+        <title>Contact Us || Salute Across America 250</title>
+        <meta name="title" content="Salute Across America 250" />
+        <meta
+          name="description"
+          content="Get ready for a once-in-a-generation celebration—America's 250th anniversary is almost here! Over 365 days, we’ll unite for thousands of events honoring our shared history, diverse stories, and bold future. Join millions of event in commemorating the spirit of a nation 250 years in the making."
+        />
+        <meta name="keywords" content="America, 250, America 250th" />
+        <meta name="author" content="Salute Across America 250" />
+        <meta name="robots" content="index, follow" />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="language" content="en" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://saluteacrossamerica250.com/" />
+        <meta property="og:title" content="Salute Across America 250" />
+        <meta
+          property="og:description"
+          content="Get ready for a once-in-a-generation celebration—America's 250th anniversary is almost here! Over 365 days, we’ll unite for thousands of events honoring our shared history, diverse stories, and bold future. Join millions of event in commemorating the spirit of a nation 250 years in the making."
+        />
+        <meta property="og:image" content={OGFB} />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:url"
+          content="https://saluteacrossamerica250.com/"
+        />
+        <meta name="twitter:title" content="Salute Across America 250" />
+        <meta
+          name="twitter:description"
+          content="Get ready for a once-in-a-generation celebration—America's 250th anniversary is almost here! Over 365 days, we’ll unite for thousands of events honoring our shared history, diverse stories, and bold future. Join millions of event in commemorating the spirit of a nation 250 years in the making."
+        />
+        <meta name="twitter:image" content={Favicon} />
+
+        {/* Favicons */}
+        <link rel="icon" href={Favicon} />
+        <link rel="apple-touch-icon" sizes="180x180" href={Favicon} />
+        <link rel="manifest" href="/site.webmanifest" />
+
+        {/* Canonical Link */}
+        <link rel="canonical" href="https://saluteacrossamerica250.com/" />
+
+        {/* Theme and Mobile */}
+        <meta name="theme-color" content="#ffffff" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=5"
+        />
+      </Helmet>
       <div className="bg-white"></div>
       <div className="divider">
         <div className="bg-gradient-to-r from-saluteRed to-red-700 h-2.5" />
@@ -125,7 +161,7 @@ export default function RegisterEvent() {
                     </div>
                   </dl>
                 </div>
-                <div className="rounded-2xl bg-sky-100/10 p-10">
+                <div className="rounded-2xl bg-saluteRed/30 p-10">
                   <h3 className="text-xl/7 font-body font-semibold text-white">
                     Contact
                   </h3>
@@ -155,9 +191,9 @@ export default function RegisterEvent() {
 
         <div className="relative mx-auto max-w-7xl px-6 lg:pb-24 lg:px-8">
           <div className="mx-auto max-w-4xl">
-            <p className="text-center font-primary mt-2 text-4xl font-semibold tracking-tight text-saluteTan sm:text-6xl">
+            <h2 className="text-center font-primary mt-2 text-4xl font-semibold tracking-tight text-saluteTan sm:text-6xl">
               Frequently Asked Questions
-            </p>
+            </h2>
             <dl className="mt-16 divide-y divide-gray-100/10">
               {faqs.map((faq) => (
                 <Disclosure
@@ -198,9 +234,9 @@ export default function RegisterEvent() {
         </div>
         <div className="relative mx-auto max-w-7xl py-24 sm:py-32 lg:px-8 lg:py-40">
           <div className="pl-6 pr-6 md:ml-auto md:w-2/3 md:pl-16 lg:w-1/2  lg:pr-0">
-            <p className="font-primary mt-2 text-4xl font-semibold tracking-tight text-saluteRed sm:text-6xl">
+            <h3 className="font-primary mt-2 text-4xl font-semibold tracking-tight text-saluteRed sm:text-6xl">
               More Questions?
-            </p>
+            </h3>
             <p className="mt-6 font-body text-lg/7 text-gray-600">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et,
               egestas tempus tellus etiam sed. Quam a scelerisque amet
