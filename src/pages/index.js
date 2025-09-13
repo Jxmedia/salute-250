@@ -19,6 +19,11 @@ import { MdAirplaneTicket } from "react-icons/md";
 import { IoMdNotifications } from "react-icons/io";
 import { GiAmericanFootballHelmet } from "react-icons/gi";
 import { IoCarSportSharp } from "react-icons/io5";
+import HomeHero from "../images/home-hero-bg-alt.jpg";
+import CTA from "../images/girl-cta.jpg";
+import Favicon from "../images/favicon.png";
+import OGFB from "../images/og-image.jpg";
+import { Helmet } from "react-helmet";
 
 const modalShareIcons = [
   {
@@ -122,6 +127,58 @@ export default function HomePage() {
 
   return (
     <Layout>
+      <Helmet>
+        {/* Primary Meta Tags */}
+        <title>Salute Across America 250</title>
+        <meta name="title" content="Salute Across America 250" />
+        <meta
+          name="description"
+          content="Get ready for a once-in-a-generation celebration—America's 250th anniversary is almost here! Over 365 days, we’ll unite for thousands of events honoring our shared history, diverse stories, and bold future. Join millions of event in commemorating the spirit of a nation 250 years in the making."
+        />
+        <meta name="keywords" content="America, 250, America 250th" />
+        <meta name="author" content="Salute Across America 250" />
+        <meta name="robots" content="index, follow" />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="language" content="en" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://saluteacrossamerica250.com/" />
+        <meta property="og:title" content="Salute Across America 250" />
+        <meta
+          property="og:description"
+          content="Get ready for a once-in-a-generation celebration—America's 250th anniversary is almost here! Over 365 days, we’ll unite for thousands of events honoring our shared history, diverse stories, and bold future. Join millions of event in commemorating the spirit of a nation 250 years in the making."
+        />
+        <meta property="og:image" content={OGFB} />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:url"
+          content="https://saluteacrossamerica250.com/"
+        />
+        <meta name="twitter:title" content="Salute Across America 250" />
+        <meta
+          name="twitter:description"
+          content="Get ready for a once-in-a-generation celebration—America's 250th anniversary is almost here! Over 365 days, we’ll unite for thousands of events honoring our shared history, diverse stories, and bold future. Join millions of event in commemorating the spirit of a nation 250 years in the making."
+        />
+        <meta name="twitter:image" content={Favicon} />
+
+        {/* Favicons */}
+        <link rel="icon" href={Favicon} />
+        <link rel="apple-touch-icon" sizes="180x180" href={Favicon} />
+        <link rel="manifest" href="/site.webmanifest" />
+
+        {/* Canonical Link */}
+        <link rel="canonical" href="https://saluteacrossamerica250.com/" />
+
+        {/* Theme and Mobile */}
+        <meta name="theme-color" content="#ffffff" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=5"
+        />
+      </Helmet>
       <Dialog open={open} onClose={setOpen} className="relative z-10">
         <DialogBackdrop
           transition
@@ -244,15 +301,11 @@ export default function HomePage() {
         <div className="relative isolate overflow-hidden">
           <img
             alt=""
-            // src="https://www.shutterstock.com/shutterstock/photos/1067889479/display_1500/stock-photo-american-flag-background-1067889479.jpg"
-            // src="https://www.shutterstock.com/shutterstock/photos/760198318/display_1500/stock-photo-american-flag-background-760198318.jpg"
-            // src="https://www.shutterstock.com/shutterstock/photos/785215165/display_1500/stock-photo-american-flag-background-785215165.jpg"
-            // src="https://www.shutterstock.com/shutterstock/photos/321307532/display_1500/stock-photo-american-flag-on-dark-background-321307532.jpg"
-            src="https://www.shutterstock.com/shutterstock/photos/1010693263/display_1500/stock-photo-closeup-ruffled-american-flag-isolated-on-white-background-1010693263.jpg"
-            className="absolute inset-0 -z-10 size-full object-cover scale-x-[-1]"
+            src={HomeHero}
+            className="absolute inset-0 -z-10 object-cover scale-x-[-1]"
           />
 
-          <div className="absolute inset-0 bg-saluteTan opacity-70 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-saluteTan opacity-60 mix-blend-multiply" />
 
           <div className="relative max-w-7xl px-6 lg:px-8">
             <div className="max-w-3xl py-32 sm:py-40">
@@ -625,11 +678,7 @@ export default function HomePage() {
 
       <div className="relative bg-white">
         <div className="relative h-80 overflow-hidden bg-indigo-600 md:absolute md:left-0 md:h-full md:w-1/3 lg:w-1/2">
-          <img
-            alt=""
-            src="https://www.shutterstock.com/shutterstock/photos/2452273295/display_1500/stock-photo-woman-patriot-with-american-flag-on-the-beach-at-sunset-usa-celebrate-th-of-july-independence-2452273295.jpg"
-            className="size-full object-cover"
-          />
+          <img alt="" src={CTA} className="size-full object-cover" />
         </div>
         <div className="relative mx-auto max-w-7xl py-24 sm:py-32 lg:px-8 lg:py-40">
           <div className="pl-6 pr-6 md:ml-auto md:w-2/3 md:pl-16 lg:w-1/2  lg:pr-0">
