@@ -19,7 +19,6 @@ import {
   CalendarDate,
   Time,
 } from "@internationalized/date";
-
 import { CheckIcon } from "@heroicons/react/20/solid";
 import { RiMailSendFill, RiSchoolFill } from "react-icons/ri";
 import { BsPatchQuestionFill } from "react-icons/bs";
@@ -138,7 +137,7 @@ export default function RegisterEvent() {
   const dd = String(today.getDate()).padStart(2, "0");
   const mm = String(today.getMonth() + 1).padStart(2, "0"); // Months are zero-based
 
-  const formattedDate = `${yyyy}-${dd}-${mm}`;
+  const formattedDate = `${yyyy}-${mm}-${dd}`;
   //
   //
   const [startDateValue, setStartDateValue] = useState(
@@ -653,13 +652,91 @@ export default function RegisterEvent() {
                     <div className="mt-2 sm:col-span-2 sm:mt-0">
                       <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
                         <div className="shrink-0 select-none text-base text-gray-500 sm:text-sm/6">
-                          https://www.
+                          www.
                         </div>
                         <input
                           id="username"
                           name="username"
                           type="text"
                           placeholder="event.com"
+                          className="block min-w-0 grow bg-white py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                    <label
+                      htmlFor="first-name"
+                      className="flex items-center block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
+                    >
+                      <FaFacebookSquare
+                        aria-hidden="true"
+                        className="pr-2 text-saluteRed hover:opacity-80 size-8"
+                      />{" "}
+                      Facebook
+                    </label>
+                    <div className="mt-2 sm:col-span-2 sm:mt-0">
+                      <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
+                        <div className="shrink-0 select-none text-base text-gray-500 sm:text-sm/6">
+                          www.facebook.com/
+                        </div>
+                        <input
+                          id="username"
+                          name="username"
+                          type="text"
+                          placeholder="eventUserName"
+                          className="block min-w-0 grow bg-white py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                    <label
+                      htmlFor="first-name"
+                      className="flex items-center block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
+                    >
+                      <FaInstagram
+                        aria-hidden="true"
+                        className="pr-2 text-saluteRed hover:opacity-80 size-8"
+                      />{" "}
+                      Instagram
+                    </label>
+                    <div className="mt-2 sm:col-span-2 sm:mt-0">
+                      <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
+                        <div className="shrink-0 select-none text-base text-gray-500 sm:text-sm/6">
+                          www.instagram.com/
+                        </div>
+                        <input
+                          id="username"
+                          name="username"
+                          type="text"
+                          placeholder="eventUserName"
+                          className="block min-w-0 grow bg-white py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                    <label
+                      htmlFor="first-name"
+                      className="flex items-center block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
+                    >
+                      <FaXTwitter
+                        aria-hidden="true"
+                        className="pr-2 text-saluteRed hover:opacity-80 size-8"
+                      />{" "}
+                      Twitter/X
+                    </label>
+                    <div className="mt-2 sm:col-span-2 sm:mt-0">
+                      <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
+                        <div className="shrink-0 select-none text-base text-gray-500 sm:text-sm/6">
+                          www.x.com/
+                        </div>
+                        <input
+                          id="username"
+                          name="username"
+                          type="text"
+                          placeholder="eventUserName"
                           className="block min-w-0 grow bg-white py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
                         />
                       </div>
@@ -680,13 +757,13 @@ export default function RegisterEvent() {
                           autoComplete="country-name"
                           className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:text-sm/6"
                         >
-                          <option>0-250</option>
-                          <option>251-1000</option>
-                          <option>1001-2500</option>
-                          <option>2501-5000</option>
-                          <option>5001-10000</option>
-                          <option>10001-25000</option>
-                          <option>25001-50000</option>
+                          <option>0 - 250</option>
+                          <option>251 - 1000</option>
+                          <option>1001 - 2500</option>
+                          <option>2501 - 5000</option>
+                          <option>5001 - 10000</option>
+                          <option>10001 - 25000</option>
+                          <option>25001 - 50000</option>
                           <option>50001+</option>
                         </select>
                         <FaRegArrowAltCircleDown
@@ -795,7 +872,7 @@ export default function RegisterEvent() {
 
             <div className="mt-8 items-center gap-x-6">
               <button className="w-full flex justify-center border-t-2 border-saluteBlue flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteBlue hover:text-white">
-                Submit Event
+                Submit Event for Review
                 <RiMailSendFill aria-hidden="true" className="size-7" />
               </button>
             </div>
