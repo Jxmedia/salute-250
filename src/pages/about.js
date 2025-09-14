@@ -47,7 +47,7 @@ const faqs = [
   },
 ];
 
-export default function RegisterEvent() {
+export default function AboutPage() {
   //
   //
 

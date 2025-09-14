@@ -55,7 +55,7 @@ const event = [
   },
 ];
 
-export default function HomePage(props) {
+export default function EventModal(props) {
   return (
     <Dialog
       open={props.openEvent}
