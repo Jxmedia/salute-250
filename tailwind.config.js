@@ -13,10 +13,10 @@ module.exports = {
     },
     extend: {
       colors: {
-        saluteTan: "#eddaba",
+        saluteTan: "#FAE3C2",
         saluteNavy: "#2a3e47",
-        saluteRed: "#ba2b23",
-        saluteBlue: "#082c5c",
+        saluteRed: "#B2170B",
+        saluteBlue: "#03243A",
       },
     },
   },
