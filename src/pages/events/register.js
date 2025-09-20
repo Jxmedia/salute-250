@@ -138,29 +138,76 @@ export default function RegisterEvent() {
   //
   //
   //
-  const today = new Date();
-
+  const today = new Date("12/12/9999");
   const yyyy = today.getFullYear();
   const dd = String(today.getDate()).padStart(2, "0");
   const mm = String(today.getMonth() + 1).padStart(2, "0"); // Months are zero-based
-
   const formattedDate = `${yyyy}-${mm}-${dd}`;
   //
   //
   const [startDateValue, setStartDateValue] = useState(
     parseDate(formattedDate)
   );
-
+  //
   const [startTime, setStartTime] = useState(
-    parseAbsoluteToLocal("2024-04-08T18:45:22Z")
+    parseAbsoluteToLocal("9999-12-31T23:59:59Z")
   );
+  //
+  //
+  const [endDateValue, setEndDateValue] = useState(parseDate(formattedDate));
+  //
+  const [endTime, setEndTime] = useState(
+    parseAbsoluteToLocal("9999-12-31T23:59:59Z")
+  );
+  //
+  //
+  const [eventData, setEventData] = useState(null);
+  const [saving, setSaving] = useState(false);
+  //
+  //
+  function handleChange(e) {
+    setEventData({
+      ...eventData,
+      [e.target.name]: e.target.value,
+    });
+  }
+  //
+  //
+  function handleStartDate(e) {
+    setEventData({
+      ...eventData,
+      [e.target.name]: e.target.value,
+    });
+  }
+  //
+  const createEntry = async () => {
+    setSaving(true);
+    const payload = {
+      ...eventData,
+      startDate: `${startDateValue.month}/${startDateValue.day}/${startDateValue.year}`,
+      startTime: `${startTime.hour}:${startTime.minute}${startTime.second}`,
+      endDate: `${endDateValue.month}/${endDateValue.day}/${endDateValue.year}`,
+      endTime: `${endTime.hour}:${endTime.minute}${endTime.second}`,
+    };
 
+    let dbResponse = await fetch(
+      "https://salute250-cxbccag3f0dff5b0.eastus2-01.azurewebsites.net/api/createEvent?",
+      {
+        method: "POST",
+        body: JSON.stringify(payload),
+      }
+    );
+    console.log("uoooo");
+    const eventID = await dbResponse.json();
+
+    window.location.href = `../thank-you/?en=${await eventID}`;
+  };
+  //
+  //
+  console.log(eventData);
   console.log(startDateValue);
+  //
   console.log(startTime);
-
-  //
-  //
-
   //
 
   return (
@@ -465,7 +512,15 @@ export default function RegisterEvent() {
               spirit of Salute Across America 250. Once approved, you’ll receive
               confirmation and next steps by email.
             </p>
-            <form className="border-t border-saluteBlue pt-8 font-body">
+            <form
+              method="POST"
+              target="_self"
+              onSubmit={(e) => {
+                e.preventDefault();
+                createEntry();
+              }}
+              className="border-t border-saluteBlue pt-8 font-body"
+            >
               <div className="space-y-12 sm:space-y-16">
                 <div>
                   <h2 className="text-base/7 font-semibold text-gray-900">
@@ -479,7 +534,7 @@ export default function RegisterEvent() {
                   <div className="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:border-t-gray-900/10 sm:pb-0">
                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
-                        htmlFor="username"
+                        htmlFor="name"
                         className="block text-sm/6 font-medium sm:pt-1.5 text-red-600"
                       >
                         Event Name*
@@ -487,9 +542,11 @@ export default function RegisterEvent() {
                       <div className="mt-2 sm:col-span-2 sm:mt-0">
                         <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
                           <input
-                            id="username"
-                            name="username"
+                            id="name"
+                            name="name"
                             type="text"
+                            onChange={handleChange}
+                            required
                             placeholder="SAA 250 BBQ"
                             className="block min-w-0 grow bg-white py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
                           />
@@ -499,7 +556,7 @@ export default function RegisterEvent() {
 
                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
-                        htmlFor="first-name"
+                        htmlFor="start-date"
                         className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
                       >
                         Start Date and Time
@@ -523,7 +580,7 @@ export default function RegisterEvent() {
                     </div>
                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
-                        htmlFor="first-name"
+                        htmlFor="end-date"
                         className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
                       >
                         End Date and Time
@@ -531,15 +588,15 @@ export default function RegisterEvent() {
                       <div className="mt-2 flex gap-x-4 sm:mt-0">
                         <div className="font-body block w-1/2 rounded-md bg-white py-1.5 text-base text-gray-900 tracking-[1px] outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-xs sm:text-sm/6">
                           <DateInput
-                            aria-label="Start Date"
-                            onChange={setStartDateValue}
+                            aria-label="End Date"
+                            onChange={setEndDateValue}
                             placeholderValue={new CalendarDate(1995, 11, 6)}
                           />
                         </div>
                         <div className="font-body block w-1/2 rounded-md bg-white py-1.5 text-base text-gray-900 tracking-[1px] outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-xs sm:text-sm/6">
                           <TimeInput
-                            aria-label="Start Time"
-                            onChange={setStartTime}
+                            aria-label="End Time"
+                            onChange={setEndTime}
                             defaultValue={new Time(12, 0)}
                           />
                         </div>
@@ -548,7 +605,7 @@ export default function RegisterEvent() {
 
                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
-                        htmlFor="country"
+                        htmlFor="event-tier"
                         className="block text-sm/6 font-medium text-red-600 sm:pt-1.5"
                       >
                         Requested Event Tier*
@@ -556,14 +613,19 @@ export default function RegisterEvent() {
                       <div className="mt-2 sm:col-span-2 sm:mt-0">
                         <div className="grid grid-cols-1 sm:max-w-xs">
                           <select
-                            id="country"
-                            name="country"
+                            id="eventTier"
+                            name="eventTier"
                             autoComplete="country-name"
+                            onChange={handleChange}
+                            required
                             className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:text-sm/6"
                           >
-                            <option>Affiliate</option>
-                            <option>Partner</option>
-                            <option>Signature</option>
+                            <option value="" selected disabled hidden>
+                              Select Event Tier Requested
+                            </option>
+                            <option value="Affiliate">Affiliate</option>
+                            <option value="Partner">Partner</option>
+                            <option value="Signature">Signature</option>
                           </select>
                           <FaRegArrowAltCircleDown
                             aria-hidden="true"
@@ -574,7 +636,7 @@ export default function RegisterEvent() {
                     </div>
                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
-                        htmlFor="country"
+                        htmlFor="event-type"
                         className="block text-sm/6 font-medium text-red-600 sm:pt-1.5"
                       >
                         Event Type*
@@ -582,14 +644,33 @@ export default function RegisterEvent() {
                       <div className="mt-2 sm:col-span-2 sm:mt-0">
                         <div className="grid grid-cols-1 sm:max-w-xs">
                           <select
-                            id="country"
-                            name="country"
+                            id="eventType"
+                            name="eventType"
                             autoComplete="country-name"
+                            onChange={handleChange}
+                            required
                             className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:text-sm/6"
                           >
-                            <option>Air Show</option>
-                            <option>Music Festival</option>
-                            <option>Sporting Event</option>
+                            <option value="" selected disabled hidden>
+                              Select Event Type
+                            </option>
+                            <option value="Air Show">Air Show</option>
+                            <option value="Music Festival">
+                              Music Festival
+                            </option>
+                            <option value="Sports">Sporting Event</option>
+                            <option value="Patriotic/Historic">
+                              Patriotic/Historic
+                            </option>
+                            <option value="State/Local">State/Local</option>
+                            <option value="Car/RV/Boat">Car/RV/Boat</option>
+                            <option value="Military/Tribute">
+                              Military/Tribute
+                            </option>
+                            <option value="Educational/STEM">
+                              Educational/STEM
+                            </option>
+                            <option value="Other">Other</option>
                           </select>
                           <FaRegArrowAltCircleDown
                             aria-hidden="true"
@@ -600,7 +681,7 @@ export default function RegisterEvent() {
                     </div>
                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
-                        htmlFor="country"
+                        htmlFor="address"
                         className="block text-sm/6 font-medium text-red-600 sm:pt-1.5"
                       >
                         Event/Venue Address*
@@ -608,9 +689,11 @@ export default function RegisterEvent() {
                       <div className="mt-2 sm:col-span-2 sm:mt-0">
                         <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
                           <input
-                            id="username"
-                            name="username"
+                            id="address"
+                            name="address"
                             type="text"
+                            required
+                            onChange={handleChange}
                             className="block min-w-0 grow bg-white py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
                           />
                         </div>
@@ -618,16 +701,17 @@ export default function RegisterEvent() {
                     </div>
                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
-                        htmlFor="first-name"
+                        htmlFor="venue"
                         className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
                       >
                         Venue name
                       </label>
                       <div className="mt-2 sm:col-span-2 sm:mt-0">
                         <input
-                          id="first-name"
-                          name="first-name"
+                          id="venue"
+                          name="venue"
                           type="text"
+                          onChange={handleChange}
                           autoComplete="given-name"
                           className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-xs sm:text-sm/6"
                         />
@@ -636,16 +720,17 @@ export default function RegisterEvent() {
 
                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
-                        htmlFor="about"
+                        htmlFor="description"
                         className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
                       >
                         Event Description
                       </label>
                       <div className="mt-2 sm:col-span-2 sm:mt-0">
                         <textarea
-                          id="about"
-                          name="about"
+                          id="description"
+                          name="description"
                           rows={3}
+                          onChange={handleChange}
                           className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-2xl sm:text-sm/6"
                           defaultValue={""}
                         />
@@ -657,16 +742,17 @@ export default function RegisterEvent() {
 
                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
-                        htmlFor="about"
+                        htmlFor="qualifiers"
                         className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
                       >
                         Other Qualifiers for Event Tier
                       </label>
                       <div className="mt-2 sm:col-span-2 sm:mt-0">
                         <textarea
-                          id="about"
-                          name="about"
+                          id="qualifiers"
+                          name="qualifiers"
                           rows={3}
+                          onChange={handleChange}
                           className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-2xl sm:text-sm/6"
                           defaultValue={""}
                         />
@@ -680,16 +766,17 @@ export default function RegisterEvent() {
                     </div>
                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
-                        htmlFor="about"
+                        htmlFor="brandIntegrations"
                         className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
                       >
                         Additional Brand Integrations
                       </label>
                       <div className="mt-2 sm:col-span-2 sm:mt-0">
                         <textarea
-                          id="about"
-                          name="about"
+                          id="brandIntegrations"
+                          name="brandIntegrations"
                           rows={3}
+                          onChange={handleChange}
                           className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-2xl sm:text-sm/6"
                           defaultValue={""}
                         />
@@ -705,7 +792,7 @@ export default function RegisterEvent() {
                     </div>
                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
-                        htmlFor="first-name"
+                        htmlFor="website"
                         className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
                       >
                         Event Website
@@ -716,10 +803,11 @@ export default function RegisterEvent() {
                             www.
                           </div>
                           <input
-                            id="username"
-                            name="username"
+                            id="website"
+                            name="website"
                             type="text"
                             placeholder="event.com"
+                            onChange={handleChange}
                             className="block min-w-0 grow bg-white py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
                           />
                         </div>
@@ -727,7 +815,7 @@ export default function RegisterEvent() {
                     </div>
                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
-                        htmlFor="first-name"
+                        htmlFor="facebook"
                         className="flex items-center block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
                       >
                         <FaFacebookSquare
@@ -742,10 +830,11 @@ export default function RegisterEvent() {
                             www.facebook.com/
                           </div>
                           <input
-                            id="username"
-                            name="username"
+                            id="facebook"
+                            name="facebook"
                             type="text"
                             placeholder="eventUserName"
+                            onChange={handleChange}
                             className="block min-w-0 grow bg-white py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
                           />
                         </div>
@@ -753,7 +842,7 @@ export default function RegisterEvent() {
                     </div>
                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
-                        htmlFor="first-name"
+                        htmlFor="instagram"
                         className="flex items-center block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
                       >
                         <FaInstagram
@@ -768,9 +857,10 @@ export default function RegisterEvent() {
                             www.instagram.com/
                           </div>
                           <input
-                            id="username"
-                            name="username"
+                            id="instagram"
+                            name="instagram"
                             type="text"
+                            onChange={handleChange}
                             placeholder="eventUserName"
                             className="block min-w-0 grow bg-white py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
                           />
@@ -779,7 +869,7 @@ export default function RegisterEvent() {
                     </div>
                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
-                        htmlFor="first-name"
+                        htmlFor="x"
                         className="flex items-center block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
                       >
                         <FaXTwitter
@@ -794,10 +884,11 @@ export default function RegisterEvent() {
                             www.x.com/
                           </div>
                           <input
-                            id="username"
-                            name="username"
+                            id="x"
+                            name="x"
                             type="text"
                             placeholder="eventUserName"
+                            onChange={handleChange}
                             className="block min-w-0 grow bg-white py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
                           />
                         </div>
@@ -805,7 +896,7 @@ export default function RegisterEvent() {
                     </div>
                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
-                        htmlFor="country"
+                        htmlFor="attendance"
                         className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
                       >
                         Projected Attendance
@@ -813,19 +904,23 @@ export default function RegisterEvent() {
                       <div className="mt-2 sm:col-span-2 sm:mt-0">
                         <div className="grid grid-cols-1 sm:max-w-xs">
                           <select
-                            id="country"
-                            name="country"
+                            id="attendance"
+                            name="attendance"
+                            onChange={handleChange}
                             autoComplete="country-name"
                             className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:text-sm/6"
                           >
-                            <option>0 - 250</option>
-                            <option>251 - 1000</option>
-                            <option>1001 - 2500</option>
-                            <option>2501 - 5000</option>
-                            <option>5001 - 10000</option>
-                            <option>10001 - 25000</option>
-                            <option>25001 - 50000</option>
-                            <option>50001+</option>
+                            <option value="" selected disabled hidden>
+                              Select Projected Attendance
+                            </option>
+                            <option value="0-250">0 - 250</option>
+                            <option value="251-1000">251 - 1000</option>
+                            <option value="1001-2500">1001 - 2500</option>
+                            <option value="2501-5000">2501 - 5000</option>
+                            <option value="5001-10000">5001 - 10000</option>
+                            <option value="10001-25000">10001 - 25000</option>
+                            <option value="25001-50000">25001 - 50000</option>
+                            <option value="50001+">50001+</option>
                           </select>
                           <FaRegArrowAltCircleDown
                             aria-hidden="true"
@@ -983,8 +1078,14 @@ export default function RegisterEvent() {
               </div>
 
               <div className="mt-8 items-center gap-x-6">
-                <button className="w-full flex justify-center border-t-2 border-saluteBlue flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteBlue hover:text-white">
-                  Submit Event for Review
+                <button
+                  type="submit"
+                  className="w-full flex justify-center border-t-2 border-saluteBlue flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteBlue hover:text-white"
+                >
+                  {saving === false
+                    ? " Submit Event for Review"
+                    : "Submitting..."}
+
                   <RiMailSendFill aria-hidden="true" className="size-7" />
                 </button>
               </div>

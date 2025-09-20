@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import { FaRegArrowAltCircleDown } from "react-icons/fa";
 import { LiaFlagUsaSolid } from "react-icons/lia";
 import { RiMailSendFill } from "react-icons/ri";
+import { MdNotificationsActive } from "react-icons/md";
 import {
   Disclosure,
   DisclosureButton,
@@ -51,6 +52,35 @@ export default function SpectatorsPage() {
   //
   //
 
+  //
+  //
+  const [spectator, setSpectator] = useState(null);
+  const [spectatorID, setSpectatorID] = useState(null);
+  const [saving, setSaving] = useState(false);
+  //
+  //
+  function handleChange(e) {
+    setSpectator({
+      ...spectator,
+      [e.target.name]: e.target.value,
+    });
+  }
+  //
+  //
+  const createSpectator = async () => {
+    setSaving(true);
+    let dbResponse = await fetch(
+      "https://salute250-cxbccag3f0dff5b0.eastus2-01.azurewebsites.net/api/createSpectator?",
+      {
+        method: "POST",
+        body: JSON.stringify(spectator),
+      }
+    );
+    console.log("uoooo");
+    const spectatorID = await dbResponse.json();
+    setSpectatorID(spectatorID);
+    setSaving(false);
+  };
   //
   //
 
@@ -174,139 +204,178 @@ export default function SpectatorsPage() {
                 </p>
               </div>
             </div>
-            <form
-              action="#"
-              method="POST"
-              className="font-body px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48"
-            >
-              <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
-                <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-                  <div>
-                    <label
-                      htmlFor="first-name"
-                      className="block text-sm/6 font-semibold text-red-600"
-                    >
-                      First name*
-                    </label>
-                    <div className="mt-2.5">
-                      <input
-                        id="first-name"
-                        name="first-name"
-                        type="text"
-                        autoComplete="given-name"
-                        className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
-                      />
+
+            {spectatorID === null ? (
+              <form
+                method="POST"
+                target="_self"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  createSpectator();
+                }}
+                className="font-body px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48"
+              >
+                <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
+                  <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+                    <div>
+                      <label
+                        htmlFor="first-name"
+                        className="block text-sm/6 font-semibold text-red-600"
+                      >
+                        First name*
+                      </label>
+                      <div className="mt-2.5">
+                        <input
+                          id="firstName"
+                          name="firstName"
+                          type="text"
+                          onChange={handleChange}
+                          required
+                          autoComplete="given-name"
+                          className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-red-600"
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="last-name"
-                      className="block text-sm/6 font-semibold text-red-600"
-                    >
-                      Last name*
-                    </label>
-                    <div className="mt-2.5">
-                      <input
-                        id="last-name"
-                        name="last-name"
-                        type="text"
-                        autoComplete="family-name"
-                        className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
-                      />
+                    <div>
+                      <label
+                        htmlFor="last-name"
+                        className="block text-sm/6 font-semibold text-red-600"
+                      >
+                        Last name*
+                      </label>
+                      <div className="mt-2.5">
+                        <input
+                          id="lastName"
+                          name="lastName"
+                          type="text"
+                          onChange={handleChange}
+                          required
+                          autoComplete="family-name"
+                          className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-red-600"
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="sm:col-span-1">
-                    <label
-                      htmlFor="email"
-                      className="block text-sm/6 font-semibold text-red-600"
-                    >
-                      Email*
-                    </label>
-                    <div className="mt-2.5">
-                      <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        autoComplete="email"
-                        className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
-                      />
+                    <div className="sm:col-span-1">
+                      <label
+                        htmlFor="email"
+                        className="block text-sm/6 font-semibold text-red-600"
+                      >
+                        Email*
+                      </label>
+                      <div className="mt-2.5">
+                        <input
+                          id="email"
+                          name="email"
+                          type="email"
+                          onChange={handleChange}
+                          required
+                          autoComplete="email"
+                          className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-red-600"
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="sm:col-span-1">
-                    <label
-                      htmlFor="phone-number"
-                      className="block text-sm/6 font-semibold text-red-600"
-                    >
-                      Zip Code*
-                    </label>
-                    <div className="mt-2.5">
-                      <input
-                        id="phone-number"
-                        name="phone-number"
-                        type="tel"
-                        autoComplete="tel"
-                        className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
-                      />
+                    <div className="sm:col-span-1">
+                      <label
+                        htmlFor="zip"
+                        className="block text-sm/6 font-semibold text-red-600"
+                      >
+                        Zip Code*
+                      </label>
+                      <div className="mt-2.5">
+                        <input
+                          id="zip"
+                          name="zip"
+                          type="number"
+                          required
+                          onChange={handleChange}
+                          onWheel={(e) => e.target.blur()}
+                          autoComplete="tel"
+                          className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-red-600"
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="sm:col-span-2">
-                    <label
-                      htmlFor="phone-number"
-                      className="block text-sm/6 font-semibold text-red-600"
-                    >
-                      Max Miles From Home You’ll Travel to an Event?*
-                    </label>
-                    <div className="mt-2.5">
-                      <div className="grid grid-cols-1">
-                        <select
-                          id="country"
-                          name="country"
-                          autoComplete="country-name"
-                          className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:text-sm/6"
-                        >
-                          <option>1 - 10</option>
-                          <option>11 - 50</option>
-                          <option>51 - 100</option>
-                          <option>101 - 500</option>
-                          <option>500 - 1000</option>
-                          <option>1001 - 5000</option>
-                          <option>5001 - 10000</option>
-                          <option>I'll travel anywhere in the Country</option>
-                        </select>
-                        <FaRegArrowAltCircleDown
-                          aria-hidden="true"
-                          className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
+                    <div className="sm:col-span-2">
+                      <label
+                        htmlFor="distance"
+                        className="block text-sm/6 font-semibold text-red-600"
+                      >
+                        Max Miles From Home You’ll Travel to an Event?*
+                      </label>
+                      <div className="mt-2.5">
+                        <div className="grid grid-cols-1">
+                          <select
+                            id="distance"
+                            name="distance"
+                            required
+                            onChange={handleChange}
+                            className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:text-sm/6"
+                          >
+                            <option value="" selected disabled hidden>
+                              Select a distance (in miles)
+                            </option>
+                            <option value="1-10">1 - 10</option>
+                            <option value="11-50">11 - 50</option>
+                            <option value="51-100">51 - 100</option>
+                            <option value="101-500">101 - 500</option>
+                            <option value="500-1000">500 - 1000</option>
+                            <option value="1001-5000">1001 - 5000</option>
+                            <option value="5001-10000">5001 - 10000</option>
+                            <option>I'll travel anywhere in the Country</option>
+                          </select>
+                          <FaRegArrowAltCircleDown
+                            aria-hidden="true"
+                            className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="sm:col-span-2">
+                      <label
+                        htmlFor="phone-number"
+                        className="block text-sm/6 font-semibold text-gray-900"
+                      >
+                        Phone Number
+                      </label>
+                      <div className="mt-2.5">
+                        <input
+                          id="phone"
+                          name="phone"
+                          onChange={handleChange}
+                          type="tel"
+                          autoComplete="tel"
+                          className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-red-600"
                         />
                       </div>
                     </div>
                   </div>
-
-                  <div className="sm:col-span-2">
-                    <label
-                      htmlFor="phone-number"
-                      className="block text-sm/6 font-semibold text-gray-900"
+                  <div className="mt-8 flex justify-end">
+                    <button
+                      type="submit"
+                      className="w-full flex justify-center border-t-2 border-saluteBlue flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteBlue hover:text-white"
                     >
-                      Phone Number
-                    </label>
-                    <div className="mt-2.5">
-                      <input
-                        id="phone-number"
-                        name="phone-number"
-                        type="tel"
-                        autoComplete="tel"
-                        className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
-                      />
-                    </div>
+                      {saving === false ? "Submit" : "Submitting..."}
+                      <RiMailSendFill aria-hidden="true" className="size-7" />
+                    </button>
                   </div>
                 </div>
-                <div className="mt-8 flex justify-end">
-                  <button className="w-full flex justify-center border-t-2 border-saluteBlue flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteBlue hover:text-white">
-                    Submit
-                    <RiMailSendFill aria-hidden="true" className="size-7" />
-                  </button>
+              </form>
+            ) : (
+              <div className="animate-fade font-body pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48">
+                <div className="text-center">
+                  <MdNotificationsActive
+                    aria-hidden="true"
+                    className="pr-2 mx-auto text-green-600 animate-bounce hover:opacity-80 size-32"
+                  />{" "}
+                  <h1 className="mt-4 text-balance text-5xl font-semibold tracking-tight text-saluteBlue sm:text-7xl">
+                    Thank you!
+                  </h1>
+                  <p className="max-w-md mx-auto mt-6 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">
+                    We will notify you by email when there's an event close by!
+                  </p>
                 </div>
               </div>
-            </form>
+            )}
           </div>
         </div>
       </div>

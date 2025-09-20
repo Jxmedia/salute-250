@@ -13,7 +13,6 @@ const navigation = [
 
 const Header = (props) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(true);
-  console.log(props);
   return (
     <header
       className={` ${
