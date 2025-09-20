@@ -233,14 +233,20 @@ export default function ContactPage() {
         </div>
         <div className="relative mx-auto max-w-7xl py-24 sm:py-32 lg:px-8 lg:py-40">
           <div className="pl-6 pr-6 md:ml-auto md:w-2/3 md:pl-16 lg:w-1/2  lg:pr-0">
-            <h3 className="font-primary mt-2 text-4xl font-semibold tracking-tight text-saluteRed sm:text-6xl">
-              More Questions?
+            <h3 className="font-primary mt-2 text-4xl font-semibold tracking-tight text-gray-800 sm:text-6xl">
+              Have Questions About <span className="text-blue-800">SAA</span>{" "}
+              <span className="font-script text-[1.2em] text-saluteRed">
+                250?
+              </span>
             </h3>
             <p className="mt-6 font-body text-lg/7 text-gray-600">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et,
-              egestas tempus tellus etiam sed. Quam a scelerisque amet
-              ullamcorper eu enim et fermentum, augue. Aliquet amet volutpat
-              quisque ut interdum tincidunt duis.
+              Learn what Salute Across America 250 is all about, how you can
+              take part in the celebration, and where to find the latest list of
+              upcoming events. If you represent an event, you’ll also discover
+              how to apply to be part of SAA250, and explore opportunities for
+              sponsors and partners to get involved. All of this can be found on
+              our dedicated Facts & Questions page, giving you quick answers
+              without the need to call.
             </p>
             <div className="isolate bg-white">
               <form action="#" method="POST" className="mx-auto mt-16 max-w-xl">

@@ -9,6 +9,7 @@ import { MdLocationPin } from "react-icons/md";
 import { FaClock } from "react-icons/fa";
 import { MdOutlineEventAvailable } from "react-icons/md";
 import { MdOutlineStar } from "react-icons/md";
+import SpectatorHero from "../images/spectator-hero.jpg";
 import AirShowCover from "../images/event-covers/airshow.png";
 import SportsCover from "../images/event-covers/sports-event.png";
 import MusicCover from "../images/event-covers/musicfest.png";
@@ -180,14 +181,14 @@ export default function HomePage() {
                 </p>
                 <div className="mt-10 flex items-center justify-start gap-x-6">
                   <a
-                    href="#"
+                    href="/events/"
                     className="border-t-2 border-blue-500 flex items-center gap-2 duration-300 ease-in-out bg-blue-800 rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-blue-800"
                   >
                     View All Events{" "}
                     <MdOutlineEvent aria-hidden="true" className="size-7" />
                   </a>
                   <a
-                    href="#"
+                    href="/spectators/"
                     className="border-t-2 border-teal-800 flex items-center gap-2 duration-300 ease-in-out bg-saluteNavy rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteNavy"
                   >
                     Spectators{" "}
@@ -432,35 +433,19 @@ export default function HomePage() {
             <span className="font-script text-[1.2em] text-saluteRed">250</span>
           </p>
 
-          <div className="font-body mt-10 grid max-w-xl grid-cols-1 gap-8 text-lg/7 text-white lg:max-w-none lg:grid-cols-2">
+          <div className="font-body mt-10 grid max-w-xl grid-cols-1 gap-8 text-lg/7 text-white lg:max-w-none">
             <div>
               <p>
-                Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget
-                risus enim. Mattis mauris semper sed amet vitae sed turpis id.
-                Id dolor praesent donec est. Odio penatibus risus viverra tellus
-                varius sit neque erat velit. Faucibus commodo massa rhoncus,
-                volutpat. Dignissim sed eget risus enim. Mattis mauris semper
-                sed amet vitae sed turpis id.
-              </p>
-              <p className="mt-8">
-                Et vitae blandit facilisi magna lacus commodo. Vitae sapien duis
-                odio id et. Id blandit molestie auctor fermentum dignissim.
-                Lacus diam tincidunt ac cursus in vel. Mauris varius vulputate
-                et ultrices hac adipiscing egestas.
-              </p>
-            </div>
-            <div>
-              <p>
-                Erat pellentesque dictumst ligula porttitor risus eget et eget.
-                Ultricies tellus felis id dignissim eget. Est augue maecenas
-                risus nulla ultrices congue nunc tortor.
-              </p>
-              <p className="mt-8">
-                Et vitae blandit facilisi magna lacus commodo. Vitae sapien duis
-                odio id et. Id blandit molestie auctor fermentum dignissim.
-                Lacus diam tincidunt ac cursus in vel. Mauris varius vulputate
-                et ultrices hac adipiscing egestas. Iaculis convallis ac tempor
-                et ut. Ac lorem vel integer orci.
+                <span className="font-bold">Salute Across America 250</span> is
+                a nationwide initiative honoring the 250th anniversary of the
+                United States. Over the course of 2026, communities from coast
+                to coast will come together with events large and small, from
+                air shows and parades to concerts, festivals, and local
+                commemorations. Each event is part of a collective celebration
+                that highlights our shared history, diverse culture, and
+                enduring spirit. Whether you attend a Signature Event or a local
+                community gathering, you are taking part in celebrating
+                America’s 250th birthday.
               </p>
             </div>
           </div>
@@ -534,7 +519,7 @@ export default function HomePage() {
         <div className="relative isolate overflow-hidden">
           <img
             alt=""
-            src="https://www.shutterstock.com/shutterstock/photos/54087580/display_1500/stock-photo-a-sky-diver-carries-an-american-flag-as-he-descends-down-through-the-clouds-54087580.jpg"
+            src={SpectatorHero}
             className="absolute inset-0 -z-10 size-full object-cover"
           />
           <div className="absolute inset-0 bg-gray-600 mix-blend-multiply" />
@@ -575,13 +560,19 @@ export default function HomePage() {
         <div className="relative mx-auto max-w-7xl py-24 sm:py-32 lg:px-8 lg:py-40">
           <div className="pl-6 pr-6 md:ml-auto md:w-2/3 md:pl-16 lg:w-1/2  lg:pr-0">
             <h3 className="font-primary mt-2 text-4xl font-semibold tracking-tight text-gray-800 sm:text-6xl">
-              Questions?
+              Have Questions About <span className="text-blue-800">SAA</span>{" "}
+              <span className="font-script text-[1.2em] text-saluteRed">
+                250?
+              </span>
             </h3>
             <p className="mt-6 font-body text-lg/7 text-gray-600">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et,
-              egestas tempus tellus etiam sed. Quam a scelerisque amet
-              ullamcorper eu enim et fermentum, augue. Aliquet amet volutpat
-              quisque ut interdum tincidunt duis.
+              Learn what Salute Across America 250 is all about, how you can
+              take part in the celebration, and where to find the latest list of
+              upcoming events. If you represent an event, you’ll also discover
+              how to apply to be part of SAA250, and explore opportunities for
+              sponsors and partners to get involved. All of this can be found on
+              our dedicated Facts & Questions page, giving you quick answers
+              without the need to call.
             </p>
             <div className="mt-8 flex">
               <a
