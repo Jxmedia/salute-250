@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
+import { IoMusicalNotesSharp } from "react-icons/io5";
 import EventModal from "../components/EventModal";
 import { LiaFlagUsaSolid } from "react-icons/lia";
 import { MdOutlineEvent } from "react-icons/md";
@@ -10,6 +11,7 @@ import { MdOutlineEventAvailable } from "react-icons/md";
 import { MdOutlineStar } from "react-icons/md";
 import AirShowCover from "../images/event-covers/airshow.png";
 import SportsCover from "../images/event-covers/sports-event.png";
+import MusicCover from "../images/event-covers/musicfest.png";
 import CarCover from "../images/event-covers/carshow.png";
 import { MdAirplaneTicket } from "react-icons/md";
 import { IoMdNotifications } from "react-icons/io";
@@ -70,6 +72,21 @@ export default function HomePage() {
 
     setAllEvents(events);
   };
+  //
+  //
+  function convertTo12Hour(time24) {
+    const [hourStr, minuteStr] = time24.split(":");
+    let hour = parseInt(hourStr, 10);
+    const minute = minuteStr;
+    const ampm = hour >= 12 ? "PM" : "AM";
+
+    hour = hour % 12 || 12; // Convert 0 to 12
+
+    return `${hour}:${minute} ${ampm}`;
+  }
+  //
+  //
+  //
   //
   //
   console.log(allEvents);
@@ -193,7 +210,6 @@ export default function HomePage() {
           <p className="text-center text-blue-800 text-xl font-primary font-extrabold uppercase">
             SAA{" "}
             <span className="font-script text-[1.2em] text-saluteRed">250</span>
-            Tour
           </p>
           <h2 className="mx-auto mt-2 text-balance text-center text-4xl font-primary font-semibold tracking-tight text-gray-800 sm:text-7xl">
             Upcoming{" "}
@@ -233,19 +249,32 @@ export default function HomePage() {
               {allEvents.map((event) => (
                 <li
                   key={event.SAAID}
-                  className="col-span-1 flex flex-col divide-y divide-gray-200 rounded-2xl bg-white ring-1 ring-blue-700/10"
+                  className="col-span-1 flex flex-col divide-y divide-gray-200"
                 >
                   <button
                     onClick={() => setOpenEvent(true)}
                     className="text-left duration-300 ease-in-out hover:bg-saluteTan hover:bg-opacity-30 rounded-2xl group"
                   >
-                    <div className="flex flex-1 flex-col p-6">
+                    <div className="bg-white rounded-t-2xl ring-1 ring-blue-700/10 flex flex-1 flex-col p-6">
                       <div className="relative isolate overflow-hidden rounded-2xl py-12">
-                        {/* <img
-                        alt=""
-                        src={event.imageUrl}
-                        className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
-                      /> */}
+                        {event.eventType === "Air Show" ? (
+                          <img
+                            alt=""
+                            src={AirShowCover}
+                            className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
+                          />
+                        ) : (
+                          <></>
+                        )}
+                        {event.eventType === "Music Festival" ? (
+                          <img
+                            alt=""
+                            src={MusicCover}
+                            className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
+                          />
+                        ) : (
+                          <></>
+                        )}
 
                         <div className="absolute inset-0 bg-black opacity-20 mix-blend-multiply duration-300 ease-in-out group-hover:saturate-0" />
                         <div className="relative flex justify-center duration-300 opacity-90 group-hover:blur-[2px] ease-in-out group-hover:opacity-60">
@@ -267,6 +296,14 @@ export default function HomePage() {
                           )}
                           {event.eventType === "Car Show" ? (
                             <IoCarSportSharp
+                              aria-hidden="true"
+                              className="size-24 text-white"
+                            />
+                          ) : (
+                            <></>
+                          )}
+                          {event.eventType === "Music Festival" ? (
+                            <IoMusicalNotesSharp
                               aria-hidden="true"
                               className="size-24 text-white"
                             />
@@ -295,31 +332,65 @@ export default function HomePage() {
                       </h3>
                       <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
                         <dt className="sr-only">Title</dt>
-                        <dd className="text-sm text-gray-600 flex items-center gap-2">
-                          <FaClock
-                            aria-hidden="true"
-                            className="size-4 text-blue-700"
-                          />{" "}
-                          {event.startDate}, {event.startTime}
-                        </dd>
+                        {event.startDate === "12/12/9999" ? (
+                          <dd className="text-sm text-gray-600 flex items-center gap-2">
+                            <FaClock
+                              aria-hidden="true"
+                              className="size-4 text-blue-700"
+                            />{" "}
+                            <span className="text-gray-400">TBA</span>
+                          </dd>
+                        ) : (
+                          <dd className="text-sm text-gray-600 flex items-center gap-2">
+                            <FaClock
+                              aria-hidden="true"
+                              className="size-4 text-blue-700"
+                            />{" "}
+                            <span className="text-blue-600">
+                              {" "}
+                              {new Date(event.startDate).toLocaleDateString(
+                                "en-US",
+                                {
+                                  year: "numeric",
+                                  month: "short", // 'short' gives you "Dec"
+                                  day: "numeric",
+                                }
+                              )}{" "}
+                            </span>
+                            {"|"} {convertTo12Hour(event.startTime)} -{" "}
+                            {convertTo12Hour(event.endTime)}
+                          </dd>
+                        )}
                       </dl>
 
                       <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
                         <dt className="sr-only">Title</dt>
-                        <dd className="text-sm text-gray-600 flex items-start gap-2">
-                          <MdLocationPin
-                            aria-hidden="true"
-                            className="size-5 text-blue-700"
-                          />{" "}
-                          {event.venue}
-                        </dd>
+                        {event.venue === undefined ? (
+                          <dd className="text-sm text-gray-400 flex items-start gap-2">
+                            <MdLocationPin
+                              aria-hidden="true"
+                              className="size-5 text-blue-700"
+                            />{" "}
+                            Venue TBA
+                          </dd>
+                        ) : (
+                          <>
+                            <dd className="text-sm text-gray-600 flex items-start gap-2">
+                              <MdLocationPin
+                                aria-hidden="true"
+                                className="size-5 text-blue-700"
+                              />{" "}
+                              {event.venue}
+                            </dd>
 
-                        <dd className="pl-7 text-sm text-gray-600 flex items-start gap-2">
-                          {event.address}
-                        </dd>
-                        <dd className="pl-7 text-sm text-gray-600 flex items-start gap-2">
-                          City, Florida 3333
-                        </dd>
+                            <dd className="pl-7 text-sm text-gray-600 flex items-start gap-2">
+                              {event.address}
+                            </dd>
+                            <dd className="pl-7 text-sm text-gray-600 flex items-start gap-2">
+                              City, Florida 3333
+                            </dd>
+                          </>
+                        )}
                       </dl>
                       <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
                         <dt className="sr-only">Title</dt>
@@ -332,20 +403,19 @@ export default function HomePage() {
                         </dd>
                       </dl>
                     </div>
-                    <div>
-                      <div className="duration-300 ease-in-out font-body -mt-px flex divide-x divide-gray-200 bg-blue-700 group-hover:opacity-80 rounded-b-2xl">
-                        <div className="border-t border-gray-200 flex w-0 flex-1">
-                          <a
-                            href={`tel:${event.telephone}`}
-                            className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 border border-transparent py-4 text-sm font-semibold text-white group-hover:underline"
-                          >
-                            <IoTicketSharp
-                              aria-hidden="true"
-                              className="size-5 text-saluteTan"
-                            />
-                            Event Details
-                          </a>
-                        </div>
+
+                    <div className="duration-300 ease-in-out font-body -mt-px flex divide-x divide-gray-200 bg-blue-700 group-hover:opacity-80 rounded-b-2xl">
+                      <div className="border-t border-gray-200 flex w-0 flex-1">
+                        <a
+                          href={`tel:${event.telephone}`}
+                          className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 border border-transparent py-4 text-sm font-semibold text-white group-hover:underline"
+                        >
+                          <IoTicketSharp
+                            aria-hidden="true"
+                            className="size-5 text-saluteTan"
+                          />
+                          Event Details
+                        </a>
                       </div>
                     </div>
                   </button>
@@ -488,7 +558,7 @@ export default function HomePage() {
                     href="/spectators/"
                     className="font-body uppercase font-semibold border-t-2 border-yellow-100 flex items-center gap-2 duration-300 ease-in-out bg-saluteTan rounded-b-xl px-14 py-2.5 text-lg/6 text-saluteBlue hover:underline hover:bg-saluteBlue  hover:text-white"
                   >
-                    Spectators{" "}
+                    Sign Up{" "}
                     <IoMdNotifications aria-hidden="true" className="size-7" />
                   </a>
                 </div>
@@ -518,7 +588,7 @@ export default function HomePage() {
                 href="/contact/"
                 className="font-body uppercase font-semibold border-t-2 border-red-500 flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl px-14 py-2.5 text-lg/6 text-white hover:underline hover:bg-saluteTan hover:text-saluteRed"
               >
-                Contact Us{" "}
+                Learn More{" "}
                 <LiaFlagUsaSolid aria-hidden="true" className="size-7" />
               </a>
             </div>

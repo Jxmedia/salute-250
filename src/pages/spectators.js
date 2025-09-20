@@ -160,7 +160,6 @@ export default function SpectatorsPage() {
             <span className="font-script text-[1.2em] text-saluteBlue">
               250
             </span>
-            Tour
           </p>
           <h1 className="mx-auto mt-2 text-balance text-center text-4xl font-primary font-semibold tracking-tight text-saluteBlue sm:text-7xl">
             Spectators/Visitors{" "}
@@ -443,7 +442,7 @@ export default function SpectatorsPage() {
                 href="/contact/"
                 className="font-body uppercase font-semibold border-t-2 border-red-500 flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl px-14 py-2.5 text-lg/6 text-white hover:underline hover:bg-saluteTan hover:text-saluteRed"
               >
-                Contact Us{" "}
+                Learn More{" "}
                 <LiaFlagUsaSolid aria-hidden="true" className="size-7" />
               </a>
             </div>

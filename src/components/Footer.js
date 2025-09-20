@@ -90,7 +90,8 @@ const Footer = () => {
             />
           </a>
           <p className="mt-8 text-center text-sm/6 text-saluteTan md:order-1 md:mt-0">
-            &copy; {new Date().getFullYear()} SAA 250, Inc. All rights reserved.
+            &copy; {new Date().getFullYear()} National Air, Sea and Space
+            Foundation
           </p>
         </div>
       </div>

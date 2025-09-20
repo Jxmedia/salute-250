@@ -127,7 +127,6 @@ export default function ContactPage() {
         <div className="relative mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
           <p className="text-center text-saluteRed text-xl font-primary font-extrabold uppercase">
             SAA <span className="font-script text-[1.2em] text-white">250</span>
-            Tour
           </p>
           <h1 className="mx-auto mt-2 text-balance text-center text-4xl font-primary font-semibold tracking-tight text-saluteTan sm:text-7xl">
             Get in Touch With Us

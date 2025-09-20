@@ -162,7 +162,6 @@ export default function EventsHome() {
         <div className="relative mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
           <p className="text-center text-saluteTan text-xl font-primary font-extrabold uppercase">
             SAA <span className="font-script text-[1.2em] text-white">250</span>
-            Tour
           </p>
           <h1 className="mx-auto mt-2 text-balance text-center text-4xl font-primary font-semibold tracking-tight text-saluteTan sm:text-7xl">
             All{" "}
@@ -403,13 +402,13 @@ export default function EventsHome() {
               {event.map((event) => (
                 <li
                   key={event.email}
-                  className="col-span-1 flex flex-col divide-y divide-gray-200 rounded-2xl bg-white ring-1 ring-blue-700/10"
+                  className="col-span-1 flex flex-col divide-y divide-gray-200 "
                 >
                   <button
                     onClick={() => setOpenEvent(true)}
                     className="text-left duration-300 ease-in-out hover:bg-saluteTan hover:bg-opacity-30 rounded-2xl group"
                   >
-                    <div className="flex flex-1 flex-col p-6">
+                    <div className="rounded-t-2xl bg-white ring-1 ring-blue-700/10 flex flex-1 flex-col p-6">
                       <div className="relative isolate overflow-hidden rounded-2xl py-12">
                         <img
                           alt=""
@@ -570,7 +569,7 @@ export default function EventsHome() {
                 href="../contact/"
                 className="font-body uppercase font-semibold border-t-2 border-red-500 flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl px-14 py-2.5 text-lg/6 text-white hover:underline hover:bg-saluteTan hover:text-saluteRed"
               >
-                Contact Us{" "}
+                Learn More{" "}
                 <LiaFlagUsaSolid aria-hidden="true" className="size-7" />
               </a>
             </div>

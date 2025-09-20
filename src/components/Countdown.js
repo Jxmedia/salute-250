@@ -60,20 +60,25 @@ const Countdown = () => {
           th Anniversary!
         </p>
       ) : (
-        <div className="mt-5 flex justify-center gap-6 text-center divide-x divide-gray-500 font-body">
-          <TimeBlock label="Days" value={timeLeft.days} />
-          <span className="pl-6">
-            {" "}
-            <TimeBlock label="Hrs" value={timeLeft.hours} />
-          </span>
-          <span className="pl-6">
-            {" "}
-            <TimeBlock label="Mins" value={timeLeft.minutes} />
-          </span>
-          <span className="pl-6 text-left">
-            <TimeBlock label="Secs" value={timeLeft.seconds} />
-          </span>
-        </div>
+        <>
+          <p className="text-sm tracking-[2px] font-body font-bold uppercase text-left opacity-60 animate-pulse">
+            Countdown to <span className="text-saluteRed">2026</span>
+          </p>
+          <div className="mt-4 flex justify-center gap-6 text-center divide-x divide-gray-500 font-body">
+            <TimeBlock label="Days" value={timeLeft.days} />
+            <span className="pl-6">
+              {" "}
+              <TimeBlock label="Hrs" value={timeLeft.hours} />
+            </span>
+            <span className="pl-6">
+              {" "}
+              <TimeBlock label="Mins" value={timeLeft.minutes} />
+            </span>
+            <span className="pl-6 text-left">
+              <TimeBlock label="Secs" value={timeLeft.seconds} />
+            </span>
+          </div>
+        </>
       )}
     </div>
   );
