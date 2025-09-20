@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HeaderLogo from "../images/SAA-Badge-Dates.png";
 import {
   Disclosure,
@@ -35,8 +35,29 @@ function classNames(...classes) {
 
 export default function AdminPage() {
   const [isDetails, setisDetails] = useState(false);
+  const [allEvents, setAllEvents] = useState(null);
 
   console.log(isDetails);
+
+  useEffect(() => {
+    getAllEvents();
+  }, []);
+
+  const getAllEvents = async () => {
+    let response = await fetch(
+      "https://salute250-cxbccag3f0dff5b0.eastus2-01.azurewebsites.net/api/pullEvents",
+      {
+        method: "POST",
+      }
+    );
+
+    const events = await response.json();
+
+    setAllEvents(events);
+  };
+  //
+  //
+  console.log(allEvents);
   return (
     <>
       <div className="relative bg-saluteBlue pb-32">
@@ -176,7 +197,11 @@ export default function AdminPage() {
       {isDetails === true ? (
         <Details isDetails={isDetails} setisDetails={setisDetails} />
       ) : (
-        <Dashboard isDetails={isDetails} setisDetails={setisDetails} />
+        <Dashboard
+          allEvents={allEvents}
+          isDetails={isDetails}
+          setisDetails={setisDetails}
+        />
       )}
     </>
   );

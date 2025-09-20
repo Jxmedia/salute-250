@@ -20,6 +20,7 @@ import CTA from "../images/girl-cta.jpg";
 import Favicon from "../images/favicon.png";
 import OGFB from "../images/og-image.jpg";
 import { Helmet } from "react-helmet";
+import Countdown from "../components/Countdown";
 
 const event = [
   {
@@ -51,52 +52,27 @@ const event = [
 export default function HomePage() {
   const [cookieOpen, setcookieOpen] = useState(true);
   const [openEvent, setOpenEvent] = useState(false);
-
-  const targetDate = new Date("January 1, 2026 00:00:00");
-
-  function getTimeLeft() {
-    const now = new Date();
-    const difference = targetDate - now;
-
-    if (difference <= 0) {
-      return {
-        days: 0,
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
-        expired: true,
-      };
-    }
-
-    return {
-      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-      minutes: Math.floor((difference / (1000 * 60)) % 60),
-      seconds: Math.floor((difference / 1000) % 60),
-      expired: false,
-    };
-  }
-
-  const [timeLeft, setTimeLeft] = useState(getTimeLeft());
+  const [allEvents, setAllEvents] = useState(null);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(getTimeLeft());
-    }, 1000);
-
-    return () => clearInterval(timer);
+    getAllEvents();
   }, []);
 
-  function TimeBlock({ label, value }) {
-    return (
-      <div>
-        <div className="text-4xl font-bold font-primary">
-          {String(value).padStart(2, "0")}
-        </div>
-        <div className="mt-2 text-sm">{label}</div>
-      </div>
+  const getAllEvents = async () => {
+    let response = await fetch(
+      "https://salute250-cxbccag3f0dff5b0.eastus2-01.azurewebsites.net/api/pullHomeSignatureEvents",
+      {
+        method: "POST",
+      }
     );
-  }
+
+    const events = await response.json();
+
+    setAllEvents(events);
+  };
+  //
+  //
+  console.log(allEvents);
 
   return (
     <Layout>
@@ -166,32 +142,7 @@ export default function HomePage() {
           <div className="relative max-w-7xl px-6 lg:px-8">
             <div className="max-w-3xl py-32 sm:py-40">
               <div className="hidden sm:mb-8 sm:flex sm:justify-start">
-                <div className="font-primary relative px-3 py-1 text-gray-700 hover:ring-gray-900/20">
-                  {timeLeft.expired ? (
-                    <p className="text-3xl font-primary font-bold uppercase text-left">
-                      Happy{" "}
-                      <span className="font-script  text-[1.2em] text-saluteRed">
-                        250
-                      </span>
-                      th Anniversary!
-                    </p>
-                  ) : (
-                    <div className="mt-5 flex justify-center gap-6 text-center divide-x divide-gray-500 font-body">
-                      <TimeBlock label="Days" value={timeLeft.days} />
-                      <span className="pl-6">
-                        {" "}
-                        <TimeBlock label="Hrs" value={timeLeft.hours} />
-                      </span>
-                      <span className="pl-6">
-                        {" "}
-                        <TimeBlock label="Mins" value={timeLeft.minutes} />
-                      </span>
-                      <span className="pl-6 text-left">
-                        <TimeBlock label="Secs" value={timeLeft.seconds} />
-                      </span>
-                    </div>
-                  )}
-                </div>
+                <Countdown />
               </div>
               <div className="">
                 <h1 className="text-balance text-saluteBlue text-5xl font-primary font-extrabold uppercase sm:text-8xl">
@@ -253,146 +204,155 @@ export default function HomePage() {
           </h2>
           <div className="mt-8 flex items-center justify-center gap-x-6">
             <a
-              href="#"
+              href="/events/"
               className="border-t-2 border-blue-500 flex items-center gap-2 duration-300 ease-in-out bg-blue-800 rounded-b-xl px-10 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-blue-800"
             >
               View All Events{" "}
               <MdOutlineEvent aria-hidden="true" className="size-7" />
             </a>
             <a
-              href="#"
+              href="/events/register/"
               className="border-t-2 border-red-500 flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl px-10 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteNavy"
             >
               Register Your Event{" "}
               <MdOutlineEventAvailable aria-hidden="true" className="size-7" />
             </a>
           </div>
-          <ul
-            role="list"
-            className="py-20 tracking-wide grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
-          >
-            {event.map((event) => (
-              <li
-                key={event.email}
-                className="col-span-1 flex flex-col divide-y divide-gray-200 rounded-2xl bg-white ring-1 ring-blue-700/10"
-              >
-                <button
-                  onClick={() => setOpenEvent(true)}
-                  className="text-left duration-300 ease-in-out hover:bg-saluteTan hover:bg-opacity-30 rounded-2xl group"
+          {allEvents === null ? (
+            <ul
+              role="list"
+              className="py-20 tracking-wide grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
+            >
+              dasda
+            </ul>
+          ) : (
+            <ul
+              role="list"
+              className="py-20 tracking-wide grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
+            >
+              {allEvents.map((event) => (
+                <li
+                  key={event.SAAID}
+                  className="col-span-1 flex flex-col divide-y divide-gray-200 rounded-2xl bg-white ring-1 ring-blue-700/10"
                 >
-                  <div className="flex flex-1 flex-col p-6">
-                    <div className="relative isolate overflow-hidden rounded-2xl py-12">
-                      <img
+                  <button
+                    onClick={() => setOpenEvent(true)}
+                    className="text-left duration-300 ease-in-out hover:bg-saluteTan hover:bg-opacity-30 rounded-2xl group"
+                  >
+                    <div className="flex flex-1 flex-col p-6">
+                      <div className="relative isolate overflow-hidden rounded-2xl py-12">
+                        {/* <img
                         alt=""
                         src={event.imageUrl}
                         className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
-                      />
+                      /> */}
 
-                      <div className="absolute inset-0 bg-black opacity-20 mix-blend-multiply duration-300 ease-in-out group-hover:saturate-0" />
-                      <div className="relative flex justify-center duration-300 opacity-90 group-hover:blur-[2px] ease-in-out group-hover:opacity-60">
-                        {event.eventType === "Air Show" ? (
-                          <MdAirplaneTicket
-                            aria-hidden="true"
-                            className="size-24 text-white"
-                          />
-                        ) : (
-                          <></>
-                        )}
-                        {event.eventType === "Sporting Event" ? (
-                          <GiAmericanFootballHelmet
-                            aria-hidden="true"
-                            className="size-24 text-white"
-                          />
-                        ) : (
-                          <></>
-                        )}
-                        {event.eventType === "Car Show" ? (
-                          <IoCarSportSharp
-                            aria-hidden="true"
-                            className="size-24 text-white"
-                          />
-                        ) : (
-                          <></>
-                        )}
+                        <div className="absolute inset-0 bg-black opacity-20 mix-blend-multiply duration-300 ease-in-out group-hover:saturate-0" />
+                        <div className="relative flex justify-center duration-300 opacity-90 group-hover:blur-[2px] ease-in-out group-hover:opacity-60">
+                          {event.eventType === "Air Show" ? (
+                            <MdAirplaneTicket
+                              aria-hidden="true"
+                              className="size-24 text-white"
+                            />
+                          ) : (
+                            <></>
+                          )}
+                          {event.eventType === "Sporting Event" ? (
+                            <GiAmericanFootballHelmet
+                              aria-hidden="true"
+                              className="size-24 text-white"
+                            />
+                          ) : (
+                            <></>
+                          )}
+                          {event.eventType === "Car Show" ? (
+                            <IoCarSportSharp
+                              aria-hidden="true"
+                              className="size-24 text-white"
+                            />
+                          ) : (
+                            <></>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                    <dd className="mt-4 font-body">
-                      <dt className="sr-only">eventType</dt>
-                      <div className="flex gap-x-2">
-                        <span className="inline-flex gap-x-1 items-center rounded-md bg-red-50 px-4 py-1.5 text-xs font-semibold text-red-700 ring-1 ring-inset ring-red-600/20">
-                          <MdOutlineStar
+                      <dd className="mt-4 font-body">
+                        <dt className="sr-only">eventType</dt>
+                        <div className="flex gap-x-2">
+                          <span className="inline-flex gap-x-1 items-center rounded-md bg-red-50 px-4 py-1.5 text-xs font-semibold text-red-700 ring-1 ring-inset ring-red-600/20">
+                            <MdOutlineStar
+                              aria-hidden="true"
+                              className="size-4"
+                            />
+                            Signature
+                          </span>
+                          <span className="inline-flex items-center rounded-md bg-teal-50 px-5 py-1.5 text-xs font-medium text-teal-700 ring-1 ring-inset ring-teal-600/20">
+                            {event.eventType}
+                          </span>
+                        </div>
+                      </dd>
+                      <h3 className="py-3 text-2xl font-primary font-medium text-gray-700">
+                        {event.name}
+                      </h3>
+                      <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
+                        <dt className="sr-only">Title</dt>
+                        <dd className="text-sm text-gray-600 flex items-center gap-2">
+                          <FaClock
                             aria-hidden="true"
-                            className="size-4"
-                          />
-                          Signature
-                        </span>
-                        <span className="inline-flex items-center rounded-md bg-teal-50 px-5 py-1.5 text-xs font-medium text-teal-700 ring-1 ring-inset ring-teal-600/20">
-                          {event.eventType}
-                        </span>
-                      </div>
-                    </dd>
-                    <h3 className="py-3 text-2xl font-primary font-medium text-gray-700">
-                      {event.name}
-                    </h3>
-                    <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
-                      <dt className="sr-only">Title</dt>
-                      <dd className="text-sm text-gray-600 flex items-center gap-2">
-                        <FaClock
-                          aria-hidden="true"
-                          className="size-4 text-blue-700"
-                        />{" "}
-                        Jan 20, 2026, 11:30AM - 7:00PM ET
-                      </dd>
-                    </dl>
+                            className="size-4 text-blue-700"
+                          />{" "}
+                          {event.startDate}, {event.startTime}
+                        </dd>
+                      </dl>
 
-                    <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
-                      <dt className="sr-only">Title</dt>
-                      <dd className="text-sm text-gray-600 flex items-start gap-2">
-                        <MdLocationPin
-                          aria-hidden="true"
-                          className="size-5 text-blue-700"
-                        />{" "}
-                        {event.location}
-                      </dd>
+                      <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
+                        <dt className="sr-only">Title</dt>
+                        <dd className="text-sm text-gray-600 flex items-start gap-2">
+                          <MdLocationPin
+                            aria-hidden="true"
+                            className="size-5 text-blue-700"
+                          />{" "}
+                          {event.venue}
+                        </dd>
 
-                      <dd className="pl-7 text-sm text-gray-600 flex items-start gap-2">
-                        Street Address
-                      </dd>
-                      <dd className="pl-7 text-sm text-gray-600 flex items-start gap-2">
-                        City, Florida 3333
-                      </dd>
-                    </dl>
-                    <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
-                      <dt className="sr-only">Title</dt>
-                      <dd className="text-sm text-gray-600 flex items-start gap-2">
-                        <IoTicketSharp
-                          aria-hidden="true"
-                          className="size-5 text-blue-700"
-                        />{" "}
-                        Free
-                      </dd>
-                    </dl>
-                  </div>
-                  <div>
-                    <div className="duration-300 ease-in-out font-body -mt-px flex divide-x divide-gray-200 bg-blue-700 group-hover:opacity-80 rounded-b-2xl">
-                      <div className="border-t border-gray-200 flex w-0 flex-1">
-                        <a
-                          href={`tel:${event.telephone}`}
-                          className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 border border-transparent py-4 text-sm font-semibold text-white group-hover:underline"
-                        >
+                        <dd className="pl-7 text-sm text-gray-600 flex items-start gap-2">
+                          {event.address}
+                        </dd>
+                        <dd className="pl-7 text-sm text-gray-600 flex items-start gap-2">
+                          City, Florida 3333
+                        </dd>
+                      </dl>
+                      <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
+                        <dt className="sr-only">Title</dt>
+                        <dd className="text-sm text-gray-600 flex items-start gap-2">
                           <IoTicketSharp
                             aria-hidden="true"
-                            className="size-5 text-saluteTan"
-                          />
-                          Event Details
-                        </a>
+                            className="size-5 text-blue-700"
+                          />{" "}
+                          Free
+                        </dd>
+                      </dl>
+                    </div>
+                    <div>
+                      <div className="duration-300 ease-in-out font-body -mt-px flex divide-x divide-gray-200 bg-blue-700 group-hover:opacity-80 rounded-b-2xl">
+                        <div className="border-t border-gray-200 flex w-0 flex-1">
+                          <a
+                            href={`tel:${event.telephone}`}
+                            className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 border border-transparent py-4 text-sm font-semibold text-white group-hover:underline"
+                          >
+                            <IoTicketSharp
+                              aria-hidden="true"
+                              className="size-5 text-saluteTan"
+                            />
+                            Event Details
+                          </a>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </button>
-              </li>
-            ))}
-          </ul>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
       <div className="bg-saluteBlue py-24">
@@ -555,7 +515,7 @@ export default function HomePage() {
             </p>
             <div className="mt-8 flex">
               <a
-                href="#"
+                href="/contact/"
                 className="font-body uppercase font-semibold border-t-2 border-red-500 flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl px-14 py-2.5 text-lg/6 text-white hover:underline hover:bg-saluteTan hover:text-saluteRed"
               >
                 Contact Us{" "}

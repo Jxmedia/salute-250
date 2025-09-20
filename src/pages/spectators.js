@@ -440,7 +440,7 @@ export default function SpectatorsPage() {
             </p>
             <div className="mt-8 flex">
               <a
-                href="#"
+                href="/contact/"
                 className="font-body uppercase font-semibold border-t-2 border-red-500 flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl px-14 py-2.5 text-lg/6 text-white hover:underline hover:bg-saluteTan hover:text-saluteRed"
               >
                 Contact Us{" "}

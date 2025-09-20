@@ -6,36 +6,6 @@ import { MdAirplaneTicket } from "react-icons/md";
 import { GiAmericanFootballHelmet } from "react-icons/gi";
 import { IoCarSportSharp } from "react-icons/io5";
 
-const events = [
-  {
-    name: "Tampa Bay Air Show",
-    startDate: "01/23/26",
-    submittedDate: "01/23/25",
-    address: "12345 Happy Lane, Tampa FL",
-    type: "Air Show",
-    tier: "Signature",
-    approved: false,
-  },
-  {
-    name: "Orlando Car Show",
-    startDate: "01/23/26",
-    submittedDate: "01/22/25",
-    address: "12345 Sad Lane, Orlando FL",
-    type: "Car Show",
-    tier: "Partner",
-    approved: true,
-  },
-  {
-    name: "Orlando Car Show",
-    startDate: "04/10/26",
-    submittedDate: "01/22/25",
-    address: "4953 Storm Drive, Jasper AL",
-    type: "Sporting Event",
-    tier: "Affiliate",
-    approved: true,
-  },
-];
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -98,168 +68,176 @@ export default function Dashboard(props) {
                             </th>
                           </tr>
                         </thead>
-                        <tbody>
-                          {events.map((event, eventIdx) => (
-                            <tr key={event.name}>
-                              <td
-                                className={classNames(
-                                  eventIdx !== events.length - 1
-                                    ? "border-b border-gray-200"
-                                    : "",
-                                  "whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-blue-600 hover:opacity-70 sm:pl-6 lg:pl-8"
-                                )}
-                              >
-                                <button
-                                  onClick={() => props.setisDetails(true)}
-                                  className="underline"
+                        {props.allEvents === null ? (
+                          <tbody>
+                            <td className="pl-4 font-body h-4 w-56 rounded bg-gray-200 animate-pulse">
+                              Loading
+                            </td>
+                          </tbody>
+                        ) : (
+                          <tbody>
+                            {props.allEvents.map((event, eventIdx) => (
+                              <tr key={event.name}>
+                                <td
+                                  className={classNames(
+                                    eventIdx !== props.allEvents.length - 1
+                                      ? "border-b border-gray-200"
+                                      : "",
+                                    "whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-blue-600 hover:opacity-70 sm:pl-6 lg:pl-8"
+                                  )}
                                 >
-                                  {event.name}
-                                </button>
-                              </td>
-                              <td
-                                className={classNames(
-                                  eventIdx !== events.length - 1
-                                    ? "border-b border-gray-200"
-                                    : "",
-                                  "hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 sm:table-cell"
-                                )}
-                              >
-                                {event.submittedDate}
-                              </td>
-                              <td
-                                className={classNames(
-                                  eventIdx !== events.length - 1
-                                    ? "border-b border-gray-200"
-                                    : "",
-                                  "hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 sm:table-cell"
-                                )}
-                              >
-                                {event.startDate}
-                              </td>
-                              <td
-                                className={classNames(
-                                  eventIdx !== events.length - 1
-                                    ? "border-b border-gray-200"
-                                    : "",
-                                  "hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 lg:table-cell"
-                                )}
-                              >
-                                {event.address}
-                              </td>
-                              <td
-                                className={classNames(
-                                  eventIdx !== events.length - 1
-                                    ? "border-b border-gray-200"
-                                    : "",
-                                  "whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                                )}
-                              >
-                                {event.tier === "Signature" ? (
-                                  <span className="inline-flex gap-x-1 items-center rounded-md bg-red-50 px-4 py-1.5 text-xs font-semibold text-red-700 ring-1 ring-inset ring-red-600/20">
-                                    <MdOutlineStar
-                                      aria-hidden="true"
-                                      className="size-4"
-                                    />
+                                  <button
+                                    onClick={() => props.setisDetails(true)}
+                                    className="underline"
+                                  >
+                                    {event.name}
+                                  </button>
+                                </td>
+                                <td
+                                  className={classNames(
+                                    eventIdx !== props.allEvents.length - 1
+                                      ? "border-b border-gray-200"
+                                      : "",
+                                    "hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 sm:table-cell"
+                                  )}
+                                >
+                                  {event.created}
+                                </td>
+                                <td
+                                  className={classNames(
+                                    eventIdx !== props.allEvents.length - 1
+                                      ? "border-b border-gray-200"
+                                      : "",
+                                    "hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 sm:table-cell"
+                                  )}
+                                >
+                                  {event.startDate}
+                                </td>
+                                <td
+                                  className={classNames(
+                                    eventIdx !== props.allEvents.length - 1
+                                      ? "border-b border-gray-200"
+                                      : "",
+                                    "hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 lg:table-cell"
+                                  )}
+                                >
+                                  {event.address}
+                                </td>
+                                <td
+                                  className={classNames(
+                                    eventIdx !== props.allEvents.length - 1
+                                      ? "border-b border-gray-200"
+                                      : "",
+                                    "whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                                  )}
+                                >
+                                  {event.eventTier === "Signature" ? (
+                                    <span className="inline-flex gap-x-1 items-center rounded-md bg-red-50 px-4 py-1.5 text-xs font-semibold text-red-700 ring-1 ring-inset ring-red-600/20">
+                                      <MdOutlineStar
+                                        aria-hidden="true"
+                                        className="size-4"
+                                      />
 
-                                    {event.tier}
-                                  </span>
-                                ) : (
-                                  <></>
-                                )}
-                                {event.tier === "Partner" ? (
-                                  <span className="inline-flex gap-x-1 items-center rounded-md bg-orange-50 px-4 py-1.5 text-xs font-semibold text-orange-700 ring-1 ring-inset ring-orange-600/20">
-                                    <MdStarBorder
+                                      {event.eventTier}
+                                    </span>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  {event.eventTier === "Partner" ? (
+                                    <span className="inline-flex gap-x-1 items-center rounded-md bg-orange-50 px-4 py-1.5 text-xs font-semibold text-orange-700 ring-1 ring-inset ring-orange-600/20">
+                                      <MdStarBorder
+                                        aria-hidden="true"
+                                        className="size-4"
+                                      />
+                                      {event.eventTier}
+                                    </span>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  {event.eventTier === "Affiliate" ? (
+                                    <span className="inline-flex gap-x-1 items-center rounded-md bg-indigo-50 px-4 py-1.5 text-xs font-semibold text-indigo-700 ring-1 ring-inset ring-indigo-600/20">
+                                      <FaCircle
+                                        aria-hidden="true"
+                                        className="size-2"
+                                      />
+                                      {event.eventTier}
+                                    </span>
+                                  ) : (
+                                    <></>
+                                  )}
+                                </td>
+                                <td
+                                  className={classNames(
+                                    eventIdx !== props.allEvents.length - 1
+                                      ? "border-b border-gray-200"
+                                      : "",
+                                    "whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                                  )}
+                                >
+                                  {event.eventType === "Air Show" ? (
+                                    <MdAirplaneTicket
                                       aria-hidden="true"
-                                      className="size-4"
+                                      className="size-10 text-saluteBlue"
                                     />
-                                    {event.tier}
-                                  </span>
-                                ) : (
-                                  <></>
-                                )}
-                                {event.tier === "Affiliate" ? (
-                                  <span className="inline-flex gap-x-1 items-center rounded-md bg-indigo-50 px-4 py-1.5 text-xs font-semibold text-indigo-700 ring-1 ring-inset ring-indigo-600/20">
-                                    <FaCircle
+                                  ) : (
+                                    <></>
+                                  )}
+                                  {event.eventType === "Sporting Event" ? (
+                                    <GiAmericanFootballHelmet
                                       aria-hidden="true"
-                                      className="size-2"
+                                      className="size-10 text-saluteBlue"
                                     />
-                                    {event.tier}
-                                  </span>
-                                ) : (
-                                  <></>
-                                )}
-                              </td>
-                              <td
-                                className={classNames(
-                                  eventIdx !== events.length - 1
-                                    ? "border-b border-gray-200"
-                                    : "",
-                                  "whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                                )}
-                              >
-                                {event.type === "Air Show" ? (
-                                  <MdAirplaneTicket
-                                    aria-hidden="true"
-                                    className="size-10 text-saluteBlue"
-                                  />
-                                ) : (
-                                  <></>
-                                )}
-                                {event.type === "Sporting Event" ? (
-                                  <GiAmericanFootballHelmet
-                                    aria-hidden="true"
-                                    className="size-10 text-saluteBlue"
-                                  />
-                                ) : (
-                                  <></>
-                                )}
-                                {event.type === "Car Show" ? (
-                                  <IoCarSportSharp
-                                    aria-hidden="true"
-                                    className="size-10 text-saluteBlue"
-                                  />
-                                ) : (
-                                  <></>
-                                )}
-                              </td>
-                              <td className="border-b pl-3">
-                                {event.approved === false ? (
-                                  <span className="text-xs font-semibold isolate inline-flex rounded-md shadow-sm">
-                                    <button
-                                      type="button"
-                                      disabled
-                                      className="relative inline-flex items-center rounded-l-md bg-amber-200 px-3 py-2 text-amber-900 ring-1 ring-inset ring-amber-400 focus:z-10"
-                                    >
-                                      Pending
-                                    </button>
-                                    <button
-                                      type="button"
-                                      className="relative -ml-px inline-flex items-center rounded-r-md bg-white px-3 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-green-200 hover:text-green-900 hover:ring-green-400 focus:z-10"
-                                    >
-                                      Approved
-                                    </button>
-                                  </span>
-                                ) : (
-                                  <span className="text-xs font-semibold isolate inline-flex rounded-md shadow-sm">
-                                    <button
-                                      type="button"
-                                      className="relative inline-flex items-center rounded-l-md bg-white px-3 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-amber-200 hover:text-amber-900 hover:ring-amber-400 focus:z-10"
-                                    >
-                                      Pending
-                                    </button>
-                                    <button
-                                      type="button"
-                                      disabled
-                                      className="relative -ml-px inline-flex items-center rounded-r-md px-3 py-2  ring-1 ring-inset ring-gray-300 bg-green-200 text-green-900 ring-green-400 focus:z-10"
-                                    >
-                                      Approved
-                                    </button>
-                                  </span>
-                                )}
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  {event.eventType === "Car Show" ? (
+                                    <IoCarSportSharp
+                                      aria-hidden="true"
+                                      className="size-10 text-saluteBlue"
+                                    />
+                                  ) : (
+                                    <></>
+                                  )}
+                                </td>
+                                <td className="border-b pl-3">
+                                  {event.approved === false ? (
+                                    <span className="text-xs font-semibold isolate inline-flex rounded-md shadow-sm">
+                                      <button
+                                        type="button"
+                                        disabled
+                                        className="relative inline-flex items-center rounded-l-md bg-amber-200 px-3 py-2 text-amber-900 ring-1 ring-inset ring-amber-400 focus:z-10"
+                                      >
+                                        Pending
+                                      </button>
+                                      <button
+                                        type="button"
+                                        className="relative -ml-px inline-flex items-center rounded-r-md bg-white px-3 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-green-200 hover:text-green-900 hover:ring-green-400 focus:z-10"
+                                      >
+                                        Approved
+                                      </button>
+                                    </span>
+                                  ) : (
+                                    <span className="text-xs font-semibold isolate inline-flex rounded-md shadow-sm">
+                                      <button
+                                        type="button"
+                                        className="relative inline-flex items-center rounded-l-md bg-white px-3 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-amber-200 hover:text-amber-900 hover:ring-amber-400 focus:z-10"
+                                      >
+                                        Pending
+                                      </button>
+                                      <button
+                                        type="button"
+                                        disabled
+                                        className="relative -ml-px inline-flex items-center rounded-r-md px-3 py-2  ring-1 ring-inset ring-gray-300 bg-green-200 text-green-900 ring-green-400 focus:z-10"
+                                      >
+                                        Approved
+                                      </button>
+                                    </span>
+                                  )}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        )}
                       </table>
                       <nav
                         aria-label="Pagination"
