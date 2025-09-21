@@ -788,16 +788,13 @@ export default function EventsHome() {
                           <div>
                             <div className="duration-300 ease-in-out font-body -mt-px flex divide-x divide-gray-200 bg-blue-700 group-hover:opacity-80 rounded-b-2xl">
                               <div className="border-t border-gray-200 flex w-0 flex-1">
-                                <a
-                                  href={`tel:${event.telephone}`}
-                                  className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 border border-transparent py-4 text-sm font-semibold text-white group-hover:underline"
-                                >
+                                <p className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 border border-transparent py-4 text-sm font-semibold text-white group-hover:underline">
                                   <IoTicketSharp
                                     aria-hidden="true"
                                     className="size-5 text-saluteTan"
                                   />
                                   Event Details
-                                </a>
+                                </p>
                               </div>
                             </div>
                           </div>

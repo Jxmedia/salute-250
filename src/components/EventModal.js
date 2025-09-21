@@ -175,7 +175,10 @@ export default function EventModal(props) {
                         <></>
                       ) : (
                         <a
-                          href={"facebook.com/" + props.event.facebook}
+                          href={
+                            "https://www.facebook.com/" + props.event.facebook
+                          }
+                          target="blank"
                           className="text-saluteTan hover:text-white"
                         >
                           <span className="sr-only">Facebook</span>
@@ -190,8 +193,11 @@ export default function EventModal(props) {
                         <></>
                       ) : (
                         <a
-                          href={"instagram.com/" + props.event.instagram}
+                          href={
+                            "https://www.instagram.com/" + props.event.instagram
+                          }
                           className="text-saluteTan hover:text-white"
+                          target="blank"
                         >
                           <span className="sr-only">Instagram</span>
                           <FaInstagram
@@ -204,8 +210,9 @@ export default function EventModal(props) {
                         <></>
                       ) : (
                         <a
-                          href={"x.com/" + props.event.x}
+                          href={"https://x.com/" + props.event.x}
                           className="text-saluteTan hover:text-white"
+                          target="blank"
                         >
                           <span className="sr-only">X</span>
                           <FaXTwitter
@@ -279,6 +286,18 @@ export default function EventModal(props) {
                     </div>
                   )}
                 </div>
+
+                {props.event.website === undefined ? (
+                  <></>
+                ) : (
+                  <a
+                    href={"https://" + props.event.website}
+                    target="blank"
+                    className="text-center pt-4 flex justify-center border-t text-sm font-body underline tracking-[0.5px] text-blue-500 hover:opacity-70"
+                  >
+                    Event Website
+                  </a>
+                )}
 
                 <div className="flex justify-center mt-5 sm:mt-6 gap-x-2 text-center">
                   <button
