@@ -8,12 +8,23 @@ import { IoTicketSharp } from "react-icons/io5";
 import { MdLocationPin } from "react-icons/md";
 import { FaClock } from "react-icons/fa";
 import { MdOutlineEventAvailable } from "react-icons/md";
+import { MdOutlineFestival } from "react-icons/md";
+import { FaPersonMilitaryRifle } from "react-icons/fa6";
+import { RiSchoolFill } from "react-icons/ri";
+import { BsPatchQuestionFill } from "react-icons/bs";
 import { MdOutlineStar } from "react-icons/md";
 import SpectatorHero from "../images/spectator-hero.jpg";
+///Covers
 import AirShowCover from "../images/event-covers/airshow.png";
 import SportsCover from "../images/event-covers/sports-event.png";
 import MusicCover from "../images/event-covers/musicfest.png";
 import CarCover from "../images/event-covers/carshow.png";
+import LocalCover from "../images/event-covers/local.png";
+import SchoolCover from "../images/event-covers/school.png";
+import MilitaryCover from "../images/event-covers/military.png";
+import PatrioticCover from "../images/event-covers/patriotic.png";
+import OtherCover from "../images/event-covers/other.png";
+///
 import { MdAirplaneTicket } from "react-icons/md";
 import { IoMdNotifications } from "react-icons/io";
 import { GiAmericanFootballHelmet } from "react-icons/gi";
@@ -24,33 +35,6 @@ import Favicon from "../images/favicon.png";
 import OGFB from "../images/og-image.jpg";
 import { Helmet } from "react-helmet";
 import Countdown from "../components/Countdown";
-
-const event = [
-  {
-    name: "Tampa Bay Aviation Show",
-    location: "Raymond James Stadium",
-    eventType: "Air Show",
-    email: "janecooper@example.com",
-    telephone: "+1-202-555-0170",
-    imageUrl: AirShowCover,
-  },
-  {
-    name: "Lightning vs. Avalanche",
-    location: "Lead Security Associate",
-    eventType: "Sporting Event",
-    email: "codyfisher@example.com",
-    telephone: "+1-202-555-0114",
-    imageUrl: SportsCover,
-  },
-  {
-    name: "SEMA Pre Show",
-    location: "Assurance Administrator",
-    email: "estherhoward@example.com",
-    telephone: "+1-202-555-0143",
-    eventType: "Car Show",
-    imageUrl: CarCover,
-  },
-];
 
 export default function HomePage() {
   const [cookieOpen, setcookieOpen] = useState(true);
@@ -238,9 +222,11 @@ export default function HomePage() {
           {allEvents === null ? (
             <ul
               role="list"
-              className="py-20 tracking-wide grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
+              className="pt-20 tracking-wide grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
             >
-              dasda
+              <button className="h-20 w-full rounded-2xl bg-gray-200 animate-pulse"></button>
+              <button className="h-20 w-full rounded-2xl bg-gray-200 animate-pulse"></button>
+              <button className="h-20 w-full rounded-2xl bg-gray-200 animate-pulse"></button>
             </ul>
           ) : (
             <ul
@@ -267,10 +253,73 @@ export default function HomePage() {
                         ) : (
                           <></>
                         )}
+                        {event.eventType === "Sports" ? (
+                          <img
+                            alt=""
+                            src={SportsCover}
+                            className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
+                          />
+                        ) : (
+                          <></>
+                        )}
+                        {event.eventType === "Car/RV/Boat" ? (
+                          <img
+                            alt=""
+                            src={CarCover}
+                            className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
+                          />
+                        ) : (
+                          <></>
+                        )}
+                        {event.eventType === "Patriotic/Historic" ? (
+                          <img
+                            alt=""
+                            src={PatrioticCover}
+                            className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
+                          />
+                        ) : (
+                          <></>
+                        )}
                         {event.eventType === "Music Festival" ? (
                           <img
                             alt=""
                             src={MusicCover}
+                            className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
+                          />
+                        ) : (
+                          <></>
+                        )}
+                        {event.eventType === "State/Local" ? (
+                          <img
+                            alt=""
+                            src={LocalCover}
+                            className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
+                          />
+                        ) : (
+                          <></>
+                        )}
+                        {event.eventType === "Military/Tribute" ? (
+                          <img
+                            alt=""
+                            src={MilitaryCover}
+                            className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
+                          />
+                        ) : (
+                          <></>
+                        )}
+                        {event.eventType === "Educational/STEM" ? (
+                          <img
+                            alt=""
+                            src={SchoolCover}
+                            className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
+                          />
+                        ) : (
+                          <></>
+                        )}
+                        {event.eventType === "Other" ? (
+                          <img
+                            alt=""
+                            src={OtherCover}
                             className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
                           />
                         ) : (
@@ -283,22 +332,25 @@ export default function HomePage() {
                             <MdAirplaneTicket
                               aria-hidden="true"
                               className="size-24 text-white"
+                              title="Air Show"
                             />
                           ) : (
                             <></>
                           )}
-                          {event.eventType === "Sporting Event" ? (
+                          {event.eventType === "Sports" ? (
                             <GiAmericanFootballHelmet
                               aria-hidden="true"
                               className="size-24 text-white"
+                              title="Sporting Event"
                             />
                           ) : (
                             <></>
                           )}
-                          {event.eventType === "Car Show" ? (
+                          {event.eventType === "Car/RV/Boat" ? (
                             <IoCarSportSharp
                               aria-hidden="true"
                               className="size-24 text-white"
+                              title="Car/RV/Boat Show"
                             />
                           ) : (
                             <></>
@@ -307,6 +359,53 @@ export default function HomePage() {
                             <IoMusicalNotesSharp
                               aria-hidden="true"
                               className="size-24 text-white"
+                              title="Music Festival"
+                            />
+                          ) : (
+                            <></>
+                          )}
+
+                          {event.eventType === "Patriotic/Historic" ? (
+                            <LiaFlagUsaSolid
+                              aria-hidden="true"
+                              className="size-24 text-white"
+                              title="Patriotic/Historic Event"
+                            />
+                          ) : (
+                            <></>
+                          )}
+                          {event.eventType === "State/Local" ? (
+                            <MdOutlineFestival
+                              aria-hidden="true"
+                              className="size-24 text-white"
+                              title="State/Local Event"
+                            />
+                          ) : (
+                            <></>
+                          )}
+                          {event.eventType === "Military/Tribute" ? (
+                            <FaPersonMilitaryRifle
+                              aria-hidden="true"
+                              className="size-24 text-white"
+                              title="Military/Tribute Event"
+                            />
+                          ) : (
+                            <></>
+                          )}
+                          {event.eventType === "Educational/STEM" ? (
+                            <RiSchoolFill
+                              aria-hidden="true"
+                              className="size-24 text-white"
+                              title="Educational/STEM Event"
+                            />
+                          ) : (
+                            <></>
+                          )}
+                          {event.eventType === "Other" ? (
+                            <BsPatchQuestionFill
+                              aria-hidden="true"
+                              className="size-24 text-white"
+                              title="Other"
                             />
                           ) : (
                             <></>

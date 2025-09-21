@@ -9,25 +9,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { FaChevronRight } from "react-icons/fa";
 import Dashboard from "../components/admin/Dashboard";
 import Details from "../components/admin/Details";
-
-const user = {
-  name: "Tom Cook",
-  email: "tom@example.com",
-  imageUrl:
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-};
-const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
-  { name: "Reports", href: "#", current: false },
-];
-const userNavigation = [
-  { name: "Your profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
-];
+import { Transition } from "@headlessui/react";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -36,8 +18,9 @@ function classNames(...classes) {
 export default function AdminPage() {
   const [isDetails, setisDetails] = useState(false);
   const [allEvents, setAllEvents] = useState(null);
-
-  console.log(isDetails);
+  const [eventDetailID, setEventDetailID] = useState(null);
+  const [eventName, setEventName] = useState(null);
+  const [showNotification, setShowNotification] = useState(false);
 
   useEffect(() => {
     getAllEvents();
@@ -57,9 +40,84 @@ export default function AdminPage() {
   };
   //
   //
+  const updateStatus = async (id, status) => {
+    let response = await fetch(
+      "https://salute250-cxbccag3f0dff5b0.eastus2-01.azurewebsites.net/api/updateEventStatus",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          eventID: id,
+          isApproved: { approved: status },
+        }),
+      }
+    );
+    setShowNotification(true);
+    setTimeout(function () {
+      setShowNotification(false);
+    }, 2000);
+
+    getAllEvents();
+  };
+  //
+
+  const eventDetails = async (ID) => {
+    console.log(ID);
+    setEventDetailID(ID);
+    setisDetails(true);
+  };
+  //
+  //
+  const returnDash = async (ID) => {
+    setisDetails(false);
+    getAllEvents();
+  };
+  //
+  //
+  //
+
+  //
+  //
+  //
   console.log(allEvents);
   return (
     <>
+      <div
+        aria-live="assertive"
+        className="z-50 font-body pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6"
+      >
+        <div className="flex w-full flex-col items-center space-y-4 sm:items-end">
+          {/* Notification panel, dynamically insert this into the live region when it needs to be displayed */}
+          <Transition show={showNotification}>
+            <div className="pointer-events-auto w-full max-w-sm rounded-lg bg-white shadow-lg outline outline-1 outline-black/5 transition data-[closed]:data-[enter]:translate-y-2 data-[enter]:transform data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-100 data-[enter]:ease-out data-[leave]:ease-in data-[closed]:data-[enter]:sm:translate-x-2 data-[closed]:data-[enter]:sm:translate-y-0">
+              <div className="p-4">
+                <div className="flex items-center">
+                  <div className="flex w-0 flex-1 justify-between">
+                    <p className="w-0 flex-1 text-sm font-medium text-gray-900">
+                      Event Status Updated
+                    </p>
+                    <button
+                      type="button"
+                      className="ml-3 shrink-0 rounded-md bg-white text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
+                    ></button>
+                  </div>
+                  <div className="ml-4 flex shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowNotification(false);
+                      }}
+                      className="inline-flex rounded-md text-gray-400 hover:text-gray-500 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-indigo-600"
+                    >
+                      <span className="sr-only">Close</span>
+                      <XMarkIcon aria-hidden="true" className="size-5" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Transition>
+        </div>
+      </div>
       <div className="relative bg-saluteBlue pb-32">
         <Disclosure as="nav" className="">
           <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -104,71 +162,13 @@ export default function AdminPage() {
             </div>
           </div>
 
-          <DisclosurePanel className="border-b border-white/10 md:hidden">
-            <div className="space-y-1 px-2 py-3 sm:px-3">
-              {navigation.map((item) => (
-                <DisclosureButton
-                  key={item.name}
-                  as="a"
-                  href={item.href}
-                  aria-current={item.current ? "page" : undefined}
-                  className={classNames(
-                    item.current
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-white/5 hover:text-white",
-                    "block rounded-md px-3 py-2 text-base font-medium"
-                  )}
-                >
-                  {item.name}
-                </DisclosureButton>
-              ))}
-            </div>
-            <div className="border-t border-white/10 pb-3 pt-4">
-              <div className="flex items-center px-5">
-                <div className="shrink-0">
-                  <img
-                    alt=""
-                    src={user.imageUrl}
-                    className="size-10 rounded-full outline outline-1 -outline-offset-1 outline-white/10"
-                  />
-                </div>
-                <div className="ml-3">
-                  <div className="text-base/5 font-medium text-white">
-                    {user.name}
-                  </div>
-                  <div className="text-sm font-medium text-gray-400">
-                    {user.email}
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  className="relative ml-auto shrink-0 rounded-full p-1 text-gray-400 hover:text-white focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
-                >
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon aria-hidden="true" className="size-6" />
-                </button>
-              </div>
-              <div className="mt-3 space-y-1 px-2">
-                {userNavigation.map((item) => (
-                  <DisclosureButton
-                    key={item.name}
-                    as="a"
-                    href={item.href}
-                    className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-white/5 hover:text-white"
-                  >
-                    {item.name}
-                  </DisclosureButton>
-                ))}
-              </div>
-            </div>
-          </DisclosurePanel>
+          <DisclosurePanel className="border-b border-white/10 md:hidden"></DisclosurePanel>
         </Disclosure>
         <header className="py-10">
           {isDetails === true ? (
             <div className="flex items-center mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <button
-                onClick={() => setisDetails(false)}
+                onClick={() => returnDash()}
                 className=" text-3xl font-bold font-primary underline hover:text-amber-200 tracking-tight text-white"
               >
                 Event Dashboard{" "}
@@ -177,30 +177,35 @@ export default function AdminPage() {
                 aria-hidden="true"
                 className="inline-flex mx-5 size-5 text-white"
               />{" "}
-              <p className="font-body text-xl text-amber-200">
-                {" "}
-                Tampa Bay Car Show
-              </p>
+              <p className="font-body text-xl text-amber-200"> {eventName}</p>
             </div>
           ) : (
-            <div className="flex items-center mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <button
-                onClick=""
-                className=" text-3xl font-bold font-primary tracking-tight text-white"
-              >
+            <div className=" items-center mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <p className=" text-3xl font-bold font-primary tracking-tight text-white">
                 Event Dashboard
-              </button>
+              </p>
+              <p className="pt-2 block text-xl font-body tracking-tight text-white">
+                Click an event name to view all details.
+              </p>
             </div>
           )}
         </header>
       </div>
       {isDetails === true ? (
-        <Details isDetails={isDetails} setisDetails={setisDetails} />
+        <Details
+          eventDetailID={eventDetailID}
+          isDetails={isDetails}
+          setisDetails={setisDetails}
+          setEventName={setEventName}
+        />
       ) : (
         <Dashboard
           allEvents={allEvents}
           isDetails={isDetails}
+          eventDetails={eventDetails}
+          setEventDetailID={setEventDetailID}
           setisDetails={setisDetails}
+          updateStatus={updateStatus}
         />
       )}
     </>

@@ -185,9 +185,9 @@ export default function RegisterEvent() {
     const payload = {
       ...eventData,
       startDate: `${startDateValue.month}/${startDateValue.day}/${startDateValue.year}`,
-      startTime: `${startTime.hour}:${startTime.minute}${startTime.second}`,
+      startTime: `${startTime.hour}:${startTime.minute}:${startTime.second}`,
       endDate: `${endDateValue.month}/${endDateValue.day}/${endDateValue.year}`,
-      endTime: `${endTime.hour}:${endTime.minute}${endTime.second}`,
+      endTime: `${endTime.hour}:${endTime.minute}:${endTime.second}`,
     };
 
     let dbResponse = await fetch(
