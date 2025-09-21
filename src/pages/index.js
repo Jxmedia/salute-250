@@ -38,7 +38,7 @@ import Countdown from "../components/Countdown";
 
 export default function HomePage() {
   const [cookieOpen, setcookieOpen] = useState(true);
-  const [openEvent, setOpenEvent] = useState(false);
+  const [openEvent, setOpenEvent] = useState(null);
   const [allEvents, setAllEvents] = useState(null);
 
   useEffect(() => {
@@ -75,8 +75,14 @@ export default function HomePage() {
   }
   //
   //
+  const handleOpenEvent = (eventId) => {
+    setOpenEvent(eventId);
+  };
   //
   //
+  const handleCloseEvent = () => {
+    setOpenEvent(null);
+  };
   //
   console.log(allEvents);
 
@@ -134,7 +140,7 @@ export default function HomePage() {
           content="width=device-width, initial-scale=1.0, maximum-scale=5"
         />
       </Helmet>
-      <EventModal openEvent={openEvent} setOpenEvent={setOpenEvent} />
+
       <div className="bg-white">
         <div className="relative isolate overflow-hidden">
           <img
@@ -233,299 +239,311 @@ export default function HomePage() {
               <button className="h-20 w-full rounded-2xl bg-gray-200 animate-pulse"></button>
             </ul>
           ) : (
-            <ul
-              role="list"
-              className="py-20 tracking-wide grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
-            >
-              {allEvents.map((event) => (
-                <li
-                  key={event.SAAID}
-                  className="col-span-1 flex flex-col divide-y divide-gray-200"
-                >
-                  <button
-                    onClick={() => setOpenEvent(true)}
-                    className="text-left duration-300 ease-in-out hover:bg-saluteTan hover:bg-opacity-30 rounded-2xl group"
-                  >
-                    <div className="bg-white rounded-t-2xl ring-1 ring-blue-700/10 flex flex-1 flex-col p-6">
-                      <div className="relative isolate overflow-hidden rounded-2xl py-12">
-                        {event.eventType === "Air Show" ? (
-                          <img
-                            alt=""
-                            src={AirShowCover}
-                            className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
-                          />
-                        ) : (
-                          <></>
-                        )}
-                        {event.eventType === "Sports" ? (
-                          <img
-                            alt=""
-                            src={SportsCover}
-                            className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
-                          />
-                        ) : (
-                          <></>
-                        )}
-                        {event.eventType === "Car/RV/Boat" ? (
-                          <img
-                            alt=""
-                            src={CarCover}
-                            className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
-                          />
-                        ) : (
-                          <></>
-                        )}
-                        {event.eventType === "Patriotic/Historic" ? (
-                          <img
-                            alt=""
-                            src={PatrioticCover}
-                            className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
-                          />
-                        ) : (
-                          <></>
-                        )}
-                        {event.eventType === "Music Festival" ? (
-                          <img
-                            alt=""
-                            src={MusicCover}
-                            className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
-                          />
-                        ) : (
-                          <></>
-                        )}
-                        {event.eventType === "State/Local" ? (
-                          <img
-                            alt=""
-                            src={LocalCover}
-                            className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
-                          />
-                        ) : (
-                          <></>
-                        )}
-                        {event.eventType === "Military/Tribute" ? (
-                          <img
-                            alt=""
-                            src={MilitaryCover}
-                            className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
-                          />
-                        ) : (
-                          <></>
-                        )}
-                        {event.eventType === "Educational/STEM" ? (
-                          <img
-                            alt=""
-                            src={SchoolCover}
-                            className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
-                          />
-                        ) : (
-                          <></>
-                        )}
-                        {event.eventType === "Other" ? (
-                          <img
-                            alt=""
-                            src={OtherCover}
-                            className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
-                          />
-                        ) : (
-                          <></>
-                        )}
+            <>
+              <ul
+                role="list"
+                className="py-20 tracking-wide grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
+              >
+                {allEvents
+                  .sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
+                  .map((event) => (
+                    <li
+                      key={event.SAAID}
+                      className="col-span-1 flex flex-col divide-y divide-gray-200"
+                    >
+                      {openEvent === event.id && (
+                        <EventModal
+                          event={event}
+                          open={openEvent === event.id}
+                          onClose={handleCloseEvent}
+                          convertTo12Hour={convertTo12Hour}
+                        />
+                      )}
+                      <button
+                        onClick={() => handleOpenEvent(event.id)}
+                        className="text-left duration-300 ease-in-out hover:bg-saluteTan hover:bg-opacity-30 rounded-2xl group"
+                      >
+                        <div className="bg-white rounded-t-2xl ring-1 ring-blue-700/10 flex flex-1 flex-col p-6">
+                          <div className="relative isolate overflow-hidden rounded-2xl py-12">
+                            {event.eventType === "Air Show" ? (
+                              <img
+                                alt=""
+                                src={AirShowCover}
+                                className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
+                              />
+                            ) : (
+                              <></>
+                            )}
+                            {event.eventType === "Sports" ? (
+                              <img
+                                alt=""
+                                src={SportsCover}
+                                className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
+                              />
+                            ) : (
+                              <></>
+                            )}
+                            {event.eventType === "Car/RV/Boat" ? (
+                              <img
+                                alt=""
+                                src={CarCover}
+                                className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
+                              />
+                            ) : (
+                              <></>
+                            )}
+                            {event.eventType === "Patriotic/Historic" ? (
+                              <img
+                                alt=""
+                                src={PatrioticCover}
+                                className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
+                              />
+                            ) : (
+                              <></>
+                            )}
+                            {event.eventType === "Music Festival" ? (
+                              <img
+                                alt=""
+                                src={MusicCover}
+                                className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
+                              />
+                            ) : (
+                              <></>
+                            )}
+                            {event.eventType === "State/Local" ? (
+                              <img
+                                alt=""
+                                src={LocalCover}
+                                className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
+                              />
+                            ) : (
+                              <></>
+                            )}
+                            {event.eventType === "Military/Tribute" ? (
+                              <img
+                                alt=""
+                                src={MilitaryCover}
+                                className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
+                              />
+                            ) : (
+                              <></>
+                            )}
+                            {event.eventType === "Educational/STEM" ? (
+                              <img
+                                alt=""
+                                src={SchoolCover}
+                                className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
+                              />
+                            ) : (
+                              <></>
+                            )}
+                            {event.eventType === "Other" ? (
+                              <img
+                                alt=""
+                                src={OtherCover}
+                                className="absolute inset-0 -z-10 size-full object-cover shrink-0 h-48 duration-300 ease-in-out group-hover:saturate-0"
+                              />
+                            ) : (
+                              <></>
+                            )}
 
-                        <div className="absolute inset-0 bg-black opacity-20 mix-blend-multiply duration-300 ease-in-out group-hover:saturate-0" />
-                        <div className="relative flex justify-center duration-300 opacity-90 group-hover:blur-[2px] ease-in-out group-hover:opacity-60">
-                          {event.eventType === "Air Show" ? (
-                            <MdAirplaneTicket
-                              aria-hidden="true"
-                              className="size-24 text-white"
-                              title="Air Show"
-                            />
-                          ) : (
-                            <></>
-                          )}
-                          {event.eventType === "Sports" ? (
-                            <GiAmericanFootballHelmet
-                              aria-hidden="true"
-                              className="size-24 text-white"
-                              title="Sporting Event"
-                            />
-                          ) : (
-                            <></>
-                          )}
-                          {event.eventType === "Car/RV/Boat" ? (
-                            <IoCarSportSharp
-                              aria-hidden="true"
-                              className="size-24 text-white"
-                              title="Car/RV/Boat Show"
-                            />
-                          ) : (
-                            <></>
-                          )}
-                          {event.eventType === "Music Festival" ? (
-                            <IoMusicalNotesSharp
-                              aria-hidden="true"
-                              className="size-24 text-white"
-                              title="Music Festival"
-                            />
-                          ) : (
-                            <></>
-                          )}
+                            <div className="absolute inset-0 bg-black opacity-20 mix-blend-multiply duration-300 ease-in-out group-hover:saturate-0" />
+                            <div className="relative flex justify-center duration-300 opacity-90 group-hover:blur-[2px] ease-in-out group-hover:opacity-60">
+                              {event.eventType === "Air Show" ? (
+                                <MdAirplaneTicket
+                                  aria-hidden="true"
+                                  className="size-24 text-white"
+                                  title="Air Show"
+                                />
+                              ) : (
+                                <></>
+                              )}
+                              {event.eventType === "Sports" ? (
+                                <GiAmericanFootballHelmet
+                                  aria-hidden="true"
+                                  className="size-24 text-white"
+                                  title="Sporting Event"
+                                />
+                              ) : (
+                                <></>
+                              )}
+                              {event.eventType === "Car/RV/Boat" ? (
+                                <IoCarSportSharp
+                                  aria-hidden="true"
+                                  className="size-24 text-white"
+                                  title="Car/RV/Boat Show"
+                                />
+                              ) : (
+                                <></>
+                              )}
+                              {event.eventType === "Music Festival" ? (
+                                <IoMusicalNotesSharp
+                                  aria-hidden="true"
+                                  className="size-24 text-white"
+                                  title="Music Festival"
+                                />
+                              ) : (
+                                <></>
+                              )}
 
-                          {event.eventType === "Patriotic/Historic" ? (
-                            <LiaFlagUsaSolid
-                              aria-hidden="true"
-                              className="size-24 text-white"
-                              title="Patriotic/Historic Event"
-                            />
-                          ) : (
-                            <></>
-                          )}
-                          {event.eventType === "State/Local" ? (
-                            <MdOutlineFestival
-                              aria-hidden="true"
-                              className="size-24 text-white"
-                              title="State/Local Event"
-                            />
-                          ) : (
-                            <></>
-                          )}
-                          {event.eventType === "Military/Tribute" ? (
-                            <FaPersonMilitaryRifle
-                              aria-hidden="true"
-                              className="size-24 text-white"
-                              title="Military/Tribute Event"
-                            />
-                          ) : (
-                            <></>
-                          )}
-                          {event.eventType === "Educational/STEM" ? (
-                            <RiSchoolFill
-                              aria-hidden="true"
-                              className="size-24 text-white"
-                              title="Educational/STEM Event"
-                            />
-                          ) : (
-                            <></>
-                          )}
-                          {event.eventType === "Other" ? (
-                            <BsPatchQuestionFill
-                              aria-hidden="true"
-                              className="size-24 text-white"
-                              title="Other"
-                            />
-                          ) : (
-                            <></>
-                          )}
-                        </div>
-                      </div>
-                      <dd className="mt-4 font-body">
-                        <dt className="sr-only">eventType</dt>
-                        <div className="flex gap-x-2">
-                          <span className="inline-flex gap-x-1 items-center rounded-md bg-red-50 px-4 py-1.5 text-xs font-semibold text-red-700 ring-1 ring-inset ring-red-600/20">
-                            <MdOutlineStar
-                              aria-hidden="true"
-                              className="size-4"
-                            />
-                            Signature
-                          </span>
-                          <span className="inline-flex items-center rounded-md bg-teal-50 px-5 py-1.5 text-xs font-medium text-teal-700 ring-1 ring-inset ring-teal-600/20">
-                            {event.eventType}
-                          </span>
-                        </div>
-                      </dd>
-                      <h3 className="py-3 text-2xl font-primary font-medium text-gray-700">
-                        {event.name}
-                      </h3>
-                      <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
-                        <dt className="sr-only">Title</dt>
-                        {event.startDate === "12/12/9999" ? (
-                          <dd className="text-sm text-gray-600 flex items-center gap-2">
-                            <FaClock
-                              aria-hidden="true"
-                              className="size-4 text-blue-700"
-                            />{" "}
-                            <span className="text-gray-400">TBA</span>
+                              {event.eventType === "Patriotic/Historic" ? (
+                                <LiaFlagUsaSolid
+                                  aria-hidden="true"
+                                  className="size-24 text-white"
+                                  title="Patriotic/Historic Event"
+                                />
+                              ) : (
+                                <></>
+                              )}
+                              {event.eventType === "State/Local" ? (
+                                <MdOutlineFestival
+                                  aria-hidden="true"
+                                  className="size-24 text-white"
+                                  title="State/Local Event"
+                                />
+                              ) : (
+                                <></>
+                              )}
+                              {event.eventType === "Military/Tribute" ? (
+                                <FaPersonMilitaryRifle
+                                  aria-hidden="true"
+                                  className="size-24 text-white"
+                                  title="Military/Tribute Event"
+                                />
+                              ) : (
+                                <></>
+                              )}
+                              {event.eventType === "Educational/STEM" ? (
+                                <RiSchoolFill
+                                  aria-hidden="true"
+                                  className="size-24 text-white"
+                                  title="Educational/STEM Event"
+                                />
+                              ) : (
+                                <></>
+                              )}
+                              {event.eventType === "Other" ? (
+                                <BsPatchQuestionFill
+                                  aria-hidden="true"
+                                  className="size-24 text-white"
+                                  title="Other"
+                                />
+                              ) : (
+                                <></>
+                              )}
+                            </div>
+                          </div>
+                          <dd className="mt-4 font-body">
+                            <dt className="sr-only">eventType</dt>
+                            <div className="flex gap-x-2">
+                              <span className="inline-flex gap-x-1 items-center rounded-md bg-red-50 px-4 py-1.5 text-xs font-semibold text-red-700 ring-1 ring-inset ring-red-600/20">
+                                <MdOutlineStar
+                                  aria-hidden="true"
+                                  className="size-4"
+                                />
+                                Signature
+                              </span>
+                              <span className="inline-flex items-center rounded-md bg-teal-50 px-5 py-1.5 text-xs font-medium text-teal-700 ring-1 ring-inset ring-teal-600/20">
+                                {event.eventType}
+                              </span>
+                            </div>
                           </dd>
-                        ) : (
-                          <dd className="text-sm text-gray-600 flex items-center gap-2">
-                            <FaClock
-                              aria-hidden="true"
-                              className="size-4 text-blue-700"
-                            />{" "}
-                            <span className="text-blue-600">
-                              {" "}
-                              {new Date(event.startDate).toLocaleDateString(
-                                "en-US",
-                                {
-                                  year: "numeric",
-                                  month: "short", // 'short' gives you "Dec"
-                                  day: "numeric",
-                                }
-                              )}{" "}
-                            </span>
-                            {"|"} {convertTo12Hour(event.startTime)} -{" "}
-                            {convertTo12Hour(event.endTime)}
-                          </dd>
-                        )}
-                      </dl>
+                          <h3 className="py-3 text-2xl font-primary font-medium text-gray-700">
+                            {event.name}
+                          </h3>
+                          <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
+                            <dt className="sr-only">Title</dt>
+                            {event.startDate === "12/12/9999" ? (
+                              <dd className="text-sm text-gray-600 flex items-center gap-2">
+                                <FaClock
+                                  aria-hidden="true"
+                                  className="size-4 text-blue-700"
+                                />{" "}
+                                <span className="text-gray-400">TBA</span>
+                              </dd>
+                            ) : (
+                              <dd className="text-sm text-gray-600 flex items-center gap-2">
+                                <FaClock
+                                  aria-hidden="true"
+                                  className="size-4 text-blue-700"
+                                />{" "}
+                                <span className="text-blue-600">
+                                  {" "}
+                                  {new Date(event.startDate).toLocaleDateString(
+                                    "en-US",
+                                    {
+                                      year: "numeric",
+                                      month: "short", // 'short' gives you "Dec"
+                                      day: "numeric",
+                                    }
+                                  )}{" "}
+                                </span>
+                                {"|"} {convertTo12Hour(event.startTime)} -{" "}
+                                {convertTo12Hour(event.endTime)}
+                              </dd>
+                            )}
+                          </dl>
 
-                      <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
-                        <dt className="sr-only">Title</dt>
-                        {event.venue === undefined ? (
-                          <dd className="text-sm text-gray-400 flex items-start gap-2">
-                            <MdLocationPin
-                              aria-hidden="true"
-                              className="size-5 text-blue-700"
-                            />{" "}
-                            Venue TBA
-                          </dd>
-                        ) : (
-                          <>
+                          <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
+                            <dt className="sr-only">Title</dt>
+                            {event.venue === undefined ? (
+                              <dd className="text-sm text-gray-400 flex items-start gap-2">
+                                <MdLocationPin
+                                  aria-hidden="true"
+                                  className="size-5 text-blue-700"
+                                />{" "}
+                                Venue TBA
+                              </dd>
+                            ) : (
+                              <>
+                                <dd className="text-sm text-gray-600 flex items-start gap-2">
+                                  <MdLocationPin
+                                    aria-hidden="true"
+                                    className="size-5 text-blue-700"
+                                  />{" "}
+                                  {event.venue}
+                                </dd>
+
+                                <dd className="pl-7 text-sm text-gray-600 flex items-start gap-2">
+                                  {event.address}
+                                </dd>
+                                <dd className="pl-7 text-sm text-gray-600 flex items-start gap-2">
+                                  City, Florida 3333
+                                </dd>
+                              </>
+                            )}
+                          </dl>
+                          <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
+                            <dt className="sr-only">Title</dt>
                             <dd className="text-sm text-gray-600 flex items-start gap-2">
-                              <MdLocationPin
+                              <IoTicketSharp
                                 aria-hidden="true"
                                 className="size-5 text-blue-700"
                               />{" "}
-                              {event.venue}
+                              Free
                             </dd>
+                          </dl>
+                        </div>
 
-                            <dd className="pl-7 text-sm text-gray-600 flex items-start gap-2">
-                              {event.address}
-                            </dd>
-                            <dd className="pl-7 text-sm text-gray-600 flex items-start gap-2">
-                              City, Florida 3333
-                            </dd>
-                          </>
-                        )}
-                      </dl>
-                      <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
-                        <dt className="sr-only">Title</dt>
-                        <dd className="text-sm text-gray-600 flex items-start gap-2">
-                          <IoTicketSharp
-                            aria-hidden="true"
-                            className="size-5 text-blue-700"
-                          />{" "}
-                          Free
-                        </dd>
-                      </dl>
-                    </div>
-
-                    <div className="duration-300 ease-in-out font-body -mt-px flex divide-x divide-gray-200 bg-blue-700 group-hover:opacity-80 rounded-b-2xl">
-                      <div className="border-t border-gray-200 flex w-0 flex-1">
-                        <a
-                          href={`tel:${event.telephone}`}
-                          className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 border border-transparent py-4 text-sm font-semibold text-white group-hover:underline"
-                        >
-                          <IoTicketSharp
-                            aria-hidden="true"
-                            className="size-5 text-saluteTan"
-                          />
-                          Event Details
-                        </a>
-                      </div>
-                    </div>
-                  </button>
-                </li>
-              ))}
-            </ul>
+                        <div className="duration-300 ease-in-out font-body -mt-px flex divide-x divide-gray-200 bg-blue-700 group-hover:opacity-80 rounded-b-2xl">
+                          <div className="border-t border-gray-200 flex w-0 flex-1">
+                            <a
+                              href={`tel:${event.telephone}`}
+                              className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 border border-transparent py-4 text-sm font-semibold text-white group-hover:underline"
+                            >
+                              <IoTicketSharp
+                                aria-hidden="true"
+                                className="size-5 text-saluteTan"
+                              />
+                              Event Details
+                            </a>
+                          </div>
+                        </div>
+                      </button>
+                    </li>
+                  ))}
+              </ul>
+            </>
           )}
         </div>
       </div>

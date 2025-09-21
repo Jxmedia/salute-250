@@ -188,6 +188,22 @@ export default function Details(props) {
                           </div>
                           <div className="bg-gray-50 px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
                             <dt className="text-sm/6 font-medium text-gray-900">
+                              Event #
+                            </dt>
+                            <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                              {matchedEvent.SAAID}
+                            </dd>
+                          </div>
+                          <div className="bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+                            <dt className="text-sm/6 font-medium text-gray-900">
+                              Contact Email
+                            </dt>
+                            <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                              {matchedEvent.poc}
+                            </dd>
+                          </div>
+                          <div className="bg-gray-50 px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+                            <dt className="text-sm/6 font-medium text-gray-900">
                               Event Type
                             </dt>
                             <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">

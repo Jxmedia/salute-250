@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Layout from "../../components/Layout";
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaRegArrowAltCircleDown } from "react-icons/fa";
@@ -25,6 +25,7 @@ import AnchorLink from "react-anchor-link-smooth-scroll";
 import Favicon from "../../images/favicon.png";
 import OGFB from "../../images/og-image.jpg";
 import { Helmet } from "react-helmet";
+import { LoadScript, Autocomplete } from "@react-google-maps/api";
 
 const eventTiers = [
   {
@@ -188,6 +189,13 @@ export default function RegisterEvent() {
       startTime: `${startTime.hour}:${startTime.minute}:${startTime.second}`,
       endDate: `${endDateValue.month}/${endDateValue.day}/${endDateValue.year}`,
       endTime: `${endTime.hour}:${endTime.minute}:${endTime.second}`,
+      address: address.address,
+      city: address.city,
+      state: address.state,
+      stateAbbr: address.stateAbbr,
+      zip: address.zip,
+      lat: coords.lat,
+      lng: coords.lng,
     };
 
     let dbResponse = await fetch(
@@ -204,8 +212,64 @@ export default function RegisterEvent() {
   };
   //
   //
+  //
+  ///////////////////GOOGLE AUTOCOMPLETE ///////////
+  ///////////////////////////
+  //
+  //
+  const libraries = ["places"];
+  const googleMapsApiKey = "AIzaSyCydl9IQNI9kEhs_--rVWqjRc0B2M9hays";
+  const [address, setAddress] = useState({ city: "", state: "", zip: "" });
+  const [coords, setCoords] = useState(null);
+  const autocompleteRef = useRef(null);
+  //
+  console.log(address);
+  //
+  //
+  //
+  //
+  //
+  ////////////SERVICE ADDRESS /////////
+  //
+  //
+  const handleAddress = async () => {
+    const place = autocompleteRef.current.getPlace();
+    if (!place.geometry) return;
+
+    // ZIP exists — continue using the place
+    const formattedAddress = place.formatted_address;
+    const lat = place.geometry.location.lat();
+    const lng = place.geometry.location.lng();
+
+    console.log(place, "placeeeeeee");
+
+    setAddress({
+      ...address,
+      address: place.formatted_address,
+      city: place.address_components.find((component) =>
+        component.types.includes("locality")
+      ).long_name,
+      state: place.address_components.find((component) =>
+        component.types.includes("administrative_area_level_1")
+      ).long_name,
+      stateAbbr: place.address_components.find((component) =>
+        component.types.includes("administrative_area_level_1")
+      ).short_name,
+      zip: place.address_components.find((component) =>
+        component.types.includes("postal_code")
+      ).long_name,
+    });
+    setCoords({ lat, lng });
+  };
+  //
+  //
+  //
+  //
+  //
+  //
   console.log(eventData);
   console.log(startDateValue);
+  console.log(coords);
   //
   console.log(startTime);
   //
@@ -552,6 +616,26 @@ export default function RegisterEvent() {
                         </div>
                       </div>
                     </div>
+                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                      <label
+                        htmlFor="poc"
+                        className="block text-sm/6 font-medium sm:pt-1.5 text-red-600"
+                      >
+                        Contact Email*
+                      </label>
+                      <div className="mt-2 sm:col-span-2 sm:mt-0">
+                        <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
+                          <input
+                            id="poc"
+                            name="poc"
+                            type="email"
+                            onChange={handleChange}
+                            required
+                            className="block min-w-0 grow bg-white py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
+                          />
+                        </div>
+                      </div>
+                    </div>
 
                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
@@ -686,15 +770,28 @@ export default function RegisterEvent() {
                         Event/Venue Address*
                       </label>
                       <div className="mt-2 sm:col-span-2 sm:mt-0">
-                        <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
-                          <input
-                            id="address"
-                            name="address"
-                            type="text"
-                            required
-                            onChange={handleChange}
-                            className="block min-w-0 grow bg-white py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
-                          />
+                        <div className="rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
+                          <LoadScript
+                            googleMapsApiKey={googleMapsApiKey} // Replace with your key
+                            libraries={libraries}
+                          >
+                            <Autocomplete
+                              onLoad={(ref) => (autocompleteRef.current = ref)}
+                              onPlaceChanged={handleAddress}
+                              options={{
+                                types: ["address"], // ✅ Restrict to addresses only
+                                componentRestrictions: { country: "us" }, // Optional: limit to U.S.
+                              }}
+                            >
+                              <input
+                                type="text"
+                                name="venueAddress"
+                                id="venueAddress"
+                                autoComplete="off"
+                                class="w-full bg-white py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
+                              />
+                            </Autocomplete>
+                          </LoadScript>
                         </div>
                       </div>
                     </div>

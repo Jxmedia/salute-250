@@ -50,9 +50,30 @@ export default function ContactPage() {
   //
   //
   //
+  const [contact, setContact] = useState(null);
+  const [saving, setSaving] = useState(false);
+  //
+  //
+  function handleChange(e) {
+    setContact({
+      ...contact,
+      [e.target.name]: e.target.value,
+    });
+  }
+  //
+  //
+  //
+  const sendContactRequest = async () => {
+    setSaving(true);
 
+    console.log("uoooo");
+
+    setSaving(false);
+  };
   //
   //
+  //
+  console.log(contact);
 
   //
 
@@ -248,40 +269,44 @@ export default function ContactPage() {
               our dedicated Facts & Questions page, giving you quick answers
               without the need to call.
             </p>
-            <div className="isolate bg-white">
+            <div className="font-body isolate bg-white">
               <form action="#" method="POST" className="mx-auto mt-16 max-w-xl">
                 <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                   <div>
                     <label
                       htmlFor="first-name"
-                      className="block text-sm/6 font-semibold text-gray-900"
+                      className="block text-sm/6 font-semibold text-red-600"
                     >
-                      First name
+                      First name*
                     </label>
                     <div className="mt-2.5">
                       <input
                         id="first-name"
                         name="first-name"
                         type="text"
+                        onChange={handleChange}
+                        required
                         autoComplete="given-name"
-                        className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+                        className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-red-600"
                       />
                     </div>
                   </div>
                   <div>
                     <label
                       htmlFor="last-name"
-                      className="block text-sm/6 font-semibold text-gray-900"
+                      className="block text-sm/6 font-semibold text-red-600"
                     >
-                      Last name
+                      Last name*
                     </label>
                     <div className="mt-2.5">
                       <input
                         id="last-name"
                         name="last-name"
                         type="text"
+                        required
+                        onChange={handleChange}
                         autoComplete="family-name"
-                        className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+                        className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-red-600"
                       />
                     </div>
                   </div>
@@ -298,24 +323,25 @@ export default function ContactPage() {
                         name="company"
                         type="text"
                         autoComplete="organization"
-                        className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+                        className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-red-600"
                       />
                     </div>
                   </div>
                   <div className="sm:col-span-2">
                     <label
                       htmlFor="email"
-                      className="block text-sm/6 font-semibold text-gray-900"
+                      className="block text-sm/6 font-semibold text-red-600"
                     >
-                      Email
+                      Email*
                     </label>
                     <div className="mt-2.5">
                       <input
                         id="email"
                         name="email"
                         type="email"
+                        required
                         autoComplete="email"
-                        className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+                        className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-red-600"
                       />
                     </div>
                   </div>
@@ -327,7 +353,7 @@ export default function ContactPage() {
                       Phone number
                     </label>
                     <div className="mt-2.5">
-                      <div className="flex rounded-md bg-white outline outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
+                      <div className="flex rounded-md bg-white outline outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-red-600">
                         <input
                           id="phone-number"
                           name="phone-number"
@@ -350,7 +376,7 @@ export default function ContactPage() {
                         id="message"
                         name="message"
                         rows={4}
-                        className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+                        className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-red-600"
                         defaultValue={""}
                       />
                     </div>
@@ -360,10 +386,10 @@ export default function ContactPage() {
                       <div className="group grid size-5 grid-cols-1">
                         <input
                           defaultChecked
-                          id="comments"
-                          name="comments"
+                          id="privacy"
+                          name="privacy"
                           type="checkbox"
-                          aria-describedby="comments-description"
+                          aria-describedby="privacy"
                           className="col-start-1 row-start-1 appearance-none rounded border border-gray-300 bg-white checked:border-saluteBlue checked:bg-saluteBlue indeterminate:border-saluteBlue indeterminate:bg-saluteBlue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-saluteBlue disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
                         />
                         <svg
