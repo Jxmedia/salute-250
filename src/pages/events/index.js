@@ -124,12 +124,14 @@ export default function EventsHome() {
     console.log(time24);
     const [hourStr, minuteStr] = time24.split(":");
     let hour = parseInt(hourStr, 10);
-    const minute = minuteStr;
+    var minute = minuteStr;
     const ampm = hour >= 12 ? "PM" : "AM";
 
     hour = hour % 12 || 12; // Convert 0 to 12
 
-    console.log(minute);
+    if (minute === "0") {
+      var minute = "00";
+    }
 
     return `${hour}:${minute} ${ampm}`;
   }
@@ -721,20 +723,32 @@ export default function EventsHome() {
 
                         <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
                           <dt className="sr-only">Title</dt>
-                          <dd className="text-sm text-gray-600 flex items-start gap-2">
-                            <MdLocationPin
-                              aria-hidden="true"
-                              className="size-5 text-blue-700"
-                            />{" "}
-                            {event.location}
-                          </dd>
+                          {event.venue === undefined ? (
+                            <dd className="text-sm text-gray-400 flex items-start gap-2">
+                              <MdLocationPin
+                                aria-hidden="true"
+                                className="size-5 text-blue-700"
+                              />{" "}
+                              Venue TBA
+                            </dd>
+                          ) : (
+                            <>
+                              <dd className="text-sm text-gray-600 flex items-start gap-2">
+                                <MdLocationPin
+                                  aria-hidden="true"
+                                  className="size-5 text-blue-700"
+                                />{" "}
+                                {event.venue}
+                              </dd>
 
-                          <dd className="pl-7 text-sm text-gray-600 flex items-start gap-2">
-                            Street Address
-                          </dd>
-                          <dd className="pl-7 text-sm text-gray-600 flex items-start gap-2">
-                            City, Florida 3333
-                          </dd>
+                              <dd className="pl-7 text-sm text-gray-600 flex items-start gap-2">
+                                {event.address}
+                              </dd>
+                              <dd className="pl-7 text-sm text-gray-600 flex items-start gap-2">
+                                City, Florida 3333
+                              </dd>
+                            </>
+                          )}
                         </dl>
                         <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
                           <dt className="sr-only">Title</dt>

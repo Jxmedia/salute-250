@@ -62,10 +62,14 @@ export default function HomePage() {
   function convertTo12Hour(time24) {
     const [hourStr, minuteStr] = time24.split(":");
     let hour = parseInt(hourStr, 10);
-    const minute = minuteStr;
+    var minute = minuteStr;
     const ampm = hour >= 12 ? "PM" : "AM";
 
     hour = hour % 12 || 12; // Convert 0 to 12
+
+    if (minute === "0") {
+      var minute = "00";
+    }
 
     return `${hour}:${minute} ${ampm}`;
   }
