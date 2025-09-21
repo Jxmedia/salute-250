@@ -16,34 +16,35 @@ import { Helmet } from "react-helmet";
 
 const faqs = [
   {
-    question: "What's the best thing about Switzerland?",
+    question: "What is Salute Across America 250?",
     answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      "Salute Across America 250 is a nationwide initiative commemorating the 250th anniversary of the United States in 2026. From coast to coast, communities will host events that honor our shared history, diverse culture, and enduring spirit. From large-scale air shows and concerts to local parades and festivals, each gathering adds to a collective national salute on America’s milestone birthday.",
   },
   {
-    question: "How do you make holy water?",
+    question: "How can I be a part of SAA250?",
     answer:
-      "You boil the hell out of it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam aut tempora vitae odio inventore fuga aliquam nostrum quod porro. Delectus quia facere id sequi expedita natus.",
+      "Everyone is invited to take part in the celebration. You can attend events in your community or travel to one of our Signature Events happening across the country. By joining in person, sharing your experience online, or volunteering locally, you’ll become part of a once-in-a-generation moment that unites millions of Americans in celebration.",
   },
   {
-    question: "What do you call someone with no body and no nose?",
+    question: "How can an event apply to join SAA250?",
     answer:
-      "Nobody knows. Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, voluptas ipsa quia excepturi, quibusdam natus exercitationem sapiente tempore labore voluptatem.",
+      "Events of all sizes are welcome to apply to be part of Salute Across America 250. Through a simple application process, organizers can register their event and be listed on our national calendar. Approved events may be designated as Signature, Partner, or Affiliate events depending on their scope and impact.",
   },
   {
-    question: "Why do you never see elephants hiding in trees?",
+    question:
+      "What is the difference between Signature, Partner, and Affiliate events?",
     answer:
-      "Because they're so good at it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      "Signature Events are large-scale celebrations recognized as anchor gatherings in the SAA250 calendar. Partner Events are major regional or community celebrations that carry national significance while retaining local character. Affiliate Events are local festivals, parades, and gatherings that proudly fly the SAA250 banner and bring the spirit of the anniversary into neighborhoods across America.",
   },
   {
-    question: "Why can't you hear a pterodactyl go to the bathroom?",
+    question: "How can sponsors and partners get involved?",
     answer:
-      "Because the pee is silent. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, quas voluptatibus ex culpa ipsum, aspernatur blanditiis fugiat ullam magnam suscipit deserunt illum natus facilis atque vero consequatur! Quisquam, debitis error.",
+      "SAA250 offers opportunities for organizations, companies, and institutions to align with the nation’s 250th anniversary through sponsorships and partnerships. Support can be tailored to national, regional, or local levels, providing visibility and meaningful engagement with audiences across the country.",
   },
   {
-    question: "Why did the invisible man turn down the job offer?",
+    question: "Where can I find the list of upcoming events?",
     answer:
-      "He couldn't see himself doing it. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet perspiciatis officiis corrupti tenetur. Temporibus ut voluptatibus, perferendis sed unde rerum deserunt eius.",
+      "Our full calendar of events is always available online and continuously updated as new celebrations are added. Visitors can search by date, location, or event type to find opportunities to join the anniversary near them.",
   },
 ];
 
