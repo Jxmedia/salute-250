@@ -168,9 +168,6 @@ export default function EventModal(props) {
                         </span>
                         {"|"} {props.convertTo12Hour(props.event.startTime)} -{" "}
                         {props.convertTo12Hour(props.event.endTime)}
-                        <span className="text-saluteBlue/90 font-medium">
-                          3PM - 7PM
-                        </span>
                       </h4>
                     )}
                     <div className="flex justify-center gap-x-4 mt-3">
