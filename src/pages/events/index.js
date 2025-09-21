@@ -169,6 +169,7 @@ export default function EventsHome() {
         <meta name="robots" content="index, follow" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="language" content="en" />
+        <meta name="format-detection" content="telephone=no" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
