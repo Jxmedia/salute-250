@@ -69,7 +69,7 @@ export default function Details(props) {
   //
   //
   //
-  console.log(matchedEvent);
+
   //
   return (
     <>

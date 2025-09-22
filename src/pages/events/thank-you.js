@@ -24,7 +24,7 @@ export default function AboutPage() {
 
   const pullEvent = async () => {
     var params = new URLSearchParams(window.location.search);
-    console.log("function ran");
+
     let response = await fetch(
       "https://salute250-cxbccag3f0dff5b0.eastus2-01.azurewebsites.net/api/pullEventByID?",
       {
@@ -33,13 +33,12 @@ export default function AboutPage() {
       }
     );
     const foundEvent = await response.json();
-    console.log(foundEvent, "found order");
+
     setfoundEvent(foundEvent);
   };
   //
   //
 
-  console.log(foundEvent);
   //
 
   return (

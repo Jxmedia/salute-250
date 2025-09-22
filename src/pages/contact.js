@@ -67,14 +67,11 @@ export default function ContactPage() {
   const sendContactRequest = async () => {
     setSaving(true);
 
-    console.log("uoooo");
-
     setSaving(false);
   };
   //
   //
   //
-  console.log(contact);
 
   //
 

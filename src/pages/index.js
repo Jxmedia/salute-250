@@ -84,7 +84,6 @@ export default function HomePage() {
     setOpenEvent(null);
   };
   //
-  console.log(allEvents);
 
   return (
     <Layout>

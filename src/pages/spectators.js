@@ -77,7 +77,7 @@ export default function SpectatorsPage() {
         body: JSON.stringify(spectator),
       }
     );
-    console.log("uoooo");
+
     const spectatorID = await dbResponse.json();
     setSpectatorID(spectatorID);
     setSaving(false);

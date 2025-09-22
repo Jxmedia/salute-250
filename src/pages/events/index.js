@@ -122,7 +122,6 @@ export default function EventsHome() {
   //
   //
   function convertTo12Hour(time24) {
-    console.log(time24);
     const [hourStr, minuteStr] = time24.split(":");
     let hour = parseInt(hourStr, 10);
     var minute = minuteStr;
@@ -152,7 +151,6 @@ export default function EventsHome() {
   //
   //
   //
-  console.log(allEvents);
 
   return (
     <Layout>

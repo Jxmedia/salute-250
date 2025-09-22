@@ -18,7 +18,7 @@ import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
 export default function EventModal(props) {
   const googleMapsApiKey = "AIzaSyCydl9IQNI9kEhs_--rVWqjRc0B2M9hays";
-  console.log(props);
+
   return (
     <>
       {props.event === undefined ? (

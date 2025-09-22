@@ -205,7 +205,7 @@ export default function RegisterEvent() {
         body: JSON.stringify(payload),
       }
     );
-    console.log("uoooo");
+
     const eventID = await dbResponse.json();
 
     window.location.href = `../thank-you/?en=${await eventID}`;
@@ -223,7 +223,7 @@ export default function RegisterEvent() {
   const [coords, setCoords] = useState(null);
   const autocompleteRef = useRef(null);
   //
-  console.log(address);
+
   //
   //
   //
@@ -240,8 +240,6 @@ export default function RegisterEvent() {
     const formattedAddress = place.formatted_address;
     const lat = place.geometry.location.lat();
     const lng = place.geometry.location.lng();
-
-    console.log(place, "placeeeeeee");
 
     setAddress({
       ...address,
@@ -267,11 +265,7 @@ export default function RegisterEvent() {
   //
   //
   //
-  console.log(eventData);
-  console.log(startDateValue);
-  console.log(coords);
-  //
-  console.log(startTime);
+
   //
 
   return (

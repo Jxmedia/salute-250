@@ -64,7 +64,6 @@ export default function AdminPage() {
   //
 
   const eventDetails = async (ID) => {
-    console.log(ID);
     setEventDetailID(ID);
     setisDetails(true);
   };
@@ -81,7 +80,7 @@ export default function AdminPage() {
   //
   //
   //
-  console.log(allEvents);
+
   return (
     <>
       <Helmet>
