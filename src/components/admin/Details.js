@@ -89,7 +89,7 @@ export default function Details(props) {
                     </p>
                     <button
                       type="button"
-                      className="ml-3 shrink-0 rounded-md bg-white text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
+                      className="ml-3 shrink-0 rounded-full bg-white text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
                     ></button>
                   </div>
                   <div className="ml-4 flex shrink-0">
@@ -98,7 +98,7 @@ export default function Details(props) {
                       onClick={() => {
                         setShowNotification(false);
                       }}
-                      className="inline-flex rounded-md text-gray-400 hover:text-gray-500 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-indigo-600"
+                      className="inline-flex rounded-full text-gray-400 hover:text-gray-500 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-indigo-600"
                     >
                       <span className="sr-only">Close</span>
                       <XMarkIcon aria-hidden="true" className="size-5" />
@@ -132,7 +132,7 @@ export default function Details(props) {
                         <div>
                           {" "}
                           {matchedEvent.approved === false ? (
-                            <span className="text-md font-semibold isolate inline-flex rounded-md shadow-sm">
+                            <span className="text-md font-semibold isolate inline-flex rounded-full shadow-sm">
                               <button
                                 type="button"
                                 disabled
@@ -151,7 +151,7 @@ export default function Details(props) {
                               </button>
                             </span>
                           ) : (
-                            <span className="text-md font-semibold isolate inline-flex rounded-md shadow-sm">
+                            <span className="text-md font-semibold isolate inline-flex rounded-full shadow-sm">
                               <button
                                 type="button"
                                 onClick={() =>
@@ -497,7 +497,7 @@ export default function Details(props) {
                         <button
                           type="button"
                           onClick={() => updateStatus(matchedEvent.id, true)}
-                          className="mt-6 font-body w-full rounded-md bg-green-600 px-3.5 py-3 text-sm font-semibold text-white shadow-sm hover:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                          className="mt-6 font-body w-full rounded-full bg-green-600 px-3.5 py-3 text-sm font-semibold text-white shadow-sm hover:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                         >
                           Approve Event
                         </button>
@@ -508,7 +508,7 @@ export default function Details(props) {
                         <button
                           type="button"
                           onClick={() => updateStatus(matchedEvent.id, false)}
-                          className="mt-6 font-body w-full rounded-md bg-amber-500 px-3.5 py-3 text-sm font-semibold text-white shadow-sm hover:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                          className="mt-6 font-body w-full rounded-full bg-amber-500 px-3.5 py-3 text-sm font-semibold text-white shadow-sm hover:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                         >
                           Unpublish Event
                         </button>
@@ -518,7 +518,7 @@ export default function Details(props) {
                       <button
                         type="button"
                         onClick={() => props.setisDetails(false)}
-                        className="mt-6 font-body w-full rounded-md bg-saluteRed px-3.5 py-3 text-sm font-semibold text-white shadow-sm hover:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        className="mt-6 font-body w-full rounded-full bg-saluteRed px-3.5 py-3 text-sm font-semibold text-white shadow-sm hover:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                       >
                         Return To Event Dashboard
                       </button>
