@@ -146,7 +146,7 @@ export default function HomePage() {
           <img
             alt=""
             src={HomeHero}
-            className="absolute inset-0 -z-10 object-cover scale-x-[-1]"
+            className="absolute opacity-30 inset-0 -z-10 object-cover blur-sm lg:opacity-100 lg:blur-none scale-x-[-1]"
           />
 
           <div className="absolute inset-0 bg-saluteTan opacity-60 mix-blend-multiply" />
@@ -173,7 +173,7 @@ export default function HomePage() {
                   a nation <span className="font-script">250</span> years in the
                   making.
                 </p>
-                <div className="mt-10 flex items-center justify-start gap-x-6">
+                <div className="mt-10 flex items-center justify-center lg:justify-start lg:gap-x-6">
                   <a
                     href="/events/"
                     className="border-t-2 border-blue-500 flex items-center gap-2 duration-300 ease-in-out bg-blue-800 rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-blue-800"
