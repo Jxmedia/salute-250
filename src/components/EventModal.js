@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoTicketSharp } from "react-icons/io5";
 import { MdLocationPin } from "react-icons/md";
 import { Dialog, DialogPanel, DialogBackdrop } from "@headlessui/react";
@@ -17,11 +17,28 @@ import { IoMusicalNotesSharp } from "react-icons/io5";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
 export default function EventModal(props) {
-  const googleMapsApiKey = "AIzaSyCydl9IQNI9kEhs_--rVWqjRc0B2M9hays";
+  const [googleMapsApiKey, setGoogleMapsApiKey] = useState(null);
+
+  useEffect(() => {
+    findGoogleKey();
+  }, []);
+
+  const findGoogleKey = async () => {
+    let response = await fetch(
+      "https://salute250-cxbccag3f0dff5b0.eastus2-01.azurewebsites.net/api/pullGoogleKey",
+      {
+        method: "POST",
+      }
+    );
+
+    const key = await response.json();
+
+    setGoogleMapsApiKey(key);
+  };
 
   return (
     <>
-      {props.event === undefined ? (
+      {props.event === undefined || googleMapsApiKey === null ? (
         <></>
       ) : (
         <Dialog

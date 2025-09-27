@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Layout from "../../components/Layout";
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaRegArrowAltCircleDown } from "react-icons/fa";
@@ -218,7 +218,6 @@ export default function RegisterEvent() {
   //
   //
   const libraries = ["places"];
-  const googleMapsApiKey = "AIzaSyCydl9IQNI9kEhs_--rVWqjRc0B2M9hays";
   const [address, setAddress] = useState({ city: "", state: "", zip: "" });
   const [coords, setCoords] = useState(null);
   const autocompleteRef = useRef(null);
@@ -261,6 +260,24 @@ export default function RegisterEvent() {
   };
   //
   //
+  const [googleMapsApiKey, setGoogleMapsApiKey] = useState(null);
+
+  useEffect(() => {
+    findGoogleKey();
+  }, []);
+
+  const findGoogleKey = async () => {
+    let response = await fetch(
+      "https://salute250-cxbccag3f0dff5b0.eastus2-01.azurewebsites.net/api/pullGoogleKey",
+      {
+        method: "POST",
+      }
+    );
+
+    const key = await response.json();
+
+    setGoogleMapsApiKey(key);
+  };
   //
   //
   //
@@ -763,31 +780,37 @@ export default function RegisterEvent() {
                       >
                         Event/Venue Address*
                       </label>
-                      <div className="mt-2 sm:col-span-2 sm:mt-0">
-                        <div className="rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
-                          <LoadScript
-                            googleMapsApiKey={googleMapsApiKey} // Replace with your key
-                            libraries={libraries}
-                          >
-                            <Autocomplete
-                              onLoad={(ref) => (autocompleteRef.current = ref)}
-                              onPlaceChanged={handleAddress}
-                              options={{
-                                types: ["address"], // ✅ Restrict to addresses only
-                                componentRestrictions: { country: "us" }, // Optional: limit to U.S.
-                              }}
+                      {googleMapsApiKey === null ? (
+                        ""
+                      ) : (
+                        <div className="mt-2 sm:col-span-2 sm:mt-0">
+                          <div className="rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
+                            <LoadScript
+                              googleMapsApiKey={googleMapsApiKey} // Replace with your key
+                              libraries={libraries}
                             >
-                              <input
-                                type="text"
-                                name="venueAddress"
-                                id="venueAddress"
-                                autoComplete="off"
-                                class="w-full bg-white py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
-                              />
-                            </Autocomplete>
-                          </LoadScript>
+                              <Autocomplete
+                                onLoad={(ref) =>
+                                  (autocompleteRef.current = ref)
+                                }
+                                onPlaceChanged={handleAddress}
+                                options={{
+                                  types: ["address"], // ✅ Restrict to addresses only
+                                  componentRestrictions: { country: "us" }, // Optional: limit to U.S.
+                                }}
+                              >
+                                <input
+                                  type="text"
+                                  name="venueAddress"
+                                  id="venueAddress"
+                                  autoComplete="off"
+                                  class="w-full bg-white py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
+                                />
+                              </Autocomplete>
+                            </LoadScript>
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
