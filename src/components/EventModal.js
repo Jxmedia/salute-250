@@ -280,13 +280,47 @@ export default function EventModal(props) {
                         {props.event.address}
                       </dd>
                     </div>
-                    <p className="text-sm text-gray-600 flex items-start gap-x-2">
-                      <IoTicketSharp
-                        aria-hidden="true"
-                        className="size-5 text-blue-700"
-                      />{" "}
-                      Free
-                    </p>
+                    {props.event.price === undefined ? (
+                      <>
+                        {props.event.website === undefined ? (
+                          <dl className="font-body justify-between">
+                            <dt className="sr-only">Title</dt>
+                            <dd className="text-sm text-gray-600 flex items-start gap-2">
+                              <IoTicketSharp
+                                aria-hidden="true"
+                                className="size-5 text-blue-700"
+                              />{" "}
+                              <span className="text-gray-400"> TBA</span>
+                            </dd>
+                          </dl>
+                        ) : (
+                          <dl className="font-body justify-between">
+                            <dt className="sr-only">Title</dt>
+                            <dd className="text-sm text-gray-600 flex items-start gap-2">
+                              <IoTicketSharp
+                                aria-hidden="true"
+                                className="size-5 text-blue-700"
+                              />{" "}
+                              <span className="text-gray-400">
+                                {" "}
+                                Check Website
+                              </span>
+                            </dd>
+                          </dl>
+                        )}
+                      </>
+                    ) : (
+                      <dl className="font-body justify-between">
+                        <dt className="sr-only">Title</dt>
+                        <dd className="text-sm text-gray-600 flex items-start gap-2">
+                          <IoTicketSharp
+                            aria-hidden="true"
+                            className="size-5 text-blue-700"
+                          />{" "}
+                          {props.event.price}
+                        </dd>
+                      </dl>
+                    )}
                   </div>
 
                   {props.event.description === undefined ? (
@@ -310,7 +344,7 @@ export default function EventModal(props) {
                   <a
                     href={"https://" + props.event.website}
                     target="blank"
-                    className="mx-auto text-center pt-4 flex justify-center text-sm font-body underline tracking-[0.5px] text-blue-500 hover:opacity-70"
+                    className="mx-auto text-center py-2 flex justify-center text-sm font-body underline tracking-[0.5px] text-blue-500 hover:opacity-70"
                   >
                     Event Website
                   </a>

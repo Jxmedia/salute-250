@@ -241,12 +241,21 @@ export default function RegisterEvent() {
     const lat = place.geometry.location.lat();
     const lng = place.geometry.location.lng();
 
+    const localityComponent = place.address_components.find((c) =>
+      c.types.includes("locality")
+    );
+
+    console.log(place);
+
     setAddress({
       ...address,
       address: place.formatted_address,
-      city: place.address_components.find((component) =>
-        component.types.includes("locality")
-      ).long_name,
+      city: localityComponent
+        ? place.address_components.find((component) =>
+            component.types.includes("locality")
+          ).long_name
+        : "NA",
+
       state: place.address_components.find((component) =>
         component.types.includes("administrative_area_level_1")
       ).long_name,
@@ -1062,6 +1071,26 @@ export default function RegisterEvent() {
                           <FaRegArrowAltCircleDown
                             aria-hidden="true"
                             className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                      <label
+                        htmlFor="x"
+                        className="flex items-center block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
+                      >
+                        Event Price
+                      </label>
+                      <div className="mt-2 sm:col-span-2 sm:mt-0">
+                        <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
+                          <input
+                            id="price"
+                            name="price"
+                            type="number"
+                            placeholder="$10"
+                            onChange={handleChange}
+                            className="block min-w-0 grow bg-white py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
                           />
                         </div>
                       </div>

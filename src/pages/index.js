@@ -513,16 +513,47 @@ export default function HomePage() {
                               </>
                             )}
                           </dl>
-                          <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
-                            <dt className="sr-only">Title</dt>
-                            <dd className="text-sm text-gray-600 flex items-start gap-2">
-                              <IoTicketSharp
-                                aria-hidden="true"
-                                className="size-5 text-blue-700"
-                              />{" "}
-                              Free
-                            </dd>
-                          </dl>
+                          {event.price === undefined ? (
+                            <>
+                              {event.website === undefined ? (
+                                <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
+                                  <dt className="sr-only">Title</dt>
+                                  <dd className="text-sm text-gray-600 flex items-start gap-2">
+                                    <IoTicketSharp
+                                      aria-hidden="true"
+                                      className="size-5 text-blue-700"
+                                    />{" "}
+                                    <span className="text-gray-400"> TBA</span>
+                                  </dd>
+                                </dl>
+                              ) : (
+                                <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
+                                  <dt className="sr-only">Title</dt>
+                                  <dd className="text-sm text-gray-600 flex items-start gap-2">
+                                    <IoTicketSharp
+                                      aria-hidden="true"
+                                      className="size-5 text-blue-700"
+                                    />{" "}
+                                    <span className="text-gray-400">
+                                      {" "}
+                                      Check Event Website
+                                    </span>
+                                  </dd>
+                                </dl>
+                              )}
+                            </>
+                          ) : (
+                            <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
+                              <dt className="sr-only">Title</dt>
+                              <dd className="text-sm text-gray-600 flex items-start gap-2">
+                                <IoTicketSharp
+                                  aria-hidden="true"
+                                  className="size-5 text-blue-700"
+                                />{" "}
+                                {event.price}
+                              </dd>
+                            </dl>
+                          )}
                         </div>
 
                         <div className="duration-300 ease-in-out font-body -mt-px flex divide-x divide-gray-200 bg-blue-700 group-hover:opacity-80 rounded-b-2xl">
