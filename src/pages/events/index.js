@@ -39,7 +39,7 @@ import Favicon from "../../images/favicon.png";
 import OGFB from "../../images/og-image.jpg";
 import { Helmet } from "react-helmet";
 import { IoMusicalNotesSharp } from "react-icons/io5";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import FlagBg from "../../images/flag-bg.jpg";
 
 const event = [
   {
@@ -220,8 +220,8 @@ export default function EventsHome() {
       <div className="relative py-32">
         <img
           alt=""
-          src="https://www.shutterstock.com/shutterstock/photos/1067889479/display_1500/stock-photo-american-flag-background-1067889479.jpg"
-          className="absolute inset-0 -z-10 opacity-60 size-full object-cover scale-x-[-1]"
+          src={FlagBg}
+          className="absolute inset-0 -z-10 opacity-70 size-full object-cover scale-x-[-1]"
         />
 
         <div className="absolute inset-0 bg-saluteBlue mix-blend-multiply" />
@@ -234,17 +234,17 @@ export default function EventsHome() {
             <span className="font-script text-[1.2em] text-white">2026</span>{" "}
             Events
           </h1>
-          <div className="mt-8 flex items-center justify-center gap-x-6">
+          <div className="mt-8 lg:flex items-center justify-center gap-x-6">
             <a
               href="register"
-              className="border-t-2 border-red-500 flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl px-10 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteNavy"
+              className="w-full justify-center border-t-2 border-red-500 lg:w-auto flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl px-10 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteNavy"
             >
               Register Your Event{" "}
               <MdOutlineEventAvailable aria-hidden="true" className="size-7" />
             </a>
             <a
               href="/spectators/"
-              className="font-body uppercase font-semibold border-t-2 border-yellow-100 flex items-center gap-2 duration-300 ease-in-out bg-saluteTan rounded-b-xl px-14 py-2.5 text-lg/6 text-saluteBlue hover:underline hover:bg-saluteBlue  hover:text-white"
+              className="mt-5 w-full justify-center font-body uppercase font-semibold border-t-2 border-yellow-100 lg:w-auto lg:mt-0 flex items-center gap-2 duration-300 ease-in-out bg-saluteTan rounded-b-xl px-14 py-2.5 text-lg/6 text-saluteBlue hover:underline hover:bg-saluteBlue hover:text-white"
             >
               Spectators{" "}
               <IoMdNotifications aria-hidden="true" className="size-7" />

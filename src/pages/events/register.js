@@ -26,6 +26,7 @@ import Favicon from "../../images/favicon.png";
 import OGFB from "../../images/og-image.jpg";
 import { Helmet } from "react-helmet";
 import { LoadScript, Autocomplete } from "@react-google-maps/api";
+import FlagBg from "../../images/flag-bg.jpg";
 
 const eventTiers = [
   {
@@ -348,7 +349,7 @@ export default function RegisterEvent() {
       <div className="bg-gray-50 relative pt-32">
         <img
           alt=""
-          src="https://www.shutterstock.com/shutterstock/photos/1067889479/display_1500/stock-photo-american-flag-background-1067889479.jpg"
+          src={FlagBg}
           className="hidden absolute inset-0 -z-10 opacity-10 size-full object-cover scale-x-[-1]"
         />
 
@@ -390,10 +391,33 @@ export default function RegisterEvent() {
           <div className="pt-6 pb-8 border-t border-gray-600 mt-10 py-20 sm:pt-14">
             <div className="">
               <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                <p className="text-center font-primary mt-2 text-4xl font-semibold tracking-tight text-saluteRed sm:text-6xl">
+                <h2 className=" text-center font-primary text-4xl font-semibold tracking-tight text-saluteRed sm:text-6xl">
+                  Why Register Your Event
+                </h2>
+                <p className="pt-8 font-body text-lg text-gray-700 gap-2 text-center max-w-5xl mx-auto">
+                  SAA250 is leading the charge to help Americans take part in
+                  this once-in-a-lifetime celebration of our nation’s 250th
+                  anniversary. While government initiatives have struggled to
+                  gain traction, our national air show tour already draws
+                  millions of spectators each year. By registering your event
+                  with SAA250, you join a movement that connects communities
+                  nationwide and puts your celebration on the map.
+                </p>
+                <p className="mt-6 pb-10 font-body text-lg text-gray-700 gap-2 text-center max-w-5xl mx-auto">
+                  When you register, you gain more than visibility. We can help
+                  connect your event with sponsors, amplify your brand, and even
+                  provide support for military flyovers, the National Anthem,
+                  and patriotic activations that make your event shine.
+                  Spectators are turning to SAA250 to find celebrations across
+                  the country and sponsors are using SAA250 to discover the
+                  right events to support. By joining us, your event becomes
+                  part of a national movement wrapped in the American flag and
+                  fueled by pride in our country.
+                </p>
+                <p className="text-center font-primary mt-2 text-4xl font-semibold tracking-tight text-saluteBlue sm:text-6xl">
                   Event Tiers
                 </p>
-                <div className="pt-10 isolate mx-auto grid max-w-md grid-cols-1 gap-y-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+                <div className="pt-10 isolate mx-auto grid grid-cols-1 gap-y-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
                   <div className="lg:mt-12 -mr-px lg:rounded-r-none flex flex-col justify-between rounded-3xl bg-white p-8 ring-1 ring-inset ring-saluteBlue xl:p-10">
                     <div className="font-body">
                       <div className="flex items-center justify-between gap-x-4">
@@ -576,7 +600,7 @@ export default function RegisterEvent() {
       </div>
       <section id="form">
         <div className="bg-saluteTan/50 py-20">
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-6xl mx-auto px-8">
             <h2 className=" text-center font-primary text-4xl font-semibold tracking-tight text-saluteBlue sm:text-6xl">
               Register Your Event
             </h2>
@@ -1174,7 +1198,7 @@ export default function RegisterEvent() {
                                 >
                                   By Checking this, you agree to our{" "}
                                   <a
-                                    href="#"
+                                    href="/privacy-policy/"
                                     className="underline text-blue-700 hover:opacity-70"
                                   >
                                     privacy policy.

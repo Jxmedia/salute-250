@@ -13,6 +13,7 @@ import { LuCirclePlus, LuCircleMinus } from "react-icons/lu";
 import Favicon from "../images/favicon.png";
 import OGFB from "../images/og-image.jpg";
 import { Helmet } from "react-helmet";
+import FlagBg from "../images/flag-bg.jpg";
 
 const faqs = [
   {
@@ -150,7 +151,7 @@ export default function SpectatorsPage() {
       <div className=" relative pt-32">
         <img
           alt=""
-          src="https://www.shutterstock.com/shutterstock/photos/1067889479/display_1500/stock-photo-american-flag-background-1067889479.jpg"
+          src={FlagBg}
           className="hidden absolute inset-0 -z-10 opacity-10 size-full object-cover scale-x-[-1]"
         />
 
@@ -168,9 +169,10 @@ export default function SpectatorsPage() {
 
           <div className="font-body py-2 text-center">
             <p className="max-w-3xl mx-auto text-lg text-gray-700 gap-2">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
-              tincidunt malesuada tortor sed suscipit. Quisque ut leo
-              condimentum, rhoncus ipsum quis, tempus ante.
+              Here you can sign up to receive notifications whenever a new event
+              is registered within your selected travel range. We’ll keep you
+              updated on all registered events celebrating the 250th anniversary
+              of the United States of America.
             </p>
           </div>
         </div>
@@ -180,14 +182,15 @@ export default function SpectatorsPage() {
               <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
                 <div className="absolute inset-y-0 left-0 -z-10 w-full overflow-hidden bg-saluteTan ring-1 ring-gray-900/10 lg:w-1/2"></div>
                 <h2 className="font-primary mt-2 text-4xl font-semibold tracking-tight text-saluteRed sm:text-6xl">
-                  Subscribe to Notifications
+                  Subscribe to <span className="block">Get Notifications</span>
                 </h2>
                 <p className="pt-2 font-body font-medium max-w-xl text-2xl text-saluteBlue gap-2">
-                  Be Part of America’s <span className="font-script">250</span>
+                  Be a Part of America’s{" "}
+                  <span className="font-script">250</span>
                   th and Find <span className="block">Events Near You</span>
                 </p>
                 <p className="pt-4 font-body max-w-3xl mx-auto text-lg text-gray-700 gap-2">
-                  From air shows to parades, concerts to commemorations —
+                  From air shows to parades, concerts to commemorations,
                   patriotic events are happening across the nation for America’s
                   <span className="font-script">250</span>th birthday in 2026.
                 </p>
@@ -199,8 +202,8 @@ export default function SpectatorsPage() {
                 </p>
                 <p className="pt-5 font-body max-w-3xl mx-auto text-lg text-gray-700 gap-2">
                   Hosting an event? Thousands of Americans are searching here
-                  for ways to celebrate. Make sure they find you — register your
-                  event today.
+                  for ways to celebrate. Make sure they find you so register
+                  your event today.
                 </p>
               </div>
             </div>
@@ -299,7 +302,7 @@ export default function SpectatorsPage() {
                         htmlFor="distance"
                         className="block text-sm/6 font-semibold text-red-600"
                       >
-                        Max Miles From Home You’ll Travel to an Event?*
+                        Range of Travel?*
                       </label>
                       <div className="mt-2.5">
                         <div className="grid grid-cols-1">
@@ -313,14 +316,12 @@ export default function SpectatorsPage() {
                             <option value="" selected disabled hidden>
                               Select a distance (in miles)
                             </option>
-                            <option value="1-10">1 - 10</option>
-                            <option value="11-50">11 - 50</option>
-                            <option value="51-100">51 - 100</option>
-                            <option value="101-500">101 - 500</option>
-                            <option value="500-1000">500 - 1000</option>
-                            <option value="1001-5000">1001 - 5000</option>
-                            <option value="5001-10000">5001 - 10000</option>
-                            <option>I'll travel anywhere in the Country</option>
+                            <option value="<10">{"<"} 10 </option>
+                            <option value="<25">{"<"} 25 </option>
+                            <option value="<50">{"<"} 50 </option>
+                            <option value="<250">{"<"} 250 </option>
+                            <option value="<1000">{"<"} 1000 </option>
+                            <option value="anywhere">Anywhere</option>
                           </select>
                           <FaRegArrowAltCircleDown
                             aria-hidden="true"

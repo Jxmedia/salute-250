@@ -12,6 +12,7 @@ import { LuCirclePlus, LuCircleMinus } from "react-icons/lu";
 import Favicon from "../images/favicon.png";
 import OGFB from "../images/og-image.jpg";
 import { Helmet } from "react-helmet";
+import FlagBg from "../images/flag-bg.jpg";
 
 const faqs = [
   {
@@ -138,7 +139,7 @@ export default function ContactPage() {
       <div className="relative pt-32">
         <img
           alt=""
-          src="https://www.shutterstock.com/shutterstock/photos/1067889479/display_1500/stock-photo-american-flag-background-1067889479.jpg"
+          src={FlagBg}
           className="absolute inset-0 -z-10 opacity-60 size-full object-cover scale-x-[-1]"
         />
 
@@ -212,7 +213,7 @@ export default function ContactPage() {
             <h2 className="text-center font-primary mt-2 text-4xl font-semibold tracking-tight text-saluteTan sm:text-6xl">
               Frequently Asked Questions
             </h2>
-            <dl className="mt-16 divide-y divide-gray-100/10">
+            <dl className="mt-16 pb-14 divide-y divide-gray-100/10">
               {faqs.map((faq) => (
                 <Disclosure
                   key={faq.question}
@@ -416,7 +417,7 @@ export default function ContactPage() {
                       <p id="comments-description" className="text-gray-800">
                         By Checking this, you agree to our{" "}
                         <a
-                          href="#"
+                          href="/privacy-policy/"
                           className="underline text-blue-700 hover:opacity-70"
                         >
                           privacy policy.

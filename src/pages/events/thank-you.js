@@ -5,6 +5,7 @@ import { LiaFlagUsaSolid } from "react-icons/lia";
 import Favicon from "../../images/favicon.png";
 import OGFB from "../../images/og-image.jpg";
 import { Helmet } from "react-helmet";
+import FlagBg from "../../images/flag-bg.jpg";
 
 export default function AboutPage() {
   //
@@ -104,7 +105,7 @@ export default function AboutPage() {
       <div className=" relative pt-32">
         <img
           alt=""
-          src="https://www.shutterstock.com/shutterstock/photos/1067889479/display_1500/stock-photo-american-flag-background-1067889479.jpg"
+          src={FlagBg}
           className="hidden absolute inset-0 -z-10 opacity-10 size-full object-cover scale-x-[-1]"
         />
 

@@ -34,14 +34,15 @@ const navigation = [
 ];
 
 const Header = (props) => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
     <header
       className={` ${
         props.currentPath === "/events/register/" ||
         props.currentPath === "/events/" ||
         props.currentPath === "/spectators/" ||
-        props.currentPath === "/about/"
+        props.currentPath === "/about/" ||
+        props.currentPath === "/privacy-policy/"
           ? "backdrop-blur-none from-transparent"
           : ""
       } absolute inset-x-0 top-0 z-50 bg-gradient-to-b from-saluteBlue/50 backdrop-blur-sm to-transparent`}
@@ -78,7 +79,8 @@ const Header = (props) => {
               className={`text-lg/6 uppercase duration-300 ease-in-out ${
                 props.currentPath === "/events/register/" ||
                 props.currentPath === "/spectators/" ||
-                props.currentPath === "/about/"
+                props.currentPath === "/about/" ||
+                props.currentPath === "/privacy-policy/"
                   ? "text-saluteBlue"
                   : "text-white"
               } hover:underline hover:text-saluteTan p-3 rounded-md`}
@@ -129,6 +131,12 @@ const Header = (props) => {
                     {item.name}
                   </a>
                 ))}
+                <a
+                  href="/contact/"
+                  className="-mx-3 block rounded-2xl px-3 py-2 text-base/7 font-semibold text-saluteBlue underline"
+                >
+                  Contact Us
+                </a>
               </div>
               <dl className="font-body pt-10 space-y-4 text-sm/7 tracking-wide text-saluteBlue">
                 <div className="flex justify-start gap-x-2">
