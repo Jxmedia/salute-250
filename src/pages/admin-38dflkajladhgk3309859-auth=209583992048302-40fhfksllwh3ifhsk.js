@@ -185,7 +185,7 @@ export default function AdminPage() {
                       className="h-16 w-auto saturate-0"
                     />
                   </div>
-                  <div className="hidden md:block">
+                  <div className="hidden lg:block">
                     <div className="ml-10 flex items-baseline space-x-4">
                       <a
                         href="/"
@@ -197,7 +197,7 @@ export default function AdminPage() {
                   </div>
                 </div>
 
-                <div className="-mr-2 flex md:hidden">
+                <div className="-mr-2 flex lg:hidden">
                   {/* Mobile menu button */}
                   <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500">
                     <span className="absolute -inset-0.5" />
@@ -216,7 +216,7 @@ export default function AdminPage() {
             </div>
           </div>
 
-          <DisclosurePanel className="border-b border-white/10 md:hidden"></DisclosurePanel>
+          <DisclosurePanel className="border-b border-white/10 lg:hidden"></DisclosurePanel>
         </Disclosure>
         <header className="py-10">
           {isDetails === true ? (

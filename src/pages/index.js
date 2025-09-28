@@ -173,17 +173,17 @@ export default function HomePage() {
                   a nation <span className="font-script">250</span> years in the
                   making.
                 </p>
-                <div className="mt-10 flex items-center justify-center lg:justify-start lg:gap-x-6">
+                <div className="mt-10 lg:flex items-center lg:justify-start lg:gap-x-6">
                   <a
                     href="/events/"
-                    className="border-t-2 border-blue-500 flex items-center gap-2 duration-300 ease-in-out bg-blue-800 rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-blue-800"
+                    className="w-full flex justify-center lg:w-auto lg:justify-start border-t-2 border-blue-500 flex items-center gap-2 duration-300 ease-in-out bg-blue-800 rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-blue-800"
                   >
                     View All Events{" "}
                     <MdOutlineEvent aria-hidden="true" className="size-7" />
                   </a>
                   <a
                     href="/spectators/"
-                    className="border-t-2 border-teal-800 flex items-center gap-2 duration-300 ease-in-out bg-saluteNavy rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteNavy"
+                    className="mt-5 w-full flex justify-center lg:mt-0 lg:w-auto lg:justify-start border-t-2 border-teal-800 items-center gap-2 duration-300 ease-in-out bg-saluteNavy rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteNavy"
                   >
                     Spectators{" "}
                     <IoTicketSharp aria-hidden="true" className="size-7" />
@@ -213,17 +213,17 @@ export default function HomePage() {
             </span>{" "}
             Events
           </h2>
-          <div className="mt-8 flex items-center justify-center gap-x-6">
+          <div className="mt-8 lg:flex items-center justify-center gap-x-6">
             <a
               href="/events/"
-              className="border-t-2 border-blue-500 flex items-center gap-2 duration-300 ease-in-out bg-blue-800 rounded-b-xl px-10 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-blue-800"
+              className="w-full justify-center border-t-2 border-blue-500 lg:w-auto lg:justify-start flex items-center gap-2 duration-300 ease-in-out bg-blue-800 rounded-b-xl px-10 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-blue-800"
             >
               View All Events{" "}
               <MdOutlineEvent aria-hidden="true" className="size-7" />
             </a>
             <a
               href="/events/register/"
-              className="border-t-2 border-red-500 flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl px-10 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteNavy"
+              className="mt-5 w-full justify-center border-t-2 border-red-500 lg:mt-0 lg:w-auto lg:justify-start flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl px-10 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteNavy"
             >
               Register Your Event{" "}
               <MdOutlineEventAvailable aria-hidden="true" className="size-7" />
@@ -232,7 +232,7 @@ export default function HomePage() {
           {allEvents === null ? (
             <ul
               role="list"
-              className="pt-20 tracking-wide grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
+              className="pt-20 tracking-wide grid grid-cols-1 gap-6 lg:grid-cols-3"
             >
               <button className="h-20 w-full rounded-2xl bg-gray-200 animate-pulse"></button>
               <button className="h-20 w-full rounded-2xl bg-gray-200 animate-pulse"></button>
@@ -242,7 +242,7 @@ export default function HomePage() {
             <>
               <ul
                 role="list"
-                className="py-20 tracking-wide grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
+                className="py-20 tracking-wide grid grid-cols-1 gap-6 lg:grid-cols-3"
               >
                 {allEvents
                   .sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
@@ -574,7 +574,7 @@ export default function HomePage() {
               Current Sponsors
             </h3>
 
-            <div className="mt-10 -mx-6 grid grid-cols-2 gap-0.5 overflow-hidden sm:mx-0 sm:rounded-xl md:grid-cols-3">
+            <div className="mt-10 -mx-6 grid grid-cols-2 gap-0.5 overflow-hidden sm:mx-0 sm:rounded-xl lg:grid-cols-3">
               <div className="bg-saluteTan p-8 sm:p-10">
                 <img
                   alt="Transistor"
@@ -659,7 +659,7 @@ export default function HomePage() {
                 <div className="mt-10 flex items-center justify-center gap-x-6">
                   <a
                     href="/spectators/"
-                    className="font-body uppercase font-semibold border-t-2 border-yellow-100 flex items-center gap-2 duration-300 ease-in-out bg-saluteTan rounded-b-xl px-14 py-2.5 text-lg/6 text-saluteBlue hover:underline hover:bg-saluteBlue  hover:text-white"
+                    className="w-1/2 justify-center font-body uppercase lg:w-auto font-semibold border-t-2 border-yellow-100 flex items-center gap-2 duration-300 ease-in-out bg-saluteTan rounded-b-xl px-14 py-2.5 text-lg/6 text-saluteBlue hover:underline hover:bg-saluteBlue  hover:text-white"
                   >
                     Sign Up{" "}
                     <IoMdNotifications aria-hidden="true" className="size-7" />
@@ -672,11 +672,11 @@ export default function HomePage() {
       </div>
 
       <div className="relative bg-white">
-        <div className="relative h-80 overflow-hidden bg-indigo-600 md:absolute md:left-0 md:h-full md:w-1/3 lg:w-1/2">
+        <div className="relative h-80 overflow-hidden bg-indigo-600 lg:absolute lg:left-0 lg:h-full lg:w-1/3 lg:w-1/2">
           <img alt="" src={CTA} className="size-full object-cover" />
         </div>
-        <div className="relative mx-auto max-w-7xl py-24 sm:py-32 lg:px-8 lg:py-40">
-          <div className="pl-6 pr-6 md:ml-auto md:w-2/3 md:pl-16 lg:w-1/2  lg:pr-0">
+        <div className="relative mx-auto max-w-7xl py-20 lg:px-8 lg:py-40">
+          <div className="pl-6 pr-6 lg:ml-auto lg:w-2/3 lg:pl-16 lg:w-1/2  lg:pr-0">
             <h3 className="font-primary mt-2 text-4xl font-semibold tracking-tight text-gray-800 sm:text-6xl">
               Have Questions About <span className="text-blue-800">SAA</span>{" "}
               <span className="font-script text-[1.2em] text-saluteRed">
@@ -708,7 +708,7 @@ export default function HomePage() {
       <div
         className={`cookie ${
           cookieOpen === false ? "hidden" : ""
-        } font-body mx-10 fixed inset-x-0 bottom-5 flex flex-col justify-between rounded-3xl gap-x-8 gap-y-4 border-t border-gray-900/10 bg-white p-10 shadow-lg md:flex-row md:items-center lg:px-8`}
+        } font-body mx-10 fixed inset-x-0 bottom-5 flex flex-col justify-between rounded-3xl gap-x-8 gap-y-4 border-t border-gray-900/10 bg-white p-10 shadow-lg lg:flex-row lg:items-center lg:px-8`}
       >
         <p className="max-w-4xl text-sm/6 text-gray-700">
           This website uses cookies to supplement a balanced diet and provide a

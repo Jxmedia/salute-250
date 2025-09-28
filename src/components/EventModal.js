@@ -52,7 +52,7 @@ export default function EventModal(props) {
           />
 
           <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-            <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <div className="lg:flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
               <DialogPanel
                 transition
                 className="relative transform overflow-hidden rounded-2xl bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-xl sm:p-6 data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
@@ -310,7 +310,7 @@ export default function EventModal(props) {
                   <a
                     href={"https://" + props.event.website}
                     target="blank"
-                    className="text-center pt-4 flex justify-center border-t text-sm font-body underline tracking-[0.5px] text-blue-500 hover:opacity-70"
+                    className="mx-auto text-center pt-4 flex justify-center text-sm font-body underline tracking-[0.5px] text-blue-500 hover:opacity-70"
                   >
                     Event Website
                   </a>

@@ -464,7 +464,7 @@ export default function EventsHome() {
             {allEvents === null ? (
               <ul
                 role="list"
-                className="tracking-wide grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
+                className="tracking-wide grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:grid-cols-3"
               >
                 <button className="h-20 w-full rounded-2xl bg-gray-200 animate-pulse"></button>
                 <button className="h-20 w-full rounded-2xl bg-gray-200 animate-pulse"></button>
@@ -473,7 +473,7 @@ export default function EventsHome() {
             ) : (
               <ul
                 role="list"
-                className="tracking-wide grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
+                className="tracking-wide grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:grid-cols-3"
               >
                 {allEvents
                   .slice() // optional: avoid mutating the original array
@@ -807,11 +807,11 @@ export default function EventsHome() {
       </div>
 
       <div className="relative bg-white">
-        <div className="relative h-80 overflow-hidden bg-indigo-600 md:absolute md:left-0 md:h-full md:w-1/3 lg:w-1/2">
+        <div className="relative h-80 overflow-hidden bg-indigo-600 lg:absolute lg:left-0 lg:h-full lg:w-1/3 lg:w-1/2">
           <img alt="" src={CTA} className="size-full object-cover" />
         </div>
         <div className="relative mx-auto max-w-7xl py-24 sm:py-32 lg:px-8 lg:py-40">
-          <div className="pl-6 pr-6 md:ml-auto md:w-2/3 md:pl-16 lg:w-1/2  lg:pr-0">
+          <div className="pl-6 pr-6 lg:ml-auto lg:w-2/3 lg:pl-16 lg:w-1/2  lg:pr-0">
             <h3 className="font-primary mt-2 text-4xl font-semibold tracking-tight text-gray-800 sm:text-6xl">
               Have Questions About <span className="text-blue-800">SAA</span>{" "}
               <span className="font-script text-[1.2em] text-saluteRed">
