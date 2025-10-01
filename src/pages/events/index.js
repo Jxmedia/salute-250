@@ -712,7 +712,7 @@ export default function EventsHome() {
                               {event.name}
                             </h3>
                             <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
-                              <dt className="sr-only">Title</dt>
+                              <dt className="sr-only">Date</dt>
                               {event.startDate === "12/12/9999" ? (
                                 <dd className="text-sm text-gray-600 flex items-center gap-2">
                                   <FaClock
@@ -729,13 +729,35 @@ export default function EventsHome() {
                                   />{" "}
                                   <span className="text-blue-600">
                                     {" "}
-                                    {new Date(
-                                      event.startDate
-                                    ).toLocaleDateString("en-US", {
-                                      year: "numeric",
-                                      month: "short", // 'short' gives you "Dec"
-                                      day: "numeric",
-                                    })}{" "}
+                                    {event.startDate === event.endDate ? (
+                                      new Date(
+                                        event.startDate
+                                      ).toLocaleDateString("en-US", {
+                                        year: "numeric",
+                                        month: "short", // 'short' gives you "Dec"
+                                        day: "numeric",
+                                      })
+                                    ) : (
+                                      <></>
+                                    )}
+                                    {event.startDate !== event.endDate ? (
+                                      <>
+                                        {new Date(
+                                          event.startDate
+                                        ).toLocaleDateString("en-US", {
+                                          month: "short", // 'short' gives you "Dec"
+                                          day: "numeric",
+                                        })}
+                                        -{new Date(event.endDate).getDate()},{" "}
+                                        {new Date(
+                                          event.endDate
+                                        ).toLocaleDateString("en-US", {
+                                          year: "numeric",
+                                        })}
+                                      </>
+                                    ) : (
+                                      <></>
+                                    )}
                                   </span>
                                   {"|"} {convertTo12Hour(event.startTime)} -{" "}
                                   {convertTo12Hour(event.endTime)}
@@ -744,14 +766,14 @@ export default function EventsHome() {
                             </dl>
 
                             <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
-                              <dt className="sr-only">Title</dt>
+                              <dt className="sr-only">Address</dt>
                               {event.venue === undefined ? (
-                                <dd className="text-sm text-gray-400 flex items-start gap-2">
+                                <dd className="text-sm text-gray-600 flex items-start gap-2">
                                   <MdLocationPin
                                     aria-hidden="true"
                                     className="size-5 text-blue-700"
                                   />{" "}
-                                  Venue TBA
+                                  {event.address.slice(0, -5)}
                                 </dd>
                               ) : (
                                 <>
@@ -760,28 +782,55 @@ export default function EventsHome() {
                                       aria-hidden="true"
                                       className="size-5 text-blue-700"
                                     />{" "}
-                                    {event.venue}
-                                  </dd>
-
-                                  <dd className="pl-7 text-sm text-gray-600 flex items-start gap-2">
-                                    {event.address}
-                                  </dd>
-                                  <dd className="pl-7 text-sm text-gray-600 flex items-start gap-2">
-                                    City, Florida 3333
+                                    {event.address.slice(0, -5)}
                                   </dd>
                                 </>
                               )}
                             </dl>
-                            <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
-                              <dt className="sr-only">Title</dt>
-                              <dd className="text-sm text-gray-600 flex items-start gap-2">
-                                <IoTicketSharp
-                                  aria-hidden="true"
-                                  className="size-5 text-blue-700"
-                                />{" "}
-                                Free
-                              </dd>
-                            </dl>
+                            {event.price === undefined ? (
+                              <>
+                                {event.website === undefined ? (
+                                  <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
+                                    <dt className="sr-only">Price</dt>
+                                    <dd className="text-sm text-gray-600 flex items-start gap-2">
+                                      <IoTicketSharp
+                                        aria-hidden="true"
+                                        className="size-5 text-blue-700"
+                                      />{" "}
+                                      <span className="text-gray-400">
+                                        {" "}
+                                        TBA
+                                      </span>
+                                    </dd>
+                                  </dl>
+                                ) : (
+                                  <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
+                                    <dt className="sr-only">Price</dt>
+                                    <dd className="text-sm text-gray-600 flex items-start gap-2">
+                                      <IoTicketSharp
+                                        aria-hidden="true"
+                                        className="size-5 text-blue-700"
+                                      />{" "}
+                                      <span className="text-gray-400">
+                                        {" "}
+                                        Check Event Website
+                                      </span>
+                                    </dd>
+                                  </dl>
+                                )}
+                              </>
+                            ) : (
+                              <dl className="border-t pt-2 mt-2 flex grow flex-col font-body justify-between">
+                                <dt className="sr-only">Price</dt>
+                                <dd className="text-sm text-gray-600 flex items-start gap-2">
+                                  <IoTicketSharp
+                                    aria-hidden="true"
+                                    className="size-5 text-blue-700"
+                                  />{" "}
+                                  {event.price}
+                                </dd>
+                              </dl>
+                            )}
                           </div>
                           <div>
                             <div className="duration-300 ease-in-out font-body -mt-px flex divide-x divide-gray-200 bg-blue-700 group-hover:opacity-80 rounded-b-2xl">

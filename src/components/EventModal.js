@@ -168,19 +168,42 @@ export default function EventModal(props) {
                     <h3 className="text-3xl font-primary font-medium text-gray-700">
                       {props.event.name}
                     </h3>
-                    {props.event.startDate === "12/12/9999" ? (
+                    {props.event.startDate === "12/12/9999" ||
+                    props.event.endDate === "12/12/9999" ? (
                       <></>
                     ) : (
                       <h4 className="text-sm pt-1 font-body text-gray-600">
                         <span className="text-blue-600">
-                          {" "}
-                          {new Date(props.event.startDate).toLocaleDateString(
-                            "en-US",
-                            {
-                              year: "numeric",
-                              month: "short", // 'short' gives you "Dec"
-                              day: "numeric",
-                            }
+                          {props.event.startDate === props.event.endDate ? (
+                            new Date(props.event.startDate).toLocaleDateString(
+                              "en-US",
+                              {
+                                year: "numeric",
+                                month: "short", // 'short' gives you "Dec"
+                                day: "numeric",
+                              }
+                            )
+                          ) : (
+                            <></>
+                          )}
+                          {props.event.startDate !== props.event.endDate ? (
+                            <>
+                              {new Date(
+                                props.event.startDate
+                              ).toLocaleDateString("en-US", {
+                                month: "short", // 'short' gives you "Dec"
+                                day: "numeric",
+                              })}
+                              -{new Date(props.event.endDate).getDate()},{" "}
+                              {new Date(props.event.endDate).toLocaleDateString(
+                                "en-US",
+                                {
+                                  year: "numeric",
+                                }
+                              )}
+                            </>
+                          ) : (
+                            <></>
                           )}{" "}
                         </span>
                         {"|"} {props.convertTo12Hour(props.event.startTime)} -{" "}
@@ -277,14 +300,14 @@ export default function EventModal(props) {
                         className="size-5 text-blue-700"
                       />
                       <dd className="text-sm text-gray-600 py-3 text-center gap-2">
-                        {props.event.address}
+                        {props.event.address.slice(0, -5)}
                       </dd>
                     </div>
                     {props.event.price === undefined ? (
                       <>
                         {props.event.website === undefined ? (
                           <dl className="font-body justify-between">
-                            <dt className="sr-only">Title</dt>
+                            <dt className="sr-only">Price</dt>
                             <dd className="text-sm text-gray-600 flex items-start gap-2">
                               <IoTicketSharp
                                 aria-hidden="true"
@@ -295,7 +318,7 @@ export default function EventModal(props) {
                           </dl>
                         ) : (
                           <dl className="font-body justify-between">
-                            <dt className="sr-only">Title</dt>
+                            <dt className="sr-only">Price</dt>
                             <dd className="text-sm text-gray-600 flex items-start gap-2">
                               <IoTicketSharp
                                 aria-hidden="true"
@@ -311,7 +334,7 @@ export default function EventModal(props) {
                       </>
                     ) : (
                       <dl className="font-body justify-between">
-                        <dt className="sr-only">Title</dt>
+                        <dt className="sr-only">Price</dt>
                         <dd className="text-sm text-gray-600 flex items-start gap-2">
                           <IoTicketSharp
                             aria-hidden="true"
