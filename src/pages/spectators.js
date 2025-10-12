@@ -382,7 +382,7 @@ export default function SpectatorsPage() {
                               <option value="<50">{"<"} 50 </option>
                               <option value="<250">{"<"} 250 </option>
                               <option value="<1000">{"<"} 1000 </option>
-                              <option value="anywhere">Anywhere</option>
+                              <option value="<10000000">Anywhere</option>
                             </select>
                             <FaRegArrowAltCircleDown
                               aria-hidden="true"
