@@ -353,7 +353,6 @@ export default function SpectatorsPage() {
                             required
                             onChange={handleChange}
                             onWheel={(e) => e.target.blur()}
-                            autoComplete="tel"
                             className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-red-600"
                           />
                         </div>
