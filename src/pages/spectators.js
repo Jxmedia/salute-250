@@ -80,7 +80,7 @@ export default function SpectatorsPage() {
   const [spectatorID, setSpectatorID] = useState(null);
   const [saving, setSaving] = useState(false);
   const [geoError, setGeoError] = useState(false);
-  console.log(geoError);
+
   //
   //
   function handleChange(e) {
@@ -99,7 +99,7 @@ export default function SpectatorsPage() {
   //
   //
   const createSpectator = async () => {
-    console.log("spectator");
+    // console.log("spectator");
     setSaving(true);
     setGeoError(false);
 
@@ -113,13 +113,13 @@ export default function SpectatorsPage() {
       );
 
       const latLng = await coordsResponse.json();
-      console.log(latLng, "lat long");
+      // console.log(latLng, "lat long");
 
       if (latLng === "Geocoding failed: ZERO_RESULTS") {
         setSaving(false);
         setGeoError(true);
       } else {
-        console.log("next lat function");
+        // console.log("next lat function");
         const payload = { spectator, latLng };
         let dbResponse = await fetch(
           "https://salute250-cxbccag3f0dff5b0.eastus2-01.azurewebsites.net/api/createSpectator?",
@@ -134,7 +134,7 @@ export default function SpectatorsPage() {
         setSaving(false);
       }
     } catch (error) {
-      console.log("error");
+      // console.log("error");
     }
   };
   //

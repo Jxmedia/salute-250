@@ -245,8 +245,6 @@ export default function RegisterEvent() {
       c.types.includes("locality")
     );
 
-    console.log(place);
-
     setAddress({
       ...address,
       address: place.formatted_address,

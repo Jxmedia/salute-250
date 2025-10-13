@@ -37,7 +37,7 @@ import { Helmet } from "react-helmet";
 import Countdown from "../components/Countdown";
 
 export default function HomePage() {
-  const [cookieOpen, setcookieOpen] = useState(true);
+  const [cookieOpen, setcookieOpen] = useState(false);
   const [openEvent, setOpenEvent] = useState(null);
   const [allEvents, setAllEvents] = useState(null);
 
