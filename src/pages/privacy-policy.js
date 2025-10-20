@@ -193,10 +193,10 @@ export default function Privacy() {
                         <span className="block">
                           Email:{" "}
                           <a
-                            href="mailto:info@saluteacrossamerica250.com"
+                            href="mailto:info@saa250.com"
                             class="text-blue-500 underline"
                           >
-                            info@saluteacrossamerica250.com
+                            info@saa250.com
                           </a>
                         </span>
                         <a href="tel:5552345678" className="block">

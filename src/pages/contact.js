@@ -197,7 +197,7 @@ export default function ContactPage() {
                       <dt className="sr-only">Email</dt>
                       <dd>
                         <p className="mt-2 font-semibold text-saluteTan">
-                          info@saluteacrossamerica250.com
+                          info@saa250.com
                         </p>
                       </dd>
                     </div>

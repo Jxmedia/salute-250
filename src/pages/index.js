@@ -178,7 +178,7 @@ export default function HomePage() {
                     href="/events/"
                     className="w-full flex justify-center lg:w-auto lg:justify-start border-t-2 border-blue-500 flex items-center gap-2 duration-300 ease-in-out bg-blue-800 rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-blue-800"
                   >
-                    View All Events{" "}
+                    Search For Events{" "}
                     <MdOutlineEvent aria-hidden="true" className="size-7" />
                   </a>
                   <a
@@ -218,12 +218,12 @@ export default function HomePage() {
               href="/events/"
               className="w-full justify-center border-t-2 border-blue-500 lg:w-auto lg:justify-start flex items-center gap-2 duration-300 ease-in-out bg-blue-800 rounded-b-xl px-10 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-blue-800"
             >
-              View All Events{" "}
+              Search For Events{" "}
               <MdOutlineEvent aria-hidden="true" className="size-7" />
             </a>
             <a
               href="/events/register/"
-              className="mt-5 w-full justify-center border-t-2 border-red-500 lg:mt-0 lg:w-auto lg:justify-start flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl px-10 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteNavy"
+              className="hidden mt-5 w-full justify-center border-t-2 border-red-500 lg:mt-0 lg:w-auto lg:justify-start flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl px-10 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteNavy"
             >
               Register Your Event{" "}
               <MdOutlineEventAvailable aria-hidden="true" className="size-7" />
@@ -707,7 +707,7 @@ export default function HomePage() {
                     href="/spectators/"
                     className="w-1/2 justify-center font-body uppercase lg:w-auto font-semibold border-t-2 border-yellow-100 flex items-center gap-2 duration-300 ease-in-out bg-saluteTan rounded-b-xl px-14 py-2.5 text-lg/6 text-saluteBlue hover:underline hover:bg-saluteBlue  hover:text-white"
                   >
-                    Sign Up{" "}
+                    Sign Up Today{" "}
                     <IoMdNotifications aria-hidden="true" className="size-7" />
                   </a>
                 </div>
@@ -743,7 +743,7 @@ export default function HomePage() {
                 href="/contact/"
                 className="font-body uppercase font-semibold border-t-2 border-red-500 flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl px-14 py-2.5 text-lg/6 text-white hover:underline hover:bg-saluteTan hover:text-saluteRed"
               >
-                Learn More{" "}
+                Contact Us{" "}
                 <LiaFlagUsaSolid aria-hidden="true" className="size-7" />
               </a>
             </div>

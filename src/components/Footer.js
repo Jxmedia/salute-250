@@ -32,7 +32,7 @@ const Footer = () => {
             <div className="">
               {" "}
               <dl className="font-body mt-10 space-y-4 text-sm/7 tracking-wide text-saluteTan">
-                <div className="flex justify-center lg:justify-end gap-x-2">
+                <div className="hidden flex justify-center lg:justify-end gap-x-2">
                   <dt className="flex-none">
                     <span className="sr-only">Telephone</span>
                     <HiMiniDevicePhoneMobile
@@ -59,10 +59,10 @@ const Footer = () => {
                   </dt>
                   <dd>
                     <a
-                      href="mailto:info@saluteacrossamerica250.com"
+                      href="mailto:info@saa250.com"
                       className="hover:text-white"
                     >
-                      info@saluteacrossamerica250.com
+                      info@saa250.com
                     </a>
                   </dd>
                 </div>
@@ -114,7 +114,7 @@ const Footer = () => {
                 />
               </a>
               <dl className="font-body space-y-4 text-sm/7 tracking-wide text-saluteTan">
-                <div className="flex justify-center lg:justify-end gap-x-2">
+                <div className="hidden flex justify-center lg:justify-end gap-x-2">
                   <dt className="flex-none">
                     <span className="sr-only">Telephone</span>
                     <HiMiniDevicePhoneMobile
@@ -141,10 +141,10 @@ const Footer = () => {
                   </dt>
                   <dd>
                     <a
-                      href="mailto:info@saluteacrossamerica250.com"
+                      href="mailto:info@saa250.com"
                       className="hover:text-white"
                     >
-                      info@saluteacrossamerica250.com
+                      info@saa250.com
                     </a>
                   </dd>
                 </div>

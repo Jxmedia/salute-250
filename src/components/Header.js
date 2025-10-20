@@ -28,9 +28,9 @@ const footerNavigation = [
 
 const navigation = [
   { name: "Home", href: "/" },
-  { name: "About", href: "/about/" },
+  // { name: "About", href: "/about/" },
   { name: "Events", href: "/events/" },
-  { name: "Spectators", href: "/spectators/" },
+  { name: "Sign Up Today", href: "/spectators/" },
 ];
 
 const Header = (props) => {
@@ -43,13 +43,13 @@ const Header = (props) => {
         props.currentPath === "/spectators/" ||
         props.currentPath === "/about/" ||
         props.currentPath === "/privacy-policy/"
-          ? "backdrop-blur-none from-transparent"
+          ? ""
           : ""
-      } absolute inset-x-0 top-0 z-50 bg-gradient-to-b from-saluteBlue/50 backdrop-blur-sm to-transparent`}
+      } sticky -mt-[9%] top-0 z-50 bg-gradient-to-b from-saluteBlue/80 backdrop-blur-md to-saluteBlue/20`}
     >
       <nav
         aria-label="Global"
-        className="flex items-center font-body font-medium uppercase justify-between p-8 lg:px-8"
+        className="flex items-center font-body font-medium uppercase justify-between p-6 lg:px-8"
       >
         <div className="flex lg:flex-1">
           <a href="/" className="-m-1.5 p-1.5">
@@ -76,14 +76,7 @@ const Header = (props) => {
             <a
               key={item.name}
               href={item.href}
-              className={`text-lg/6 uppercase duration-300 ease-in-out ${
-                props.currentPath === "/events/register/" ||
-                props.currentPath === "/spectators/" ||
-                props.currentPath === "/about/" ||
-                props.currentPath === "/privacy-policy/"
-                  ? "text-saluteBlue"
-                  : "text-white"
-              } hover:underline hover:text-saluteTan p-3 rounded-md`}
+              className="text-white hover:underline hover:text-saluteTan p-3 rounded-md"
             >
               {item.name}
             </a>
@@ -91,10 +84,11 @@ const Header = (props) => {
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <a
-            href="/contact/"
+            href="/events/register/"
             className="border-t-2 border-red-500 flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl px-6 py-2.5 text-lg/6 text-white hover:underline hover:bg-saluteTan hover:text-saluteRed"
           >
-            Contact Us <LiaFlagUsaSolid aria-hidden="true" className="size-7" />
+            Register Your Event{" "}
+            <LiaFlagUsaSolid aria-hidden="true" className="size-7" />
           </a>
         </div>
       </nav>
@@ -132,10 +126,10 @@ const Header = (props) => {
                   </a>
                 ))}
                 <a
-                  href="/contact/"
+                  href="/events/register/"
                   className="-mx-3 block rounded-2xl px-3 py-2 text-base/7 font-semibold text-saluteBlue underline"
                 >
-                  Contact Us
+                  Register Your Event
                 </a>
               </div>
               <dl className="font-body pt-10 space-y-4 text-sm/7 tracking-wide text-saluteBlue">
@@ -166,10 +160,10 @@ const Header = (props) => {
                   </dt>
                   <dd>
                     <a
-                      href="mailto:info@saluteacrossamerica250.com"
+                      href="mailto:info@saa250.com"
                       className="hover:text-white"
                     >
-                      info@saluteacrossamerica250.com
+                      info@saa250.com
                     </a>
                   </dd>
                 </div>
