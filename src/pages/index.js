@@ -242,10 +242,11 @@ export default function HomePage() {
             <>
               <ul
                 role="list"
-                className="py-20 tracking-wide grid grid-cols-1 gap-6 lg:grid-cols-3"
+                className="py-20 tracking-wide grid grid-cols-1 gap-6 lg:grid-cols-2"
               >
                 {allEvents
                   .sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
+                  .slice(0, 4)
                   .map((event) => (
                     <li
                       key={event.SAAID}
