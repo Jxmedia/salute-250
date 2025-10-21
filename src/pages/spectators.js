@@ -148,7 +148,7 @@ export default function SpectatorsPage() {
       <Layout>
         <Helmet>
           {/* Primary Meta Tags */}
-          <title>Spectators || Salute Across America 250</title>
+          <title>Get Notified || Salute Across America 250</title>
           <meta name="title" content="Salute Across America 250" />
           <meta
             name="description"

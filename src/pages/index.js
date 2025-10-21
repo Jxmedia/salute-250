@@ -185,7 +185,7 @@ export default function HomePage() {
                     href="/spectators/"
                     className="mt-5 w-full flex justify-center lg:mt-0 lg:w-auto lg:justify-start border-t-2 border-teal-800 items-center gap-2 duration-300 ease-in-out bg-saluteNavy rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteNavy"
                   >
-                    Spectators{" "}
+                    Get Notified{" "}
                     <IoTicketSharp aria-hidden="true" className="size-7" />
                   </a>
                 </div>
