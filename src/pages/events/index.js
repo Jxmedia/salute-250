@@ -599,11 +599,42 @@ export default function EventsHome() {
 
                               {/* Tags */}
                               <dd className="mt-4 font-body">
+                                <dt className="sr-only">eventType</dt>
                                 <div className="flex gap-x-2">
-                                  <span className="inline-flex gap-x-1 items-center rounded-md bg-red-50 px-4 py-1.5 text-xs font-semibold text-red-700 ring-1 ring-inset ring-red-600/20">
-                                    <MdOutlineStar className="size-4" />
-                                    Signature
-                                  </span>
+                                  {event.eventTier === "Signature" ? (
+                                    <span className="inline-flex gap-x-1 items-center rounded-md bg-red-50 px-4 py-1.5 text-xs font-semibold text-red-700 ring-1 ring-inset ring-red-600/20">
+                                      <MdOutlineStar
+                                        aria-hidden="true"
+                                        className="size-4"
+                                      />
+
+                                      {event.eventTier}
+                                    </span>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  {event.eventTier === "Partner" ? (
+                                    <span className="inline-flex gap-x-1 items-center rounded-md bg-orange-50 px-4 py-1.5 text-xs font-semibold text-orange-700 ring-1 ring-inset ring-orange-600/20">
+                                      <MdStarBorder
+                                        aria-hidden="true"
+                                        className="size-4"
+                                      />
+                                      {event.eventTier}
+                                    </span>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  {event.eventTier === "Affiliate" ? (
+                                    <span className="inline-flex gap-x-1 items-center rounded-md bg-indigo-50 px-4 py-1.5 text-xs font-semibold text-indigo-700 ring-1 ring-inset ring-indigo-600/20">
+                                      <FaCircle
+                                        aria-hidden="true"
+                                        className="size-2"
+                                      />
+                                      {event.eventTier}
+                                    </span>
+                                  ) : (
+                                    <></>
+                                  )}
                                   <span className="inline-flex items-center rounded-md bg-teal-50 px-5 py-1.5 text-xs font-medium text-teal-700 ring-1 ring-inset ring-teal-600/20">
                                     {event.eventType}
                                   </span>

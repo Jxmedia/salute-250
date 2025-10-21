@@ -44,7 +44,7 @@ export default function EventModal(props) {
         <Dialog
           open={props.open}
           onClose={props.onClose}
-          className="relative z-10"
+          className="relative z-50"
         >
           <DialogBackdrop
             transition
