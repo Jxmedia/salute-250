@@ -18,3 +18,7 @@ input[type="number"] {
 a {
     width: fit-content;
 }
+
+.rs-picker-toggle-read-only {
+    pointer-events: unset;
+}

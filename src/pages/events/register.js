@@ -27,6 +27,11 @@ import OGFB from "../../images/og-image.jpg";
 import { Helmet } from "react-helmet";
 import { LoadScript, Autocomplete } from "@react-google-maps/api";
 import FlagBg from "../../images/flag-bg.jpg";
+/////
+import { DateRangePicker, Stack } from "rsuite";
+import { FaCalendar, FaClock } from "react-icons/fa";
+import { BsCalendar2MonthFill } from "react-icons/bs";
+import "rsuite/dist/rsuite.min.css";
 
 const eventTiers = [
   {
@@ -140,6 +145,9 @@ export default function RegisterEvent() {
   //
   //
   //
+  const [selectedDate, setSelectedDate] = useState(null);
+  //
+  //
   const today = new Date("12/12/9999");
   const yyyy = today.getFullYear();
   const dd = String(today.getDate()).padStart(2, "0");
@@ -186,10 +194,7 @@ export default function RegisterEvent() {
     setSaving(true);
     const payload = {
       ...eventData,
-      startDate: `${startDateValue.month}/${startDateValue.day}/${startDateValue.year}`,
-      startTime: `${startTime.hour}:${startTime.minute}:${startTime.second}`,
-      endDate: `${endDateValue.month}/${endDateValue.day}/${endDateValue.year}`,
-      endTime: `${endTime.hour}:${endTime.minute}:${endTime.second}`,
+      dateTime: selectedDate,
       address: address.address,
       city: address.city,
       state: address.state,
@@ -290,7 +295,7 @@ export default function RegisterEvent() {
   //
   //
   //
-
+  console.log(selectedDate);
   //
 
   return (
@@ -348,6 +353,7 @@ export default function RegisterEvent() {
         />
       </Helmet>
       <div className="bg-white"></div>
+
       <div className="divider">
         <div className="bg-gradient-to-r from-saluteRed to-red-700 h-2.5" />
         <div className="bg-white h-1.5" />
@@ -684,47 +690,16 @@ export default function RegisterEvent() {
                         htmlFor="start-date"
                         className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
                       >
-                        Start Date and Time
+                        Date and Time
                       </label>
                       <div className="mt-2 flex gap-x-4 sm:mt-0">
-                        <div className="font-body block w-1/2 rounded-md bg-white py-1.5 text-base text-gray-900 tracking-[1px] outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-xs sm:text-sm/6">
-                          <DateInput
-                            aria-label="Start Date"
-                            onChange={setStartDateValue}
-                            placeholderValue={new CalendarDate(1995, 11, 6)}
-                          />
-                        </div>
-                        <div className="font-body block w-1/2 rounded-md bg-white py-1.5 text-base text-gray-900 tracking-[1px] outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-xs sm:text-sm/6">
-                          <TimeInput
-                            aria-label="Start Time"
-                            onChange={setStartTime}
-                            defaultValue={new Time(12, 0)}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                      <label
-                        htmlFor="end-date"
-                        className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
-                      >
-                        End Date and Time
-                      </label>
-                      <div className="mt-2 flex gap-x-4 sm:mt-0">
-                        <div className="font-body block w-1/2 rounded-md bg-white py-1.5 text-base text-gray-900 tracking-[1px] outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-xs sm:text-sm/6">
-                          <DateInput
-                            aria-label="End Date"
-                            onChange={setEndDateValue}
-                            placeholderValue={new CalendarDate(1995, 11, 6)}
-                          />
-                        </div>
-                        <div className="font-body block w-1/2 rounded-md bg-white py-1.5 text-base text-gray-900 tracking-[1px] outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-xs sm:text-sm/6">
-                          <TimeInput
-                            aria-label="End Time"
-                            onChange={setEndTime}
-                            defaultValue={new Time(12, 0)}
-                          />
-                        </div>
+                        <DateRangePicker
+                          className="border-1 border-gray-300 rounded-md hover:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500"
+                          format="MM/dd/yyyy hh:mm aa"
+                          value={selectedDate}
+                          onChange={setSelectedDate}
+                          showMeridiem
+                        />
                       </div>
                     </div>
 
@@ -1242,16 +1217,26 @@ export default function RegisterEvent() {
               </div>
 
               <div className="mt-8 items-center gap-x-6">
-                <button
-                  type="submit"
-                  className="w-full flex justify-center border-t-2 border-saluteBlue flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteBlue hover:text-white"
-                >
-                  {saving === false
-                    ? " Submit Event for Review"
-                    : "Submitting..."}
+                {coords === null ? (
+                  <button
+                    disabled
+                    className="w-full flex justify-center border-t-2 border-saluteBlue flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl py-2.5 text-lg/6 text-white font-body font-semibold uppercase opacity-50"
+                  >
+                    Check Venue Address
+                    <RiMailSendFill aria-hidden="true" className="size-7" />
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    className="w-full flex justify-center border-t-2 border-saluteBlue flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteBlue hover:text-white"
+                  >
+                    {saving === false
+                      ? " Submit Event for Review"
+                      : "Submitting..."}
 
-                  <RiMailSendFill aria-hidden="true" className="size-7" />
-                </button>
+                    <RiMailSendFill aria-hidden="true" className="size-7" />
+                  </button>
+                )}
               </div>
             </form>
           </div>

@@ -168,47 +168,17 @@ export default function EventModal(props) {
                     <h3 className="text-3xl font-primary font-medium text-gray-700">
                       {props.event.name}
                     </h3>
-                    {props.event.startDate === "12/12/9999" ||
-                    props.event.endDate === "12/12/9999" ? (
-                      <></>
+                    {props.event.dateTime === null ? (
+                      <span className="text-gray-400">TBA</span>
                     ) : (
-                      <h4 className="text-sm pt-1 font-body text-gray-600">
-                        <span className="text-blue-600">
-                          {props.event.startDate === props.event.endDate ? (
-                            new Date(props.event.startDate).toLocaleDateString(
-                              "en-US",
-                              {
-                                year: "numeric",
-                                month: "short", // 'short' gives you "Dec"
-                                day: "numeric",
-                              }
-                            )
-                          ) : (
-                            <></>
-                          )}
-                          {props.event.startDate !== props.event.endDate ? (
-                            <>
-                              {new Date(
-                                props.event.startDate
-                              ).toLocaleDateString("en-US", {
-                                month: "short", // 'short' gives you "Dec"
-                                day: "numeric",
-                              })}
-                              -{new Date(props.event.endDate).getDate()},{" "}
-                              {new Date(props.event.endDate).toLocaleDateString(
-                                "en-US",
-                                {
-                                  year: "numeric",
-                                }
-                              )}
-                            </>
-                          ) : (
-                            <></>
-                          )}{" "}
+                      <span className="text-blue-600">
+                        {props.formatDateLocal(props.event.dateTime[0])} -{" "}
+                        {props.formatDateLocal(props.event.dateTime[1])}{" "}
+                        <span className="text-blue-800 font-semibold">
+                          {" "}
+                          {props.event.dateTime[0].substring(0, 4)}
                         </span>
-                        {"|"} {props.convertTo12Hour(props.event.startTime)} -{" "}
-                        {props.convertTo12Hour(props.event.endTime)}
-                      </h4>
+                      </span>
                     )}
                     <div className="flex justify-center gap-x-4 mt-3">
                       {props.event.facebook === undefined ? (
@@ -293,13 +263,13 @@ export default function EventModal(props) {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-center gap-x-4 font-body">
+                  <div className="py-3 flex items-center justify-center gap-x-4 font-body">
                     <div className="flex items-center justify-center gap-x-2">
                       <MdLocationPin
                         aria-hidden="true"
                         className="size-5 text-blue-700"
                       />
-                      <dd className="text-sm text-gray-600 py-3 text-center gap-2">
+                      <dd className="mb-0 text-sm text-gray-600 py-3 text-center gap-2">
                         {props.event.address.slice(0, -5)}
                       </dd>
                     </div>
@@ -308,7 +278,7 @@ export default function EventModal(props) {
                         {props.event.website === undefined ? (
                           <dl className="font-body justify-between">
                             <dt className="sr-only">Price</dt>
-                            <dd className="text-sm text-gray-600 flex items-start gap-2">
+                            <dd className="mb-0 text-sm text-gray-600 flex items-start gap-2">
                               <IoTicketSharp
                                 aria-hidden="true"
                                 className="size-5 text-blue-700"
@@ -317,9 +287,9 @@ export default function EventModal(props) {
                             </dd>
                           </dl>
                         ) : (
-                          <dl className="font-body justify-between">
+                          <dl className="mb-0 font-body justify-between">
                             <dt className="sr-only">Price</dt>
-                            <dd className="text-sm text-gray-600 flex items-start gap-2">
+                            <dd className="mb-0 text-sm text-gray-600 flex items-start gap-2">
                               <IoTicketSharp
                                 aria-hidden="true"
                                 className="size-5 text-blue-700"

@@ -88,19 +88,6 @@ export default function EventsHome() {
   const [openEvent, setOpenEvent] = useState(false);
   const [selected, setSelected] = useState(null);
 
-  //
-  // For share link if we use it
-  //
-  // useEffect(() => {
-  //   var params = new URLSearchParams(window.location.search);
-  //   const paramOrder = params.get("o") || null;
-  //   if (paramOrder === null) {
-  //     setOpenEvent(false);
-  //   } else {
-  //     setOpenEvent(true);
-  //   }
-  // }, []);
-
   const [allEvents, setAllEvents] = useState(null);
 
   useEffect(() => {
@@ -120,21 +107,7 @@ export default function EventsHome() {
     setAllEvents(events);
   };
   //
-  //
-  function convertTo12Hour(time24) {
-    const [hourStr, minuteStr] = time24.split(":");
-    let hour = parseInt(hourStr, 10);
-    var minute = minuteStr;
-    const ampm = hour >= 12 ? "PM" : "AM";
 
-    hour = hour % 12 || 12; // Convert 0 to 12
-
-    if (minute === "0") {
-      var minute = "00";
-    }
-
-    return `${hour}:${minute} ${ampm}`;
-  }
   //
   //
   //
@@ -149,6 +122,20 @@ export default function EventsHome() {
   };
   //
   //
+  function formatDateLocal(isoString) {
+    const date = new Date(isoString);
+
+    const month = date.toLocaleString("en-US", { month: "short" });
+    const day = date.getDate(); // No padStart, removes leading 0
+    const year = date.getFullYear();
+
+    let hours = date.getHours();
+    const minutes = String(date.getMinutes()).padStart(2, "0"); // Keep minutes padded
+    const ampm = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12 || 12; // Converts 0 -> 12
+
+    return `${month} ${day} | ${hours}:${minutes} ${ampm}`; // hours no padStart
+  }
   //
   //
 
@@ -208,7 +195,11 @@ export default function EventsHome() {
         />
       </Helmet>
       <div>
-        <EventModal openEvent={openEvent} setOpenEvent={setOpenEvent} />
+        <EventModal
+          openEvent={openEvent}
+          setOpenEvent={setOpenEvent}
+          formatDateLocal={formatDateLocal}
+        />
       </div>
       <div className="bg-white"></div>
       <div className="divider">
@@ -477,7 +468,24 @@ export default function EventsHome() {
               >
                 {allEvents
                   .slice() // optional: avoid mutating the original array
-                  .sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
+                  .sort((a, b) => {
+                    const dateA = a.dateTime?.[0]
+                      ? new Date(a.dateTime[0])
+                      : null;
+                    const dateB = b.dateTime?.[0]
+                      ? new Date(b.dateTime[0])
+                      : null;
+
+                    // Both null → equal
+                    if (!dateA && !dateB) return 0;
+
+                    // Nulls last
+                    if (!dateA) return 1;
+                    if (!dateB) return -1;
+
+                    // Compare valid dates
+                    return dateA - dateB;
+                  })
                   .map((event) => (
                     <>
                       {openEvent === event.id && (
@@ -485,7 +493,7 @@ export default function EventsHome() {
                           event={event}
                           open={openEvent === event.id}
                           onClose={handleCloseEvent}
-                          convertTo12Hour={convertTo12Hour}
+                          formatDateLocal={formatDateLocal}
                         />
                       )}
                       <li
@@ -649,40 +657,18 @@ export default function EventsHome() {
                               {/* Date */}
                               <dl className="border-t pt-2 mt-2 flex flex-col font-body gap-2">
                                 <dt className="sr-only">Date</dt>
-                                <dd className="text-sm text-gray-600 flex items-center gap-2">
+                                <dd className="mb-0 text-sm text-gray-600 flex items-center gap-2">
                                   <FaClock className="size-4 text-blue-700" />
-                                  {event.startDate === "12/12/9999" ||
-                                  event.endDate === "12/12/9999" ? (
+                                  {event.dateTime === null ? (
                                     <span className="text-gray-400">TBA</span>
                                   ) : (
                                     <span className="text-blue-600">
-                                      {event.startDate === event.endDate ? (
-                                        new Date(
-                                          event.startDate
-                                        ).toLocaleDateString("en-US", {
-                                          year: "numeric",
-                                          month: "short",
-                                          day: "numeric",
-                                        })
-                                      ) : (
-                                        <>
-                                          {new Date(
-                                            event.startDate
-                                          ).toLocaleDateString("en-US", {
-                                            month: "short",
-                                            day: "numeric",
-                                          })}
-                                          -{new Date(event.endDate).getDate()},{" "}
-                                          {new Date(
-                                            event.endDate
-                                          ).toLocaleDateString("en-US", {
-                                            year: "numeric",
-                                          })}
-                                        </>
-                                      )}
-                                      {" | "}
-                                      {convertTo12Hour(event.startTime)} -{" "}
-                                      {convertTo12Hour(event.endTime)}
+                                      {formatDateLocal(event.dateTime[0])} -{" "}
+                                      {formatDateLocal(event.dateTime[1])}{" "}
+                                      <span className="text-blue-800 font-semibold">
+                                        {" "}
+                                        {event.dateTime[0].substring(0, 4)}
+                                      </span>
                                     </span>
                                   )}
                                 </dd>
@@ -691,7 +677,7 @@ export default function EventsHome() {
                               {/* Address */}
                               <dl className="border-t pt-2 mt-2 flex flex-col font-body">
                                 <dt className="sr-only">Address</dt>
-                                <dd className="text-sm text-gray-600 flex items-start gap-2">
+                                <dd className="mb-0 text-sm text-gray-600 flex items-start gap-2">
                                   <MdLocationPin className="size-5 text-blue-700" />
                                   {event.address.slice(0, -5)}
                                 </dd>

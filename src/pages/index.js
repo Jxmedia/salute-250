@@ -59,19 +59,19 @@ export default function HomePage() {
   };
   //
   //
-  function convertTo12Hour(time24) {
-    const [hourStr, minuteStr] = time24.split(":");
-    let hour = parseInt(hourStr, 10);
-    var minute = minuteStr;
-    const ampm = hour >= 12 ? "PM" : "AM";
+  function formatDateLocal(isoString) {
+    const date = new Date(isoString);
 
-    hour = hour % 12 || 12; // Convert 0 to 12
+    const month = date.toLocaleString("en-US", { month: "short" });
+    const day = date.getDate(); // No padStart, removes leading 0
+    const year = date.getFullYear();
 
-    if (minute === "0") {
-      var minute = "00";
-    }
+    let hours = date.getHours();
+    const minutes = String(date.getMinutes()).padStart(2, "0"); // Keep minutes padded
+    const ampm = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12 || 12; // Converts 0 -> 12
 
-    return `${hour}:${minute} ${ampm}`;
+    return `${month} ${day} | ${hours}:${minutes} ${ampm}`; // hours no padStart
   }
   //
   //
@@ -257,7 +257,7 @@ export default function HomePage() {
                           event={event}
                           open={openEvent === event.id}
                           onClose={handleCloseEvent}
-                          convertTo12Hour={convertTo12Hour}
+                          formatDateLocal={formatDateLocal}
                         />
                       )}
                       <button
@@ -388,38 +388,16 @@ export default function HomePage() {
                               <dt className="sr-only">Date</dt>
                               <dd className="text-sm text-gray-600 flex items-center gap-2">
                                 <FaClock className="size-4 text-blue-700" />
-                                {event.startDate === "12/12/9999" ||
-                                event.endDate === "12/12/9999" ? (
+                                {event.dateTime === null ? (
                                   <span className="text-gray-400">TBA</span>
                                 ) : (
                                   <span className="text-blue-600">
-                                    {event.startDate === event.endDate ? (
-                                      new Date(
-                                        event.startDate
-                                      ).toLocaleDateString("en-US", {
-                                        year: "numeric",
-                                        month: "short",
-                                        day: "numeric",
-                                      })
-                                    ) : (
-                                      <>
-                                        {new Date(
-                                          event.startDate
-                                        ).toLocaleDateString("en-US", {
-                                          month: "short",
-                                          day: "numeric",
-                                        })}
-                                        -{new Date(event.endDate).getDate()},{" "}
-                                        {new Date(
-                                          event.endDate
-                                        ).toLocaleDateString("en-US", {
-                                          year: "numeric",
-                                        })}
-                                      </>
-                                    )}
-                                    {" | "}
-                                    {convertTo12Hour(event.startTime)} -{" "}
-                                    {convertTo12Hour(event.endTime)}
+                                    {formatDateLocal(event.dateTime[0])} -{" "}
+                                    {formatDateLocal(event.dateTime[1])}{" "}
+                                    <span className="text-blue-800 font-semibold">
+                                      {" "}
+                                      {event.dateTime[0].substring(0, 4)}
+                                    </span>
                                   </span>
                                 )}
                               </dd>
