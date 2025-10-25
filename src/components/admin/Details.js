@@ -23,7 +23,7 @@ import "rsuite/dist/rsuite.min.css";
 export default function Details(props) {
   const [matchedEvent, setMatchedEvent] = useState(null);
   const [showNotification, setShowNotification] = useState(false);
-  const [showDetailsNotification, setShowDetailsNotification] = useState(false);
+
   //
   //
   useEffect(() => {
@@ -129,10 +129,6 @@ export default function Details(props) {
       }
     );
     handleCancel();
-    setShowDetailsNotification(true);
-    setTimeout(function () {
-      setShowDetailsNotification(false);
-    }, 2000);
 
     foundEvent();
   };
@@ -161,10 +157,6 @@ export default function Details(props) {
       }
     );
     handleCancel();
-    setShowDetailsNotification(true);
-    setTimeout(function () {
-      setShowDetailsNotification(false);
-    }, 2000);
 
     foundEvent();
   };
@@ -269,10 +261,6 @@ export default function Details(props) {
       }
     );
     handleCancel();
-    setShowDetailsNotification(true);
-    setTimeout(function () {
-      setShowDetailsNotification(false);
-    }, 2000);
 
     foundEvent();
   };
@@ -326,35 +314,6 @@ export default function Details(props) {
                       type="button"
                       onClick={() => {
                         setShowNotification(false);
-                      }}
-                      className="inline-flex rounded-full text-gray-400 hover:text-gray-500 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-indigo-600"
-                    >
-                      <span className="sr-only">Close</span>
-                      <XMarkIcon aria-hidden="true" className="size-5" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Transition>
-          <Transition show={showDetailsNotification}>
-            <div className="relative z-50 pointer-events-auto w-full max-w-sm rounded-lg bg-white shadow-lg outline outline-1 outline-black/5 transition data-[closed]:data-[enter]:translate-y-2 data-[enter]:transform data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-100 data-[enter]:ease-out data-[leave]:ease-in data-[closed]:data-[enter]:sm:translate-x-2 data-[closed]:data-[enter]:sm:translate-y-0">
-              <div className="p-4">
-                <div className="flex items-center">
-                  <div className="flex w-0 flex-1 justify-between">
-                    <p className="w-0 flex-1 text-sm font-medium text-gray-900">
-                      Event Details Updated
-                    </p>
-                    <button
-                      type="button"
-                      className="ml-3 shrink-0 rounded-full bg-white text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
-                    ></button>
-                  </div>
-                  <div className="ml-4 flex shrink-0">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setShowDetailsNotification(false);
                       }}
                       className="inline-flex rounded-full text-gray-400 hover:text-gray-500 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-indigo-600"
                     >
