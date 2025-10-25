@@ -141,14 +141,14 @@ const Header = (props) => {
                       className="h-7 w-6 text-saluteRed"
                     />
                   </dt>
-                  <dd>
+                  <div>
                     <a
                       href="tel:+1 (555) 234-5678"
                       className="hover:text-white"
                     >
                       +1 (555) 234-5678
                     </a>
-                  </dd>
+                  </div>
                 </div>
                 <div className="flex justify-start gap-x-2">
                   <dt className="flex-none">
@@ -158,14 +158,14 @@ const Header = (props) => {
                       className="h-7 w-6 text-saluteRed"
                     />
                   </dt>
-                  <dd>
+                  <div>
                     <a
                       href="mailto:info@saa250.com"
                       className="hover:text-white"
                     >
                       info@saa250.com
                     </a>
-                  </dd>
+                  </div>
                 </div>
                 <div className="flex justify-start gap-x-4 pt-2">
                   {footerNavigation.map((item) => (

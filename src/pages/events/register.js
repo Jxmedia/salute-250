@@ -28,9 +28,7 @@ import { Helmet } from "react-helmet";
 import { LoadScript, Autocomplete } from "@react-google-maps/api";
 import FlagBg from "../../images/flag-bg.jpg";
 /////
-import { DateRangePicker, Stack } from "rsuite";
-import { FaCalendar, FaClock } from "react-icons/fa";
-import { BsCalendar2MonthFill } from "react-icons/bs";
+import { DateRangePicker } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
 
 const eventTiers = [
@@ -601,9 +599,9 @@ export default function RegisterEvent() {
                         {type.name}
                       </p>
                     </dt>
-                    <dd className="mt-2 text-base/7 text-gray-600">
+                    <div className="mb-0 mt-2 text-base/7 text-gray-600">
                       {type.description}
-                    </dd>
+                    </div>
                   </div>
                 ))}
               </dl>

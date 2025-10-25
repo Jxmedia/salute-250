@@ -20,6 +20,14 @@ function convertISOToUSDate(isoDateStr) {
   return `${month.padStart(2, "0")}/${day.padStart(2, "0")}/${year}`;
 }
 
+function formatDateToMMDDYYYY(isoDate) {
+  const date = new Date(isoDate);
+  const month = String(date.getUTCMonth() + 1).padStart(2, "0"); // Months are 0-indexed
+  const day = String(date.getUTCDate()).padStart(2, "0");
+  const year = date.getUTCFullYear();
+  return `${month}/${day}/${year}`;
+}
+
 export default function Dashboard(props) {
   return (
     <>
@@ -127,9 +135,13 @@ export default function Dashboard(props) {
                                     "hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 sm:table-cell"
                                   )}
                                 >
-                                  {event.startDate === "12/12/9999"
-                                    ? "TBA"
-                                    : event.startDate}
+                                  {event.dateTime === null ? (
+                                    "TBA"
+                                  ) : (
+                                    <span className=" text-blue-700">
+                                      {formatDateToMMDDYYYY(event.dateTime[0])}
+                                    </span>
+                                  )}
                                 </td>
                                 <td
                                   className={classNames(

@@ -171,12 +171,12 @@ export default function ContactPage() {
                   <dl className="mt-5 space-y-1 text-base/6 text-gray-600">
                     <div>
                       <dt className="sr-only">Address</dt>
-                      <dd>
+                      <div>
                         <p className="font-semibold text-saluteTan">
                           5700 North Harbor City Blvd, Suite 280 Melbourne, FL
                           32940
                         </p>
-                      </dd>
+                      </div>
                     </div>
                   </dl>
                 </div>
@@ -187,19 +187,19 @@ export default function ContactPage() {
                   <dl className="mt-5 space-y-1 text-base/6 text-gray-600">
                     <div>
                       <dt className="sr-only">Phone NUmber</dt>
-                      <dd>
+                      <div>
                         <p className="font-semibold text-saluteTan">
                           +1 250-250-0000
                         </p>
-                      </dd>
+                      </div>
                     </div>
                     <div>
                       <dt className="sr-only">Email</dt>
-                      <dd>
+                      <div>
                         <p className="mt-2 font-semibold text-saluteTan">
                           info@saa250.com
                         </p>
-                      </dd>
+                      </div>
                     </div>
                   </dl>
                 </div>

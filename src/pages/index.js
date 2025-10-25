@@ -366,7 +366,7 @@ export default function HomePage() {
                             </div>
 
                             {/* Tags */}
-                            <dd className="mt-4 font-body">
+                            <div className="mb-0 mt-4 font-body">
                               <div className="flex gap-x-2">
                                 <span className="inline-flex gap-x-1 items-center rounded-md bg-red-50 px-4 py-1.5 text-xs font-semibold text-red-700 ring-1 ring-inset ring-red-600/20">
                                   <MdOutlineStar className="size-4" />
@@ -376,7 +376,7 @@ export default function HomePage() {
                                   {event.eventType}
                                 </span>
                               </div>
-                            </dd>
+                            </div>
 
                             {/* Title */}
                             <h3 className="py-3 text-2xl font-primary font-medium text-gray-700">
@@ -386,7 +386,7 @@ export default function HomePage() {
                             {/* Date */}
                             <dl className="border-t pt-2 mt-2 flex flex-col font-body gap-2">
                               <dt className="sr-only">Date</dt>
-                              <dd className="text-sm text-gray-600 flex items-center gap-2">
+                              <div className="mb-0 text-sm text-gray-600 flex items-center gap-2">
                                 <FaClock className="size-4 text-blue-700" />
                                 {event.dateTime === null ? (
                                   <span className="text-gray-400">TBA</span>
@@ -400,29 +400,29 @@ export default function HomePage() {
                                     </span>
                                   </span>
                                 )}
-                              </dd>
+                              </div>
                             </dl>
 
                             {/* Address */}
                             <dl className="border-t pt-2 mt-2 flex flex-col font-body">
                               <dt className="sr-only">Address</dt>
-                              <dd className="text-sm text-gray-600 flex items-start gap-2">
+                              <div className="mb-0 text-sm text-gray-600 flex items-start gap-2">
                                 <MdLocationPin className="size-5 text-blue-700" />
                                 {event.address.slice(0, -5)}
-                              </dd>
+                              </div>
                             </dl>
 
                             {/* Price */}
                             <dl className="border-t pt-2 mt-2 flex flex-col font-body">
                               <dt className="sr-only">Price</dt>
-                              <dd className="text-sm text-gray-600 flex items-start gap-2">
+                              <div className="mb-0 text-sm text-gray-600 flex items-start gap-2">
                                 <IoTicketSharp className="size-5 text-blue-700" />
                                 {event.price
                                   ? event.price
                                   : event.website
                                   ? "Check Event Website"
                                   : "TBA"}
-                              </dd>
+                              </div>
                             </dl>
                           </div>
 

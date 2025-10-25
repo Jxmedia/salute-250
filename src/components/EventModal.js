@@ -269,27 +269,27 @@ export default function EventModal(props) {
                         aria-hidden="true"
                         className="size-5 text-blue-700"
                       />
-                      <dd className="mb-0 text-sm text-gray-600 py-3 text-center gap-2">
+                      <div className="mb-0 text-sm text-gray-600 py-3 text-center gap-2">
                         {props.event.address.slice(0, -5)}
-                      </dd>
+                      </div>
                     </div>
                     {props.event.price === undefined ? (
                       <>
                         {props.event.website === undefined ? (
                           <dl className="font-body justify-between">
                             <dt className="sr-only">Price</dt>
-                            <dd className="mb-0 text-sm text-gray-600 flex items-start gap-2">
+                            <div className="mb-0 text-sm text-gray-600 flex items-start gap-2">
                               <IoTicketSharp
                                 aria-hidden="true"
                                 className="size-5 text-blue-700"
                               />{" "}
                               <span className="text-gray-400"> TBA</span>
-                            </dd>
+                            </div>
                           </dl>
                         ) : (
                           <dl className="mb-0 font-body justify-between">
                             <dt className="sr-only">Price</dt>
-                            <dd className="mb-0 text-sm text-gray-600 flex items-start gap-2">
+                            <div className="mb-0 text-sm text-gray-600 flex items-start gap-2">
                               <IoTicketSharp
                                 aria-hidden="true"
                                 className="size-5 text-blue-700"
@@ -298,20 +298,20 @@ export default function EventModal(props) {
                                 {" "}
                                 Check Website
                               </span>
-                            </dd>
+                            </div>
                           </dl>
                         )}
                       </>
                     ) : (
                       <dl className="font-body justify-between">
                         <dt className="sr-only">Price</dt>
-                        <dd className="text-sm text-gray-600 flex items-start gap-2">
+                        <div className="mb-0 text-sm text-gray-600 flex items-start gap-2">
                           <IoTicketSharp
                             aria-hidden="true"
                             className="size-5 text-blue-700"
                           />{" "}
                           {props.event.price}
-                        </dd>
+                        </div>
                       </dl>
                     )}
                   </div>

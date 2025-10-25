@@ -40,14 +40,14 @@ const Footer = () => {
                       className="h-7 w-6 text-saluteRed"
                     />
                   </dt>
-                  <dd>
+                  <div>
                     <a
                       href="tel:+1 (555) 234-5678"
                       className="hover:text-white"
                     >
                       +1 (555) 234-5678
                     </a>
-                  </dd>
+                  </div>
                 </div>
                 <div className="flex justify-center lg:justify-end gap-x-2">
                   <dt className="flex-none">
@@ -57,14 +57,14 @@ const Footer = () => {
                       className="h-7 w-6 text-saluteRed"
                     />
                   </dt>
-                  <dd>
+                  <div>
                     <a
                       href="mailto:info@saa250.com"
                       className="hover:text-white"
                     >
                       info@saa250.com
                     </a>
-                  </dd>
+                  </div>
                 </div>
               </dl>
               <div className="flex justify-center lg:justify-end gap-x-4 mt-5">
@@ -122,14 +122,14 @@ const Footer = () => {
                       className="h-7 w-6 text-saluteRed"
                     />
                   </dt>
-                  <dd>
+                  <div>
                     <a
                       href="tel:+1 (555) 234-5678"
                       className="hover:text-white"
                     >
                       +1 (555) 234-5678
                     </a>
-                  </dd>
+                  </div>
                 </div>
                 <div className="flex justify-center lg:justify-end gap-x-2">
                   <dt className="flex-none">
@@ -139,14 +139,14 @@ const Footer = () => {
                       className="h-7 w-6 text-saluteRed"
                     />
                   </dt>
-                  <dd>
+                  <div>
                     <a
                       href="mailto:info@saa250.com"
                       className="hover:text-white"
                     >
                       info@saa250.com
                     </a>
-                  </dd>
+                  </div>
                 </div>
               </dl>
               <div className="flex justify-center lg:justify-end gap-x-4 mt-5">
