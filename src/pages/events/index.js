@@ -34,6 +34,7 @@ import MilitaryCover from "../../images/event-covers/military.png";
 import PatrioticCover from "../../images/event-covers/patriotic.png";
 import OtherCover from "../../images/event-covers/other.png";
 import BucsCover from "../../images/event-covers/71a4d628-d864-4ba0-aead-080b73ef5d48.png";
+import Saa250Cover from "../../images/event-covers/0cf0c100-7f8a-4be8-a9ee-03bd98ef1ffd.png";
 ///
 import CTA from "../../images/girl-cta.jpg";
 import Favicon from "../../images/favicon.png";
@@ -520,69 +521,84 @@ export default function EventsHome() {
                                 ) : (
                                   <>
                                     {" "}
-                                    {event.eventType === "Air Show" && (
+                                    {event.id ===
+                                    "0cf0c100-7f8a-4be8-a9ee-03bd98ef1ffd" ? (
                                       <img
                                         alt=""
-                                        src={AirShowCover}
+                                        src={Saa250Cover}
                                         className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
                                       />
-                                    )}
-                                    {event.eventType === "Sports" && (
-                                      <img
-                                        alt=""
-                                        src={SportsCover}
-                                        className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                      />
-                                    )}
-                                    {event.eventType === "Car/RV/Boat" && (
-                                      <img
-                                        alt=""
-                                        src={CarCover}
-                                        className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                      />
-                                    )}
-                                    {event.eventType ===
-                                      "Patriotic/Historic" && (
-                                      <img
-                                        alt=""
-                                        src={PatrioticCover}
-                                        className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                      />
-                                    )}
-                                    {event.eventType === "Music Festival" && (
-                                      <img
-                                        alt=""
-                                        src={MusicCover}
-                                        className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                      />
-                                    )}
-                                    {event.eventType === "State/Local" && (
-                                      <img
-                                        alt=""
-                                        src={LocalCover}
-                                        className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                      />
-                                    )}
-                                    {event.eventType === "Military/Tribute" && (
-                                      <img
-                                        alt=""
-                                        src={MilitaryCover}
-                                        className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                      />
-                                    )}
-                                    {event.eventType === "Educational/STEM" && (
-                                      <img
-                                        alt=""
-                                        src={SchoolCover}
-                                        className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                      />
-                                    )}
-                                    {event.eventType === "Other" && (
-                                      <img
-                                        alt=""
-                                        src={OtherCover}
-                                        className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                      />
+                                    ) : (
+                                      <>
+                                        {" "}
+                                        {event.eventType === "Air Show" && (
+                                          <img
+                                            alt=""
+                                            src={AirShowCover}
+                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                          />
+                                        )}
+                                        {event.eventType === "Sports" && (
+                                          <img
+                                            alt=""
+                                            src={SportsCover}
+                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                          />
+                                        )}
+                                        {event.eventType === "Car/RV/Boat" && (
+                                          <img
+                                            alt=""
+                                            src={CarCover}
+                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                          />
+                                        )}
+                                        {event.eventType ===
+                                          "Patriotic/Historic" && (
+                                          <img
+                                            alt=""
+                                            src={PatrioticCover}
+                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                          />
+                                        )}
+                                        {event.eventType ===
+                                          "Music Festival" && (
+                                          <img
+                                            alt=""
+                                            src={MusicCover}
+                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                          />
+                                        )}
+                                        {event.eventType === "State/Local" && (
+                                          <img
+                                            alt=""
+                                            src={LocalCover}
+                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                          />
+                                        )}
+                                        {event.eventType ===
+                                          "Military/Tribute" && (
+                                          <img
+                                            alt=""
+                                            src={MilitaryCover}
+                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                          />
+                                        )}
+                                        {event.eventType ===
+                                          "Educational/STEM" && (
+                                          <img
+                                            alt=""
+                                            src={SchoolCover}
+                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                          />
+                                        )}
+                                        {event.eventType === "Other" && (
+                                          <img
+                                            alt=""
+                                            src={OtherCover}
+                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                          />
+                                        )}
+                                      </>
                                     )}
                                   </>
                                 )}
