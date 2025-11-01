@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../../components/Layout";
 import EventModal from "../../components/EventModal";
+import EventMap from "../../components/Map";
 import {
   Listbox,
   ListboxButton,
@@ -43,35 +44,6 @@ import { Helmet } from "react-helmet";
 import { IoMusicalNotesSharp } from "react-icons/io5";
 import FlagBg from "../../images/flag-bg.jpg";
 
-const event = [
-  {
-    name: "Tampa Bay Aviation Show",
-    location: "Raymond James Stadium",
-    eventType: "Air Show",
-    email: "janecooper@example.com",
-    telephone: "+1-202-555-0170",
-    imageUrl: AirShowCover,
-    tier: "Signature",
-  },
-  {
-    name: "Lightning vs. Avalanche",
-    location: "Lead Security Associate",
-    eventType: "Sporting Event",
-    email: "codyfisher@example.com",
-    telephone: "+1-202-555-0114",
-    imageUrl: SportsCover,
-    tier: "Affiliate",
-  },
-  {
-    name: "SEMA Pre Show",
-    location: "Assurance Administrator",
-    email: "estherhoward@example.com",
-    telephone: "+1-202-555-0143",
-    eventType: "Car Show",
-    imageUrl: CarCover,
-    tier: "Partner",
-  },
-];
 const people = [
   "All Events",
   "Air Show",
@@ -138,6 +110,62 @@ export default function EventsHome() {
 
     return `${month} ${day} | ${hours}:${minutes} ${ampm}`; // hours no padStart
   }
+  //
+  //
+  //
+  const projects = [
+    {
+      id: 1,
+      name: "GraphQL API",
+      href: "#",
+      status: "Complete",
+      createdBy: "Leslie Alexander",
+      dueDate: "March 17, 2023",
+      dueDateTime: "2023-03-17T00:00Z",
+    },
+    {
+      id: 2,
+      name: "New benefits plan",
+      href: "#",
+      status: "In progress",
+      createdBy: "Leslie Alexander",
+      dueDate: "May 5, 2023",
+      dueDateTime: "2023-05-05T00:00Z",
+    },
+    {
+      id: 3,
+      name: "Onboarding emails",
+      href: "#",
+      status: "In progress",
+      createdBy: "Courtney Henry",
+      dueDate: "May 25, 2023",
+      dueDateTime: "2023-05-25T00:00Z",
+    },
+    {
+      id: 4,
+      name: "iOS app",
+      href: "#",
+      status: "In progress",
+      createdBy: "Leonard Krasner",
+      dueDate: "June 7, 2023",
+      dueDateTime: "2023-06-07T00:00Z",
+    },
+    {
+      id: 5,
+      name: "Marketing site redesign",
+      href: "#",
+      status: "Archived",
+      createdBy: "Courtney Henry",
+      dueDate: "June 10, 2023",
+      dueDateTime: "2023-06-10T00:00Z",
+    },
+  ];
+  //
+  //
+  //
+  //
+  //
+  //
   //
   //
 
@@ -744,6 +772,8 @@ export default function EventsHome() {
           </div>
         </div>
       </div>
+
+      {allEvents === null ? <></> : <EventMap events={allEvents} />}
 
       <div className="relative bg-white">
         <div className="relative h-80 overflow-hidden bg-indigo-600 lg:absolute lg:left-0 lg:h-full lg:w-1/3 lg:w-1/2">

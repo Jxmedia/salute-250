@@ -60,7 +60,7 @@ const Footer = () => {
                   <div>
                     <a
                       href="mailto:info@saa250.com"
-                      className="hover:text-white"
+                      className="text-saluteTan hover:text-white"
                     >
                       info@saa250.com
                     </a>
@@ -142,7 +142,7 @@ const Footer = () => {
                   <div>
                     <a
                       href="mailto:info@saa250.com"
-                      className="hover:text-white"
+                      className="text-saluteTan hover:text-white"
                     >
                       info@saa250.com
                     </a>
