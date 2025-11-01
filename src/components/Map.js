@@ -97,7 +97,7 @@ export default function EventMap(props) {
   // Load Google Maps API
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyCydl9IQNI9kEhs_--rVWqjRc0B2M9hays",
+    googleMapsApiKey: props.googleMapsApiKey,
   });
 
   const [map, setMap] = useState(null);

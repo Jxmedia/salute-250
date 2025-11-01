@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useCallback } from "react";
 import { IoTicketSharp } from "react-icons/io5";
 import { MdLocationPin } from "react-icons/md";
 import { Dialog, DialogPanel, DialogBackdrop } from "@headlessui/react";
@@ -14,7 +14,7 @@ import { RiSchoolFill } from "react-icons/ri";
 import { BsPatchQuestionFill } from "react-icons/bs";
 import { LiaFlagUsaSolid } from "react-icons/lia";
 import { IoMusicalNotesSharp } from "react-icons/io5";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 
 export default function EventModalMap(props) {
   return (
@@ -209,6 +209,33 @@ export default function EventModalMap(props) {
                         />
                       </a>
                     )}
+                  </div>
+                </div>
+                <div className="mt-3 relative isolate overflow-hidden rounded-2xl">
+                  <div class=" col-span-6 sm:col-span-3">
+                    <div class="border border-gray-300 rounded-lg p-2 h-64 relative">
+                      <div class="absolute top-0 left-0 w-full h-full rounded-2xl">
+                        <GoogleMap
+                          mapContainerStyle={{
+                            width: "100%",
+                            height: "100%",
+                          }}
+                          center={{
+                            lat: props.event.lat,
+                            lng: props.event.lng,
+                          }}
+                          zoom={11}
+                        >
+                          {/* Marker at the center */}
+                          <Marker
+                            position={{
+                              lat: props.event.lat,
+                              lng: props.event.lng,
+                            }}
+                          />
+                        </GoogleMap>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
