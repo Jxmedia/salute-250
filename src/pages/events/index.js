@@ -146,7 +146,7 @@ export default function EventsHome() {
   //
   //
   //
-  console.log(filteredEvents.length);
+
   //
   //
   //
@@ -253,7 +253,7 @@ export default function EventsHome() {
             </a>
           </div>
           <div className="py-6 relative flex justify-center gap-x-6 items-center">
-            <div className="relative w-1/3">
+            <div className="relative lg:w-1/3">
               <input
                 type="text"
                 placeholder="Search by city, state or zip..."
@@ -285,7 +285,7 @@ export default function EventsHome() {
                 </button>
               )}
             </div>
-            <div className="w-1/3">
+            <div className="lg:w-1/3">
               <div className="font-body bg-white grid grid-cols-2 gap-x-1 rounded-xl p-1 text-center text-xs/5 font-semibold ring-1 ring-inset ring-gray-200">
                 <label className="group relative rounded-xl px-2.5 py-3 has-[:checked]:bg-saluteBlue">
                   <input
@@ -630,7 +630,10 @@ export default function EventsHome() {
       {isListView === false ? (
         <>
           {filteredEvents === null || googleMapsApiKey === null ? (
-            <></>
+            <div className="flex">
+              <div className="h-20 my-3 mx-4 w-1/3 rounded-2xl bg-gray-200 animate-pulse"></div>
+              <div className="h-20 my-3 mx-4 w-3/4 rounded-2xl bg-gray-200 animate-pulse"></div>
+            </div>
           ) : (
             <>
               {filteredEvents.length > 0 ? (

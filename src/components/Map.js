@@ -322,8 +322,8 @@ export default function EventMap(props) {
 
   return (
     <>
-      <div className="font-body grid grid-cols-8">
-        <div className="col-span-3 p-6 overflow-y-scroll h-[600px] border-b-2 border-saluteBlue">
+      <div className="font-body grid lg:grid-cols-8">
+        <div className="order-2 col-span-3 p-6 overflow-y-scroll h-[600px] border-b-2 border-saluteBlue lg:order-1">
           {" "}
           <ul role="list" className="divide-y divide-gray-200">
             {props.events.map((event) => (
@@ -337,7 +337,7 @@ export default function EventMap(props) {
                 } flex items-center justify-between gap-x-6 py-5`}
               >
                 <div className="min-w-0">
-                  <div className="mb-4 relative isolate overflow-hidden rounded-2xl py-14 w-56">
+                  <div className="mb-4 relative isolate overflow-hidden rounded-2xl py-14 w-96 lg:w-56">
                     {event.id === "71a4d628-d864-4ba0-aead-080b73ef5d48" ? (
                       <img
                         alt=""
@@ -536,7 +536,7 @@ export default function EventMap(props) {
                           event
                         )
                       }
-                      className="mt-3 hidden rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:block"
+                      className="mt-3 rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:block"
                     >
                       View on Map
                       <span className="sr-only">, {event.name}</span>
@@ -547,7 +547,7 @@ export default function EventMap(props) {
                       <a
                         href={"https://" + event.website}
                         target="blank"
-                        className="mt-3 hidden rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:block"
+                        className="mt-3 rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:block"
                       >
                         Event Website
                       </a>
@@ -558,7 +558,7 @@ export default function EventMap(props) {
             ))}
           </ul>
         </div>
-        <div className="col-span-5">
+        <div className="order-1 col-span-5 lg:order-2">
           <GoogleMap
             mapContainerStyle={containerStyle}
             center={defaultCenter}
