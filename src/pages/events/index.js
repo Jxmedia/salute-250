@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Layout from "../../components/Layout";
 import EventModal from "../../components/EventModalMap";
 import EventMap from "../../components/Map";
@@ -61,9 +61,27 @@ export default function EventsHome() {
   //
   const [openEvent, setOpenEvent] = useState(false);
   const [selected, setSelected] = useState(null);
+  const [isListView, setIsListView] = useState(false);
 
   const [allEvents, setAllEvents] = useState(null);
   const [googleMapsApiKey, setGoogleMapsApiKey] = useState(null);
+  const [query, setQuery] = useState("");
+
+  const clearSearch = () => {
+    setQuery("");
+  };
+
+  // Filter events by city or zip (case-insensitive)
+  const filteredEvents = useMemo(() => {
+    if (!query.trim()) return allEvents;
+    const lowerQuery = query.toLowerCase();
+    return allEvents.filter(
+      (event) =>
+        event.city?.toLowerCase().includes(lowerQuery) ||
+        event.zip?.toString().includes(lowerQuery) ||
+        event.state?.toLowerCase().includes(lowerQuery)
+    );
+  }, [query, allEvents]);
 
   useEffect(() => {
     getAllEvents();
@@ -128,7 +146,7 @@ export default function EventsHome() {
   //
   //
   //
-
+  console.log(filteredEvents.length);
   //
   //
   //
@@ -201,7 +219,7 @@ export default function EventsHome() {
         <div className="bg-gradient-to-r from-blue-600 to-blue-900 h-2.5" />
       </div>
 
-      <div className="relative py-32">
+      <div className="relative pt-32">
         <img
           alt=""
           src={FlagBg}
@@ -234,513 +252,402 @@ export default function EventsHome() {
               <IoMdNotifications aria-hidden="true" className="size-7" />
             </a>
           </div>
-          <div className="pt-6 pb-8 border-t border-b border-gray-600 mt-10">
-            <div className="hidden pb-8 flex justify-center gap-x-4">
-              <Listbox value={selected} onChange={setSelected}>
-                <div className="relative mt-2">
-                  <ListboxButton className="flex items-center gap-x-1 font-body bg-white px-10 py-4 text-md text-saluteRed font-medium rounded-full hover:bg-saluteRed hover:text-white focus-visible:outline-saluteBlue">
-                    <span className="">
-                      {selected ? selected : "Event Tier"}
-                    </span>
-                  </ListboxButton>
-
-                  <ListboxOptions
-                    transition
-                    className="absolute z-10 mt-1 w-full overflow-auto rounded-3xl bg-white py-4 text-base shadow-lg outline outline-1 outline-black/5 data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in sm:text-sm"
+          <div className="py-6 relative flex justify-center gap-x-6 items-center">
+            <div className="relative w-1/3">
+              <input
+                type="text"
+                placeholder="Search by city, state or zip..."
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                className="w-full rounded-2xl border border-gray-300 bg-white py-4 pl-3 pr-10 text-sm text-gray-700 placeholder-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+              />
+              {query && (
+                <button
+                  onClick={clearSearch}
+                  type="button"
+                  className="absolute inset-y-0 right-2 flex items-center text-gray-400 hover:text-gray-600"
+                >
+                  {/* X icon (Heroicon-style SVG) */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
                   >
-                    <ListboxOption
-                      value="Signature Event"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-700 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
-                    >
-                      <span className="block truncate font-normal group-data-[selected]:font-semibold">
-                        Signature
-                      </span>
-                    </ListboxOption>
-                    <ListboxOption
-                      value="Partner Event"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-700 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
-                    >
-                      <span className="block truncate font-normal group-data-[selected]:font-semibold">
-                        Partner
-                      </span>
-                    </ListboxOption>
-                    <ListboxOption
-                      value="Affiliate Event"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-700 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
-                    >
-                      <span className="block truncate font-normal group-data-[selected]:font-semibold">
-                        Affiliate
-                      </span>
-                    </ListboxOption>
-                    <ListboxOption
-                      value="Event Tier"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-600 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
-                    >
-                      <span className="block truncate font-normal group-data-[selected]:font-semibold underline">
-                        Clear
-                      </span>
-                    </ListboxOption>
-                  </ListboxOptions>
-                </div>
-              </Listbox>
-
-              <Listbox value={selected} onChange={setSelected}>
-                <div className="relative mt-2">
-                  <ListboxButton className="flex items-center gap-x-1 font-body bg-white px-10 py-4 text-md text-saluteRed font-medium rounded-full hover:bg-saluteRed hover:text-white focus-visible:outline-saluteBlue">
-                    <span className="">
-                      {selected ? selected : "Event Type"}
-                    </span>
-                  </ListboxButton>
-
-                  <ListboxOptions
-                    transition
-                    className="absolute z-10 mt-1 w-full overflow-auto rounded-3xl bg-white py-4 text-base shadow-lg outline outline-1 outline-black/5 data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in sm:text-sm"
-                  >
-                    {people.map((person) => (
-                      <ListboxOption
-                        key={person}
-                        value={person}
-                        className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-700 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
-                      >
-                        <span className="block truncate font-normal group-data-[selected]:font-semibold">
-                          {person}
-                        </span>
-                      </ListboxOption>
-                    ))}
-                    <ListboxOption
-                      value="Event Tier"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-600 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
-                    >
-                      <span className="block truncate font-normal group-data-[selected]:font-semibold underline">
-                        Clear
-                      </span>
-                    </ListboxOption>
-                  </ListboxOptions>
-                </div>
-              </Listbox>
-
-              <Listbox value={selected} onChange={setSelected}>
-                <div className="relative mt-2">
-                  <ListboxButton className="flex items-center gap-x-1 font-body bg-white px-10 py-4 text-md text-saluteRed font-medium rounded-full hover:bg-saluteRed hover:text-white focus-visible:outline-saluteBlue">
-                    <span className="">
-                      {selected ? selected : "Event Name"}
-                    </span>
-                  </ListboxButton>
-
-                  <ListboxOptions
-                    transition
-                    className="absolute z-10 mt-1 w-full overflow-auto rounded-3xl bg-white py-4 text-base shadow-lg outline outline-1 outline-black/5 data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in sm:text-sm"
-                  >
-                    <ListboxOption
-                      value="ASC"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-700 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
-                    >
-                      <span className="block truncate font-normal group-data-[selected]:font-semibold">
-                        Ascending
-                      </span>
-                    </ListboxOption>
-                    <ListboxOption
-                      value="DESC"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-700 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
-                    >
-                      <span className="block truncate font-normal group-data-[selected]:font-semibold">
-                        Descending
-                      </span>
-                    </ListboxOption>
-                    <ListboxOption
-                      value="Event Tier"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-600 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
-                    >
-                      <span className="block truncate font-normal group-data-[selected]:font-semibold underline">
-                        Clear
-                      </span>
-                    </ListboxOption>
-                  </ListboxOptions>
-                </div>
-              </Listbox>
-
-              <Listbox value={selected} onChange={setSelected}>
-                <div className="relative mt-2">
-                  <ListboxButton className="flex items-center gap-x-1 font-body bg-white px-10 py-4 text-md text-saluteRed font-medium rounded-full hover:bg-saluteRed hover:text-white focus-visible:outline-saluteBlue">
-                    <span className="">
-                      {selected ? selected : "Start Date"}
-                    </span>
-                  </ListboxButton>
-
-                  <ListboxOptions
-                    transition
-                    className="absolute z-10 mt-1 w-full overflow-auto rounded-3xl bg-white py-4 text-base shadow-lg outline outline-1 outline-black/5 data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in sm:text-sm"
-                  >
-                    <ListboxOption
-                      value="ASC"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-700 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
-                    >
-                      <span className="block truncate font-normal group-data-[selected]:font-semibold">
-                        Ascending
-                      </span>
-                    </ListboxOption>
-                    <ListboxOption
-                      value="DESC"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-700 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
-                    >
-                      <span className="block truncate font-normal group-data-[selected]:font-semibold">
-                        Descending
-                      </span>
-                    </ListboxOption>
-                    <ListboxOption
-                      value="Event Tier"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-600 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
-                    >
-                      <span className="block truncate font-normal group-data-[selected]:font-semibold underline">
-                        Clear
-                      </span>
-                    </ListboxOption>
-                  </ListboxOptions>
-                </div>
-              </Listbox>
-
-              <Listbox value={selected} onChange={setSelected}>
-                <div className="relative mt-2">
-                  <ListboxButton className="flex items-center gap-x-1 font-body bg-white px-10 py-4 text-md text-saluteRed font-medium rounded-full hover:bg-saluteRed hover:text-white focus-visible:outline-saluteBlue">
-                    <span className="">{selected ? selected : "Price"}</span>
-                  </ListboxButton>
-
-                  <ListboxOptions
-                    transition
-                    className="absolute z-10 mt-1 w-full overflow-auto rounded-3xl bg-white py-4 text-base shadow-lg outline outline-1 outline-black/5 data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in sm:text-sm"
-                  >
-                    <ListboxOption
-                      value="ASC"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-700 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
-                    >
-                      <span className="block truncate font-normal group-data-[selected]:font-semibold">
-                        Ascending
-                      </span>
-                    </ListboxOption>
-                    <ListboxOption
-                      value="DESC"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-700 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
-                    >
-                      <span className="block truncate font-normal group-data-[selected]:font-semibold">
-                        Descending
-                      </span>
-                    </ListboxOption>
-                    <ListboxOption
-                      value="Free"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-700 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
-                    >
-                      <span className="block truncate font-normal group-data-[selected]:font-semibold">
-                        Free
-                      </span>
-                    </ListboxOption>
-                    <ListboxOption
-                      value="Event Tier"
-                      className="group relative cursor-default select-none py-2 pl-4 pr-4 text-gray-600 data-[focus]:bg-saluteRed data-[focus]:text-white data-[focus]:outline-none"
-                    >
-                      <span className="block truncate font-normal group-data-[selected]:font-semibold underline">
-                        Clear
-                      </span>
-                    </ListboxOption>
-                  </ListboxOptions>
-                </div>
-              </Listbox>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              )}
             </div>
-            {allEvents === null ? (
-              <ul
-                role="list"
-                className="tracking-wide grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:grid-cols-3"
-              >
-                <button className="h-20 w-full rounded-2xl bg-gray-200 animate-pulse"></button>
-                <button className="h-20 w-full rounded-2xl bg-gray-200 animate-pulse"></button>
-                <button className="h-20 w-full rounded-2xl bg-gray-200 animate-pulse"></button>
-              </ul>
-            ) : (
-              <ul
-                role="list"
-                className="tracking-wide grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:grid-cols-3"
-              >
-                {allEvents
-                  .slice() // optional: avoid mutating the original array
-                  .sort((a, b) => {
-                    const dateA = a.dateTime?.[0]
-                      ? new Date(a.dateTime[0])
-                      : null;
-                    const dateB = b.dateTime?.[0]
-                      ? new Date(b.dateTime[0])
-                      : null;
+            <div className="w-1/3">
+              <div className="font-body bg-white grid grid-cols-2 gap-x-1 rounded-xl p-1 text-center text-xs/5 font-semibold ring-1 ring-inset ring-gray-200">
+                <label className="group relative rounded-xl px-2.5 py-3 has-[:checked]:bg-saluteBlue">
+                  <input
+                    defaultValue="map"
+                    checked={isListView === false}
+                    onChange={() => setIsListView(false)}
+                    id="view"
+                    name="view"
+                    type="radio"
+                    className="absolute inset-0 appearance-none rounded-full"
+                  />
+                  <span className="text-gray-500 group-has-[:checked]:text-white">
+                    Map View
+                  </span>
+                </label>
+                <label className="group relative rounded-xl px-2.5 py-3 has-[:checked]:bg-saluteBlue">
+                  <input
+                    id="view"
+                    checked={isListView === true}
+                    onChange={() => setIsListView(true)}
+                    name="view"
+                    type="radio"
+                    className="absolute inset-0 appearance-none pointer-events-auto rounded-full"
+                  />
+                  <span className="text-gray-500 group-has-[:checked]:text-white">
+                    List View
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+          {isListView === true ? (
+            <div className="pt-6 pb-8 border-t border-b border-gray-600">
+              {filteredEvents === null ? (
+                <ul
+                  role="list"
+                  className="tracking-wide grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:grid-cols-3"
+                >
+                  <button className="h-20 w-full rounded-2xl bg-gray-200 animate-pulse"></button>
+                  <button className="h-20 w-full rounded-2xl bg-gray-200 animate-pulse"></button>
+                  <button className="h-20 w-full rounded-2xl bg-gray-200 animate-pulse"></button>
+                </ul>
+              ) : (
+                <ul
+                  role="list"
+                  className="tracking-wide grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:grid-cols-3"
+                >
+                  {filteredEvents.length > 0 ? (
+                    filteredEvents
+                      .slice() // optional: avoid mutating the original array
+                      .sort((a, b) => {
+                        const dateA = a.dateTime?.[0]
+                          ? new Date(a.dateTime[0])
+                          : null;
+                        const dateB = b.dateTime?.[0]
+                          ? new Date(b.dateTime[0])
+                          : null;
 
-                    // Both null → equal
-                    if (!dateA && !dateB) return 0;
+                        // Both null → equal
+                        if (!dateA && !dateB) return 0;
 
-                    // Nulls last
-                    if (!dateA) return 1;
-                    if (!dateB) return -1;
+                        // Nulls last
+                        if (!dateA) return 1;
+                        if (!dateB) return -1;
 
-                    // Compare valid dates
-                    return dateA - dateB;
-                  })
-                  .map((event) => (
-                    <>
-                      {openEvent === event.id && (
-                        <EventModal
-                          event={event}
-                          open={openEvent === event.id}
-                          onClose={handleCloseEvent}
-                          formatDateLocal={formatDateLocal}
-                          googleMapsApiKey={googleMapsApiKey}
-                        />
-                      )}
-                      <li
-                        key={event.email}
-                        className="col-span-1 flex flex-col divide-y divide-gray-200 "
-                      >
-                        <button
-                          onClick={() => handleOpenEvent(event.id)}
-                          className="text-left duration-300 ease-in-out hover:bg-saluteTan hover:bg-opacity-30 rounded-2xl group h-full w-full"
-                        >
-                          <div className="bg-white rounded-2xl ring-1 ring-blue-700/10 flex flex-col justify-between h-full">
-                            {/* Top content area */}
-                            <div className="flex flex-col flex-grow p-6">
-                              {/* Background image + icon section */}
-                              <div className="relative isolate overflow-hidden rounded-2xl py-12">
-                                {event.id ===
-                                "71a4d628-d864-4ba0-aead-080b73ef5d48" ? (
-                                  <img
-                                    alt=""
-                                    src={BucsCover}
-                                    className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                  />
-                                ) : (
-                                  <>
-                                    {" "}
+                        // Compare valid dates
+                        return dateA - dateB;
+                      })
+                      .map((event) => (
+                        <>
+                          {openEvent === event.id && (
+                            <EventModal
+                              event={event}
+                              open={openEvent === event.id}
+                              onClose={handleCloseEvent}
+                              formatDateLocal={formatDateLocal}
+                              googleMapsApiKey={googleMapsApiKey}
+                            />
+                          )}
+                          <li
+                            key={event.email}
+                            className="col-span-1 flex flex-col divide-y divide-gray-200 "
+                          >
+                            <button
+                              onClick={() => handleOpenEvent(event.id)}
+                              className="text-left duration-300 ease-in-out hover:bg-saluteTan hover:bg-opacity-30 rounded-2xl group h-full w-full"
+                            >
+                              <div className="bg-white rounded-2xl ring-1 ring-blue-700/10 flex flex-col justify-between h-full">
+                                {/* Top content area */}
+                                <div className="flex flex-col flex-grow p-6">
+                                  {/* Background image + icon section */}
+                                  <div className="relative isolate overflow-hidden rounded-2xl py-12">
                                     {event.id ===
-                                    "0cf0c100-7f8a-4be8-a9ee-03bd98ef1ffd" ? (
+                                    "71a4d628-d864-4ba0-aead-080b73ef5d48" ? (
                                       <img
                                         alt=""
-                                        src={Saa250Cover}
+                                        src={BucsCover}
                                         className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
                                       />
                                     ) : (
                                       <>
                                         {" "}
-                                        {event.eventType === "Air Show" && (
+                                        {event.id ===
+                                        "0cf0c100-7f8a-4be8-a9ee-03bd98ef1ffd" ? (
                                           <img
                                             alt=""
-                                            src={AirShowCover}
+                                            src={Saa250Cover}
                                             className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
                                           />
-                                        )}
-                                        {event.eventType === "Sports" && (
-                                          <img
-                                            alt=""
-                                            src={SportsCover}
-                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                          />
-                                        )}
-                                        {event.eventType === "Car/RV/Boat" && (
-                                          <img
-                                            alt=""
-                                            src={CarCover}
-                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                          />
-                                        )}
-                                        {event.eventType ===
-                                          "Patriotic/Historic" && (
-                                          <img
-                                            alt=""
-                                            src={PatrioticCover}
-                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                          />
-                                        )}
-                                        {event.eventType ===
-                                          "Music Festival" && (
-                                          <img
-                                            alt=""
-                                            src={MusicCover}
-                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                          />
-                                        )}
-                                        {event.eventType === "State/Local" && (
-                                          <img
-                                            alt=""
-                                            src={LocalCover}
-                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                          />
-                                        )}
-                                        {event.eventType ===
-                                          "Military/Tribute" && (
-                                          <img
-                                            alt=""
-                                            src={MilitaryCover}
-                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                          />
-                                        )}
-                                        {event.eventType ===
-                                          "Educational/STEM" && (
-                                          <img
-                                            alt=""
-                                            src={SchoolCover}
-                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                          />
-                                        )}
-                                        {event.eventType === "Other" && (
-                                          <img
-                                            alt=""
-                                            src={OtherCover}
-                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                          />
+                                        ) : (
+                                          <>
+                                            {" "}
+                                            {event.eventType === "Air Show" && (
+                                              <img
+                                                alt=""
+                                                src={AirShowCover}
+                                                className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                              />
+                                            )}
+                                            {event.eventType === "Sports" && (
+                                              <img
+                                                alt=""
+                                                src={SportsCover}
+                                                className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                              />
+                                            )}
+                                            {event.eventType ===
+                                              "Car/RV/Boat" && (
+                                              <img
+                                                alt=""
+                                                src={CarCover}
+                                                className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                              />
+                                            )}
+                                            {event.eventType ===
+                                              "Patriotic/Historic" && (
+                                              <img
+                                                alt=""
+                                                src={PatrioticCover}
+                                                className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                              />
+                                            )}
+                                            {event.eventType ===
+                                              "Music Festival" && (
+                                              <img
+                                                alt=""
+                                                src={MusicCover}
+                                                className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                              />
+                                            )}
+                                            {event.eventType ===
+                                              "State/Local" && (
+                                              <img
+                                                alt=""
+                                                src={LocalCover}
+                                                className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                              />
+                                            )}
+                                            {event.eventType ===
+                                              "Military/Tribute" && (
+                                              <img
+                                                alt=""
+                                                src={MilitaryCover}
+                                                className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                              />
+                                            )}
+                                            {event.eventType ===
+                                              "Educational/STEM" && (
+                                              <img
+                                                alt=""
+                                                src={SchoolCover}
+                                                className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                              />
+                                            )}
+                                            {event.eventType === "Other" && (
+                                              <img
+                                                alt=""
+                                                src={OtherCover}
+                                                className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                              />
+                                            )}
+                                          </>
                                         )}
                                       </>
                                     )}
-                                  </>
-                                )}
 
-                                <div className="absolute inset-0 bg-black opacity-20 mix-blend-multiply group-hover:saturate-0" />
-                                <div className="relative flex justify-center opacity-90 group-hover:blur-[2px] group-hover:opacity-60">
-                                  {event.eventType === "Air Show" && (
-                                    <MdAirplaneTicket className="size-24 text-white" />
-                                  )}
-                                  {event.eventType === "Sports" && (
-                                    <GiAmericanFootballHelmet className="size-24 text-white" />
-                                  )}
-                                  {event.eventType === "Car/RV/Boat" && (
-                                    <IoCarSportSharp className="size-24 text-white" />
-                                  )}
-                                  {event.eventType === "Music Festival" && (
-                                    <IoMusicalNotesSharp className="size-24 text-white" />
-                                  )}
-                                  {event.eventType === "Patriotic/Historic" && (
-                                    <LiaFlagUsaSolid className="size-24 text-white" />
-                                  )}
-                                  {event.eventType === "State/Local" && (
-                                    <MdOutlineFestival className="size-24 text-white" />
-                                  )}
-                                  {event.eventType === "Military/Tribute" && (
-                                    <FaPersonMilitaryRifle className="size-24 text-white" />
-                                  )}
-                                  {event.eventType === "Educational/STEM" && (
-                                    <RiSchoolFill className="size-24 text-white" />
-                                  )}
-                                  {event.eventType === "Other" && (
-                                    <BsPatchQuestionFill className="size-24 text-white" />
-                                  )}
-                                </div>
-                              </div>
+                                    <div className="absolute inset-0 bg-black opacity-20 mix-blend-multiply group-hover:saturate-0" />
+                                    <div className="relative flex justify-center opacity-90 group-hover:blur-[2px] group-hover:opacity-60">
+                                      {event.eventType === "Air Show" && (
+                                        <MdAirplaneTicket className="size-24 text-white" />
+                                      )}
+                                      {event.eventType === "Sports" && (
+                                        <GiAmericanFootballHelmet className="size-24 text-white" />
+                                      )}
+                                      {event.eventType === "Car/RV/Boat" && (
+                                        <IoCarSportSharp className="size-24 text-white" />
+                                      )}
+                                      {event.eventType === "Music Festival" && (
+                                        <IoMusicalNotesSharp className="size-24 text-white" />
+                                      )}
+                                      {event.eventType ===
+                                        "Patriotic/Historic" && (
+                                        <LiaFlagUsaSolid className="size-24 text-white" />
+                                      )}
+                                      {event.eventType === "State/Local" && (
+                                        <MdOutlineFestival className="size-24 text-white" />
+                                      )}
+                                      {event.eventType ===
+                                        "Military/Tribute" && (
+                                        <FaPersonMilitaryRifle className="size-24 text-white" />
+                                      )}
+                                      {event.eventType ===
+                                        "Educational/STEM" && (
+                                        <RiSchoolFill className="size-24 text-white" />
+                                      )}
+                                      {event.eventType === "Other" && (
+                                        <BsPatchQuestionFill className="size-24 text-white" />
+                                      )}
+                                    </div>
+                                  </div>
 
-                              {/* Tags */}
-                              <div className="mb-0 mt-4 font-body">
-                                <dt className="sr-only">eventType</dt>
-                                <div className="flex gap-x-2">
-                                  {event.eventTier === "Signature" ? (
-                                    <span className="inline-flex gap-x-1 items-center rounded-md bg-red-50 px-4 py-1.5 text-xs font-semibold text-red-700 ring-1 ring-inset ring-red-600/20">
-                                      <MdOutlineStar
-                                        aria-hidden="true"
-                                        className="size-4"
-                                      />
+                                  {/* Tags */}
+                                  <div className="mb-0 mt-4 font-body">
+                                    <dt className="sr-only">eventType</dt>
+                                    <div className="flex gap-x-2">
+                                      {event.eventTier === "Signature" ? (
+                                        <span className="inline-flex gap-x-1 items-center rounded-md bg-red-50 px-4 py-1.5 text-xs font-semibold text-red-700 ring-1 ring-inset ring-red-600/20">
+                                          <MdOutlineStar
+                                            aria-hidden="true"
+                                            className="size-4"
+                                          />
 
-                                      {event.eventTier}
-                                    </span>
-                                  ) : (
-                                    <></>
-                                  )}
-                                  {event.eventTier === "Partner" ? (
-                                    <span className="inline-flex gap-x-1 items-center rounded-md bg-orange-50 px-4 py-1.5 text-xs font-semibold text-orange-700 ring-1 ring-inset ring-orange-600/20">
-                                      <MdStarBorder
-                                        aria-hidden="true"
-                                        className="size-4"
-                                      />
-                                      {event.eventTier}
-                                    </span>
-                                  ) : (
-                                    <></>
-                                  )}
-                                  {event.eventTier === "Affiliate" ? (
-                                    <span className="inline-flex gap-x-1 items-center rounded-md bg-indigo-50 px-4 py-1.5 text-xs font-semibold text-indigo-700 ring-1 ring-inset ring-indigo-600/20">
-                                      <FaCircle
-                                        aria-hidden="true"
-                                        className="size-2"
-                                      />
-                                      {event.eventTier}
-                                    </span>
-                                  ) : (
-                                    <></>
-                                  )}
-                                  <span className="inline-flex items-center rounded-md bg-teal-50 px-5 py-1.5 text-xs font-medium text-teal-700 ring-1 ring-inset ring-teal-600/20">
-                                    {event.eventType}
-                                  </span>
-                                </div>
-                              </div>
-
-                              {/* Title */}
-                              <h3 className="py-3 text-2xl font-primary font-medium text-gray-700">
-                                {event.name}
-                              </h3>
-
-                              {/* Date */}
-                              <dl className="border-t pt-2 mt-2 flex flex-col font-body gap-2">
-                                <dt className="sr-only">Date</dt>
-                                <div className="mb-0 mb-0 text-sm text-gray-600 flex items-center gap-2">
-                                  <FaClock className="size-4 text-blue-700" />
-                                  {event.dateTime === null ? (
-                                    <span className="text-gray-400">TBA</span>
-                                  ) : (
-                                    <span className="text-blue-600">
-                                      {formatDateLocal(event.dateTime[0])} -{" "}
-                                      {formatDateLocal(event.dateTime[1])}{" "}
-                                      <span className="text-blue-800 font-semibold">
-                                        {" "}
-                                        {event.dateTime[0].substring(0, 4)}
+                                          {event.eventTier}
+                                        </span>
+                                      ) : (
+                                        <></>
+                                      )}
+                                      {event.eventTier === "Partner" ? (
+                                        <span className="inline-flex gap-x-1 items-center rounded-md bg-orange-50 px-4 py-1.5 text-xs font-semibold text-orange-700 ring-1 ring-inset ring-orange-600/20">
+                                          <MdStarBorder
+                                            aria-hidden="true"
+                                            className="size-4"
+                                          />
+                                          {event.eventTier}
+                                        </span>
+                                      ) : (
+                                        <></>
+                                      )}
+                                      {event.eventTier === "Affiliate" ? (
+                                        <span className="inline-flex gap-x-1 items-center rounded-md bg-indigo-50 px-4 py-1.5 text-xs font-semibold text-indigo-700 ring-1 ring-inset ring-indigo-600/20">
+                                          <FaCircle
+                                            aria-hidden="true"
+                                            className="size-2"
+                                          />
+                                          {event.eventTier}
+                                        </span>
+                                      ) : (
+                                        <></>
+                                      )}
+                                      <span className="inline-flex items-center rounded-md bg-teal-50 px-5 py-1.5 text-xs font-medium text-teal-700 ring-1 ring-inset ring-teal-600/20">
+                                        {event.eventType}
                                       </span>
-                                    </span>
-                                  )}
-                                </div>
-                              </dl>
+                                    </div>
+                                  </div>
 
-                              {/* Address */}
-                              <dl className="border-t pt-2 mt-2 flex flex-col font-body">
-                                <dt className="sr-only">Address</dt>
-                                <div className="mb-0 mb-0 text-sm text-gray-600 flex items-start gap-2">
-                                  <MdLocationPin className="size-5 text-blue-700" />
-                                  {event.address.slice(0, -5)}
-                                </div>
-                              </dl>
+                                  {/* Title */}
+                                  <h3 className="py-3 text-2xl font-primary font-medium text-gray-700">
+                                    {event.name}
+                                  </h3>
 
-                              {/* Price */}
-                              <dl className="border-t pt-2 mt-2 flex flex-col font-body">
-                                <dt className="sr-only">Price</dt>
-                                <div className="mb-0 text-sm text-gray-600 flex items-start gap-2">
-                                  <IoTicketSharp className="size-5 text-blue-700" />
-                                  {event.price
-                                    ? event.price
-                                    : event.website
-                                    ? "Check Event Website"
-                                    : "TBA"}
-                                </div>
-                              </dl>
-                            </div>
+                                  {/* Date */}
+                                  <dl className="border-t pt-2 mt-2 flex flex-col font-body gap-2">
+                                    <dt className="sr-only">Date</dt>
+                                    <div className="mb-0 mb-0 text-sm text-gray-600 flex items-center gap-2">
+                                      <FaClock className="size-4 text-blue-700" />
+                                      {event.dateTime === null ? (
+                                        <span className="text-gray-400">
+                                          TBA
+                                        </span>
+                                      ) : (
+                                        <span className="text-blue-600">
+                                          {formatDateLocal(event.dateTime[0])} -{" "}
+                                          {formatDateLocal(event.dateTime[1])}{" "}
+                                          <span className="text-blue-800 font-semibold">
+                                            {" "}
+                                            {event.dateTime[0].substring(0, 4)}
+                                          </span>
+                                        </span>
+                                      )}
+                                    </div>
+                                  </dl>
 
-                            {/* Footer - always pinned to bottom */}
-                            <div className="font-body bg-blue-700 group-hover:opacity-80 rounded-b-2xl">
-                              <div className="flex w-full justify-center py-4 text-sm font-semibold text-white group-hover:underline">
-                                <IoTicketSharp className="size-5 text-saluteTan mr-2" />
-                                Event Details
+                                  {/* Address */}
+                                  <dl className="border-t pt-2 mt-2 flex flex-col font-body">
+                                    <dt className="sr-only">Address</dt>
+                                    <div className="mb-0 mb-0 text-sm text-gray-600 flex items-start gap-2">
+                                      <MdLocationPin className="size-5 text-blue-700" />
+                                      {event.address.slice(0, -5)}
+                                    </div>
+                                  </dl>
+
+                                  {/* Price */}
+                                  <dl className="border-t pt-2 mt-2 flex flex-col font-body">
+                                    <dt className="sr-only">Price</dt>
+                                    <div className="mb-0 text-sm text-gray-600 flex items-start gap-2">
+                                      <IoTicketSharp className="size-5 text-blue-700" />
+                                      {event.price
+                                        ? event.price
+                                        : event.website
+                                        ? "Check Event Website"
+                                        : "TBA"}
+                                    </div>
+                                  </dl>
+                                </div>
+
+                                {/* Footer - always pinned to bottom */}
+                                <div className="font-body bg-blue-700 group-hover:opacity-80 rounded-b-2xl">
+                                  <div className="flex w-full justify-center py-4 text-sm font-semibold text-white group-hover:underline">
+                                    <IoTicketSharp className="size-5 text-saluteTan mr-2" />
+                                    Event Details
+                                  </div>
+                                </div>
                               </div>
-                            </div>
-                          </div>
-                        </button>
-                      </li>
-                    </>
-                  ))}
-              </ul>
-            )}
-          </div>
+                            </button>
+                          </li>
+                        </>
+                      ))
+                  ) : (
+                    <div className="col-span-3 mt-3 font-body text-center text-red-600 text-4xl font-bold">
+                      <p> No Events found for your search.</p>
+                    </div>
+                  )}
+                </ul>
+              )}
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
 
-      {allEvents === null || googleMapsApiKey === null ? (
-        <></>
+      {isListView === false ? (
+        <>
+          {filteredEvents === null || googleMapsApiKey === null ? (
+            <></>
+          ) : (
+            <>
+              {filteredEvents.length > 0 ? (
+                <EventMap
+                  events={filteredEvents}
+                  googleMapsApiKey={googleMapsApiKey}
+                />
+              ) : (
+                <div className="bg-saluteBlue col-span-3 py-5 font-body text-center text-red-600 text-4xl font-bold">
+                  <p> No Events found for your search.</p>
+                </div>
+              )}
+            </>
+          )}
+        </>
       ) : (
-        <EventMap events={allEvents} googleMapsApiKey={googleMapsApiKey} />
+        <></>
       )}
 
       <div className="relative bg-white">

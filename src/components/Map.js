@@ -318,9 +318,6 @@ export default function EventMap(props) {
     zoomControl: true, // optional: enable zoom control
   };
 
-  console.log(props);
-  console.log(selectedEventId);
-
   if (!isLoaded) return <p>Loading map...</p>;
 
   return (

@@ -22,3 +22,7 @@ a {
 .rs-picker-toggle-read-only {
     pointer-events: unset;
 }
+
+#view {
+    cursor: pointer;
+}
