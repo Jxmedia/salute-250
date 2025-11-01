@@ -211,13 +211,6 @@ export default function EventsHome() {
           content="width=device-width, initial-scale=1.0, maximum-scale=5"
         />
       </Helmet>
-      <div></div>
-      <div className="bg-white"></div>
-      <div className="divider">
-        <div className="bg-gradient-to-r from-saluteRed to-red-700 h-2.5" />
-        <div className="bg-white h-1.5" />
-        <div className="bg-gradient-to-r from-blue-600 to-blue-900 h-2.5" />
-      </div>
 
       <div className="relative pt-32">
         <img

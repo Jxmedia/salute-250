@@ -323,7 +323,7 @@ export default function EventMap(props) {
   return (
     <>
       <div className="font-body grid lg:grid-cols-8">
-        <div className="order-2 col-span-3 p-6 overflow-y-scroll h-[600px] border-b-2 border-saluteBlue lg:order-1">
+        <div className="relative order-2 col-span-3 p-6 overflow-y-scroll h-[600px] border-b-2 border-saluteBlue lg:order-1">
           {" "}
           <ul role="list" className="divide-y divide-gray-200">
             {props.events.map((event) => (
@@ -332,12 +332,12 @@ export default function EventMap(props) {
                 ref={(el) => (eventRefs.current[event.id] = el)}
                 className={`${
                   selectedEventId === event.id
-                    ? "bg-saluteTan/40 p-4 rounded-2xl my-2"
+                    ? "bg-saluteTan/40 lg:p-4 rounded-2xl my-2"
                     : ""
                 } flex items-center justify-between gap-x-6 py-5`}
               >
                 <div className="min-w-0">
-                  <div className="mb-4 relative isolate overflow-hidden rounded-2xl py-14 w-96 lg:w-56">
+                  <div className="mb-4 relative isolate overflow-hidden rounded-2xl py-14 w-56">
                     {event.id === "71a4d628-d864-4ba0-aead-080b73ef5d48" ? (
                       <img
                         alt=""
