@@ -247,7 +247,7 @@ export default function HomePage() {
           ) : (
             <>
               <LoadScript googleMapsApiKey="AIzaSyCydl9IQNI9kEhs_--rVWqjRc0B2M9hays">
-                <ul role="list" className="py-20">
+                <ul role="list" className="hidden py-20 lg:block">
                   <InfiniteScroller speed={30}>
                     {allEvents
                       .sort(
@@ -476,7 +476,7 @@ export default function HomePage() {
                 </ul>
                 <ul
                   role="list"
-                  className="py-20 tracking-wide grid grid-cols-1 gap-6 lg:grid-cols-2"
+                  className="py-20 tracking-wide grid grid-cols-1 gap-6 lg:grid-cols-2 lg:hidden"
                 >
                   {allEvents
                     .sort(
