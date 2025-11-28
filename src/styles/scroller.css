@@ -1,0 +1,33 @@
+.scroller-outer {
+    width: 100%;
+    overflow: hidden;
+}
+
+.scroller-track {
+    display: flex;
+    width: max-content;
+    /* no animation until ready */
+}
+
+.scroller-track.is-ready {
+    animation: scroll var(--duration) linear infinite;
+}
+
+.scroller-track.is-ready:hover {
+    animation-play-state: paused;
+}
+
+.scroller-content {
+    display: inline-flex;
+    white-space: nowrap;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}

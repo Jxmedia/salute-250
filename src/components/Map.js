@@ -3,7 +3,7 @@ import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { FaCircle } from "react-icons/fa";
 import { MdStarBorder } from "react-icons/md";
 import { MdOutlineStar } from "react-icons/md";
-import EventModal from "./EventModalMap";
+import EventModal from "./EventModal";
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
@@ -17,6 +17,7 @@ import SchoolCover from "../images/event-covers/school.png";
 import MilitaryCover from "../images/event-covers/military.png";
 import PatrioticCover from "../images/event-covers/patriotic.png";
 import OtherCover from "../images/event-covers/other.png";
+import ParadeCover from "../images/event-covers/parade.png";
 import BucsCover from "../images/event-covers/71a4d628-d864-4ba0-aead-080b73ef5d48.png";
 import Saa250Cover from "../images/event-covers/0cf0c100-7f8a-4be8-a9ee-03bd98ef1ffd.png";
 ///
@@ -25,7 +26,7 @@ import { MdOutlineFestival } from "react-icons/md";
 import { FaPersonMilitaryRifle } from "react-icons/fa6";
 import { RiSchoolFill } from "react-icons/ri";
 import { BsPatchQuestionFill } from "react-icons/bs";
-import { IoTicketSharp } from "react-icons/io5";
+
 import { MdLocationPin } from "react-icons/md";
 import { FaClock } from "react-icons/fa";
 import { MdOutlineEventAvailable } from "react-icons/md";
@@ -34,6 +35,7 @@ import { IoMdNotifications } from "react-icons/io";
 import { GiAmericanFootballHelmet } from "react-icons/gi";
 import { IoCarSportSharp } from "react-icons/io5";
 import { IoMusicalNotesSharp } from "react-icons/io5";
+import { select } from "@heroui/react";
 
 const containerStyle = {
   width: "100%",
@@ -46,22 +48,16 @@ export default function EventMap(props) {
   const [openEvent, setOpenEvent] = useState(false);
   const mapRef = useRef();
 
-  useEffect(() => {
-    findGoogleKey();
-  }, []);
-
-  const findGoogleKey = async () => {
-    let response = await fetch(
-      "https://salute250-cxbccag3f0dff5b0.eastus2-01.azurewebsites.net/api/pullGoogleKey",
-      {
-        method: "POST",
-      }
-    );
-
-    const key = await response.json();
-
-    setGoogleMapsApiKey(key);
-  };
+  function getIcon(eventType) {
+    switch (eventType) {
+      case "Air Show":
+        return "/images/air-show.svg";
+      case "Sports":
+        return "/images/sports.svg";
+      default:
+        return "/images/air-show.svg";
+    }
+  }
   //
   //
   //
@@ -91,6 +87,7 @@ export default function EventMap(props) {
   }
   //
   //
+
   //
   //
 
@@ -120,6 +117,14 @@ export default function EventMap(props) {
       behavior: "smooth",
       block: "center",
     });
+  };
+
+  const resetMarkerClick = () => {
+    setSelectedEventId(null);
+    // Smoothly move and zoom the map
+
+    mapRef.current.setZoom(5);
+    // setOpenEvent(event.id);
   };
 
   const onUnmount = useCallback(() => {
@@ -322,22 +327,32 @@ export default function EventMap(props) {
 
   return (
     <>
-      <div className="font-body grid lg:grid-cols-8">
-        <div className="relative order-2 col-span-3 p-6 overflow-y-scroll h-[600px] border-b-2 border-saluteBlue lg:order-1">
+      <div className="font-body grid lg:grid-cols-9">
+        <div className="relative order-2 col-span-4 p-6 overflow-y-scroll h-[600px] lg:order-1">
           {" "}
-          <ul role="list" className="divide-y divide-gray-200">
+          {selectedEventId === null ? (
+            <></>
+          ) : (
+            <button
+              onClick={() => resetMarkerClick()}
+              className="my-3 text-sm text-gray-500 underline hover:text-gray-900 sm:block"
+            >
+              View All Events
+            </button>
+          )}
+          <ul role="list" className="items-start gap-2 grid grid-cols-2 ">
             {props.events.map((event) => (
               <li
                 key={event.id}
                 ref={(el) => (eventRefs.current[event.id] = el)}
                 className={`${
                   selectedEventId === event.id
-                    ? "bg-saluteTan/40 lg:p-4 rounded-2xl my-2"
+                    ? "bg-saluteTan/40 rounded-2xl"
                     : ""
-                } flex items-center justify-between gap-x-6 py-5`}
+                } `}
               >
-                <div className="min-w-0">
-                  <div className="mb-4 relative isolate overflow-hidden rounded-2xl py-14 w-56">
+                <div className="min-w-0 border border-gray-100 p-3 rounded-2xl">
+                  <div className="mb-4 relative isolate overflow-hidden rounded-2xl py-14">
                     {event.id === "71a4d628-d864-4ba0-aead-080b73ef5d48" ? (
                       <img
                         alt=""
@@ -412,6 +427,13 @@ export default function EventMap(props) {
                                 className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
                               />
                             )}
+                            {event.eventType === "Parade" && (
+                              <img
+                                alt=""
+                                src={ParadeCover}
+                                className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                              />
+                            )}
                             {event.eventType === "Other" && (
                               <img
                                 alt=""
@@ -430,7 +452,7 @@ export default function EventMap(props) {
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-x-2 text-xs/5 text-gray-500">
+                  <div className="flex mt-1 items-center gap-x-2 text-xs/5 text-gray-500">
                     {event.dateTime === null ? (
                       <span className="text-gray-400">TBA</span>
                     ) : (
@@ -477,58 +499,8 @@ export default function EventMap(props) {
                       {event.eventType}
                     </span>
                   </div>
-                  <div className="flex justify-start gap-x-2 mt-3">
-                    {event.facebook === undefined ? (
-                      <></>
-                    ) : (
-                      <a
-                        href={"https://www.facebook.com/" + event.facebook}
-                        target="blank"
-                        className="text-saluteTan hover:text-white"
-                      >
-                        <span className="sr-only">Facebook</span>
-                        <FaFacebookSquare
-                          aria-hidden="true"
-                          className="text-saluteRed hover:opacity-80 size-5"
-                        />
-                      </a>
-                    )}
 
-                    {event.instagram === undefined ? (
-                      <></>
-                    ) : (
-                      <a
-                        href={"https://www.instagram.com/" + event.instagram}
-                        className="text-saluteTan hover:text-white"
-                        target="blank"
-                      >
-                        <span className="sr-only">Instagram</span>
-                        <FaInstagram
-                          aria-hidden="true"
-                          className="text-saluteRed hover:opacity-80 size-5"
-                        />
-                      </a>
-                    )}
-                    {event.x === undefined ? (
-                      <></>
-                    ) : (
-                      <a
-                        href={"https://x.com/" + event.x}
-                        className="text-saluteTan hover:text-white"
-                        target="blank"
-                      >
-                        <span className="sr-only">X</span>
-                        <FaXTwitter
-                          aria-hidden="true"
-                          className="text-saluteRed hover:opacity-80 size-5"
-                        />
-                      </a>
-                    )}
-                  </div>
-                  <div className="mb-0 text-xs text-gray-600 pt-3 gap-2">
-                    {event.description}
-                  </div>
-                  <div className="flex gap-x-2">
+                  <div className="flex gap-x-2 mt-3">
                     <button
                       onClick={() =>
                         handleMarkerClick(
@@ -572,6 +544,10 @@ export default function EventMap(props) {
                 key={event.id}
                 position={{ lat: event.lat, lng: event.lng }}
                 // onClick={() => setOpenEvent(event.id)}
+                icon={{
+                  url: getIcon(event.eventType),
+                  scaledSize: new window.google.maps.Size(50, 50),
+                }}
                 onClick={() =>
                   handleMarkerClick({ lat: event.lat, lng: event.lng }, event)
                 }

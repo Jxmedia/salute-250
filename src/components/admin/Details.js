@@ -19,6 +19,7 @@ import { MdOutlineFestival } from "react-icons/md";
 import { DateRangePicker } from "rsuite";
 import { LoadScript, Autocomplete } from "@react-google-maps/api";
 import "rsuite/dist/rsuite.min.css";
+import { BiParty } from "react-icons/bi";
 
 export default function Details(props) {
   const [matchedEvent, setMatchedEvent] = useState(null);
@@ -561,6 +562,7 @@ export default function Details(props) {
                                         <option value="Educational/STEM">
                                           Educational/STEM
                                         </option>
+                                        <option value="Parade">Parade</option>
                                         <option value="Other">Other</option>
                                       </select>
                                       <FaRegArrowAltCircleDown
@@ -748,6 +750,25 @@ export default function Details(props) {
                                       <span className="flex">
                                         Educational/STEM
                                       </span>
+                                      <button
+                                        type="button"
+                                        onClick={() => setIsEditType(true)}
+                                        className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                      >
+                                        Edit
+                                      </button>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  {matchedEvent.eventType === "Parade" ? (
+                                    <div className="flex items-center gap-x-3">
+                                      <BiParty
+                                        aria-hidden="true"
+                                        className="size-10 text-saluteBlue"
+                                        title="Parade Event"
+                                      />
+                                      <span className="flex">Parade</span>
                                       <button
                                         type="button"
                                         onClick={() => setIsEditType(true)}

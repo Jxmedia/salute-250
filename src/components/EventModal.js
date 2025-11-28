@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { IoTicketSharp } from "react-icons/io5";
 import { MdLocationPin } from "react-icons/md";
 import { Dialog, DialogPanel, DialogBackdrop } from "@headlessui/react";
 import { FaFacebookSquare } from "react-icons/fa";
@@ -15,30 +14,12 @@ import { BsPatchQuestionFill } from "react-icons/bs";
 import { LiaFlagUsaSolid } from "react-icons/lia";
 import { IoMusicalNotesSharp } from "react-icons/io5";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { BiParty } from "react-icons/bi";
 
 export default function EventModal(props) {
-  const [googleMapsApiKey, setGoogleMapsApiKey] = useState(null);
-
-  useEffect(() => {
-    findGoogleKey();
-  }, []);
-
-  const findGoogleKey = async () => {
-    let response = await fetch(
-      "https://salute250-cxbccag3f0dff5b0.eastus2-01.azurewebsites.net/api/pullGoogleKey",
-      {
-        method: "POST",
-      }
-    );
-
-    const key = await response.json();
-
-    setGoogleMapsApiKey(key);
-  };
-
   return (
     <>
-      {props.event === undefined || googleMapsApiKey === null ? (
+      {props.event === undefined ? (
         <></>
       ) : (
         <Dialog
@@ -132,6 +113,15 @@ export default function EventModal(props) {
                     ) : (
                       <></>
                     )}
+                    {props.event.eventType === "Parade" ? (
+                      <BiParty
+                        aria-hidden="true"
+                        className="size-6 text-blue-600"
+                        title="Parade"
+                      />
+                    ) : (
+                      <></>
+                    )}
                     {props.event.eventType === "Other" ? (
                       <BsPatchQuestionFill
                         aria-hidden="true"
@@ -180,192 +170,74 @@ export default function EventModal(props) {
                         </span>
                       </span>
                     )}
-                    <div className="flex justify-center gap-x-4 mt-3">
-                      {props.event.facebook === undefined ? (
-                        <></>
-                      ) : (
-                        <a
-                          href={
-                            "https://www.facebook.com/" + props.event.facebook
-                          }
-                          target="blank"
-                          className="text-saluteTan hover:text-white"
-                        >
-                          <span className="sr-only">Facebook</span>
-                          <FaFacebookSquare
-                            aria-hidden="true"
-                            className="text-saluteRed hover:opacity-80 size-6"
-                          />
-                        </a>
-                      )}
 
-                      {props.event.instagram === undefined ? (
-                        <></>
-                      ) : (
-                        <a
-                          href={
-                            "https://www.instagram.com/" + props.event.instagram
-                          }
-                          className="text-saluteTan hover:text-white"
-                          target="blank"
-                        >
-                          <span className="sr-only">Instagram</span>
-                          <FaInstagram
-                            aria-hidden="true"
-                            className="text-saluteRed hover:opacity-80 size-6"
-                          />
-                        </a>
-                      )}
-                      {props.event.x === undefined ? (
-                        <></>
-                      ) : (
-                        <a
-                          href={"https://x.com/" + props.event.x}
-                          className="text-saluteTan hover:text-white"
-                          target="blank"
-                        >
-                          <span className="sr-only">X</span>
-                          <FaXTwitter
-                            aria-hidden="true"
-                            className="text-saluteRed hover:opacity-80 size-6"
-                          />
-                        </a>
-                      )}
+                    <div className="flex items-center justify-center gap-x-2 font-body">
+                      <MdLocationPin
+                        aria-hidden="true"
+                        className="size-5 text-blue-700"
+                      />
+                      <div className="mb-0 text-sm text-gray-600 py-2 text-center gap-2">
+                        {props.event.address.slice(0, -5)}
+                      </div>
                     </div>
                   </div>
                   <div className="mt-3 relative isolate overflow-hidden rounded-2xl">
                     <div class=" col-span-6 sm:col-span-3">
                       <div class="border border-gray-300 rounded-lg p-2 h-64 relative">
                         <div class="absolute top-0 left-0 w-full h-full rounded-2xl">
-                          <LoadScript googleMapsApiKey={googleMapsApiKey}>
-                            <GoogleMap
-                              mapContainerStyle={{
-                                width: "100%",
-                                height: "100%",
-                              }}
-                              center={{
+                          <GoogleMap
+                            mapContainerStyle={{
+                              width: "100%",
+                              height: "100%",
+                            }}
+                            center={{
+                              lat: props.event.lat,
+                              lng: props.event.lng,
+                            }}
+                            zoom={11}
+                          >
+                            {/* Marker at the center */}
+                            <Marker
+                              position={{
                                 lat: props.event.lat,
                                 lng: props.event.lng,
                               }}
-                              zoom={11}
-                            >
-                              {/* Marker at the center */}
-                              <Marker
-                                position={{
-                                  lat: props.event.lat,
-                                  lng: props.event.lng,
-                                }}
-                              />
-                            </GoogleMap>
-                          </LoadScript>
+                            />
+                          </GoogleMap>
                         </div>
                       </div>
                     </div>
                   </div>
-
-                  <div className="py-3 flex items-center justify-center gap-x-4 font-body">
-                    <div className="flex items-center justify-center gap-x-2">
-                      <MdLocationPin
-                        aria-hidden="true"
-                        className="size-5 text-blue-700"
-                      />
-                      <div className="mb-0 text-sm text-gray-600 py-3 text-center gap-2">
-                        {props.event.address.slice(0, -5)}
-                      </div>
-                    </div>
-                    {props.event.price === undefined ? (
-                      <>
-                        {props.event.website === undefined ? (
-                          <dl className="font-body justify-between">
-                            <dt className="sr-only">Price</dt>
-                            <div className="mb-0 text-sm text-gray-600 flex items-start gap-2">
-                              <IoTicketSharp
-                                aria-hidden="true"
-                                className="size-5 text-blue-700"
-                              />{" "}
-                              <span className="text-gray-400"> TBA</span>
-                            </div>
-                          </dl>
-                        ) : (
-                          <dl className="mb-0 font-body justify-between">
-                            <dt className="sr-only">Price</dt>
-                            <div className="mb-0 text-sm text-gray-600 flex items-start gap-2">
-                              <IoTicketSharp
-                                aria-hidden="true"
-                                className="size-5 text-blue-700"
-                              />{" "}
-                              <span className="text-gray-400">
-                                {" "}
-                                Check Website
-                              </span>
-                            </div>
-                          </dl>
-                        )}
-                      </>
-                    ) : (
-                      <dl className="font-body justify-between">
-                        <dt className="sr-only">Price</dt>
-                        <div className="mb-0 text-sm text-gray-600 flex items-start gap-2">
-                          <IoTicketSharp
-                            aria-hidden="true"
-                            className="size-5 text-blue-700"
-                          />{" "}
-                          {props.event.price}
-                        </div>
-                      </dl>
-                    )}
-                  </div>
-
-                  {props.event.description === undefined ? (
-                    ""
-                  ) : (
-                    <div className="">
-                      <div className="border border-gray-100 bg-gray-50 rounded-2xl p-3 font-body justify-center">
-                        <div className="py-2">
-                          <p className="text-sm text-gray-700 gap-2">
-                            {props.event.description}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  )}
                 </div>
 
                 {props.event.website === undefined ? (
-                  <></>
+                  <div className="flex justify-center mt-5 sm:mt-6 gap-x-2 text-center">
+                    <button
+                      type="button"
+                      onClick={() => props.onClose()}
+                      className="w-full justify-center border-t-2 border-blue-300 flex items-center gap-2 duration-300 ease-in-out bg-blue-600 rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteBlue"
+                    >
+                      Back to Events
+                    </button>
+                  </div>
                 ) : (
-                  <a
-                    href={"https://" + props.event.website}
-                    target="blank"
-                    className="mx-auto text-center py-2 flex justify-center text-sm font-body underline tracking-[0.5px] text-blue-500 hover:opacity-70"
-                  >
-                    Event Website
-                  </a>
+                  <div className="flex justify-center mt-5 sm:mt-6 gap-x-2 text-center">
+                    <button
+                      type="button"
+                      onClick={() => props.onClose()}
+                      className="w-full justify-center border-t-2 border-blue-300 flex items-center gap-2 duration-300 ease-in-out bg-blue-600 rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteBlue"
+                    >
+                      Back to Events
+                    </button>
+                    <a
+                      href={"https://" + props.event.website}
+                      target="blank"
+                      className="w-full justify-center border-t-2 border-red-300 flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteBlue"
+                    >
+                      Event Website
+                    </a>
+                  </div>
                 )}
-
-                <div className="flex justify-center mt-5 sm:mt-6 gap-x-2 text-center">
-                  <button
-                    type="button"
-                    onClick={() => props.setOpenEvent(false)}
-                    className="pointer-events-none w-full justify-center opacity-30 border-t-2 border-blue-800 flex items-center gap-2 duration-300 ease-in-out bg-saluteNavy rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteNavy"
-                  >
-                    Buy Tickets
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => props.setOpenEvent(false)}
-                    className="hidden w-full justify-center border-t-2 border-blue-800 flex items-center gap-2 duration-300 ease-in-out bg-saluteNavy rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteNavy"
-                  >
-                    Buy Tickets
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => props.onClose()}
-                    className="w-full justify-center border-t-2 border-blue-300 flex items-center gap-2 duration-300 ease-in-out bg-blue-600 rounded-b-xl px-8 py-2.5 text-lg/6 text-white font-body font-semibold uppercase hover:underline hover:bg-saluteTan hover:text-saluteBlue"
-                  >
-                    Back to Events
-                  </button>
-                </div>
               </DialogPanel>
             </div>
           </div>

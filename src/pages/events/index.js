@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Layout from "../../components/Layout";
-import EventModal from "../../components/EventModalMap";
+import EventModal from "../../components/EventModal";
 import EventMap from "../../components/Map";
 import {
   Listbox,
@@ -34,6 +34,7 @@ import SchoolCover from "../../images/event-covers/school.png";
 import MilitaryCover from "../../images/event-covers/military.png";
 import PatrioticCover from "../../images/event-covers/patriotic.png";
 import OtherCover from "../../images/event-covers/other.png";
+import ParadeCover from "../../images/event-covers/parade.png";
 import BucsCover from "../../images/event-covers/71a4d628-d864-4ba0-aead-080b73ef5d48.png";
 import Saa250Cover from "../../images/event-covers/0cf0c100-7f8a-4be8-a9ee-03bd98ef1ffd.png";
 ///
@@ -43,19 +44,7 @@ import OGFB from "../../images/og-image.jpg";
 import { Helmet } from "react-helmet";
 import { IoMusicalNotesSharp } from "react-icons/io5";
 import FlagBg from "../../images/flag-bg.jpg";
-
-const people = [
-  "All Events",
-  "Air Show",
-  "Music Festival",
-  "Sporting Event",
-  "Patriotic Event",
-  "State Festival",
-  "Car/Rv/Boat Show",
-  "Military Event",
-  "Educational Event",
-  "Other",
-];
+import { BiParty } from "react-icons/bi";
 
 export default function EventsHome() {
   //
@@ -64,7 +53,8 @@ export default function EventsHome() {
   const [isListView, setIsListView] = useState(false);
 
   const [allEvents, setAllEvents] = useState(null);
-  const [googleMapsApiKey, setGoogleMapsApiKey] = useState(null);
+  const googleMapsApiKey = "AIzaSyCydl9IQNI9kEhs_--rVWqjRc0B2M9hays";
+
   const [query, setQuery] = useState("");
 
   const clearSearch = () => {
@@ -85,21 +75,7 @@ export default function EventsHome() {
 
   useEffect(() => {
     getAllEvents();
-    findGoogleKey();
   }, []);
-
-  const findGoogleKey = async () => {
-    let response = await fetch(
-      "https://salute250-cxbccag3f0dff5b0.eastus2-01.azurewebsites.net/api/pullGoogleKey",
-      {
-        method: "POST",
-      }
-    );
-
-    const key = await response.json();
-
-    setGoogleMapsApiKey(key);
-  };
 
   const getAllEvents = async () => {
     let response = await fetch(
@@ -311,7 +287,7 @@ export default function EventsHome() {
             </div>
           </div>
           {isListView === true ? (
-            <div className="pt-6 pb-8 border-t border-b border-gray-600">
+            <div className="pt-6 pb-8 border-t">
               {filteredEvents === null ? (
                 <ul
                   role="list"
@@ -453,6 +429,13 @@ export default function EventsHome() {
                                                 className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
                                               />
                                             )}
+                                            {event.eventType === "Parade" && (
+                                              <img
+                                                alt=""
+                                                src={ParadeCover}
+                                                className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                              />
+                                            )}
                                             {event.eventType === "Other" && (
                                               <img
                                                 alt=""
@@ -493,6 +476,9 @@ export default function EventsHome() {
                                       {event.eventType ===
                                         "Educational/STEM" && (
                                         <RiSchoolFill className="size-24 text-white" />
+                                      )}
+                                      {event.eventType === "Parade" && (
+                                        <BiParty className="size-24 text-white" />
                                       )}
                                       {event.eventType === "Other" && (
                                         <BsPatchQuestionFill className="size-24 text-white" />
@@ -579,19 +565,6 @@ export default function EventsHome() {
                                       {event.address.slice(0, -5)}
                                     </div>
                                   </dl>
-
-                                  {/* Price */}
-                                  <dl className="border-t pt-2 mt-2 flex flex-col font-body">
-                                    <dt className="sr-only">Price</dt>
-                                    <div className="mb-0 text-sm text-gray-600 flex items-start gap-2">
-                                      <IoTicketSharp className="size-5 text-blue-700" />
-                                      {event.price
-                                        ? event.price
-                                        : event.website
-                                        ? "Check Event Website"
-                                        : "TBA"}
-                                    </div>
-                                  </dl>
                                 </div>
 
                                 {/* Footer - always pinned to bottom */}
@@ -622,7 +595,7 @@ export default function EventsHome() {
 
       {isListView === false ? (
         <>
-          {filteredEvents === null || googleMapsApiKey === null ? (
+          {filteredEvents === null ? (
             <div className="flex">
               <div className="h-20 my-3 mx-4 w-1/3 rounded-2xl bg-gray-200 animate-pulse"></div>
               <div className="h-20 my-3 mx-4 w-3/4 rounded-2xl bg-gray-200 animate-pulse"></div>
@@ -646,7 +619,7 @@ export default function EventsHome() {
         <></>
       )}
 
-      <div className="relative bg-white">
+      <div className="hidden relative bg-white">
         <div className="relative h-80 overflow-hidden bg-indigo-600 lg:absolute lg:left-0 lg:h-full lg:w-1/3 lg:w-1/2">
           <img alt="" src={CTA} className="size-full object-cover" />
         </div>

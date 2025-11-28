@@ -10,6 +10,7 @@ import { MdOutlineStar } from "react-icons/md";
 import { LiaFlagUsaSolid } from "react-icons/lia";
 import { MdAirplaneTicket } from "react-icons/md";
 import { GiAmericanFootballHelmet } from "react-icons/gi";
+import { BiParty } from "react-icons/bi";
 import { IoCarSportSharp } from "react-icons/io5";
 import { DateInput, TimeInput } from "@heroui/react";
 import {
@@ -130,6 +131,11 @@ const eventTypes = [
     description:
       "STEM expos, student showcases, or aerospace-related events with an American focus",
     icon: RiSchoolFill,
+  },
+  {
+    name: "Parade",
+    description: "SAMPLE TEXT TO BE REPLACED",
+    icon: BiParty,
   },
   {
     name: "Other Event Type",
@@ -768,6 +774,7 @@ export default function RegisterEvent() {
                             <option value="Educational/STEM">
                               Educational/STEM
                             </option>
+                            <option value="Parade">Parade</option>
                             <option value="Other">Other</option>
                           </select>
                           <FaRegArrowAltCircleDown

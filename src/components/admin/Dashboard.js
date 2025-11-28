@@ -10,6 +10,7 @@ import { LiaFlagUsaSolid } from "react-icons/lia";
 import { FaPersonMilitaryRifle } from "react-icons/fa6";
 import { RiSchoolFill } from "react-icons/ri";
 import { BsPatchQuestionFill } from "react-icons/bs";
+import { BiParty } from "react-icons/bi";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -283,6 +284,15 @@ export default function Dashboard(props) {
                                       aria-hidden="true"
                                       className="size-10 text-saluteBlue"
                                       title="Educational/STEM Event"
+                                    />
+                                  ) : (
+                                    <></>
+                                  )}
+                                  {props.event.eventType === "Parade" ? (
+                                    <BiParty
+                                      aria-hidden="true"
+                                      className="size-6 text-blue-600"
+                                      title="Parade"
                                     />
                                   ) : (
                                     <></>
