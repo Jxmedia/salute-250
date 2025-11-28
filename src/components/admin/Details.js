@@ -285,6 +285,7 @@ export default function Details(props) {
   //
   //
   //
+
   //
   //
 
@@ -369,24 +370,36 @@ export default function Details(props) {
                               </button>
                             </span>
                           ) : (
-                            <span className="text-md font-semibold isolate inline-flex rounded-full shadow-sm">
-                              <button
-                                type="button"
-                                onClick={() =>
-                                  updateStatus(matchedEvent.id, false)
-                                }
-                                className="relative inline-flex items-center rounded-l-md bg-white px-5 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-amber-200 hover:text-amber-900 hover:ring-amber-400 focus:z-10"
-                              >
-                                Pending
-                              </button>
-                              <button
-                                type="button"
-                                disabled
-                                className="relative -ml-px inline-flex items-center rounded-r-md px-5 py-2  ring-1 ring-inset ring-gray-300 bg-green-200 text-green-900 ring-green-400 focus:z-10"
-                              >
-                                Approved
-                              </button>
-                            </span>
+                            <>
+                              {matchedEvent.approved === "passed" ? (
+                                <button
+                                  type="button"
+                                  disabled
+                                  className="relative items-center bg-white  w-full rounded-md px-3 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 focus:z-10"
+                                >
+                                  Event Passed
+                                </button>
+                              ) : (
+                                <span className="text-md font-semibold isolate inline-flex rounded-full shadow-sm">
+                                  <button
+                                    type="button"
+                                    onClick={() =>
+                                      updateStatus(matchedEvent.id, false)
+                                    }
+                                    className="relative inline-flex items-center rounded-l-md bg-white px-5 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-amber-200 hover:text-amber-900 hover:ring-amber-400 focus:z-10"
+                                  >
+                                    Pending
+                                  </button>
+                                  <button
+                                    type="button"
+                                    disabled
+                                    className="relative -ml-px inline-flex items-center rounded-r-md px-5 py-2  ring-1 ring-inset ring-gray-300 bg-green-200 text-green-900 ring-green-400 focus:z-10"
+                                  >
+                                    Approved
+                                  </button>
+                                </span>
+                              )}
+                            </>
                           )}
                         </div>
                       )}
@@ -396,7 +409,7 @@ export default function Details(props) {
                     ) : (
                       <div className="mt-6 border-t border-gray-100">
                         <dl className="divide-y divide-gray-100">
-                          <div className="bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+                          <div className="odd:bg-gray-50 even:bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
                             <dt className="text-sm/6 font-medium text-gray-900">
                               Event Name
                             </dt>
@@ -450,7 +463,8 @@ export default function Details(props) {
                               </div>
                             )}
                           </div>
-                          <div className="bg-gray-50 px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+
+                          <div className="odd:bg-gray-50 even:bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
                             <dt className="text-sm/6 font-medium text-gray-900">
                               Event #
                             </dt>
@@ -458,7 +472,169 @@ export default function Details(props) {
                               {matchedEvent.SAAID}
                             </div>
                           </div>
-                          <div className="bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+                          <div className="odd:bg-gray-50 even:bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+                            <dt className="text-sm/6 font-medium text-gray-900">
+                              Requested Event Tier*
+                            </dt>
+                            <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                              {isEditTier === true ? (
+                                <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                  <div className="flex items-center">
+                                    {" "}
+                                    <div className="grid grid-cols-1 sm:max-w-xs">
+                                      <select
+                                        id="eventTier"
+                                        name="eventTier"
+                                        autoComplete="country-name"
+                                        onChange={handleChange}
+                                        required
+                                        className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:text-sm/6"
+                                      >
+                                        <option
+                                          value=""
+                                          selected
+                                          disabled
+                                          hidden
+                                        >
+                                          Select Event Tier Requested
+                                        </option>
+                                        <option value="Affiliate">
+                                          Affiliate
+                                        </option>
+                                        <option value="Partner">Partner</option>
+                                        <option value="Signature">
+                                          Signature
+                                        </option>
+                                      </select>
+                                      <FaRegArrowAltCircleDown
+                                        aria-hidden="true"
+                                        className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
+                                      />
+                                    </div>
+                                    <div className="col-span-1">
+                                      {" "}
+                                      <button
+                                        type="button"
+                                        onClick={() =>
+                                          updateEventDetails(matchedEvent.id)
+                                        }
+                                        disabled={eventData === null}
+                                        className={`${
+                                          eventData === null
+                                            ? "text-gray-700 ring-gray-500"
+                                            : "text-green-700 ring-green-500 hover:bg-green-50"
+                                        } ml-3 rounded bg-white px-2 py-1 text-xs font-semibold shadow-sm ring-1 ring-inset`}
+                                      >
+                                        Save
+                                      </button>
+                                      <button
+                                        type="button"
+                                        onClick={() => handleCancel()}
+                                        className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                      >
+                                        Cancel
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              ) : (
+                                <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                  {matchedEvent.eventTier}
+                                  <button
+                                    type="button"
+                                    onClick={() => setIsEditTier(true)}
+                                    className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                  >
+                                    Edit
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                          <div className="odd:bg-gray-50 even:bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+                            <dt className="text-sm/6 font-medium text-gray-900">
+                              Signature Event Cover
+                            </dt>
+                            <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                              {isEditTier === true ? (
+                                <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                  <div className="flex items-center">
+                                    {" "}
+                                    <div className="grid grid-cols-1 sm:max-w-xs">
+                                      <select
+                                        id="eventTier"
+                                        name="eventTier"
+                                        autoComplete="country-name"
+                                        onChange={handleChange}
+                                        required
+                                        className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:text-sm/6"
+                                      >
+                                        <option
+                                          value=""
+                                          selected
+                                          disabled
+                                          hidden
+                                        >
+                                          Select Event Tier Requested
+                                        </option>
+                                        <option value="Affiliate">
+                                          Affiliate
+                                        </option>
+                                        <option value="Partner">Partner</option>
+                                        <option value="Signature">
+                                          Signature
+                                        </option>
+                                      </select>
+                                      <FaRegArrowAltCircleDown
+                                        aria-hidden="true"
+                                        className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
+                                      />
+                                    </div>
+                                    <div className="col-span-1">
+                                      {" "}
+                                      <button
+                                        type="button"
+                                        onClick={() =>
+                                          updateEventDetails(matchedEvent.id)
+                                        }
+                                        disabled={eventData === null}
+                                        className={`${
+                                          eventData === null
+                                            ? "text-gray-700 ring-gray-500"
+                                            : "text-green-700 ring-green-500 hover:bg-green-50"
+                                        } ml-3 rounded bg-white px-2 py-1 text-xs font-semibold shadow-sm ring-1 ring-inset`}
+                                      >
+                                        Save
+                                      </button>
+                                      <button
+                                        type="button"
+                                        onClick={() => handleCancel()}
+                                        className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                      >
+                                        Cancel
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              ) : (
+                                <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                  <img
+                                    src={matchedEvent.img}
+                                    className="w-1/2"
+                                  />
+
+                                  <button
+                                    type="button"
+                                    onClick={() => setIsEditTier(true)}
+                                    className="mt-1 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                  >
+                                    Edit
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                          <div className="odd:bg-gray-50 even:bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
                             <dt className="text-sm/6 font-medium text-gray-900">
                               Contact Email
                             </dt>
@@ -512,7 +688,7 @@ export default function Details(props) {
                               </div>
                             )}
                           </div>
-                          <div className="bg-gray-50 px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+                          <div className="odd:bg-gray-50 even:bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
                             <dt className="text-sm/6 font-medium text-gray-900">
                               Event Type
                             </dt>
@@ -804,7 +980,7 @@ export default function Details(props) {
                             </div>
                           </div>
 
-                          <div className="bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+                          <div className="odd:bg-gray-50 even:bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
                             <dt className="text-sm/6 font-medium text-gray-900">
                               Date and Time
                             </dt>
@@ -850,22 +1026,58 @@ export default function Details(props) {
                                   {matchedEvent.dateTime === null ? (
                                     <span className="text-gray-400">TBA</span>
                                   ) : (
-                                    <span className="text-gray-700">
-                                      {formatDateLocal(
-                                        matchedEvent.dateTime[0]
-                                      )}{" "}
-                                      -{" "}
-                                      {formatDateLocal(
-                                        matchedEvent.dateTime[1]
-                                      )}{" "}
-                                      <span className="text-gray-700 font-semibold">
-                                        {" "}
-                                        {matchedEvent.dateTime[0].substring(
-                                          0,
-                                          4
-                                        )}
-                                      </span>
-                                    </span>
+                                    <>
+                                      {matchedEvent.isSingleDate === false ? (
+                                        <span className="text-gray-700">
+                                          {formatDateLocal(
+                                            matchedEvent.dateTime[0]
+                                          )}{" "}
+                                          -{" "}
+                                          {formatDateLocal(
+                                            matchedEvent.dateTime[1]
+                                          )}{" "}
+                                          <span className="text-gray-700 font-semibold">
+                                            {" "}
+                                            {matchedEvent.dateTime[0].substring(
+                                              0,
+                                              4
+                                            )}
+                                          </span>
+                                        </span>
+                                      ) : (
+                                        <span className="text-gray-700">
+                                          {formatDateLocal(
+                                            matchedEvent.dateTime
+                                          ).substring(0, 7)}{" "}
+                                          |
+                                          <span className="text-gray-700">
+                                            {" "}
+                                            {
+                                              formatDateLocal(
+                                                matchedEvent.singleTime[0]
+                                              )
+                                                .split(" | ")[1]
+                                                .split(" - ")[0]
+                                            }{" "}
+                                            -{" "}
+                                            {
+                                              formatDateLocal(
+                                                matchedEvent.singleTime[1]
+                                              )
+                                                .split(" | ")[1]
+                                                .split(" - ")[0]
+                                            }{" "}
+                                            <span className="font-semibold">
+                                              {" "}
+                                              {matchedEvent.dateTime.substring(
+                                                0,
+                                                4
+                                              )}
+                                            </span>
+                                          </span>
+                                        </span>
+                                      )}
+                                    </>
                                   )}
                                   <button
                                     type="button"
@@ -879,7 +1091,7 @@ export default function Details(props) {
                             </div>
                           </div>
 
-                          <div className="bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+                          <div className="odd:bg-gray-50 even:bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
                             <dt className="text-sm/6 font-medium text-gray-900">
                               Event Website
                             </dt>
@@ -939,378 +1151,8 @@ export default function Details(props) {
                               )}
                             </div>
                           </div>
-                          <div className="bg-gray-50 px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
-                            <dt className="flex items-center text-sm/6 font-medium text-gray-900">
-                              <FaFacebookSquare
-                                aria-hidden="true"
-                                className="pr-2 text-saluteBlue hover:opacity-80 size-8"
-                              />{" "}
-                              Facebook
-                            </dt>
-                            <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                              {isEditFb === true ? (
-                                <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                  <div className="flex items-center  sm:max-w-md">
-                                    <input
-                                      id="facebook"
-                                      name="facebook"
-                                      type="text"
-                                      onChange={handleChange}
-                                      placeholder={matchedEvent.facebook}
-                                      className="block min-w-0 grow bg-white py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-1 sm:text-sm/6 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue rounded-md bg-white pl-3"
-                                    />
-                                    <div className="col-span-1">
-                                      {" "}
-                                      <button
-                                        type="button"
-                                        onClick={() =>
-                                          updateEventDetails(matchedEvent.id)
-                                        }
-                                        disabled={eventData === null}
-                                        className={`${
-                                          eventData === null
-                                            ? "text-gray-700 ring-gray-500"
-                                            : "text-green-700 ring-green-500 hover:bg-green-50"
-                                        } ml-3 rounded bg-white px-2 py-1 text-xs font-semibold shadow-sm ring-1 ring-inset`}
-                                      >
-                                        Save
-                                      </button>
-                                      <button
-                                        type="button"
-                                        onClick={() => handleCancel()}
-                                        className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                                      >
-                                        Cancel
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              ) : (
-                                <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                  {matchedEvent.facebook === undefined ? (
-                                    ""
-                                  ) : (
-                                    <>
-                                      {" "}
-                                      www.facebook.com/{matchedEvent.facebook}/
-                                    </>
-                                  )}
-                                  <button
-                                    type="button"
-                                    onClick={() => setIsEditFb(true)}
-                                    className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                                  >
-                                    Edit
-                                  </button>
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                          <div className="bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
-                            <dt className="flex items-center text-sm/6 font-medium text-gray-900">
-                              <FaInstagram
-                                aria-hidden="true"
-                                className="pr-2 text-saluteBlue hover:opacity-80 size-8"
-                              />{" "}
-                              Instagram
-                            </dt>
-                            <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                              {isEditIg === true ? (
-                                <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                  <div className="flex items-center  sm:max-w-md">
-                                    <input
-                                      id="instagram"
-                                      name="instagram"
-                                      type="text"
-                                      onChange={handleChange}
-                                      placeholder={matchedEvent.instagram}
-                                      className="block min-w-0 grow bg-white py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-1 sm:text-sm/6 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue rounded-md bg-white pl-3"
-                                    />
-                                    <div className="col-span-1">
-                                      {" "}
-                                      <button
-                                        type="button"
-                                        onClick={() =>
-                                          updateEventDetails(matchedEvent.id)
-                                        }
-                                        disabled={eventData === null}
-                                        className={`${
-                                          eventData === null
-                                            ? "text-gray-700 ring-gray-500"
-                                            : "text-green-700 ring-green-500 hover:bg-green-50"
-                                        } ml-3 rounded bg-white px-2 py-1 text-xs font-semibold shadow-sm ring-1 ring-inset`}
-                                      >
-                                        Save
-                                      </button>
-                                      <button
-                                        type="button"
-                                        onClick={() => handleCancel()}
-                                        className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                                      >
-                                        Cancel
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              ) : (
-                                <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                  {matchedEvent.instagram === undefined ? (
-                                    ""
-                                  ) : (
-                                    <>
-                                      {" "}
-                                      www.instagram.com/{matchedEvent.instagram}
-                                      /
-                                    </>
-                                  )}
-                                  <button
-                                    type="button"
-                                    onClick={() => setIsEditIg(true)}
-                                    className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                                  >
-                                    Edit
-                                  </button>
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                          <div className="bg-gray-50 px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
-                            <dt className="flex items-center text-sm/6 font-medium text-gray-900">
-                              <FaXTwitter
-                                aria-hidden="true"
-                                className="pr-2 text-saluteBlue hover:opacity-80 size-8"
-                              />{" "}
-                              Twitter/X
-                            </dt>
-                            <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                              {isEditX === true ? (
-                                <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                  <div className="flex items-center  sm:max-w-md">
-                                    <input
-                                      id="x"
-                                      name="x"
-                                      type="text"
-                                      onChange={handleChange}
-                                      placeholder={matchedEvent.x}
-                                      className="block min-w-0 grow bg-white py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-1 sm:text-sm/6 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue rounded-md bg-white pl-3"
-                                    />
-                                    <div className="col-span-1">
-                                      {" "}
-                                      <button
-                                        type="button"
-                                        onClick={() =>
-                                          updateEventDetails(matchedEvent.id)
-                                        }
-                                        disabled={eventData === null}
-                                        className={`${
-                                          eventData === null
-                                            ? "text-gray-700 ring-gray-500"
-                                            : "text-green-700 ring-green-500 hover:bg-green-50"
-                                        } ml-3 rounded bg-white px-2 py-1 text-xs font-semibold shadow-sm ring-1 ring-inset`}
-                                      >
-                                        Save
-                                      </button>
-                                      <button
-                                        type="button"
-                                        onClick={() => handleCancel()}
-                                        className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                                      >
-                                        Cancel
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              ) : (
-                                <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                  {matchedEvent.x === undefined ? (
-                                    ""
-                                  ) : (
-                                    <> www.x.com/{matchedEvent.x}/</>
-                                  )}
-                                  <button
-                                    type="button"
-                                    onClick={() => setIsEditX(true)}
-                                    className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                                  >
-                                    Edit
-                                  </button>
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                          <div className="bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
-                            <dt className="text-sm/6 font-medium text-gray-900">
-                              Projected Attendance
-                            </dt>
-                            <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                              {isEditAttendance === true ? (
-                                <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                  <div className="flex items-center">
-                                    {" "}
-                                    <div className="grid grid-cols-1 sm:max-w-xs">
-                                      <select
-                                        id="attendance"
-                                        name="attendance"
-                                        onChange={handleChange}
-                                        autoComplete="country-name"
-                                        className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:text-sm/6"
-                                      >
-                                        <option
-                                          value=""
-                                          selected
-                                          disabled
-                                          hidden
-                                        >
-                                          Select Projected Attendance
-                                        </option>
-                                        <option value="0-250">0 - 250</option>
-                                        <option value="251-1000">
-                                          251 - 1000
-                                        </option>
-                                        <option value="1001-2500">
-                                          1001 - 2500
-                                        </option>
-                                        <option value="2501-5000">
-                                          2501 - 5000
-                                        </option>
-                                        <option value="5001-10000">
-                                          5001 - 10000
-                                        </option>
-                                        <option value="10001-25000">
-                                          10001 - 25000
-                                        </option>
-                                        <option value="25001-50000">
-                                          25001 - 50000
-                                        </option>
-                                        <option value="50001+">50001+</option>
-                                      </select>
-                                      <FaRegArrowAltCircleDown
-                                        aria-hidden="true"
-                                        className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
-                                      />
-                                    </div>
-                                    <div className="col-span-1">
-                                      {" "}
-                                      <button
-                                        type="button"
-                                        onClick={() =>
-                                          updateEventDetails(matchedEvent.id)
-                                        }
-                                        disabled={eventData === null}
-                                        className={`${
-                                          eventData === null
-                                            ? "text-gray-700 ring-gray-500"
-                                            : "text-green-700 ring-green-500 hover:bg-green-50"
-                                        } ml-3 rounded bg-white px-2 py-1 text-xs font-semibold shadow-sm ring-1 ring-inset`}
-                                      >
-                                        Save
-                                      </button>
-                                      <button
-                                        type="button"
-                                        onClick={() => handleCancel()}
-                                        className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                                      >
-                                        Cancel
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              ) : (
-                                <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                  {matchedEvent.attendance}
-                                  <button
-                                    type="button"
-                                    onClick={() => setIsEditAttendance(true)}
-                                    className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                                  >
-                                    Edit
-                                  </button>
-                                </div>
-                              )}
-                            </div>
-                          </div>
 
-                          <div className="bg-gray-50 px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
-                            <dt className="text-sm/6 font-medium text-gray-900">
-                              Requested Event Tier*
-                            </dt>
-                            <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                              {isEditTier === true ? (
-                                <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                  <div className="flex items-center">
-                                    {" "}
-                                    <div className="grid grid-cols-1 sm:max-w-xs">
-                                      <select
-                                        id="eventTier"
-                                        name="eventTier"
-                                        autoComplete="country-name"
-                                        onChange={handleChange}
-                                        required
-                                        className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:text-sm/6"
-                                      >
-                                        <option
-                                          value=""
-                                          selected
-                                          disabled
-                                          hidden
-                                        >
-                                          Select Event Tier Requested
-                                        </option>
-                                        <option value="Affiliate">
-                                          Affiliate
-                                        </option>
-                                        <option value="Partner">Partner</option>
-                                        <option value="Signature">
-                                          Signature
-                                        </option>
-                                      </select>
-                                      <FaRegArrowAltCircleDown
-                                        aria-hidden="true"
-                                        className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
-                                      />
-                                    </div>
-                                    <div className="col-span-1">
-                                      {" "}
-                                      <button
-                                        type="button"
-                                        onClick={() =>
-                                          updateEventDetails(matchedEvent.id)
-                                        }
-                                        disabled={eventData === null}
-                                        className={`${
-                                          eventData === null
-                                            ? "text-gray-700 ring-gray-500"
-                                            : "text-green-700 ring-green-500 hover:bg-green-50"
-                                        } ml-3 rounded bg-white px-2 py-1 text-xs font-semibold shadow-sm ring-1 ring-inset`}
-                                      >
-                                        Save
-                                      </button>
-                                      <button
-                                        type="button"
-                                        onClick={() => handleCancel()}
-                                        className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                                      >
-                                        Cancel
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              ) : (
-                                <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                  {matchedEvent.eventTier}
-                                  <button
-                                    type="button"
-                                    onClick={() => setIsEditTier(true)}
-                                    className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                                  >
-                                    Edit
-                                  </button>
-                                </div>
-                              )}
-                            </div>
-                          </div>
-
-                          <div className="bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+                          <div className="odd:bg-gray-50 even:bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
                             <dt className="text-sm/6 font-medium text-gray-900">
                               Venue Address
                             </dt>
@@ -1385,7 +1227,7 @@ export default function Details(props) {
                               )}
                             </div>
                           </div>
-                          <div className="bg-gray-50 px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+                          <div className="odd:bg-gray-50 even:bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
                             <dt className="text-sm/6 font-medium text-gray-900">
                               Venue Name
                             </dt>
@@ -1441,65 +1283,10 @@ export default function Details(props) {
                               )}
                             </div>
                           </div>
-                          <div className="bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+
+                          <div className="odd:bg-gray-50 even:bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
                             <dt className="text-sm/6 font-medium text-gray-900">
-                              Description
-                            </dt>
-                            <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                              {isEditDesc === true ? (
-                                <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                  <div className="flex items-center  sm:max-w-md">
-                                    <textarea
-                                      id="description"
-                                      name="description"
-                                      rows={3}
-                                      onChange={handleChange}
-                                      className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-2xl sm:text-sm/6"
-                                      defaultValue={matchedEvent.description}
-                                    />
-                                    <div className="flex">
-                                      {" "}
-                                      <button
-                                        type="button"
-                                        onClick={() =>
-                                          updateEventDetails(matchedEvent.id)
-                                        }
-                                        disabled={eventData === null}
-                                        className={`${
-                                          eventData === null
-                                            ? "text-gray-700 ring-gray-500"
-                                            : "text-green-700 ring-green-500 hover:bg-green-50"
-                                        } ml-3 rounded bg-white px-2 py-1 text-xs font-semibold shadow-sm ring-1 ring-inset`}
-                                      >
-                                        Save
-                                      </button>
-                                      <button
-                                        type="button"
-                                        onClick={() => handleCancel()}
-                                        className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                                      >
-                                        Cancel
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              ) : (
-                                <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                  {matchedEvent.description}
-                                  <button
-                                    type="button"
-                                    onClick={() => setIsEditDesc(true)}
-                                    className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                                  >
-                                    Edit
-                                  </button>
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                          <div className="bg-gray-50 px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
-                            <dt className="text-sm/6 font-medium text-gray-900">
-                              Other Event Tier Qualifiers
+                              Description + Qualifiers for Event Tier
                             </dt>
                             <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
                               {isEditQualifiers === true ? (
@@ -1553,7 +1340,7 @@ export default function Details(props) {
                               )}
                             </div>
                           </div>
-                          <div className="bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+                          <div className="odd:bg-gray-50 even:bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
                             <dt className="text-sm/6 font-medium text-gray-900">
                               Additional Brand Integrations
                             </dt>

@@ -19,7 +19,7 @@ import {
   CalendarDate,
   Time,
 } from "@internationalized/date";
-import { CheckIcon } from "@heroicons/react/20/solid";
+import { CheckIcon, PhotoIcon } from "@heroicons/react/20/solid";
 import { RiMailSendFill, RiSchoolFill } from "react-icons/ri";
 import { BsPatchQuestionFill } from "react-icons/bs";
 import AnchorLink from "react-anchor-link-smooth-scroll";
@@ -29,7 +29,7 @@ import { Helmet } from "react-helmet";
 import { LoadScript, Autocomplete } from "@react-google-maps/api";
 import FlagBg from "../../images/flag-bg.jpg";
 /////
-import { DateRangePicker } from "rsuite";
+import { DatePicker, DateRangePicker, TimeRangePicker } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
 
 const eventTiers = [
@@ -150,7 +150,16 @@ export default function RegisterEvent() {
   //
   //
   const [selectedDate, setSelectedDate] = useState(null);
+  const [singleTime, setSingleTime] = useState(null);
+  const [isSingleDate, setIsSingleDate] = useState(false);
+
+  const handleToggle = (event) => {
+    setSelectedDate(null);
+    setSingleTime(null);
+    setIsSingleDate(event.target.checked); // true or false
+  };
   //
+  console.log(isSingleDate);
   //
   const today = new Date("12/12/9999");
   const yyyy = today.getFullYear();
@@ -175,7 +184,7 @@ export default function RegisterEvent() {
   );
   //
   //
-  const [eventData, setEventData] = useState(null);
+  const [eventData, setEventData] = useState({ eventTier: null });
   const [saving, setSaving] = useState(false);
   //
   //
@@ -199,6 +208,8 @@ export default function RegisterEvent() {
     const payload = {
       ...eventData,
       dateTime: selectedDate,
+      isSingleDate: isSingleDate,
+      singleTime: singleTime,
       address: address.address,
       city: address.city,
       state: address.state,
@@ -206,6 +217,7 @@ export default function RegisterEvent() {
       zip: address.zip,
       lat: coords.lat,
       lng: coords.lng,
+      img: eventImage,
     };
 
     let dbResponse = await fetch(
@@ -277,29 +289,41 @@ export default function RegisterEvent() {
   };
   //
   //
-  const [googleMapsApiKey, setGoogleMapsApiKey] = useState(null);
+  const googleMapsApiKey = "AIzaSyCydl9IQNI9kEhs_--rVWqjRc0B2M9hays";
 
-  useEffect(() => {
-    findGoogleKey();
-  }, []);
+  //
+  //
+  //
+  //
+  const [eventImage, setEventImage] = useState(null);
 
-  const findGoogleKey = async () => {
-    let response = await fetch(
-      "https://salute250-cxbccag3f0dff5b0.eastus2-01.azurewebsites.net/api/pullGoogleKey",
-      {
-        method: "POST",
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const img = new Image();
+    const reader = new FileReader();
+
+    reader.onload = (ev) => {
+      img.src = ev.target.result;
+    };
+
+    img.onload = () => {
+      if (img.width === 800 && img.height === 449) {
+        setEventImage(img.src);
+      } else {
+        alert("Image must be exactly 800x400 pixels.");
       }
-    );
+    };
 
-    const key = await response.json();
-
-    setGoogleMapsApiKey(key);
+    reader.readAsDataURL(file);
   };
   //
   //
   //
   //
   console.log(selectedDate);
+  console.log(singleTime);
   //
 
   return (
@@ -719,14 +743,59 @@ export default function RegisterEvent() {
                       >
                         Date and Time
                       </label>
-                      <div className="mt-2 flex gap-x-4 sm:mt-0">
-                        <DateRangePicker
-                          className="border-1 border-gray-300 rounded-md hover:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500"
-                          format="MM/dd/yyyy hh:mm aa"
-                          value={selectedDate}
-                          onChange={setSelectedDate}
-                          showMeridiem
-                        />
+
+                      <div className="mt-2 gap-x-4 sm:mt-0">
+                        <div className="flex items-center gap-3">
+                          <div className="group relative inline-flex w-11 shrink-0 rounded-full bg-gray-200 p-0.5 outline-offset-2 outline-green-600 ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out has-[:checked]:bg-green-600 has-[:focus-visible]:outline has-[:focus-visible]:outline-2">
+                            <span className="size-5 rounded-full bg-white shadow-sm ring-1 ring-gray-900/5 transition-transform duration-200 ease-in-out group-has-[:checked]:translate-x-5" />
+                            <input
+                              id="isSingleDate"
+                              name="isSingleDate"
+                              checked={isSingleDate === true}
+                              onChange={handleToggle}
+                              type="checkbox"
+                              aria-labelledby="single-date-label"
+                              className="absolute inset-0 appearance-none focus:outline-none"
+                            />
+                          </div>
+
+                          <div className="text-xs">
+                            <label
+                              id="single-date-label"
+                              className="font-medium text-gray-900"
+                            >
+                              Single Date?
+                            </label>{" "}
+                          </div>
+                        </div>
+                        <div className="border-t border-saluteBlue/30 mt-3 pt-3 ">
+                          {isSingleDate === true ? (
+                            <div className="flex">
+                              <DatePicker
+                                value={selectedDate}
+                                onChange={setSelectedDate}
+                                placeholder="Select a Day"
+                                oneTap
+                              />
+                              <TimeRangePicker
+                                value={singleTime}
+                                onChange={setSingleTime}
+                                format="hh:mm a"
+                                placeholder={["Start Time", "End Time"]}
+                                showMeridiem
+                              />
+                            </div>
+                          ) : (
+                            <DateRangePicker
+                              className="border-1 border-gray-300 rounded-md hover:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500"
+                              format="MM/dd/yyyy hh:mm aa"
+                              value={selectedDate}
+                              onChange={setSelectedDate}
+                              placeholder="Select a Day/Time Range"
+                              showMeridiem
+                            />
+                          )}
+                        </div>
                       </div>
                     </div>
 
@@ -737,29 +806,59 @@ export default function RegisterEvent() {
                       >
                         Requested Event Tier*
                       </label>
-                      <div className="mt-2 sm:col-span-2 sm:mt-0">
-                        <div className="grid grid-cols-1 sm:max-w-xs">
-                          <select
-                            id="eventTier"
-                            name="eventTier"
-                            autoComplete="country-name"
-                            onChange={handleChange}
-                            required
-                            className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:text-sm/6"
-                          >
-                            <option value="" selected disabled hidden>
-                              Select Event Tier Requested
-                            </option>
-                            <option value="Affiliate">Affiliate</option>
-                            <option value="Partner">Partner</option>
-                            <option value="Signature">Signature</option>
-                          </select>
-                          <FaRegArrowAltCircleDown
-                            aria-hidden="true"
-                            className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
-                          />
-                        </div>
+
+                      <div className="grid grid-cols-1 sm:max-w-xs">
+                        <select
+                          id="eventTier"
+                          name="eventTier"
+                          autoComplete="country-name"
+                          onChange={handleChange}
+                          required
+                          className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:text-sm/6"
+                        >
+                          <option value="" selected disabled hidden>
+                            Select Event Tier Requested
+                          </option>
+                          <option value="Affiliate">Affiliate</option>
+                          <option value="Partner">Partner</option>
+                          <option value="Signature">Signature</option>
+                        </select>
+                        <FaRegArrowAltCircleDown
+                          aria-hidden="true"
+                          className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
+                        />
                       </div>
+                      {eventData.eventTier === "Signature" ? (
+                        <div className="flex flex-col items-start">
+                          {/* Hidden input */}
+                          <input
+                            type="file"
+                            accept="image/*"
+                            id="file-upload"
+                            onChange={handleImageUpload}
+                            className="hidden"
+                          />
+
+                          {/* Styled button */}
+                          <label
+                            htmlFor="file-upload"
+                            className="cursor-pointer px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-body font-medium"
+                          >
+                            Upload Event Cover
+                          </label>
+
+                          {/* Preview */}
+                          {eventImage && (
+                            <img
+                              src={eventImage}
+                              alt="Event"
+                              className="border rounded shadow-lg mt-4"
+                            />
+                          )}
+                        </div>
+                      ) : (
+                        <></>
+                      )}
                     </div>
                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
@@ -867,32 +966,10 @@ export default function RegisterEvent() {
 
                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
-                        htmlFor="description"
-                        className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
-                      >
-                        Event Description
-                      </label>
-                      <div className="mt-2 sm:col-span-2 sm:mt-0">
-                        <textarea
-                          id="description"
-                          name="description"
-                          rows={3}
-                          onChange={handleChange}
-                          className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-2xl sm:text-sm/6"
-                          defaultValue={""}
-                        />
-                        <p className="mt-3 text-sm/6 text-gray-600">
-                          Write a few sentences about your event.
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                      <label
                         htmlFor="qualifiers"
                         className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
                       >
-                        Other Qualifiers for Event Tier
+                        Description + Qualifiers for Event Tier
                       </label>
                       <div className="mt-2 sm:col-span-2 sm:mt-0">
                         <textarea
@@ -933,145 +1010,8 @@ export default function RegisterEvent() {
                           into your event? From stage design to merchandise or
                           media campaigns, we welcome your ideas for using the
                           brand to amplify patriotism and commemorate America’s
-                          250th anniversary.
+                          250th anniversary. We welcome you to share.
                         </p>
-                      </div>
-                    </div>
-
-                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                      <label
-                        htmlFor="facebook"
-                        className="flex items-center block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
-                      >
-                        <FaFacebookSquare
-                          aria-hidden="true"
-                          className="pr-2 text-saluteRed hover:opacity-80 size-8"
-                        />{" "}
-                        Facebook
-                      </label>
-                      <div className="mt-2 sm:col-span-2 sm:mt-0">
-                        <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
-                          <div className="shrink-0 select-none text-base text-gray-500 sm:text-sm/6">
-                            www.facebook.com/
-                          </div>
-                          <input
-                            id="facebook"
-                            name="facebook"
-                            type="text"
-                            placeholder="eventUserName"
-                            onChange={handleChange}
-                            className="block min-w-0 grow bg-white py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                      <label
-                        htmlFor="instagram"
-                        className="flex items-center block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
-                      >
-                        <FaInstagram
-                          aria-hidden="true"
-                          className="pr-2 text-saluteRed hover:opacity-80 size-8"
-                        />{" "}
-                        Instagram
-                      </label>
-                      <div className="mt-2 sm:col-span-2 sm:mt-0">
-                        <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
-                          <div className="shrink-0 select-none text-base text-gray-500 sm:text-sm/6">
-                            www.instagram.com/
-                          </div>
-                          <input
-                            id="instagram"
-                            name="instagram"
-                            type="text"
-                            onChange={handleChange}
-                            placeholder="eventUserName"
-                            className="block min-w-0 grow bg-white py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                      <label
-                        htmlFor="x"
-                        className="flex items-center block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
-                      >
-                        <FaXTwitter
-                          aria-hidden="true"
-                          className="pr-2 text-saluteRed hover:opacity-80 size-8"
-                        />{" "}
-                        Twitter/X
-                      </label>
-                      <div className="mt-2 sm:col-span-2 sm:mt-0">
-                        <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
-                          <div className="shrink-0 select-none text-base text-gray-500 sm:text-sm/6">
-                            www.x.com/
-                          </div>
-                          <input
-                            id="x"
-                            name="x"
-                            type="text"
-                            placeholder="eventUserName"
-                            onChange={handleChange}
-                            className="block min-w-0 grow bg-white py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                      <label
-                        htmlFor="attendance"
-                        className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
-                      >
-                        Projected Attendance
-                      </label>
-                      <div className="mt-2 sm:col-span-2 sm:mt-0">
-                        <div className="grid grid-cols-1 sm:max-w-xs">
-                          <select
-                            id="attendance"
-                            name="attendance"
-                            onChange={handleChange}
-                            autoComplete="country-name"
-                            className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:text-sm/6"
-                          >
-                            <option value="" selected disabled hidden>
-                              Select Projected Attendance
-                            </option>
-                            <option value="0-250">0 - 250</option>
-                            <option value="251-1000">251 - 1000</option>
-                            <option value="1001-2500">1001 - 2500</option>
-                            <option value="2501-5000">2501 - 5000</option>
-                            <option value="5001-10000">5001 - 10000</option>
-                            <option value="10001-25000">10001 - 25000</option>
-                            <option value="25001-50000">25001 - 50000</option>
-                            <option value="50001+">50001+</option>
-                          </select>
-                          <FaRegArrowAltCircleDown
-                            aria-hidden="true"
-                            className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                      <label
-                        htmlFor="x"
-                        className="flex items-center block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
-                      >
-                        Event Price
-                      </label>
-                      <div className="mt-2 sm:col-span-2 sm:mt-0">
-                        <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
-                          <input
-                            id="price"
-                            name="price"
-                            type="number"
-                            placeholder="$10"
-                            onChange={handleChange}
-                            className="block min-w-0 grow bg-white py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
-                          />
-                        </div>
                       </div>
                     </div>
                   </div>

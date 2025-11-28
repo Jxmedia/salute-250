@@ -102,13 +102,20 @@ export default function Dashboard(props) {
                         ) : (
                           <tbody>
                             {props.allEvents.map((event, eventIdx) => (
-                              <tr key={event.name}>
+                              <tr
+                                key={event.name}
+                                className={`${
+                                  event.approved === "passed"
+                                    ? "saturate-0 opacity-60"
+                                    : ""
+                                } odd:bg-gray-50 even:bg-white`}
+                              >
                                 <td
                                   className={classNames(
                                     eventIdx !== props.allEvents.length - 1
                                       ? "border-b border-gray-200"
                                       : "",
-                                    "whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-blue-600 hover:opacity-70 sm:pl-6 lg:pl-8"
+                                    " whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-blue-600 hover:opacity-70 sm:pl-6 lg:pl-8"
                                   )}
                                 >
                                   <button
@@ -139,9 +146,19 @@ export default function Dashboard(props) {
                                   {event.dateTime === null ? (
                                     "TBA"
                                   ) : (
-                                    <span className=" text-blue-700">
-                                      {formatDateToMMDDYYYY(event.dateTime[0])}
-                                    </span>
+                                    <>
+                                      {event.isSingleDate === false ? (
+                                        <span className=" text-blue-700">
+                                          {formatDateToMMDDYYYY(
+                                            event.dateTime[0]
+                                          )}
+                                        </span>
+                                      ) : (
+                                        <span className=" text-blue-700">
+                                          {formatDateToMMDDYYYY(event.dateTime)}
+                                        </span>
+                                      )}
+                                    </>
                                   )}
                                 </td>
                                 <td
@@ -288,7 +305,7 @@ export default function Dashboard(props) {
                                   ) : (
                                     <></>
                                   )}
-                                  {props.event.eventType === "Parade" ? (
+                                  {event.eventType === "Parade" ? (
                                     <BiParty
                                       aria-hidden="true"
                                       className="size-6 text-blue-600"
@@ -328,24 +345,41 @@ export default function Dashboard(props) {
                                       </button>
                                     </span>
                                   ) : (
-                                    <span className="text-xs font-semibold isolate inline-flex rounded-md shadow-sm">
-                                      <button
-                                        type="button"
-                                        onClick={() =>
-                                          props.updateStatus(event.id, false)
-                                        }
-                                        className="relative inline-flex items-center rounded-l-md bg-white px-3 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-amber-200 hover:text-amber-900 hover:ring-amber-400 focus:z-10"
-                                      >
-                                        Pending
-                                      </button>
-                                      <button
-                                        type="button"
-                                        disabled
-                                        className="relative -ml-px inline-flex items-center rounded-r-md px-3 py-2  ring-1 ring-inset ring-gray-300 bg-green-200 text-green-900 ring-green-400 focus:z-10"
-                                      >
-                                        Approved
-                                      </button>
-                                    </span>
+                                    <>
+                                      {event.approved === "passed" ? (
+                                        <span className="text-xs font-semibold">
+                                          <button
+                                            type="button"
+                                            disabled
+                                            className="relative items-center bg-white  w-full rounded-md px-3 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 focus:z-10"
+                                          >
+                                            Event Passed
+                                          </button>
+                                        </span>
+                                      ) : (
+                                        <span className="text-xs font-semibold isolate inline-flex rounded-md shadow-sm">
+                                          <button
+                                            type="button"
+                                            onClick={() =>
+                                              props.updateStatus(
+                                                event.id,
+                                                false
+                                              )
+                                            }
+                                            className="relative inline-flex items-center rounded-l-md bg-white px-3 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-amber-200 hover:text-amber-900 hover:ring-amber-400 focus:z-10"
+                                          >
+                                            Pending
+                                          </button>
+                                          <button
+                                            type="button"
+                                            disabled
+                                            className="relative -ml-px inline-flex items-center rounded-r-md px-3 py-2  ring-1 ring-inset ring-gray-300 bg-green-200 text-green-900 ring-green-400 focus:z-10"
+                                          >
+                                            Approved
+                                          </button>
+                                        </span>
+                                      )}
+                                    </>
                                   )}
                                 </td>
                               </tr>
