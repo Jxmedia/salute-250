@@ -670,6 +670,29 @@ export default function RegisterEvent() {
                     </div>
                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
+                        htmlFor="website"
+                        className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
+                      >
+                        Event Website
+                      </label>
+                      <div className="mt-2 sm:col-span-2 sm:mt-0">
+                        <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
+                          <div className="shrink-0 select-none text-base text-gray-500 sm:text-sm/6">
+                            www.
+                          </div>
+                          <input
+                            id="website"
+                            name="website"
+                            type="text"
+                            placeholder="event.com"
+                            onChange={handleChange}
+                            className="block min-w-0 grow bg-white py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                      <label
                         htmlFor="poc"
                         className="block text-sm/6 font-medium sm:pt-1.5 text-red-600"
                       >
@@ -914,29 +937,7 @@ export default function RegisterEvent() {
                         </p>
                       </div>
                     </div>
-                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                      <label
-                        htmlFor="website"
-                        className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
-                      >
-                        Event Website
-                      </label>
-                      <div className="mt-2 sm:col-span-2 sm:mt-0">
-                        <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
-                          <div className="shrink-0 select-none text-base text-gray-500 sm:text-sm/6">
-                            www.
-                          </div>
-                          <input
-                            id="website"
-                            name="website"
-                            type="text"
-                            placeholder="event.com"
-                            onChange={handleChange}
-                            className="block min-w-0 grow bg-white py-1.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
-                          />
-                        </div>
-                      </div>
-                    </div>
+
                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
                         htmlFor="facebook"

@@ -15,8 +15,10 @@ const InfiniteScroller = ({ speed = 20, children }) => {
       const containerWidth = containerRef.current.offsetWidth;
       const contentWidth = contentRef.current.scrollWidth;
 
-      const needed = Math.ceil((containerWidth * 2) / contentWidth);
-
+      const needed = Math.max(
+        1,
+        Math.ceil((containerWidth * 2) / contentWidth) || 1
+      );
       setCopies(needed);
 
       // ensure next paint cycle completes before enabling animation
