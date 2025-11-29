@@ -36,6 +36,14 @@ export default function AboutPage() {
     const foundEvent = await response.json();
 
     setfoundEvent(foundEvent);
+
+    // await fetch(
+    //   "https://salute250-cxbccag3f0dff5b0.eastus2-01.azurewebsites.net/api/notificationNewEventSubmitted",
+    //   {
+    //     method: "POST",
+    //     // body: JSON.stringify(params.get("en")),
+    //   }
+    // );
   };
   //
   //

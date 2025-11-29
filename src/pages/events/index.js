@@ -24,6 +24,7 @@ import { MdAirplaneTicket } from "react-icons/md";
 import { IoMdNotifications } from "react-icons/io";
 import { GiAmericanFootballHelmet } from "react-icons/gi";
 import { IoCarSportSharp } from "react-icons/io5";
+import { FaRegArrowAltCircleDown } from "react-icons/fa";
 ///Covers
 import AirShowCover from "../../images/event-covers/airshow.png";
 import SportsCover from "../../images/event-covers/sports-event.png";
@@ -35,8 +36,7 @@ import MilitaryCover from "../../images/event-covers/military.png";
 import PatrioticCover from "../../images/event-covers/patriotic.png";
 import OtherCover from "../../images/event-covers/other.png";
 import ParadeCover from "../../images/event-covers/parade.png";
-import BucsCover from "../../images/event-covers/71a4d628-d864-4ba0-aead-080b73ef5d48.png";
-import Saa250Cover from "../../images/event-covers/0cf0c100-7f8a-4be8-a9ee-03bd98ef1ffd.png";
+
 ///
 import CTA from "../../images/girl-cta.jpg";
 import Favicon from "../../images/favicon.png";
@@ -53,6 +53,7 @@ export default function EventsHome() {
   const [isListView, setIsListView] = useState(false);
 
   const [allEvents, setAllEvents] = useState(null);
+  const [eventTypeFilter, setEventTypeFilter] = useState("View All");
   const googleMapsApiKey = "AIzaSyCydl9IQNI9kEhs_--rVWqjRc0B2M9hays";
 
   const [query, setQuery] = useState("");
@@ -61,17 +62,26 @@ export default function EventsHome() {
     setQuery("");
   };
 
-  // Filter events by city or zip (case-insensitive)
   const filteredEvents = useMemo(() => {
-    if (!query.trim()) return allEvents;
-    const lowerQuery = query.toLowerCase();
-    return allEvents.filter(
-      (event) =>
+    if (!allEvents) return []; // Return empty array if events not loaded yet
+
+    const lowerQuery = query.trim().toLowerCase();
+
+    return allEvents.filter((event) => {
+      // Text search filter (city, state, zip)
+      const matchesText =
+        !lowerQuery ||
         event.city?.toLowerCase().includes(lowerQuery) ||
-        event.zip?.toString().includes(lowerQuery) ||
-        event.state?.toLowerCase().includes(lowerQuery)
-    );
-  }, [query, allEvents]);
+        event.state?.toLowerCase().includes(lowerQuery) ||
+        event.zip?.toString().includes(lowerQuery);
+
+      // Event type filter: "View All" means no filtering
+      const matchesType =
+        eventTypeFilter === "View All" || event.eventType === eventTypeFilter;
+
+      return matchesText && matchesType; // Must match both filters
+    });
+  }, [query, eventTypeFilter, allEvents]);
 
   useEffect(() => {
     getAllEvents();
@@ -93,6 +103,9 @@ export default function EventsHome() {
 
   //
   //
+  const handleEventTypeFilter = (e) => {
+    setEventTypeFilter(e.target.value);
+  };
   //
   //
   const handleOpenEvent = (eventId) => {
@@ -254,6 +267,54 @@ export default function EventsHome() {
                 </button>
               )}
             </div>
+            <div className="relative lg:w-1/3">
+              <select
+                id="eventType"
+                name="eventType"
+                autoComplete="country-name"
+                onChange={handleEventTypeFilter}
+                className="w-full rounded-2xl border border-gray-300 bg-white py-4 pl-3 pr-10 text-sm text-gray-700 placeholder-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+              >
+                <option value="" selected disabled hidden>
+                  Filter by Event Type
+                </option>
+                <option value="View All">View All</option>
+                <option value="Air Show">Air Show</option>
+                <option value="Music Festival">Music Festival</option>
+                <option value="Sports">Sporting Event</option>
+                <option value="Patriotic/Historic">Patriotic/Historic</option>
+                <option value="State/Local">State/Local</option>
+                <option value="Car/RV/Boat">Car/RV/Boat</option>
+                <option value="Military/Tribute">Military/Tribute</option>
+                <option value="Educational/STEM">Educational/STEM</option>
+                <option value="Parade">Parade</option>
+                <option value="Other">Other</option>
+              </select>
+
+              {query && (
+                <button
+                  onClick={clearSearch}
+                  type="button"
+                  className="absolute inset-y-0 right-2 flex items-center text-gray-400 hover:text-gray-600"
+                >
+                  {/* X icon (Heroicon-style SVG) */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              )}
+            </div>
             <div className="lg:w-1/3">
               <div className="font-body bg-white grid grid-cols-2 gap-x-1 rounded-xl p-1 text-center text-xs/5 font-semibold ring-1 ring-inset ring-gray-200">
                 <label className="group relative rounded-xl px-2.5 py-3 has-[:checked]:bg-saluteBlue">
@@ -347,103 +408,88 @@ export default function EventsHome() {
                                 <div className="flex flex-col flex-grow p-6">
                                   {/* Background image + icon section */}
                                   <div className="relative isolate overflow-hidden rounded-2xl py-12">
-                                    {event.id ===
-                                    "71a4d628-d864-4ba0-aead-080b73ef5d48" ? (
+                                    {event.img != undefined ? (
                                       <img
                                         alt=""
-                                        src={BucsCover}
+                                        src={event.img}
                                         className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
                                       />
                                     ) : (
                                       <>
                                         {" "}
-                                        {event.id ===
-                                        "0cf0c100-7f8a-4be8-a9ee-03bd98ef1ffd" ? (
+                                        {event.eventType === "Air Show" && (
                                           <img
                                             alt=""
-                                            src={Saa250Cover}
+                                            src={AirShowCover}
                                             className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
                                           />
-                                        ) : (
-                                          <>
-                                            {" "}
-                                            {event.eventType === "Air Show" && (
-                                              <img
-                                                alt=""
-                                                src={AirShowCover}
-                                                className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                              />
-                                            )}
-                                            {event.eventType === "Sports" && (
-                                              <img
-                                                alt=""
-                                                src={SportsCover}
-                                                className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                              />
-                                            )}
-                                            {event.eventType ===
-                                              "Car/RV/Boat" && (
-                                              <img
-                                                alt=""
-                                                src={CarCover}
-                                                className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                              />
-                                            )}
-                                            {event.eventType ===
-                                              "Patriotic/Historic" && (
-                                              <img
-                                                alt=""
-                                                src={PatrioticCover}
-                                                className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                              />
-                                            )}
-                                            {event.eventType ===
-                                              "Music Festival" && (
-                                              <img
-                                                alt=""
-                                                src={MusicCover}
-                                                className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                              />
-                                            )}
-                                            {event.eventType ===
-                                              "State/Local" && (
-                                              <img
-                                                alt=""
-                                                src={LocalCover}
-                                                className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                              />
-                                            )}
-                                            {event.eventType ===
-                                              "Military/Tribute" && (
-                                              <img
-                                                alt=""
-                                                src={MilitaryCover}
-                                                className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                              />
-                                            )}
-                                            {event.eventType ===
-                                              "Educational/STEM" && (
-                                              <img
-                                                alt=""
-                                                src={SchoolCover}
-                                                className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                              />
-                                            )}
-                                            {event.eventType === "Parade" && (
-                                              <img
-                                                alt=""
-                                                src={ParadeCover}
-                                                className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                              />
-                                            )}
-                                            {event.eventType === "Other" && (
-                                              <img
-                                                alt=""
-                                                src={OtherCover}
-                                                className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                              />
-                                            )}
-                                          </>
+                                        )}
+                                        {event.eventType === "Sports" && (
+                                          <img
+                                            alt=""
+                                            src={SportsCover}
+                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                          />
+                                        )}
+                                        {event.eventType === "Car/RV/Boat" && (
+                                          <img
+                                            alt=""
+                                            src={CarCover}
+                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                          />
+                                        )}
+                                        {event.eventType ===
+                                          "Patriotic/Historic" && (
+                                          <img
+                                            alt=""
+                                            src={PatrioticCover}
+                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                          />
+                                        )}
+                                        {event.eventType ===
+                                          "Music Festival" && (
+                                          <img
+                                            alt=""
+                                            src={MusicCover}
+                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                          />
+                                        )}
+                                        {event.eventType === "State/Local" && (
+                                          <img
+                                            alt=""
+                                            src={LocalCover}
+                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                          />
+                                        )}
+                                        {event.eventType ===
+                                          "Military/Tribute" && (
+                                          <img
+                                            alt=""
+                                            src={MilitaryCover}
+                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                          />
+                                        )}
+                                        {event.eventType ===
+                                          "Educational/STEM" && (
+                                          <img
+                                            alt=""
+                                            src={SchoolCover}
+                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                          />
+                                        )}
+                                        {event.eventType === "Parade" && (
+                                          <img
+                                            alt=""
+                                            src={ParadeCover}
+                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                          />
+                                        )}
+                                        {event.eventType === "Other" && (
+                                          <img
+                                            alt=""
+                                            src={OtherCover}
+                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                          />
                                         )}
                                       </>
                                     )}
@@ -545,14 +591,58 @@ export default function EventsHome() {
                                           TBA
                                         </span>
                                       ) : (
-                                        <span className="text-blue-600">
-                                          {formatDateLocal(event.dateTime[0])} -{" "}
-                                          {formatDateLocal(event.dateTime[1])}{" "}
-                                          <span className="text-blue-800 font-semibold">
-                                            {" "}
-                                            {event.dateTime[0].substring(0, 4)}
-                                          </span>
-                                        </span>
+                                        <>
+                                          {event.isSingleDate === true ? (
+                                            <span className="text-blue-600">
+                                              {formatDateLocal(
+                                                event.dateTime
+                                              ).substring(0, 7)}{" "}
+                                              |
+                                              <span className="">
+                                                {" "}
+                                                {
+                                                  formatDateLocal(
+                                                    event.singleTime[0]
+                                                  )
+                                                    .split(" | ")[1]
+                                                    .split(" - ")[0]
+                                                }{" "}
+                                                -{" "}
+                                                {
+                                                  formatDateLocal(
+                                                    event.singleTime[1]
+                                                  )
+                                                    .split(" | ")[1]
+                                                    .split(" - ")[0]
+                                                }{" "}
+                                                <span className="text-blue-800 font-semibold">
+                                                  {" "}
+                                                  {event.dateTime.substring(
+                                                    0,
+                                                    4
+                                                  )}
+                                                </span>
+                                              </span>
+                                            </span>
+                                          ) : (
+                                            <span className="text-blue-600">
+                                              {formatDateLocal(
+                                                event.dateTime[0]
+                                              )}{" "}
+                                              -{" "}
+                                              {formatDateLocal(
+                                                event.dateTime[1]
+                                              )}{" "}
+                                              <span className="text-blue-800 font-semibold">
+                                                {" "}
+                                                {event.dateTime[0].substring(
+                                                  0,
+                                                  4
+                                                )}
+                                              </span>
+                                            </span>
+                                          )}
+                                        </>
                                       )}
                                     </div>
                                   </dl>

@@ -161,14 +161,45 @@ export default function EventModal(props) {
                     {props.event.dateTime === null ? (
                       <span className="text-gray-400">TBA</span>
                     ) : (
-                      <span className="text-blue-600">
-                        {props.formatDateLocal(props.event.dateTime[0])} -{" "}
-                        {props.formatDateLocal(props.event.dateTime[1])}{" "}
-                        <span className="text-blue-800 font-semibold">
-                          {" "}
-                          {props.event.dateTime[0].substring(0, 4)}
-                        </span>
-                      </span>
+                      <>
+                        {props.event.isSingleDate === true ? (
+                          <span className="text-blue-600">
+                            {props
+                              .formatDateLocal(props.event.dateTime)
+                              .substring(0, 7)}{" "}
+                            |
+                            <span className="">
+                              {" "}
+                              {
+                                props
+                                  .formatDateLocal(props.event.singleTime[0])
+                                  .split(" | ")[1]
+                                  .split(" - ")[0]
+                              }{" "}
+                              -{" "}
+                              {
+                                props
+                                  .formatDateLocal(props.event.singleTime[1])
+                                  .split(" | ")[1]
+                                  .split(" - ")[0]
+                              }{" "}
+                              <span className="text-blue-800 font-semibold">
+                                {" "}
+                                {props.event.dateTime.substring(0, 4)}
+                              </span>
+                            </span>
+                          </span>
+                        ) : (
+                          <span className="text-blue-600">
+                            {props.formatDateLocal(props.event.dateTime[0])} -{" "}
+                            {props.formatDateLocal(props.event.dateTime[1])}{" "}
+                            <span className="text-blue-800 font-semibold">
+                              {" "}
+                              {props.event.dateTime[0].substring(0, 4)}
+                            </span>
+                          </span>
+                        )}
+                      </>
                     )}
 
                     <div className="flex items-center justify-center gap-x-2 font-body">

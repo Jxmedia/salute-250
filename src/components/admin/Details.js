@@ -16,7 +16,7 @@ import { FaPersonMilitaryRifle } from "react-icons/fa6";
 import { RiSchoolFill } from "react-icons/ri";
 import { BsPatchQuestionFill } from "react-icons/bs";
 import { MdOutlineFestival } from "react-icons/md";
-import { DateRangePicker } from "rsuite";
+import { DatePicker, DateRangePicker, TimeRangePicker } from "rsuite";
 import { LoadScript, Autocomplete } from "@react-google-maps/api";
 import "rsuite/dist/rsuite.min.css";
 import { BiParty } from "react-icons/bi";
@@ -27,9 +27,7 @@ export default function Details(props) {
 
   //
   //
-  useEffect(() => {
-    findGoogleKey();
-  }, []);
+
   //
   ////// Edit Fields ////
   //
@@ -42,6 +40,35 @@ export default function Details(props) {
       [e.target.name]: e.target.value,
     });
   }
+
+  const [eventImage, setEventImage] = useState({ img: null });
+
+  console.log(eventImage);
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const img = new Image();
+    const reader = new FileReader();
+
+    reader.onload = (ev) => {
+      img.src = ev.target.result;
+    };
+
+    img.onload = () => {
+      if (img.width === 800 && img.height === 449) {
+        setEventImage({ img: img.src });
+      } else {
+        alert("Image must be exactly 800x400 pixels.");
+      }
+    };
+
+    reader.readAsDataURL(file);
+  };
+  //
+  //
+
   function handleCancel() {
     setEventData(null);
     setIsEditName(false);
@@ -49,7 +76,8 @@ export default function Details(props) {
     setIsEditType(false);
     setIsEditTime(false);
     setIsEditWebsite(false);
-    setIsEditFb(false);
+    setIsEditCover(false);
+    setEventImage({ img: null });
     setIsEditIg(false);
     setIsEditX(false);
     setIsEditAttendance(false);
@@ -66,8 +94,11 @@ export default function Details(props) {
   const [isEditType, setIsEditType] = useState(false);
   const [isEditTime, setIsEditTime] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [singleTime, setSingleTime] = useState(null);
+  const [isSingleDate, setIsSingleDate] = useState(false);
+
   const [isEditWebsite, setIsEditWebsite] = useState(false);
-  const [isEditFb, setIsEditFb] = useState(false);
+  const [isEditCover, setIsEditCover] = useState(false);
   const [isEditIg, setIsEditIg] = useState(false);
   const [isEditX, setIsEditX] = useState(false);
   const [isEditAttendance, setIsEditAttendance] = useState(false);
@@ -77,7 +108,16 @@ export default function Details(props) {
   const [isEditDesc, setIsEditDesc] = useState(false);
   const [isEditQualifiers, setIsEditQualifiers] = useState(false);
   const [isEditIntegrations, setIsEditIntegrations] = useState(false);
-
+  //
+  //
+  //
+  const handleToggle = (event) => {
+    setSelectedDate(null);
+    setSingleTime(null);
+    setIsSingleDate(event.target.checked); // true or false
+  };
+  //
+  //
   //
   //
   //
@@ -98,6 +138,7 @@ export default function Details(props) {
     const event = await response.json();
 
     setMatchedEvent(event);
+    setIsSingleDate(event.isSingleDate);
     props.setEventName(event.name);
   };
   //
@@ -135,6 +176,21 @@ export default function Details(props) {
   };
   //
   //
+  const updateEventImage = async (id) => {
+    await fetch(
+      "https://salute250-cxbccag3f0dff5b0.eastus2-01.azurewebsites.net/api/updateEventDetails",
+      {
+        method: "POST",
+        body: JSON.stringify({ eventID: id, data: eventImage }),
+      }
+    );
+    handleCancel();
+
+    foundEvent();
+  };
+  //
+  //
+  //
   const deleteEvent = async (id) => {
     await fetch(
       "https://salute250-cxbccag3f0dff5b0.eastus2-01.azurewebsites.net/api/deleteEvent",
@@ -154,7 +210,10 @@ export default function Details(props) {
       "https://salute250-cxbccag3f0dff5b0.eastus2-01.azurewebsites.net/api/updateEventDetails",
       {
         method: "POST",
-        body: JSON.stringify({ eventID: id, data: { dateTime: selectedDate } }),
+        body: JSON.stringify({
+          eventID: id,
+          data: { dateTime: selectedDate, isSingleDate: isSingleDate },
+        }),
       }
     );
     handleCancel();
@@ -219,24 +278,8 @@ export default function Details(props) {
   };
   //
   //
-  const [googleMapsApiKey, setGoogleMapsApiKey] = useState(null);
+  const googleMapsApiKey = "AIzaSyCydl9IQNI9kEhs_--rVWqjRc0B2M9hays";
 
-  useEffect(() => {
-    findGoogleKey();
-  }, []);
-
-  const findGoogleKey = async () => {
-    let response = await fetch(
-      "https://salute250-cxbccag3f0dff5b0.eastus2-01.azurewebsites.net/api/pullGoogleKey",
-      {
-        method: "POST",
-      }
-    );
-
-    const key = await response.json();
-
-    setGoogleMapsApiKey(key);
-  };
   //
   //
   //
@@ -551,89 +594,87 @@ export default function Details(props) {
                               )}
                             </div>
                           </div>
-                          <div className="odd:bg-gray-50 even:bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
-                            <dt className="text-sm/6 font-medium text-gray-900">
-                              Signature Event Cover
-                            </dt>
-                            <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                              {isEditTier === true ? (
-                                <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                  <div className="flex items-center">
-                                    {" "}
-                                    <div className="grid grid-cols-1 sm:max-w-xs">
-                                      <select
-                                        id="eventTier"
-                                        name="eventTier"
-                                        autoComplete="country-name"
-                                        onChange={handleChange}
-                                        required
-                                        className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:text-sm/6"
-                                      >
-                                        <option
-                                          value=""
-                                          selected
-                                          disabled
-                                          hidden
-                                        >
-                                          Select Event Tier Requested
-                                        </option>
-                                        <option value="Affiliate">
-                                          Affiliate
-                                        </option>
-                                        <option value="Partner">Partner</option>
-                                        <option value="Signature">
-                                          Signature
-                                        </option>
-                                      </select>
-                                      <FaRegArrowAltCircleDown
-                                        aria-hidden="true"
-                                        className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
+                          {matchedEvent.eventTier === "Signature" ? (
+                            <div className="odd:bg-gray-50 even:bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+                              <dt className="text-sm/6 font-medium text-gray-900">
+                                Signature Event Cover
+                              </dt>
+                              <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                {isEditCover === true ? (
+                                  <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                    <div className="flex flex-col items-start">
+                                      {/* Hidden input */}
+                                      <input
+                                        type="file"
+                                        accept="image/*"
+                                        id="file-upload"
+                                        onChange={handleImageUpload}
+                                        className="hidden"
                                       />
-                                    </div>
-                                    <div className="col-span-1">
-                                      {" "}
-                                      <button
-                                        type="button"
-                                        onClick={() =>
-                                          updateEventDetails(matchedEvent.id)
-                                        }
-                                        disabled={eventData === null}
-                                        className={`${
-                                          eventData === null
-                                            ? "text-gray-700 ring-gray-500"
-                                            : "text-green-700 ring-green-500 hover:bg-green-50"
-                                        } ml-3 rounded bg-white px-2 py-1 text-xs font-semibold shadow-sm ring-1 ring-inset`}
-                                      >
-                                        Save
-                                      </button>
-                                      <button
-                                        type="button"
-                                        onClick={() => handleCancel()}
-                                        className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                                      >
-                                        Cancel
-                                      </button>
+
+                                      {/* Styled button */}
+                                      <div className="flex">
+                                        {" "}
+                                        <label
+                                          htmlFor="file-upload"
+                                          className="cursor-pointer px-6 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-body font-medium"
+                                        >
+                                          Upload Event Cover
+                                        </label>
+                                        <button
+                                          type="button"
+                                          onClick={() =>
+                                            updateEventImage(matchedEvent.id)
+                                          }
+                                          disabled={eventImage.img === null}
+                                          className={`${
+                                            eventImage.img === null
+                                              ? "text-gray-700 ring-gray-500"
+                                              : "text-green-700 ring-green-500 hover:bg-green-50"
+                                          } ml-3 rounded bg-white px-2 py-1 text-xs font-semibold shadow-sm ring-1 ring-inset`}
+                                        >
+                                          Save
+                                        </button>
+                                        <button
+                                          type="button"
+                                          onClick={() => handleCancel()}
+                                          className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                        >
+                                          Cancel
+                                        </button>
+                                      </div>
+
+                                      {/* Preview */}
+                                      {eventImage.img && (
+                                        <img
+                                          src={eventImage.img}
+                                          alt="Event"
+                                          className="border rounded shadow-lg mt-4 w-1/2"
+                                        />
+                                      )}
                                     </div>
                                   </div>
-                                </div>
-                              ) : (
-                                <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                  <img
-                                    src={matchedEvent.img}
-                                    className="w-1/2"
-                                  />
+                                ) : (
+                                  <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                    <img
+                                      src={matchedEvent.img}
+                                      className="w-1/2"
+                                    />
 
-                                  <button
-                                    type="button"
-                                    onClick={() => setIsEditTier(true)}
-                                    className="mt-1 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                                  >
-                                    Edit
-                                  </button>
-                                </div>
-                              )}
+                                    <button
+                                      type="button"
+                                      onClick={() => setIsEditCover(true)}
+                                      className="mt-1 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                    >
+                                      Edit
+                                    </button>
+                                  </div>
+                                )}
+                              </div>
                             </div>
-                          </div>
+                          ) : (
+                            <></>
+                          )}
                           <div className="odd:bg-gray-50 even:bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
                             <dt className="text-sm/6 font-medium text-gray-900">
                               Contact Email
@@ -987,39 +1028,110 @@ export default function Details(props) {
                             <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
                               {isEditTime === true ? (
                                 <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                  <div className="flex items-center  sm:max-w-md">
-                                    <DateRangePicker
-                                      className="border-1 border-gray-300 rounded-md hover:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500"
-                                      format="MM/dd/yyyy hh:mm aa"
-                                      value={selectedDate}
-                                      onChange={setSelectedDate}
-                                      showMeridiem
-                                    />
-                                    <div className="flex">
-                                      {" "}
-                                      <button
-                                        type="button"
-                                        onClick={() =>
-                                          updateEventTime(matchedEvent.id)
-                                        }
-                                        disabled={selectedDate === null}
-                                        className={`${
-                                          selectedDate === null
-                                            ? "text-gray-700 ring-gray-500"
-                                            : "text-green-700 ring-green-500 hover:bg-green-50"
-                                        } ml-3 rounded bg-white px-2 py-1 text-xs font-semibold shadow-sm ring-1 ring-inset`}
+                                  <div className="flex items-center gap-3">
+                                    <div className="group relative inline-flex w-11 shrink-0 rounded-full bg-gray-200 p-0.5 outline-offset-2 outline-green-600 ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out has-[:checked]:bg-green-600 has-[:focus-visible]:outline has-[:focus-visible]:outline-2">
+                                      <span className="size-5 rounded-full bg-white shadow-sm ring-1 ring-gray-900/5 transition-transform duration-200 ease-in-out group-has-[:checked]:translate-x-5" />
+                                      <input
+                                        id="isSingleDate"
+                                        name="isSingleDate"
+                                        checked={isSingleDate === true}
+                                        onChange={handleToggle}
+                                        type="checkbox"
+                                        aria-labelledby="single-date-label"
+                                        className="absolute inset-0 appearance-none focus:outline-none"
+                                      />
+                                    </div>
+
+                                    <div className="text-xs">
+                                      <label
+                                        id="single-date-label"
+                                        className="font-medium text-gray-900"
                                       >
-                                        Save
-                                      </button>
-                                      <button
-                                        type="button"
-                                        onClick={() => handleCancel()}
-                                        className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                                      >
-                                        Cancel
-                                      </button>
+                                        Single Date?
+                                      </label>{" "}
                                     </div>
                                   </div>
+
+                                  {isSingleDate === true ? (
+                                    <div className="mt-3 flex items-center  sm:max-w-md">
+                                      <div className="flex">
+                                        <DatePicker
+                                          value={selectedDate}
+                                          onChange={setSelectedDate}
+                                          placeholder="Select a Day"
+                                          oneTap
+                                        />
+                                        <TimeRangePicker
+                                          value={singleTime}
+                                          onChange={setSingleTime}
+                                          format="hh:mm a"
+                                          placeholder={[
+                                            "Start Time",
+                                            "End Time",
+                                          ]}
+                                          showMeridiem
+                                        />
+                                      </div>
+                                      <div className="flex">
+                                        {" "}
+                                        <button
+                                          type="button"
+                                          onClick={() =>
+                                            updateEventTime(matchedEvent.id)
+                                          }
+                                          disabled={selectedDate === null}
+                                          className={`${
+                                            selectedDate === null
+                                              ? "text-gray-700 ring-gray-500"
+                                              : "text-green-700 ring-green-500 hover:bg-green-50"
+                                          } ml-3 rounded bg-white px-2 py-1 text-xs font-semibold shadow-sm ring-1 ring-inset`}
+                                        >
+                                          Save
+                                        </button>
+                                        <button
+                                          type="button"
+                                          onClick={() => handleCancel()}
+                                          className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                        >
+                                          Cancel
+                                        </button>
+                                      </div>
+                                    </div>
+                                  ) : (
+                                    <div className="mt-3 flex items-center  sm:max-w-md">
+                                      <DateRangePicker
+                                        className="border-1 border-gray-300 rounded-md hover:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500"
+                                        format="MM/dd/yyyy hh:mm aa"
+                                        value={selectedDate}
+                                        onChange={setSelectedDate}
+                                        showMeridiem
+                                      />
+                                      <div className="flex">
+                                        {" "}
+                                        <button
+                                          type="button"
+                                          onClick={() =>
+                                            updateEventTime(matchedEvent.id)
+                                          }
+                                          disabled={selectedDate === null}
+                                          className={`${
+                                            selectedDate === null
+                                              ? "text-gray-700 ring-gray-500"
+                                              : "text-green-700 ring-green-500 hover:bg-green-50"
+                                          } ml-3 rounded bg-white px-2 py-1 text-xs font-semibold shadow-sm ring-1 ring-inset`}
+                                        >
+                                          Save
+                                        </button>
+                                        <button
+                                          type="button"
+                                          onClick={() => handleCancel()}
+                                          className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                        >
+                                          Cancel
+                                        </button>
+                                      </div>
+                                    </div>
+                                  )}
                                 </div>
                               ) : (
                                 <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">

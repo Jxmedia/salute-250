@@ -25,8 +25,7 @@ import MilitaryCover from "../images/event-covers/military.png";
 import PatrioticCover from "../images/event-covers/patriotic.png";
 import OtherCover from "../images/event-covers/other.png";
 import ParadeCover from "../images/event-covers/parade.png";
-import BucsCover from "../images/event-covers/71a4d628-d864-4ba0-aead-080b73ef5d48.png";
-import Saa250Cover from "../images/event-covers/0cf0c100-7f8a-4be8-a9ee-03bd98ef1ffd.png";
+
 ///
 import { MdAirplaneTicket } from "react-icons/md";
 import { IoMdNotifications } from "react-icons/io";
@@ -276,103 +275,87 @@ export default function HomePage() {
                               <div className="flex flex-col flex-grow p-6">
                                 {/* Background image + icon section */}
                                 <div className="relative isolate overflow-hidden rounded-2xl py-12">
-                                  {event.id ===
-                                  "71a4d628-d864-4ba0-aead-080b73ef5d48" ? (
+                                  {event.img != undefined ? (
                                     <img
                                       alt=""
-                                      src={BucsCover}
+                                      src={event.img}
                                       className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
                                     />
                                   ) : (
                                     <>
                                       {" "}
-                                      {event.id ===
-                                      "0cf0c100-7f8a-4be8-a9ee-03bd98ef1ffd" ? (
+                                      {event.eventType === "Air Show" && (
                                         <img
                                           alt=""
-                                          src={Saa250Cover}
+                                          src={AirShowCover}
                                           className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
                                         />
-                                      ) : (
-                                        <>
-                                          {" "}
-                                          {event.eventType === "Air Show" && (
-                                            <img
-                                              alt=""
-                                              src={AirShowCover}
-                                              className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                            />
-                                          )}
-                                          {event.eventType === "Sports" && (
-                                            <img
-                                              alt=""
-                                              src={SportsCover}
-                                              className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                            />
-                                          )}
-                                          {event.eventType ===
-                                            "Car/RV/Boat" && (
-                                            <img
-                                              alt=""
-                                              src={CarCover}
-                                              className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                            />
-                                          )}
-                                          {event.eventType ===
-                                            "Patriotic/Historic" && (
-                                            <img
-                                              alt=""
-                                              src={PatrioticCover}
-                                              className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                            />
-                                          )}
-                                          {event.eventType ===
-                                            "Music Festival" && (
-                                            <img
-                                              alt=""
-                                              src={MusicCover}
-                                              className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                            />
-                                          )}
-                                          {event.eventType ===
-                                            "State/Local" && (
-                                            <img
-                                              alt=""
-                                              src={LocalCover}
-                                              className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                            />
-                                          )}
-                                          {event.eventType ===
-                                            "Military/Tribute" && (
-                                            <img
-                                              alt=""
-                                              src={MilitaryCover}
-                                              className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                            />
-                                          )}
-                                          {event.eventType ===
-                                            "Educational/STEM" && (
-                                            <img
-                                              alt=""
-                                              src={SchoolCover}
-                                              className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                            />
-                                          )}
-                                          {event.eventType === "Parade" && (
-                                            <img
-                                              alt=""
-                                              src={ParadeCover}
-                                              className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                            />
-                                          )}
-                                          {event.eventType === "Other" && (
-                                            <img
-                                              alt=""
-                                              src={OtherCover}
-                                              className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                            />
-                                          )}
-                                        </>
+                                      )}
+                                      {event.eventType === "Sports" && (
+                                        <img
+                                          alt=""
+                                          src={SportsCover}
+                                          className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                        />
+                                      )}
+                                      {event.eventType === "Car/RV/Boat" && (
+                                        <img
+                                          alt=""
+                                          src={CarCover}
+                                          className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                        />
+                                      )}
+                                      {event.eventType ===
+                                        "Patriotic/Historic" && (
+                                        <img
+                                          alt=""
+                                          src={PatrioticCover}
+                                          className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                        />
+                                      )}
+                                      {event.eventType === "Music Festival" && (
+                                        <img
+                                          alt=""
+                                          src={MusicCover}
+                                          className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                        />
+                                      )}
+                                      {event.eventType === "State/Local" && (
+                                        <img
+                                          alt=""
+                                          src={LocalCover}
+                                          className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                        />
+                                      )}
+                                      {event.eventType ===
+                                        "Military/Tribute" && (
+                                        <img
+                                          alt=""
+                                          src={MilitaryCover}
+                                          className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                        />
+                                      )}
+                                      {event.eventType ===
+                                        "Educational/STEM" && (
+                                        <img
+                                          alt=""
+                                          src={SchoolCover}
+                                          className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                        />
+                                      )}
+                                      {event.eventType === "Parade" && (
+                                        <img
+                                          alt=""
+                                          src={ParadeCover}
+                                          className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                        />
+                                      )}
+                                      {event.eventType === "Other" && (
+                                        <img
+                                          alt=""
+                                          src={OtherCover}
+                                          className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                        />
                                       )}
                                     </>
                                   )}
@@ -439,14 +422,51 @@ export default function HomePage() {
                                     {event.dateTime === null ? (
                                       <span className="text-gray-400">TBA</span>
                                     ) : (
-                                      <span className="text-blue-600">
-                                        {formatDateLocal(event.dateTime[0])} -{" "}
-                                        {formatDateLocal(event.dateTime[1])}{" "}
-                                        <span className="text-blue-800 font-semibold">
-                                          {" "}
-                                          {event.dateTime[0].substring(0, 4)}
-                                        </span>
-                                      </span>
+                                      <>
+                                        {event.isSingleDate === true ? (
+                                          <span className="text-blue-600">
+                                            {formatDateLocal(
+                                              event.dateTime
+                                            ).substring(0, 7)}{" "}
+                                            |
+                                            <span className="">
+                                              {" "}
+                                              {
+                                                formatDateLocal(
+                                                  event.singleTime[0]
+                                                )
+                                                  .split(" | ")[1]
+                                                  .split(" - ")[0]
+                                              }{" "}
+                                              -{" "}
+                                              {
+                                                formatDateLocal(
+                                                  event.singleTime[1]
+                                                )
+                                                  .split(" | ")[1]
+                                                  .split(" - ")[0]
+                                              }{" "}
+                                              <span className="text-blue-800 font-semibold">
+                                                {" "}
+                                                {event.dateTime.substring(0, 4)}
+                                              </span>
+                                            </span>
+                                          </span>
+                                        ) : (
+                                          <span className="text-blue-600">
+                                            {formatDateLocal(event.dateTime[0])}{" "}
+                                            -{" "}
+                                            {formatDateLocal(event.dateTime[1])}{" "}
+                                            <span className="text-blue-800 font-semibold">
+                                              {" "}
+                                              {event.dateTime[0].substring(
+                                                0,
+                                                4
+                                              )}
+                                            </span>
+                                          </span>
+                                        )}
+                                      </>
                                     )}
                                   </div>
                                 </dl>
@@ -505,101 +525,85 @@ export default function HomePage() {
                             <div className="flex flex-col flex-grow p-6">
                               {/* Background image + icon section */}
                               <div className="relative isolate overflow-hidden rounded-2xl py-12">
-                                {event.id ===
-                                "71a4d628-d864-4ba0-aead-080b73ef5d48" ? (
+                                {event.img != undefined ? (
                                   <img
                                     alt=""
-                                    src={BucsCover}
+                                    src={event.img}
                                     className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
                                   />
                                 ) : (
                                   <>
                                     {" "}
-                                    {event.id ===
-                                    "0cf0c100-7f8a-4be8-a9ee-03bd98ef1ffd" ? (
+                                    {event.eventType === "Air Show" && (
                                       <img
                                         alt=""
-                                        src={Saa250Cover}
+                                        src={AirShowCover}
                                         className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
                                       />
-                                    ) : (
-                                      <>
-                                        {" "}
-                                        {event.eventType === "Air Show" && (
-                                          <img
-                                            alt=""
-                                            src={AirShowCover}
-                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                          />
-                                        )}
-                                        {event.eventType === "Sports" && (
-                                          <img
-                                            alt=""
-                                            src={SportsCover}
-                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                          />
-                                        )}
-                                        {event.eventType === "Car/RV/Boat" && (
-                                          <img
-                                            alt=""
-                                            src={CarCover}
-                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                          />
-                                        )}
-                                        {event.eventType ===
-                                          "Patriotic/Historic" && (
-                                          <img
-                                            alt=""
-                                            src={PatrioticCover}
-                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                          />
-                                        )}
-                                        {event.eventType ===
-                                          "Music Festival" && (
-                                          <img
-                                            alt=""
-                                            src={MusicCover}
-                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                          />
-                                        )}
-                                        {event.eventType === "State/Local" && (
-                                          <img
-                                            alt=""
-                                            src={LocalCover}
-                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                          />
-                                        )}
-                                        {event.eventType ===
-                                          "Military/Tribute" && (
-                                          <img
-                                            alt=""
-                                            src={MilitaryCover}
-                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                          />
-                                        )}
-                                        {event.eventType ===
-                                          "Educational/STEM" && (
-                                          <img
-                                            alt=""
-                                            src={SchoolCover}
-                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                          />
-                                        )}
-                                        {event.eventType === "Parade" && (
-                                          <img
-                                            alt=""
-                                            src={ParadeCover}
-                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                          />
-                                        )}
-                                        {event.eventType === "Other" && (
-                                          <img
-                                            alt=""
-                                            src={OtherCover}
-                                            className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
-                                          />
-                                        )}
-                                      </>
+                                    )}
+                                    {event.eventType === "Sports" && (
+                                      <img
+                                        alt=""
+                                        src={SportsCover}
+                                        className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                      />
+                                    )}
+                                    {event.eventType === "Car/RV/Boat" && (
+                                      <img
+                                        alt=""
+                                        src={CarCover}
+                                        className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                      />
+                                    )}
+                                    {event.eventType ===
+                                      "Patriotic/Historic" && (
+                                      <img
+                                        alt=""
+                                        src={PatrioticCover}
+                                        className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                      />
+                                    )}
+                                    {event.eventType === "Music Festival" && (
+                                      <img
+                                        alt=""
+                                        src={MusicCover}
+                                        className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                      />
+                                    )}
+                                    {event.eventType === "State/Local" && (
+                                      <img
+                                        alt=""
+                                        src={LocalCover}
+                                        className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                      />
+                                    )}
+                                    {event.eventType === "Military/Tribute" && (
+                                      <img
+                                        alt=""
+                                        src={MilitaryCover}
+                                        className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                      />
+                                    )}
+                                    {event.eventType === "Educational/STEM" && (
+                                      <img
+                                        alt=""
+                                        src={SchoolCover}
+                                        className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                      />
+                                    )}
+                                    {event.eventType === "Parade" && (
+                                      <img
+                                        alt=""
+                                        src={ParadeCover}
+                                        className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                      />
+                                    )}
+                                    {event.eventType === "Other" && (
+                                      <img
+                                        alt=""
+                                        src={OtherCover}
+                                        className="absolute inset-0 -z-10 size-full object-cover h-48 group-hover:saturate-0"
+                                      />
                                     )}
                                   </>
                                 )}
@@ -665,14 +669,47 @@ export default function HomePage() {
                                   {event.dateTime === null ? (
                                     <span className="text-gray-400">TBA</span>
                                   ) : (
-                                    <span className="text-blue-600">
-                                      {formatDateLocal(event.dateTime[0])} -{" "}
-                                      {formatDateLocal(event.dateTime[1])}{" "}
-                                      <span className="text-blue-800 font-semibold">
-                                        {" "}
-                                        {event.dateTime[0].substring(0, 4)}
-                                      </span>
-                                    </span>
+                                    <>
+                                      {event.isSingleDate === true ? (
+                                        <span className="text-blue-600">
+                                          {formatDateLocal(
+                                            event.dateTime
+                                          ).substring(0, 7)}{" "}
+                                          |
+                                          <span className="">
+                                            {" "}
+                                            {
+                                              formatDateLocal(
+                                                event.singleTime[0]
+                                              )
+                                                .split(" | ")[1]
+                                                .split(" - ")[0]
+                                            }{" "}
+                                            -{" "}
+                                            {
+                                              formatDateLocal(
+                                                event.singleTime[1]
+                                              )
+                                                .split(" | ")[1]
+                                                .split(" - ")[0]
+                                            }{" "}
+                                            <span className="text-blue-800 font-semibold">
+                                              {" "}
+                                              {event.dateTime.substring(0, 4)}
+                                            </span>
+                                          </span>
+                                        </span>
+                                      ) : (
+                                        <span className="text-blue-600">
+                                          {formatDateLocal(event.dateTime[0])} -{" "}
+                                          {formatDateLocal(event.dateTime[1])}{" "}
+                                          <span className="text-blue-800 font-semibold">
+                                            {" "}
+                                            {event.dateTime[0].substring(0, 4)}
+                                          </span>
+                                        </span>
+                                      )}
+                                    </>
                                   )}
                                 </div>
                               </dl>
