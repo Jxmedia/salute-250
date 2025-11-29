@@ -189,7 +189,6 @@ export default function SpectatorsPage() {
           {/* Favicons */}
           <link rel="icon" href={Favicon} />
           <link rel="apple-touch-icon" sizes="180x180" href={Favicon} />
-          <link rel="manifest" href="/site.webmanifest" />
 
           {/* Canonical Link */}
           <link rel="canonical" href="https://saluteacrossamerica250.com/" />
