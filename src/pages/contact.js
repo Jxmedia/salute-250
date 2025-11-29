@@ -247,7 +247,7 @@ export default function ContactPage() {
         </div>
       </div>
 
-      <div className="relative bg-white">
+      <div className="hidden relative bg-white">
         <div className="relative h-80 overflow-hidden bg-saluteBlue lg:absolute lg:left-0 lg:h-full lg:w-1/3 lg:w-1/2">
           <img alt="" src={CTA} className="size-full object-cover" />
         </div>

@@ -767,7 +767,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        <div className="py-10">
+        <div className="py-10 hidden">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <h3 className="mx-auto mt-2 text-balance text-center text-4xl font-primary font-semibold tracking-tight text-white sm:text-5xl">
               Current Sponsors
