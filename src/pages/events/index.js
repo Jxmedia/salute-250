@@ -54,7 +54,7 @@ export default function EventsHome() {
 
   const [allEvents, setAllEvents] = useState(null);
   const [eventTypeFilter, setEventTypeFilter] = useState("View All");
-  const googleMapsApiKey = "AIzaSyCydl9IQNI9kEhs_--rVWqjRc0B2M9hays";
+  const googleMapsApiKey = "AIzaSyDwKx1yTYrz4Z7mpDf8-0Cz5D5BTXhsPPE";
 
   const [query, setQuery] = useState("");
 

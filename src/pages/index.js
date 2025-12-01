@@ -244,7 +244,7 @@ export default function HomePage() {
             </ul>
           ) : (
             <>
-              <LoadScript googleMapsApiKey="AIzaSyCydl9IQNI9kEhs_--rVWqjRc0B2M9hays">
+              <LoadScript googleMapsApiKey="AIzaSyDwKx1yTYrz4Z7mpDf8-0Cz5D5BTXhsPPE">
                 <ul role="list" className="hidden py-20 lg:block">
                   <InfiniteScroller speed={30}>
                     {allEvents
