@@ -507,7 +507,7 @@ export default function HomePage() {
                 </ul>
                 <ul
                   role="list"
-                  className="py-20 tracking-wide grid grid-cols-1 gap-6 lg:grid-cols-2 "
+                  className="py-20 tracking-wide grid grid-cols-1 gap-6 lg:grid-cols-2 lg:hidden "
                 >
                   {allEvents
                     .sort(
