@@ -539,7 +539,7 @@ export default function Details(props) {
                                           disabled
                                           hidden
                                         >
-                                          Select Event Tier Requested
+                                          Select Event Tier
                                         </option>
                                         <option value="Affiliate">
                                           Affiliate

@@ -799,14 +799,14 @@ export default function RegisterEvent() {
                       </div>
                     </div>
 
-                    <div className="hidden sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                      <label
+                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                      {/* <label
                         htmlFor="event-tier"
                         className="block text-sm/6 font-medium text-red-600 sm:pt-1.5"
                       >
                         Requested Event Tier*
-                      </label>
-
+                      </label> */}
+                      {/* 
                       <div className="grid grid-cols-1 sm:max-w-xs">
                         <select
                           id="eventTier"
@@ -827,7 +827,7 @@ export default function RegisterEvent() {
                           aria-hidden="true"
                           className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
                         />
-                      </div>
+                      </div> */}
                       {eventData.eventTier === "Signature" ? (
                         <div className="flex flex-col items-start">
                           {/* Hidden input */}
