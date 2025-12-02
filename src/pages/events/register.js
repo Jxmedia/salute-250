@@ -454,10 +454,10 @@ export default function RegisterEvent() {
                   part of a national movement wrapped in the American flag and
                   fueled by pride in our country.
                 </p>
-                <p className="text-center font-primary mt-2 text-4xl font-semibold tracking-tight text-saluteBlue sm:text-6xl">
+                <p className="hidden text-center font-primary mt-2 text-4xl font-semibold tracking-tight text-saluteBlue sm:text-6xl">
                   Event Tiers
                 </p>
-                <div className="pt-10 isolate mx-auto grid grid-cols-1 gap-y-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+                <div className="hidden pt-10 isolate mx-auto grid grid-cols-1 gap-y-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
                   <div className="lg:mt-12 -mr-px lg:rounded-r-none flex flex-col justify-between rounded-3xl bg-white p-8 ring-1 ring-inset ring-saluteBlue xl:p-10">
                     <div className="font-body">
                       <div className="flex items-center justify-between gap-x-4">
@@ -685,7 +685,7 @@ export default function RegisterEvent() {
                             type="text"
                             onChange={handleChange}
                             required
-                            placeholder="SAA 250 BBQ"
+                            placeholder="American Valor Music Fest"
                             className="block min-w-0 grow bg-white py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
                           />
                         </div>
@@ -907,6 +907,25 @@ export default function RegisterEvent() {
                     </div>
                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
+                        htmlFor="venue"
+                        className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
+                      >
+                        Venue name
+                      </label>
+                      <div className="mt-2 sm:col-span-2 sm:mt-0">
+                        <input
+                          id="venue"
+                          name="venue"
+                          type="text"
+                          onChange={handleChange}
+                          autoComplete="given-name"
+                          placeholder="America First Field"
+                          className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-xs sm:text-sm/6"
+                        />
+                      </div>
+                    </div>
+                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                      <label
                         htmlFor="address"
                         className="block text-sm/6 font-medium text-red-600 sm:pt-1.5"
                       >
@@ -944,31 +963,13 @@ export default function RegisterEvent() {
                         </div>
                       )}
                     </div>
-                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                      <label
-                        htmlFor="venue"
-                        className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
-                      >
-                        Venue name
-                      </label>
-                      <div className="mt-2 sm:col-span-2 sm:mt-0">
-                        <input
-                          id="venue"
-                          name="venue"
-                          type="text"
-                          onChange={handleChange}
-                          autoComplete="given-name"
-                          className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:max-w-xs sm:text-sm/6"
-                        />
-                      </div>
-                    </div>
 
                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
                         htmlFor="qualifiers"
                         className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
                       >
-                        Description + Qualifiers for Event Tier
+                        Description
                       </label>
                       <div className="mt-2 sm:col-span-2 sm:mt-0">
                         <textarea
@@ -980,10 +981,9 @@ export default function RegisterEvent() {
                           defaultValue={""}
                         />
                         <p className="mt-3 text-sm/6 text-gray-600 max-w-xl">
-                          Please share anything additional about your event that
-                          may support its tier selection — including its
-                          patriotic theme, community impact, media coverage, or
-                          other unique aspects.
+                          Please share anything additional about your event
+                          including inclusion of patriotic themes, community
+                          impact, media coverage, or other unique aspects.
                         </p>
                       </div>
                     </div>

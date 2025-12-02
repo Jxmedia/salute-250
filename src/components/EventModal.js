@@ -4,7 +4,7 @@ import { Dialog, DialogPanel, DialogBackdrop } from "@headlessui/react";
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { MdAirplaneTicket } from "react-icons/md";
+import { MdAirplaneTicket, MdLocationCity } from "react-icons/md";
 import { GiAmericanFootballHelmet } from "react-icons/gi";
 import { IoCarSportSharp } from "react-icons/io5";
 import { MdOutlineFestival } from "react-icons/md";
@@ -163,26 +163,21 @@ export default function EventModal(props) {
                     ) : (
                       <>
                         {props.event.isSingleDate === true ? (
-                          <span className="text-blue-600">
-                            {props
-                              .formatDateLocal(props.event.dateTime)
-                              .substring(0, 7)}{" "}
-                            |
+                          <span className="text-blue-600 font-medium">
+                            {new Date(props.event.dateTime).toLocaleString(
+                              "en-US",
+                              {
+                                month: "long",
+                              }
+                            )}{" "}
+                            {new Date(props.event.dateTime).getDate()} |
                             <span className="">
                               {" "}
-                              {
-                                props
-                                  .formatDateLocal(props.event.singleTime[0])
-                                  .split(" | ")[1]
-                                  .split(" - ")[0]
-                              }{" "}
+                              {props.formatDateLocal(
+                                props.event.singleTime[0]
+                              )}{" "}
                               -{" "}
-                              {
-                                props
-                                  .formatDateLocal(props.event.singleTime[1])
-                                  .split(" | ")[1]
-                                  .split(" - ")[0]
-                              }{" "}
+                              {props.formatDateLocal(props.event.singleTime[1])}{" "}
                               <span className="text-blue-800 font-semibold">
                                 {" "}
                                 {props.event.dateTime.substring(0, 4)}
@@ -191,7 +186,21 @@ export default function EventModal(props) {
                           </span>
                         ) : (
                           <span className="text-blue-600">
+                            {new Date(props.event.dateTime[0]).toLocaleString(
+                              "en-US",
+                              {
+                                month: "long",
+                              }
+                            )}{" "}
+                            {new Date(props.event.dateTime[0]).getDate()} |{" "}
                             {props.formatDateLocal(props.event.dateTime[0])} -{" "}
+                            {new Date(props.event.dateTime[1]).toLocaleString(
+                              "en-US",
+                              {
+                                month: "long",
+                              }
+                            )}{" "}
+                            {new Date(props.event.dateTime[1]).getDate()} |{" "}
                             {props.formatDateLocal(props.event.dateTime[1])}{" "}
                             <span className="text-blue-800 font-semibold">
                               {" "}
@@ -200,6 +209,19 @@ export default function EventModal(props) {
                           </span>
                         )}
                       </>
+                    )}
+
+                    <div className="border-t pt-2 mt-2 w-1/2 mx-auto" />
+                    {props.event.venue === null ? (
+                      <span className="text-gray-400">Venue TBA</span>
+                    ) : (
+                      <div className="flex items-center justify-center gap-x-2 font-body">
+                        <dt className="sr-only">Venue</dt>
+                        <div className="mb-0 text-sm text-gray-600 flex items-start gap-2">
+                          <MdLocationCity className="size-5 text-blue-700" />
+                          {props.event.venue}
+                        </div>
+                      </div>
                     )}
 
                     <div className="flex items-center justify-center gap-x-2 font-body">

@@ -479,7 +479,16 @@ export default function EventMap(props) {
                       </>
                     )}
                   </div>
-                  <div className="mb-0 text-xs text-gray-600 pt-1 gap-2">
+                  {event.venue === null ? (
+                    <div className="mb-0 text-xs text-gray-400 pt-1 gap-2">
+                      Venue TBA
+                    </div>
+                  ) : (
+                    <div className="mb-0 text-xs text-gray-600 pt-1 gap-2">
+                      {event.venue}
+                    </div>
+                  )}
+                  <div className="mb-0 text-xs text-gray-600 font-medium pt-1 gap-2">
                     {event.address.slice(0, -5)}
                   </div>
                   <div className="flex mt-2 gap-x-2">

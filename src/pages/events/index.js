@@ -17,7 +17,7 @@ import { FaPersonMilitaryRifle } from "react-icons/fa6";
 import { RiSchoolFill } from "react-icons/ri";
 import { BsPatchQuestionFill } from "react-icons/bs";
 import { IoTicketSharp } from "react-icons/io5";
-import { MdLocationPin } from "react-icons/md";
+import { MdLocationPin, MdLocationCity } from "react-icons/md";
 import { FaClock } from "react-icons/fa";
 import { MdOutlineEventAvailable } from "react-icons/md";
 import { MdAirplaneTicket } from "react-icons/md";
@@ -120,17 +120,12 @@ export default function EventsHome() {
   //
   function formatDateLocal(isoString) {
     const date = new Date(isoString);
-
-    const month = date.toLocaleString("en-US", { month: "short" });
-    const day = date.getDate(); // No padStart, removes leading 0
-    const year = date.getFullYear();
-
     let hours = date.getHours();
     const minutes = String(date.getMinutes()).padStart(2, "0"); // Keep minutes padded
     const ampm = hours >= 12 ? "PM" : "AM";
     hours = hours % 12 || 12; // Converts 0 -> 12
 
-    return `${month} ${day} | ${hours}:${minutes} ${ampm}`; // hours no padStart
+    return `${hours}:${minutes} ${ampm}`; // hours no padStart
   }
   //
   //
@@ -592,52 +587,48 @@ export default function EventsHome() {
                                       ) : (
                                         <>
                                           {event.isSingleDate === true ? (
-                                            <span className="text-blue-600">
-                                              {formatDateLocal(
+                                            <span className="text-blue-600 font-medium">
+                                              {/* {formatDateLocal(event.dateTime)} */}
+                                              {new Date(
                                                 event.dateTime
-                                              ).substring(0, 7)}{" "}
-                                              |
-                                              <span className="">
-                                                {" "}
-                                                {
-                                                  formatDateLocal(
-                                                    event.singleTime[0]
-                                                  )
-                                                    .split(" | ")[1]
-                                                    .split(" - ")[0]
-                                                }{" "}
-                                                -{" "}
-                                                {
-                                                  formatDateLocal(
-                                                    event.singleTime[1]
-                                                  )
-                                                    .split(" | ")[1]
-                                                    .split(" - ")[0]
-                                                }{" "}
-                                                <span className="text-blue-800 font-semibold">
-                                                  {" "}
-                                                  {event.dateTime.substring(
-                                                    0,
-                                                    4
-                                                  )}
-                                                </span>
+                                              ).toLocaleString("en-US", {
+                                                month: "long",
+                                              })}{" "}
+                                              {new Date(
+                                                event.dateTime
+                                              ).getDate()}
+                                              ,{" "}
+                                              <span className="text-blue-600 font-bold">
+                                                {new Date(
+                                                  event.dateTime
+                                                ).getFullYear()}
                                               </span>
                                             </span>
                                           ) : (
-                                            <span className="text-blue-600">
-                                              {formatDateLocal(
+                                            <span className="text-blue-600 font-medium">
+                                              {/* {formatDateLocal(event.dateTime)} */}
+                                              {new Date(
                                                 event.dateTime[0]
-                                              )}{" "}
+                                              ).toLocaleString("en-US", {
+                                                month: "long",
+                                              })}{" "}
+                                              {new Date(
+                                                event.dateTime[0]
+                                              ).getDate()}{" "}
                                               -{" "}
-                                              {formatDateLocal(
+                                              {new Date(
                                                 event.dateTime[1]
-                                              )}{" "}
-                                              <span className="text-blue-800 font-semibold">
-                                                {" "}
-                                                {event.dateTime[0].substring(
-                                                  0,
-                                                  4
-                                                )}
+                                              ).toLocaleString("en-US", {
+                                                month: "long",
+                                              })}{" "}
+                                              {new Date(
+                                                event.dateTime[1]
+                                              ).getDate()}
+                                              ,{" "}
+                                              <span className="text-blue-600 font-bold">
+                                                {new Date(
+                                                  event.dateTime[0]
+                                                ).getFullYear()}
                                               </span>
                                             </span>
                                           )}
@@ -646,8 +637,20 @@ export default function EventsHome() {
                                     </div>
                                   </dl>
 
+                                  {event.venue === null ? (
+                                    <span className="text-gray-400">TBA</span>
+                                  ) : (
+                                    <dl className="border-t pt-2 flex flex-col font-body">
+                                      <dt className="sr-only">Venue</dt>
+                                      <div className="mb-0 text-sm text-gray-600 flex items-start gap-2">
+                                        <MdLocationCity className="size-5 text-blue-700" />
+                                        {event.venue}
+                                      </div>
+                                    </dl>
+                                  )}
+
                                   {/* Address */}
-                                  <dl className="border-t pt-2 mt-2 flex flex-col font-body">
+                                  <dl className="border-t pt-2 flex flex-col font-body">
                                     <dt className="sr-only">Address</dt>
                                     <div className="mb-0 mb-0 text-sm text-gray-600 flex items-start gap-2">
                                       <MdLocationPin className="size-5 text-blue-700" />
