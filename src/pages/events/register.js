@@ -207,6 +207,7 @@ export default function RegisterEvent() {
     setSaving(true);
     const payload = {
       ...eventData,
+      eventTier: "Affiliate",
       dateTime: selectedDate,
       isSingleDate: isSingleDate,
       singleTime: singleTime,
@@ -798,7 +799,7 @@ export default function RegisterEvent() {
                       </div>
                     </div>
 
-                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                    <div className="hidden sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
                         htmlFor="event-tier"
                         className="block text-sm/6 font-medium text-red-600 sm:pt-1.5"
