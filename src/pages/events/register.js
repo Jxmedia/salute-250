@@ -717,6 +717,45 @@ export default function RegisterEvent() {
                     </div>
                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
+                        htmlFor="name"
+                        className="block text-sm/6 font-medium sm:pt-1.5 text-red-600"
+                      >
+                        Full Name*
+                      </label>
+                      <div className="mt-2 sm:col-span-2 sm:mt-0">
+                        <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
+                          <input
+                            id="contactName"
+                            name="contactName"
+                            type="text"
+                            onChange={handleChange}
+                            required
+                            className="block min-w-0 grow bg-white py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                      <label
+                        htmlFor="phone"
+                        className="block text-sm/6 font-medium sm:pt-1.5 text-gray-900"
+                      >
+                        Phone Number
+                      </label>
+                      <div className="mt-2 sm:col-span-2 sm:mt-0">
+                        <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue sm:max-w-md">
+                          <input
+                            id="phone"
+                            name="phone"
+                            type="tel"
+                            onChange={handleChange}
+                            className="block min-w-0 grow bg-white py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                      <label
                         htmlFor="poc"
                         className="block text-sm/6 font-medium sm:pt-1.5 text-red-600"
                       >
@@ -799,7 +838,7 @@ export default function RegisterEvent() {
                       </div>
                     </div>
 
-                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                    <div className="sm:hidden sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       {/* <label
                         htmlFor="event-tier"
                         className="block text-sm/6 font-medium text-red-600 sm:pt-1.5"

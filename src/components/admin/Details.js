@@ -73,6 +73,8 @@ export default function Details(props) {
     setEventData(null);
     setIsEditName(false);
     setIsEditPoc(false);
+    setIsEditContactName(false);
+    setIsEditPhone(false);
     setIsEditType(false);
     setIsEditTime(false);
     setIsEditWebsite(false);
@@ -91,6 +93,8 @@ export default function Details(props) {
 
   const [isEditName, setIsEditName] = useState(false);
   const [isEditPoc, setIsEditPoc] = useState(false);
+  const [isEditContactName, setIsEditContactName] = useState(false);
+  const [isEditPhone, setIsEditPhone] = useState(false);
   const [isEditType, setIsEditType] = useState(false);
   const [isEditTime, setIsEditTime] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -328,7 +332,7 @@ export default function Details(props) {
   //
   //
   //
-
+  //
   //
   //
 
@@ -675,6 +679,123 @@ export default function Details(props) {
                           ) : (
                             <></>
                           )}
+                          <div className="odd:bg-gray-50 even:bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+                            <dt className="text-sm/6 font-medium text-gray-900">
+                              Contact Name
+                            </dt>
+                            {isEditContactName === true ? (
+                              <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                <div className="flex items-center  sm:max-w-md">
+                                  <input
+                                    id="contactName"
+                                    name="contactName"
+                                    type="text"
+                                    onChange={handleChange}
+                                    placeholder={matchedEvent.contactName}
+                                    className="block min-w-0 grow bg-white py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-1 sm:text-sm/6 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue rounded-md bg-white pl-3"
+                                  />
+                                  <div className="col-span-1">
+                                    {" "}
+                                    <button
+                                      type="button"
+                                      onClick={() =>
+                                        updateEventDetails(matchedEvent.id)
+                                      }
+                                      disabled={eventData === null}
+                                      className={`${
+                                        eventData === null
+                                          ? "text-gray-700 ring-gray-500"
+                                          : "text-green-700 ring-green-500 hover:bg-green-50"
+                                      } ml-3 rounded bg-white px-2 py-1 text-xs font-semibold shadow-sm ring-1 ring-inset`}
+                                    >
+                                      Save
+                                    </button>
+                                    <button
+                                      type="button"
+                                      onClick={() => handleCancel()}
+                                      className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                    >
+                                      Cancel
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            ) : (
+                              <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                {matchedEvent.contactName}{" "}
+                                <button
+                                  type="button"
+                                  onClick={() => setIsEditContactName(true)}
+                                  className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                >
+                                  Edit
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                          <div className="odd:bg-gray-50 even:bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+                            <dt className="text-sm/6 font-medium text-gray-900">
+                              Contact Phone
+                            </dt>
+
+                            {isEditPhone === true ? (
+                              <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                <div className="flex items-center  sm:max-w-md">
+                                  <input
+                                    id="phone"
+                                    name="phone"
+                                    type="text"
+                                    onChange={handleChange}
+                                    placeholder={matchedEvent.phone}
+                                    className="block min-w-0 grow bg-white py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-1 sm:text-sm/6 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-saluteBlue rounded-md bg-white pl-3"
+                                  />
+                                  <div className="col-span-1">
+                                    {" "}
+                                    <button
+                                      type="button"
+                                      onClick={() =>
+                                        updateEventDetails(matchedEvent.id)
+                                      }
+                                      disabled={eventData === null}
+                                      className={`${
+                                        eventData === null
+                                          ? "text-gray-700 ring-gray-500"
+                                          : "text-green-700 ring-green-500 hover:bg-green-50"
+                                      } ml-3 rounded bg-white px-2 py-1 text-xs font-semibold shadow-sm ring-1 ring-inset`}
+                                    >
+                                      Save
+                                    </button>
+                                    <button
+                                      type="button"
+                                      onClick={() => handleCancel()}
+                                      className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                    >
+                                      Cancel
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            ) : (
+                              <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                {matchedEvent.phone === "" ? (
+                                  <span className="text-gray-400">
+                                    Not Added
+                                  </span>
+                                ) : (
+                                  <>
+                                    {matchedEvent.phone}
+                                    <button
+                                      type="button"
+                                      onClick={() => setIsEditPhone(true)}
+                                      className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                    >
+                                      Edit
+                                    </button>
+                                  </>
+                                )}
+                              </div>
+                            )}
+                          </div>
                           <div className="odd:bg-gray-50 even:bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
                             <dt className="text-sm/6 font-medium text-gray-900">
                               Contact Email
