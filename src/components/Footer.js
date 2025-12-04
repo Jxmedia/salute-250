@@ -67,7 +67,7 @@ const Footer = () => {
                   </div>
                 </div>
               </dl>
-              <div className="flex justify-center lg:justify-end gap-x-4 mt-5">
+              <div className="hidden flex justify-center lg:justify-end gap-x-4 mt-5">
                 {footerNavigation.map((item) => (
                   <a
                     key={item.name}
@@ -149,7 +149,7 @@ const Footer = () => {
                   </div>
                 </div>
               </dl>
-              <div className="flex justify-center lg:justify-end gap-x-4 mt-5">
+              <div className="hidden flex justify-center lg:justify-end gap-x-4 mt-5">
                 {footerNavigation.map((item) => (
                   <a
                     key={item.name}

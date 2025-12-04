@@ -172,8 +172,7 @@ export default function ContactPage() {
                       <dt className="sr-only">Address</dt>
                       <div>
                         <p className="font-semibold text-saluteTan">
-                          5700 North Harbor City Blvd, Suite 280 Melbourne, FL
-                          32940
+                          PO Box 360857 Melbourne, FL 32936
                         </p>
                       </div>
                     </div>
@@ -184,14 +183,6 @@ export default function ContactPage() {
                     Contact
                   </h3>
                   <dl className="mt-5 space-y-1 text-base/6 text-gray-600">
-                    <div>
-                      <dt className="sr-only">Phone NUmber</dt>
-                      <div>
-                        <p className="font-semibold text-saluteTan">
-                          +1 250-250-0000
-                        </p>
-                      </div>
-                    </div>
                     <div>
                       <dt className="sr-only">Email</dt>
                       <div>
