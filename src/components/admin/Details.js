@@ -521,7 +521,7 @@ export default function Details(props) {
                           </div>
                           <div className="odd:bg-gray-50 even:bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
                             <dt className="text-sm/6 font-medium text-gray-900">
-                              Requested Event Tier*
+                              Event Tier
                             </dt>
                             <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
                               {isEditTier === true ? (
@@ -598,87 +598,85 @@ export default function Details(props) {
                               )}
                             </div>
                           </div>
-                          {matchedEvent.eventTier === "Signature" ? (
-                            <div className="odd:bg-gray-50 even:bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
-                              <dt className="text-sm/6 font-medium text-gray-900">
-                                Signature Event Cover
-                              </dt>
-                              <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                {isEditCover === true ? (
-                                  <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                    <div className="flex flex-col items-start">
-                                      {/* Hidden input */}
-                                      <input
-                                        type="file"
-                                        accept="image/*"
-                                        id="file-upload"
-                                        onChange={handleImageUpload}
-                                        className="hidden"
-                                      />
 
-                                      {/* Styled button */}
-                                      <div className="flex">
-                                        {" "}
-                                        <label
-                                          htmlFor="file-upload"
-                                          className="cursor-pointer px-6 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-body font-medium"
-                                        >
-                                          Upload Event Cover
-                                        </label>
-                                        <button
-                                          type="button"
-                                          onClick={() =>
-                                            updateEventImage(matchedEvent.id)
-                                          }
-                                          disabled={eventImage.img === null}
-                                          className={`${
-                                            eventImage.img === null
-                                              ? "text-gray-700 ring-gray-500"
-                                              : "text-green-700 ring-green-500 hover:bg-green-50"
-                                          } ml-3 rounded bg-white px-2 py-1 text-xs font-semibold shadow-sm ring-1 ring-inset`}
-                                        >
-                                          Save
-                                        </button>
-                                        <button
-                                          type="button"
-                                          onClick={() => handleCancel()}
-                                          className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                                        >
-                                          Cancel
-                                        </button>
-                                      </div>
-
-                                      {/* Preview */}
-                                      {eventImage.img && (
-                                        <img
-                                          src={eventImage.img}
-                                          alt="Event"
-                                          className="border rounded shadow-lg mt-4 w-1/2"
-                                        />
-                                      )}
-                                    </div>
-                                  </div>
-                                ) : (
-                                  <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                    <img
-                                      src={matchedEvent.img}
-                                      className="w-1/2"
+                          <div className="odd:bg-gray-50 even:bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+                            <dt className="text-sm/6 font-medium text-gray-900">
+                              Event Cover
+                            </dt>
+                            <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                              {isEditCover === true ? (
+                                <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                  <div className="flex flex-col items-start">
+                                    {/* Hidden input */}
+                                    <input
+                                      type="file"
+                                      accept="image/*"
+                                      id="file-upload"
+                                      onChange={handleImageUpload}
+                                      className="hidden"
                                     />
 
-                                    <button
-                                      type="button"
-                                      onClick={() => setIsEditCover(true)}
-                                      className="mt-1 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                                    >
-                                      Edit
-                                    </button>
+                                    {/* Styled button */}
+                                    <div className="flex">
+                                      {" "}
+                                      <label
+                                        htmlFor="file-upload"
+                                        className="cursor-pointer px-6 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-body font-medium"
+                                      >
+                                        Upload Event Cover
+                                      </label>
+                                      <button
+                                        type="button"
+                                        onClick={() =>
+                                          updateEventImage(matchedEvent.id)
+                                        }
+                                        disabled={eventImage.img === null}
+                                        className={`${
+                                          eventImage.img === null
+                                            ? "text-gray-700 ring-gray-500"
+                                            : "text-green-700 ring-green-500 hover:bg-green-50"
+                                        } ml-3 rounded bg-white px-2 py-1 text-xs font-semibold shadow-sm ring-1 ring-inset`}
+                                      >
+                                        Save
+                                      </button>
+                                      <button
+                                        type="button"
+                                        onClick={() => handleCancel()}
+                                        className="ml-3 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                      >
+                                        Cancel
+                                      </button>
+                                    </div>
+
+                                    {/* Preview */}
+                                    {eventImage.img && (
+                                      <img
+                                        src={eventImage.img}
+                                        alt="Event"
+                                        className="border rounded shadow-lg mt-4 w-1/2"
+                                      />
+                                    )}
                                   </div>
-                                )}
-                              </div>
+                                </div>
+                              ) : (
+                                <div className="mb-0 mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                  <img
+                                    src={matchedEvent.img}
+                                    className="w-1/2"
+                                  />
+
+                                  <button
+                                    type="button"
+                                    onClick={() => setIsEditCover(true)}
+                                    className="mt-1 rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                  >
+                                    Edit
+                                  </button>
+                                </div>
+                              )}
                             </div>
-                          ) : (
-                            <></>
-                          )}
+                          </div>
+
                           <div className="odd:bg-gray-50 even:bg-white px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
                             <dt className="text-sm/6 font-medium text-gray-900">
                               Contact Name

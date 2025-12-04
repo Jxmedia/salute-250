@@ -138,10 +138,9 @@ export default function AboutPage() {
 
           <div className="font-body py-2 text-center">
             <p className="max-w-3xl mx-auto text-lg text-gray-700 gap-2">
-              One of our team members will look over your submission to
-              determine if your event is a good fit for our tour, we will reach
-              out to you by way of email, please keep your event # handy for
-              reference purposes, thanks again.
+              Thank you for your interest. Our team will review your submission
+              and email you with next steps. Please keep your event number handy
+              for reference.
             </p>
           </div>
         </div>
@@ -170,7 +169,7 @@ export default function AboutPage() {
             </p>
             <div className="mt-8 flex">
               <a
-                href="../contact/"
+                href="/contact/"
                 className="font-body uppercase font-semibold border-t-2 border-red-500 flex items-center gap-2 duration-300 ease-in-out bg-saluteRed rounded-b-xl px-14 py-2.5 text-lg/6 text-white hover:underline hover:bg-saluteTan hover:text-saluteRed"
               >
                 Contact Us{" "}

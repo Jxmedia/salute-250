@@ -313,7 +313,7 @@ export default function RegisterEvent() {
       if (img.width === 800 && img.height === 449) {
         setEventImage(img.src);
       } else {
-        alert("Image must be exactly 800x400 pixels.");
+        alert("Image must be exactly 800x449 pixels.");
       }
     };
 
@@ -838,66 +838,43 @@ export default function RegisterEvent() {
                       </div>
                     </div>
 
-                    <div className="sm:hidden sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                      {/* <label
+                    <div className=" sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                      <label
                         htmlFor="event-tier"
-                        className="block text-sm/6 font-medium text-red-600 sm:pt-1.5"
+                        className="block text-sm/6 font-medium text-gray-900 sm:pt-1.5"
                       >
-                        Requested Event Tier*
-                      </label> */}
-                      {/* 
-                      <div className="grid grid-cols-1 sm:max-w-xs">
-                        <select
-                          id="eventTier"
-                          name="eventTier"
-                          autoComplete="country-name"
-                          onChange={handleChange}
-                          required
-                          className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-saluteBlue sm:text-sm/6"
-                        >
-                          <option value="" selected disabled hidden>
-                            Select Event Tier Requested
-                          </option>
-                          <option value="Affiliate">Affiliate</option>
-                          <option value="Partner">Partner</option>
-                          <option value="Signature">Signature</option>
-                        </select>
-                        <FaRegArrowAltCircleDown
-                          aria-hidden="true"
-                          className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
+                        Event Cover
+                      </label>
+
+                      <div className="flex flex-col items-start">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          id="file-upload"
+                          onChange={handleImageUpload}
+                          className="hidden"
                         />
-                      </div> */}
-                      {eventData.eventTier === "Signature" ? (
-                        <div className="flex flex-col items-start">
-                          {/* Hidden input */}
-                          <input
-                            type="file"
-                            accept="image/*"
-                            id="file-upload"
-                            onChange={handleImageUpload}
-                            className="hidden"
+
+                        {/* Styled button */}
+                        <label
+                          htmlFor="file-upload"
+                          className="cursor-pointer px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-body font-medium"
+                        >
+                          Upload Event Cover
+                        </label>
+                        <p className="mt-3 text-sm/6 text-gray-600 max-w-xl">
+                          Must be exactly 800x449px
+                        </p>
+
+                        {/* Preview */}
+                        {eventImage && (
+                          <img
+                            src={eventImage}
+                            alt="Event"
+                            className="border rounded shadow-lg mt-4"
                           />
-
-                          {/* Styled button */}
-                          <label
-                            htmlFor="file-upload"
-                            className="cursor-pointer px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-body font-medium"
-                          >
-                            Upload Event Cover
-                          </label>
-
-                          {/* Preview */}
-                          {eventImage && (
-                            <img
-                              src={eventImage}
-                              alt="Event"
-                              className="border rounded shadow-lg mt-4"
-                            />
-                          )}
-                        </div>
-                      ) : (
-                        <></>
-                      )}
+                        )}
+                      </div>
                     </div>
                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                       <label
@@ -969,7 +946,7 @@ export default function RegisterEvent() {
                         htmlFor="address"
                         className="block text-sm/6 font-medium text-red-600 sm:pt-1.5"
                       >
-                        Event/Venue Address*
+                        Address of Event/Venue*
                       </label>
                       {googleMapsApiKey === null ? (
                         ""
@@ -995,6 +972,7 @@ export default function RegisterEvent() {
                                   name="venueAddress"
                                   id="venueAddress"
                                   autoComplete="off"
+                                  placeholder="Enter an address"
                                   class="w-full bg-white py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
                                 />
                               </Autocomplete>

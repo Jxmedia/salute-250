@@ -510,7 +510,7 @@ export default function EventMap(props) {
                       <></>
                     )}
                     {event.eventTier === "Affiliate" ? (
-                      <span className="inline-flex gap-x-1 items-center rounded-md bg-indigo-50 px-3 py-11 text-xs font-semibold text-indigo-700 ring-1 ring-inset ring-indigo-600/20">
+                      <span className="inline-flex gap-x-1 items-center rounded-md bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700 ring-1 ring-inset ring-indigo-600/20">
                         <FaCircle aria-hidden="true" className="size-1" />
                         {event.eventTier}
                       </span>
