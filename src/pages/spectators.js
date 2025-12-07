@@ -83,6 +83,7 @@ export default function SpectatorsPage() {
   //
   //
   //
+  //
   const createSpectator = async () => {
     // console.log("spectator");
     setSaving(true);
