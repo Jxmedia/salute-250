@@ -159,7 +159,7 @@ export default function EventsHome() {
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://saluteacrossamerica250.com/" />
+        <meta property="og:url" content="https://saa250.com/" />
         <meta property="og:title" content="Salute Across America 250" />
         <meta
           property="og:description"
@@ -169,10 +169,7 @@ export default function EventsHome() {
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:url"
-          content="https://saluteacrossamerica250.com/"
-        />
+        <meta name="twitter:url" content="https://saa250.com/" />
         <meta name="twitter:title" content="Salute Across America 250" />
         <meta
           name="twitter:description"
@@ -185,7 +182,7 @@ export default function EventsHome() {
         <link rel="apple-touch-icon" sizes="180x180" href={Favicon} />
 
         {/* Canonical Link */}
-        <link rel="canonical" href="https://saluteacrossamerica250.com/" />
+        <link rel="canonical" href="https://saa250.com/" />
 
         {/* Theme and Mobile */}
         <meta name="theme-color" content="#ffffff" />
