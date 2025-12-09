@@ -33,7 +33,7 @@ export default function EventMap(props) {
   function getIcon(eventType) {
     switch (eventType) {
       case "Air Show":
-        return "/images/air-show.svg";
+        return "/air-show.svg";
       case "Sports":
         return "/images/sports.svg";
       case "Music Festival":
