@@ -35,25 +35,25 @@ export default function EventMap(props) {
       case "Air Show":
         return "/air-show.svg";
       case "Sports":
-        return "/images/sports.svg";
+        return "/sports.svg";
       case "Music Festival":
-        return "/images/music.svg";
+        return "/music.svg";
       case "Patriotic/Historic":
-        return "/images/patriotic.svg";
+        return "/patriotic.svg";
       case "State/Local":
-        return "/images/local.svg";
+        return "/local.svg";
       case "Car/RV/Boat":
-        return "/images/car.svg";
+        return "/car.svg";
       case "Military/Tribute":
-        return "/images/military.svg";
+        return "/military.svg";
       case "Educational/STEM":
-        return "/images/school.svg";
+        return "/school.svg";
       case "Parade":
-        return "/images/parade.svg";
+        return "/parade.svg";
       case "Other":
-        return "/images/other.svg";
+        return "/other.svg";
       default:
-        return "/images/other.svg";
+        return "/other.svg";
     }
   }
   //
